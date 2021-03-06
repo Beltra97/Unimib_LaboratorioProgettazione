@@ -9,7 +9,7 @@
 
 ## Descrizione Progetto
 
-La WebApp permette di creare annunci per ripetizioni private. Tali annunci consistono in domande e offerte di ripetizioni private prenotabili tramite la WebApp stessa. Esistono persone che offrono ripetizioni e persone che ne cercano. La WebApp integra un sistema di registrazione e login.
+Il progetto consiste in una WebApp che permette di creare annunci per ripetizioni private. Tali annunci consistono in domande e offerte di ripetizioni private prenotabili tramite la WebApp stessa. Esistono persone che offrono ripetizioni e persone che ne cercano. La WebApp integra un sistema di registrazione e login.
 
 ## Tecnologie
 
