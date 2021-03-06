@@ -17,3 +17,4 @@ La WebApp permette di creare annunci per ripetizioni private. Tali annunci consi
 - front-end: Angular
 - back-end: Hipster (Java)
 - Docker
+- RDBMS
