@@ -21,3 +21,8 @@ The project consists of a WebApp that allows you to create announcements for pri
 - RDBMS: H2 (?)
 - Deployment: Heroku
 - CI/CD: GitLab (?)
+- Documentation: Gitlab wiki pages
+- Testing: pipelines
+-- Unit: JUnit (?)
+-- Integration: Mockito (?)
+-- System tests: Selenium (?)
