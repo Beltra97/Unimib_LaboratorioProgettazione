@@ -13,16 +13,18 @@ The project consists of a WebApp that allows you to create announcements for pri
 
 ## Technologies
 
-- Framework: JHipster
+- Full stack platform: JHipster
 - WebApp using REST architectural style 
 - Front-end: Angular + Bootstrap + HTML5 + NPM + Webpack + Thymeleaf (?)
 - Back-end: Spring Boot + Node.js (?) + Maven + Spring MVC REST + Jackson + Spring Data JPA + Elasticsearch (?)
 - Docker
-- RDBMS: H2 (?)
+- RDBMS: H2 (dev) + PostgreSQL (prod) (?)
 - Deployment: Heroku
 - CI/CD: GitLab (?)
+- Monitoring: Metrics + ELK Stack
+- Logging: slf4j
 - Documentation: Gitlab wiki pages
 - Testing: pipelines
--- Unit: JUnit (?)
--- Integration: Mockito (?)
--- System tests: Selenium (?)
+    - Unit: JUnit (?)
+    - Integration: Mockito (?)
+    - System tests: Selenium (?)
