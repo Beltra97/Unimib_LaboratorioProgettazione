@@ -1,0 +1,267 @@
+package com.company.repetitionwebapp.web.rest;
+
+import com.company.repetitionwebapp.RepetitionWebApp;
+import com.company.repetitionwebapp.domain.Repetition;
+import com.company.repetitionwebapp.repository.RepetitionRepository;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * Integration tests for the {@link RepetitionResource} REST controller.
+ */
+@SpringBootTest(classes = RepetitionWebApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
+public class RepetitionResourceIT {
+
+    private static final String DEFAULT_SUBJECT = "AAAAAAAAAA";
+    private static final String UPDATED_SUBJECT = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_DATE_REPETITION = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_REPETITION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_DATE_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_DATE_DELETED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_DELETED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    @Autowired
+    private RepetitionRepository repetitionRepository;
+
+    @Autowired
+    private EntityManager em;
+
+    @Autowired
+    private MockMvc restRepetitionMockMvc;
+
+    private Repetition repetition;
+
+    /**
+     * Create an entity for this test.
+     *
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Repetition createEntity(EntityManager em) {
+        Repetition repetition = new Repetition()
+            .subject(DEFAULT_SUBJECT)
+            .dateRepetition(DEFAULT_DATE_REPETITION)
+            .dateCreated(DEFAULT_DATE_CREATED)
+            .dateModified(DEFAULT_DATE_MODIFIED)
+            .dateDeleted(DEFAULT_DATE_DELETED);
+        return repetition;
+    }
+    /**
+     * Create an updated entity for this test.
+     *
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Repetition createUpdatedEntity(EntityManager em) {
+        Repetition repetition = new Repetition()
+            .subject(UPDATED_SUBJECT)
+            .dateRepetition(UPDATED_DATE_REPETITION)
+            .dateCreated(UPDATED_DATE_CREATED)
+            .dateModified(UPDATED_DATE_MODIFIED)
+            .dateDeleted(UPDATED_DATE_DELETED);
+        return repetition;
+    }
+
+    @BeforeEach
+    public void initTest() {
+        repetition = createEntity(em);
+    }
+
+    @Test
+    @Transactional
+    public void createRepetition() throws Exception {
+        int databaseSizeBeforeCreate = repetitionRepository.findAll().size();
+        // Create the Repetition
+        restRepetitionMockMvc.perform(post("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(repetition)))
+            .andExpect(status().isCreated());
+
+        // Validate the Repetition in the database
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeCreate + 1);
+        Repetition testRepetition = repetitionList.get(repetitionList.size() - 1);
+        assertThat(testRepetition.getSubject()).isEqualTo(DEFAULT_SUBJECT);
+        assertThat(testRepetition.getDateRepetition()).isEqualTo(DEFAULT_DATE_REPETITION);
+        assertThat(testRepetition.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
+        assertThat(testRepetition.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
+        assertThat(testRepetition.getDateDeleted()).isEqualTo(DEFAULT_DATE_DELETED);
+    }
+
+    @Test
+    @Transactional
+    public void createRepetitionWithExistingId() throws Exception {
+        int databaseSizeBeforeCreate = repetitionRepository.findAll().size();
+
+        // Create the Repetition with an existing ID
+        repetition.setId(1L);
+
+        // An entity with an existing ID cannot be created, so this API call must fail
+        restRepetitionMockMvc.perform(post("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(repetition)))
+            .andExpect(status().isBadRequest());
+
+        // Validate the Repetition in the database
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeCreate);
+    }
+
+
+    @Test
+    @Transactional
+    public void checkDateRepetitionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = repetitionRepository.findAll().size();
+        // set the field null
+        repetition.setDateRepetition(null);
+
+        // Create the Repetition, which fails.
+
+
+        restRepetitionMockMvc.perform(post("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(repetition)))
+            .andExpect(status().isBadRequest());
+
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRepetitions() throws Exception {
+        // Initialize the database
+        repetitionRepository.saveAndFlush(repetition);
+
+        // Get all the repetitionList
+        restRepetitionMockMvc.perform(get("/api/repetitions?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(repetition.getId().intValue())))
+            .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT)))
+            .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
+            .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
+            .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
+    }
+    
+    @Test
+    @Transactional
+    public void getRepetition() throws Exception {
+        // Initialize the database
+        repetitionRepository.saveAndFlush(repetition);
+
+        // Get the repetition
+        restRepetitionMockMvc.perform(get("/api/repetitions/{id}", repetition.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.id").value(repetition.getId().intValue()))
+            .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT))
+            .andExpect(jsonPath("$.dateRepetition").value(DEFAULT_DATE_REPETITION.toString()))
+            .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
+            .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
+            .andExpect(jsonPath("$.dateDeleted").value(DEFAULT_DATE_DELETED.toString()));
+    }
+    @Test
+    @Transactional
+    public void getNonExistingRepetition() throws Exception {
+        // Get the repetition
+        restRepetitionMockMvc.perform(get("/api/repetitions/{id}", Long.MAX_VALUE))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    public void updateRepetition() throws Exception {
+        // Initialize the database
+        repetitionRepository.saveAndFlush(repetition);
+
+        int databaseSizeBeforeUpdate = repetitionRepository.findAll().size();
+
+        // Update the repetition
+        Repetition updatedRepetition = repetitionRepository.findById(repetition.getId()).get();
+        // Disconnect from session so that the updates on updatedRepetition are not directly saved in db
+        em.detach(updatedRepetition);
+        updatedRepetition
+            .subject(UPDATED_SUBJECT)
+            .dateRepetition(UPDATED_DATE_REPETITION)
+            .dateCreated(UPDATED_DATE_CREATED)
+            .dateModified(UPDATED_DATE_MODIFIED)
+            .dateDeleted(UPDATED_DATE_DELETED);
+
+        restRepetitionMockMvc.perform(put("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(updatedRepetition)))
+            .andExpect(status().isOk());
+
+        // Validate the Repetition in the database
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeUpdate);
+        Repetition testRepetition = repetitionList.get(repetitionList.size() - 1);
+        assertThat(testRepetition.getSubject()).isEqualTo(UPDATED_SUBJECT);
+        assertThat(testRepetition.getDateRepetition()).isEqualTo(UPDATED_DATE_REPETITION);
+        assertThat(testRepetition.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
+        assertThat(testRepetition.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
+        assertThat(testRepetition.getDateDeleted()).isEqualTo(UPDATED_DATE_DELETED);
+    }
+
+    @Test
+    @Transactional
+    public void updateNonExistingRepetition() throws Exception {
+        int databaseSizeBeforeUpdate = repetitionRepository.findAll().size();
+
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException
+        restRepetitionMockMvc.perform(put("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(repetition)))
+            .andExpect(status().isBadRequest());
+
+        // Validate the Repetition in the database
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    public void deleteRepetition() throws Exception {
+        // Initialize the database
+        repetitionRepository.saveAndFlush(repetition);
+
+        int databaseSizeBeforeDelete = repetitionRepository.findAll().size();
+
+        // Delete the repetition
+        restRepetitionMockMvc.perform(delete("/api/repetitions/{id}", repetition.getId())
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNoContent());
+
+        // Validate the database contains one less item
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+}

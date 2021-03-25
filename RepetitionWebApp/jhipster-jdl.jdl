@@ -1,0 +1,54 @@
+
+entity Tutor {
+    name String required,
+    surname String required
+    birthDate Instant required
+    subject String,
+    degree String,
+    dateCreated Instant,
+    dateModified Instant,
+    dateDeleted Instant
+}
+
+entity Student {
+    name String required,
+    surname String required,
+    birthDate Instant required,
+    dateCreated Instant, 
+    dateModified Instant, 
+    dateDeleted Instant
+}
+
+entity Repetition {
+    subject String,
+    dateRepetition Instant required,
+    dateCreated Instant, 
+    dateModified Instant, 
+    dateDeleted Instant
+}
+
+entity RepetitionStudent {
+	dateCreated Instant, 
+    dateModified Instant, 
+    dateDeleted Instant
+}
+
+relationship OneToOne {
+	Tutor{user(id)} to User,
+}
+
+relationship OneToOne {
+	Student{user(id)} to User,
+}
+
+relationship ManyToOne {
+	RepetitionStudent{repetition(id)} to Repetition,
+}
+
+relationship OneToMany {
+    Tutor{repetition(id)} to Repetition,
+}
+
+relationship ManyToOne {
+    RepetitionStudent{student(id)} to Student,
+}
