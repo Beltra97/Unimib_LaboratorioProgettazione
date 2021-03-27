@@ -40,6 +40,7 @@
     "form": {
       "username.label": "Username",
       "username.placeholder": "Your username",
+      "type.label": "Are you a student or a tutor?",
       "currentpassword.label": "Current password",
       "currentpassword.placeholder": "Current password",
       "newpassword.label": "New password",
