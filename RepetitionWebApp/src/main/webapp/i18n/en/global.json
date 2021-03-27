@@ -82,6 +82,9 @@
           "invalid": "Your email is invalid.",
           "minlength": "Your email is required to be at least 5 characters.",
           "maxlength": "Your email cannot be longer than 50 characters."
+        },
+        "dropdown": {
+          "required": "You must choose an account type."
         }
       }
     },
