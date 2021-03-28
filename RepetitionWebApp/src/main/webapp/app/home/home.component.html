@@ -1,21 +1,16 @@
 <div class="card jh-card">
     <div class="row row-content">
-        <div class="col-md-3">
-            <span class="hipster img-fluid rounded"></span>
+        <div class="col-md-4">
+            <img src="../../content/images/chalkboard-teacher-solid.svg">
         </div>
     
-        <div class="col-md-9">
-            <h1 class="display-3" jhiTranslate="home.title">Welcome to the Repetition WebApp!</h1>
+        <div class="col-md-8">
+            <h1 class="display-4" jhiTranslate="home.title">Welcome to the Repetition WebApp!</h1>
     
             <div [ngSwitch]="isAuthenticated()">
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
                         [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
-                </div>
-    
-                <div class="alert alert-warning" *ngSwitchCase="false">
-                    <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-                    <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
                 </div>
     
                 <div class="alert alert-warning" *ngSwitchCase="false">
@@ -30,31 +25,49 @@
 
 <div class="card jh-card">
     <div class="row row-content">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <h1 class="display-4" jhiTranslate="home.functioning">How does it work?</h1>
             <h4 jhiTranslate="home.description">The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. Simple and effective.</h4>
         </div>
     
-        <div class="col-md-3">
-            <span class="hipster img-fluid rounded"></span>
+        <div class="col-md-4">
+            <img src="../../content/images/users-solid.svg">
         </div>
     </div>
 </div>
 
 <div class="card jh-card">
     <div class="row row-content">
-        <div class="col-md-9">
-            <h1 class="display-4" jhiTranslate="home.repetitions">Available repetitions</h1>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
+        <div class="col-12">
+            <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.repetitions">Available repetitions</h1>
         </div>
     </div>
+    
+    <div class="row row-content">
+        <div class="col-12">
+
+            <div id="cardRepetitions" class="card" *ngFor="let repetition of repetitions">
+                <div class="card-body">
+                    <div class="d-flex flex-column">
+                        <div class="p-2">
+                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition.subject}}</h5>
+                        </div>
+                        <div class="p-2">
+                            <p id="cardTextRepetitions" class="card-text">{{repetition.description}}</p>
+                        </div>
+                        <div class="p-2" [ngSwitch]="isAuthenticated()">
+                            <div *ngSwitchCase="true">
+                                <a href="#" class="btn btn-outline-primary btn-block">Enroll</a>
+                            </div>
+                            <div *ngSwitchCase="false">
+                                <a href="#" class="btn btn-outline-primary btn-block disabled">Enroll</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
