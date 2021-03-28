@@ -60,15 +60,25 @@
                     </div>
                 </div>
 
-                <div class="form-group"> 
+                <div class="form-group">
+                    <label class="form-control-label" for="accountType" jhiTranslate="global.form.accountType.label">Type</label>
+                    <input type="accountType" class="form-control" id="accountType" name="accountType" placeholder="{{ 'global.form.accountType.placeholder' | translate }}"
+                             formControlName="accountType">
+                
+                    <div *ngIf="registerForm.get('accountType')!.invalid && (registerForm.get('accountType')!.dirty || registerForm.get('accountType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('accountType')?.errors?.required"
+                               jhiTranslate="global.messages.validate.accountType.required">
+                            Your account type is required.
+                        </small>
 
-                    <label class="form-control-label" for="dropdown" jhiTranslate="global.form.type.label">Type</label>
-                    <select class="custom-select" id="dropdown">
-                        <option value="" disabled selected>Select one from below </option>
-                        <option value="">Student</option>
-                        <option value="">Tutor</option>
-                    </select>
-                   
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('accountType')?.errors?.pattern"
+                               jhiTranslate="global.messages.validate.accountType.pattern">
+                            Your account type is invalid.
+                        </small>
+                    </div>
+                
                 </div>
 
                 <div class="form-group">
