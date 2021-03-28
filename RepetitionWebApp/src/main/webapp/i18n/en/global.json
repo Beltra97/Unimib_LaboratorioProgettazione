@@ -140,5 +140,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Developers: <strong>Beltramelli</strong> Fabio - <strong>Bucci</strong> Davide - <strong>Capelli</strong> Alessandro - <strong>Finati</strong> Davide"
+  "footer": "Powered by: <strong>Beltramelli</strong> Fabio - <strong>Bucci</strong> Davide - <strong>Capelli</strong> Alessandro - <strong>Finati</strong> Davide"
 }

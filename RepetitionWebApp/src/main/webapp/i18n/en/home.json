@@ -4,7 +4,8 @@
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "description": "The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. Simple and effective.",
-    "functioning": "How does it work?"
+    "functioning": "How does it work?",
+    "description": "The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. <small class='text-muted'>Simple and effective.</small>",
+    "repetitions": "Available repetitions"
   }
 }
