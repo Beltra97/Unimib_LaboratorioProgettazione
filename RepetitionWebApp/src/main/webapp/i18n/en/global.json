@@ -40,7 +40,8 @@
     "form": {
       "username.label": "Username",
       "username.placeholder": "Your username",
-      "type.label": "Are you a student or a tutor?",
+      "accountType.label": "Are you a student or a tutor?",
+      "accountType.placeholder": "type in Student or Tutor",
       "currentpassword.label": "Current password",
       "currentpassword.placeholder": "Current password",
       "newpassword.label": "New password",
@@ -83,8 +84,9 @@
           "minlength": "Your email is required to be at least 5 characters.",
           "maxlength": "Your email cannot be longer than 50 characters."
         },
-        "dropdown": {
-          "required": "You must choose an account type."
+        "accountType": {
+          "required": "An account type is required.",
+          "pattern": "You must write Student or Tutor"
         }
       }
     },
