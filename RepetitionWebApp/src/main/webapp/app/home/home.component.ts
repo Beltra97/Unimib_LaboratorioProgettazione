@@ -5,9 +5,9 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 
-import { Repetition } from '../shared/repetition';
+import { Repetition } from '../shared/repetition/repetition';
 
-const REPETITIONS: Repetition = [
+const REPETITIONS: Repetition[] = [
   {
     id: 1,
     subject: 'Math',
