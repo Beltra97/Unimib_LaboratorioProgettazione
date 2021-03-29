@@ -5,6 +5,8 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 
+import { faSchool, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+
 import { Repetition } from '../shared/repetition/repetition';
 
 const REPETITIONS: Repetition[] = [
@@ -28,6 +30,9 @@ const REPETITIONS: Repetition[] = [
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
+
+  faSchool = faSchool;
+  faUserFriends = faUserFriends;
 
   repetitions: Repetition[] = REPETITIONS;
 
