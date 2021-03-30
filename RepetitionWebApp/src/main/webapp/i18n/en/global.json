@@ -38,6 +38,8 @@
       "language": "Language"
     },
     "form": {
+      "name.label": "Name",
+      "name.placeholder": "Your name",
       "username.label": "Username",
       "username.placeholder": "Your username",
       "currentpassword.label": "Current password",
@@ -81,6 +83,13 @@
           "invalid": "Your email is invalid.",
           "minlength": "Your email is required to be at least 5 characters.",
           "maxlength": "Your email cannot be longer than 50 characters."
+        },
+        "name": {
+          "required": "Your name is required.",
+          "invalid": "Your name is invalid.",
+          "pattern": "Your name can only contain letters.",
+          "minlength": "Your name is required to be at least 1 characters.",
+          "maxlength": "Your name cannot be longer than 50 characters."
         }
       }
     },
