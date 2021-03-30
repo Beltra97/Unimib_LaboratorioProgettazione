@@ -1,13 +1,19 @@
 package com.company.repetitionwebapp.service;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.company.repetitionwebapp.config.Constants;
 import com.company.repetitionwebapp.domain.Authority;
+import com.company.repetitionwebapp.domain.Student;
+import com.company.repetitionwebapp.domain.Tutor;
 import com.company.repetitionwebapp.domain.User;
 import com.company.repetitionwebapp.repository.AuthorityRepository;
+import com.company.repetitionwebapp.repository.StudentRepository;
+import com.company.repetitionwebapp.repository.TutorRepository;
 import com.company.repetitionwebapp.repository.UserRepository;
 import com.company.repetitionwebapp.security.AuthoritiesConstants;
 import com.company.repetitionwebapp.security.SecurityUtils;
 import com.company.repetitionwebapp.service.dto.UserDTO;
+import com.company.repetitionwebapp.web.rest.vm.ManagedUserVM;
 import io.github.jhipster.security.RandomUtil;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -33,6 +39,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final TutorRepository tutorRepository;
+
+    private final StudentRepository studentRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -41,11 +51,15 @@ public class UserService {
 
     public UserService(
         UserRepository userRepository,
+        StudentRepository studentRepository,
+        TutorRepository tutorRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
         CacheManager cacheManager
     ) {
         this.userRepository = userRepository;
+        this.studentRepository = studentRepository;
+        this.tutorRepository = tutorRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
@@ -97,7 +111,7 @@ public class UserService {
             );
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(ManagedUserVM userDTO, String password) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .ifPresent(
@@ -137,6 +151,29 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
+
+        if (userDTO.getStudentFlag()) {
+            Student newStudent = new Student();
+            newStudent.setName(userDTO.getFirstName());
+            newStudent.setSurname(userDTO.getLastName());
+            newStudent.setUser(newUser);
+            newStudent.setDateCreated(Instant.now());
+            newStudent.setBirthDate(Instant.now()); //NON HO LA DATA DI NASCITA
+            studentRepository.save(newStudent);
+        }
+        /*        
+        }else{
+            Tutor newTutor = new Tutor();
+            newTutor.setDateCreated(Instant.now());
+            //newTutor.setDegree(degree);NON HO IL DEGREE
+            newTutor.setName(userDTO.getFirstName());
+            newTutor.setSurname(userDTO.getLastName());
+            //newTutor.setSubject(subject); NON HO IL SUBJECT
+            //newTutor.setBirthDate(birthDate); MI MANCA ANCHE QUESTO
+            newTutor.setUser(newUser);
+            tutorRepository.save(newTutor);
+        }
+      */
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
