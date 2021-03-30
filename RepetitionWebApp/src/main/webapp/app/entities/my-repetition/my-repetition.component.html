@@ -1,0 +1,46 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="repetitionWebApp.myRepetition.home.title">My Repetitions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-repetition" [routerLink]="['/my-repetition/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="repetitionWebApp.myRepetition.home.createLabel">
+            Create a new My Repetition
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="myRepetitions?.length === 0">
+        <span jhiTranslate="repetitionWebApp.myRepetition.home.notFound">No myRepetitions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="myRepetitions && myRepetitions.length > 0">
+
+        <mat-card style="margin:2em;" *ngFor="let myRepetition of myRepetitions" class="example-card"
+                  [routerLink]="['/my-repetition', myRepetition.id, 'view']">
+            <mat-card-header>
+                <mat-card-title>{{ myRepetition.subject }} </mat-card-title>
+                <mat-card-subtitle>{{ myRepetition.dateRepetition | date:'medium' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                    bred for hunting.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-fab>
+                    <mat-icon>update</mat-icon>
+                </button>
+                <button type="submit" (click)="delete(myRepetition)" mat-fab>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
