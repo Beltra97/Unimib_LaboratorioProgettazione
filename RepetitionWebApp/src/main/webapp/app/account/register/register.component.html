@@ -60,6 +60,38 @@
                         </small>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="surname" jhiTranslate="global.form.surname.label">Surname</label>
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder="{{ 'global.form.surname.placeholder' | translate }}"
+                           formControlName="surname">
+
+                    <div *ngIf="registerForm.get('surname')!.invalid && (registerForm.get('surname')!.dirty || registerForm.get('surname')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('surname')?.errors?.required"
+                               jhiTranslate="global.messages.validate.surname.required">
+                            Your surname is required.
+                        </small>
+
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('surname')?.errors?.minlength"
+                               jhiTranslate="global.messages.validate.name.minlength">
+                            Your surname is required to be at least 1 character.
+                        </small>
+
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('surname')?.errors?.maxlength"
+                               jhiTranslate="global.messages.validate.surname.maxlength">
+                            Your surname cannot be longer than 50 characters.
+                        </small>
+
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('surname')?.errors?.pattern"
+                               jhiTranslate="global.messages.validate.surname.pattern">
+                            Your surname can only contain letters.
+                        </small>
+                    </div>
+                </div>
                 
                 <div class="form-group">
                     <label class="form-control-label" for="login" jhiTranslate="global.form.username.label">Username</label>
@@ -89,6 +121,25 @@
                                *ngIf="registerForm.get('login')?.errors?.pattern"
                                jhiTranslate="register.messages.validate.login.pattern">
                             Your username can only contain letters and digits.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="birthdate" jhiTranslate="global.form.birthdate.label">Birthdate</label>
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" formControlName="birthdate">
+
+                    <div *ngIf="registerForm.get('birthdate')!.invalid && (registerForm.get('birthdate')!.dirty || registerForm.get('birthdate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('birthdate')?.errors?.required"
+                               jhiTranslate="global.messages.validate.birthdate.required">
+                            Your birthdate is required.
+                        </small>
+
+                        <small class="form-text text-danger"
+                               *ngIf="registerForm.get('birthdate')?.errors?.pattern"
+                               jhiTranslate="global.messages.validate.birthdate.pattern">
+                            Your birthdate can only contain letters.
                         </small>
                     </div>
                 </div>

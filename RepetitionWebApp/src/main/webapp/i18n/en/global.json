@@ -40,6 +40,8 @@
     "form": {
       "name.label": "Name",
       "name.placeholder": "Your name",
+      "surname.label": "Surname",
+      "surname.placeholder": "Your surname",
       "username.label": "Username",
       "username.placeholder": "Your username",
       "currentpassword.label": "Current password",
@@ -49,7 +51,8 @@
       "confirmpassword.label": "New password confirmation",
       "confirmpassword.placeholder": "Confirm the new password",
       "email.label": "Email",
-      "email.placeholder": "Your email"
+      "email.placeholder": "Your email",
+      "birthdate.label": "Birthdate"
     },
     "messages": {
       "info": {
@@ -90,6 +93,18 @@
           "pattern": "Your name can only contain letters.",
           "minlength": "Your name is required to be at least 1 characters.",
           "maxlength": "Your name cannot be longer than 50 characters."
+        },
+        "surname": {
+          "required": "Your surname is required.",
+          "invalid": "Your surname is invalid.",
+          "pattern": "Your surname can only contain letters.",
+          "minlength": "Your surname is required to be at least 1 characters.",
+          "maxlength": "Your surname cannot be longer than 50 characters."
+        },
+        "birthdate": {
+          "required": "Your birthdate is required.",
+          "invalid": "Your birthdate is invalid.",
+          "pattern": "Your birthdate can only contain letters."
         }
       }
     },

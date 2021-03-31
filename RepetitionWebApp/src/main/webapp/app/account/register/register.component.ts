@@ -24,6 +24,8 @@ export class RegisterComponent implements AfterViewInit {
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), 
                 Validators.pattern('^[A-Za-z\\s]+')]],
+    surname: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), 
+                Validators.pattern('^[A-Za-z\\s]+')]],
     login: [
       '',
       [
@@ -33,9 +35,10 @@ export class RegisterComponent implements AfterViewInit {
         Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
       ],
     ],
+    birthdate: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
   });
 
   constructor(
@@ -63,8 +66,10 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       const login = this.registerForm.get(['login'])!.value;
       const firstName = this.registerForm.get(['name'])!.value;
+      const lastName = this.registerForm.get(['surname'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, firstName, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
+      //const birthdate = this.registerForm.get(['birthdate'])!.value;
+      this.registerService.save({ login, firstName, lastName, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe( //birthdate
         () => (this.success = true),
         response => this.processError(response)
       );
