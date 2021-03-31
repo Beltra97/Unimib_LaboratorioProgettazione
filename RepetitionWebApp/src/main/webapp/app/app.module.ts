@@ -15,6 +15,9 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 
+import { RepetitionService } from './services/repetition.service';
+import { HomeComponent } from './home/home.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     RepetitionWebAppAppRoutingModule,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  providers: [RepetitionService],
   bootstrap: [MainComponent],
 })
 export class RepetitionWebAppAppModule {}

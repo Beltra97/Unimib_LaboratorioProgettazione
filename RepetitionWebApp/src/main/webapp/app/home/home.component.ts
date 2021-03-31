@@ -8,19 +8,7 @@ import { Account } from 'app/core/user/account.model';
 import { faSchool, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
 import { Repetition } from '../shared/repetition/repetition';
-
-const REPETITIONS: Repetition[] = [
-  {
-    id: 1,
-    subject: 'Math',
-    description: 'Enjoy math tutoring with our best teacher.',
-  },
-  {
-    id: 2,
-    subject: 'English',
-    description: 'Enjoy english tutoring with our best teacher.',
-  },
-];
+import { RepetitionService } from '../services/repetition.service';
 
 @Component({
   selector: 'jhi-home',
@@ -34,12 +22,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   faSchool = faSchool;
   faUserFriends = faUserFriends;
 
-  repetitions: Repetition[] = REPETITIONS;
+  repetitions: Repetition[] = this.repetitionService.getRepetitions();
 
-  constructor(private accountService: AccountService, private loginModalService: LoginModalService) {}
+  constructor(
+    private accountService: AccountService,
+    private loginModalService: LoginModalService,
+    private repetitionService: RepetitionService
+  ) {}
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    this.repetitions = this.repetitionService.getRepetitions();
   }
 
   isAuthenticated(): boolean {

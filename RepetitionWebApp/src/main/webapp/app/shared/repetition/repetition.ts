@@ -1,5 +1,5 @@
 export class Repetition {
-  id?: number;
+  id?: string;
   subject?: string;
   description?: string;
 }
