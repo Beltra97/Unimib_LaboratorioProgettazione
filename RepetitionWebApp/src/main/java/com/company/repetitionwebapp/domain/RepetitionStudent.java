@@ -27,7 +27,7 @@ public class RepetitionStudent implements Serializable {
     private Instant dateCreated;
 
     @Column(name = "date_modified")
-    private Instant dateModified = null;
+    private Instant dateModified;
 
     @Column(name = "date_deleted")
     private Instant dateDeleted = null;

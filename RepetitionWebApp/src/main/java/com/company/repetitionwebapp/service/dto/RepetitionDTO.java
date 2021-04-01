@@ -3,6 +3,7 @@ package com.company.repetitionwebapp.service.dto;
 import com.company.repetitionwebapp.config.Constants;
 import com.company.repetitionwebapp.domain.Authority;
 import com.company.repetitionwebapp.domain.Repetition;
+import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.domain.User;
 
 import javax.validation.constraints.Email;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 public class RepetitionDTO {
     private Long id;
 
+    private Subject subject;
+
     private Instant dateRepetition;
 
     public RepetitionDTO() {
@@ -27,6 +30,7 @@ public class RepetitionDTO {
 
     public RepetitionDTO(Repetition repetition) {
         this.id = repetition.getId();
+        this.subject = repetition.getSubject();
         this.dateRepetition = repetition.getDateRepetition();
     }
 
@@ -38,11 +42,19 @@ public class RepetitionDTO {
         this.id = id;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public Instant getDateRepetition() {
         return dateRepetition;
     }
 
-    public void setDateRepetition(Instant createdBy) {
-        this.dateRepetition = createdBy;
+    public void setDateRepetition(Instant dateRepetition) {
+        this.dateRepetition = dateRepetition;
     }
 }

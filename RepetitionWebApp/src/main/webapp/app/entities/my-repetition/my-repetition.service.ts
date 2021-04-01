@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IMyRepetition } from 'app/shared/model/my-repetition.model';
+import { MyRepetition } from 'app/shared/model/repetition.model';
 
 type EntityResponseType = HttpResponse<IMyRepetition>;
 type EntityArrayResponseType = HttpResponse<IMyRepetition[]>;
@@ -17,15 +18,15 @@ export class MyRepetitionService {
 
   constructor(protected http: HttpClient) {}
 
-  create(myRepetition: IMyRepetition): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(myRepetition);
+  create(repetition: IMyRepetition): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(repetition);
     return this.http
       .post<IMyRepetition>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(myRepetition: IMyRepetition): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(myRepetition);
+  update(repetition: IMyRepetition): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(repetition);
     return this.http
       .put<IMyRepetition>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -33,14 +34,14 @@ export class MyRepetitionService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<IMyRepetition>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<IRepetition>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<IMyRepetition[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IRepetition[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

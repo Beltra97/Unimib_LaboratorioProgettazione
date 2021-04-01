@@ -78,7 +78,7 @@ describe('Service Tests', () => {
       it('should update a Repetition', () => {
         const returnedFromService = Object.assign(
           {
-            subject: 'BBBBBB',
+            topic: 'BBBBBB',
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
@@ -107,7 +107,7 @@ describe('Service Tests', () => {
       it('should return a list of Repetition', () => {
         const returnedFromService = Object.assign(
           {
-            subject: 'BBBBBB',
+            topic: 'BBBBBB',
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),

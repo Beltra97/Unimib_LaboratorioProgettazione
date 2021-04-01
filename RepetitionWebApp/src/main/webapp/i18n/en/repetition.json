@@ -16,12 +16,13 @@
       "detail": {
         "title": "Repetition"
       },
-      "subject": "Subject",
+      "topic": "Topic",
       "dateRepetition": "Date Repetition",
       "dateCreated": "Date Created",
       "dateModified": "Date Modified",
       "dateDeleted": "Date Deleted",
-      "tutor": "Tutor"
+      "tutor": "Tutor",
+      "subject": "Subject"
     }
   }
 }

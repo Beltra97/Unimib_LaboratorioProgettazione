@@ -20,7 +20,7 @@ entity Student {
 }
 
 entity Repetition {
-    subject String,
+    topic String,
     dateRepetition Instant required,
     dateCreated Instant, 
     dateModified Instant, 
@@ -29,6 +29,14 @@ entity Repetition {
 
 entity RepetitionStudent {
 	dateCreated Instant, 
+    dateModified Instant, 
+    dateDeleted Instant
+}
+
+entity Subject {
+    name String required,
+    description String required,
+    dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant
 }
@@ -51,4 +59,8 @@ relationship OneToMany {
 
 relationship ManyToOne {
     RepetitionStudent{student(id)} to Student,
+}
+
+relationship OneToMany {
+    Subject{repetition(id)} to Repetition,
 }

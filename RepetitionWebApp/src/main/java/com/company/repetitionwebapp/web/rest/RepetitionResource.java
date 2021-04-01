@@ -63,24 +63,6 @@ public class RepetitionResource {
             .body(result);
     }
 
-    /**
-     * {@code POST  /repetitions} : Create a new repetition.
-     *
-     * @param repetition the repetition to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new repetition, or with status {@code 400 (Bad Request)} if the repetition has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @RequestMapping(value = "/postrepetition", method = RequestMethod.POST)
-    public ResponseEntity<Repetition> postRepetition(@Valid @RequestBody RepetitionDTO repetition) throws URISyntaxException {
-        log.debug("REST request to save Repetition : {}", repetition);
-        if (repetition.getId() != null) {
-            throw new BadRequestAlertException("A new repetition cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        Repetition result = repetitionService.postRepetition(repetition);
-        return ResponseEntity.created(new URI("/api/repetitions/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
 
     /**
      * {@code PUT  /repetitions} : Updates an existing repetition.
@@ -115,17 +97,6 @@ public class RepetitionResource {
     }
 
     /**
-     * {@code GET  /my-repetitions} : get my repetitions.
-     *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of repetitions in body.
-     */
-    @RequestMapping(value = "/my-repetitions", method = RequestMethod.GET)
-    public List<Repetition> getAllMyRepetitions() {
-        log.debug("REST request to get all Repetitions");
-        return repetitionService.getMyRepetitions();
-    }
-
-    /**
      * {@code GET  /repetitions/:id} : get the "id" repetition.
      *
      * @param id the id of the repetition to retrieve.
@@ -133,19 +104,6 @@ public class RepetitionResource {
      */
     @GetMapping("/repetitions/{id}")
     public ResponseEntity<Repetition> getRepetition(@PathVariable Long id) {
-        log.debug("REST request to get Repetition : {}", id);
-        Optional<Repetition> repetition = repetitionRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(repetition);
-    }
-
-    /**
-     * {@code GET  /my-repetitions/:id} : get my repetition.
-     *
-     * @param id the id of the repetition to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the repetition, or with status {@code 404 (Not Found)}.
-     */
-    @RequestMapping(value = "/my-repetition/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Repetition> getMyRepetition(@PathVariable Long id) {
         log.debug("REST request to get Repetition : {}", id);
         Optional<Repetition> repetition = repetitionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(repetition);
@@ -161,19 +119,6 @@ public class RepetitionResource {
     public ResponseEntity<Void> deleteRepetition(@PathVariable Long id) {
         log.debug("REST request to delete Repetition : {}", id);
         repetitionRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * {@code POST  /setDateDeleted/:id} : delete the "id" repetition.
-     *
-     * @param id the id of the repetition to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
-    @RequestMapping(value = "/setDateDeleted/{id}",  method = RequestMethod.POST)
-    public ResponseEntity<Void> setDateDeleted(@PathVariable Long id) {
-        log.debug("REST request to setDateDeleted Repetition : {}", id);
-        repetitionService.setDateDeleted(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

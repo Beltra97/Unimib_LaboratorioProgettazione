@@ -24,8 +24,8 @@ public class Repetition implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "subject")
-    private String subject;
+    @Column(name = "topic")
+    private String topic;
 
     @NotNull
     @Column(name = "date_repetition", nullable = false)
@@ -35,7 +35,7 @@ public class Repetition implements Serializable {
     private Instant dateCreated;
 
     @Column(name = "date_modified")
-    private Instant dateModified = null;
+    private Instant dateModified;
 
     @Column(name = "date_deleted")
     private Instant dateDeleted = null;
@@ -43,6 +43,10 @@ public class Repetition implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "repetitions", allowSetters = true)
     private Tutor tutor;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "repetitions", allowSetters = true)
+    private Subject subject;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -53,17 +57,17 @@ public class Repetition implements Serializable {
         this.id = id;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTopic() {
+        return topic;
     }
 
-    public Repetition subject(String subject) {
-        this.subject = subject;
+    public Repetition topic(String topic) {
+        this.topic = topic;
         return this;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public Instant getDateRepetition() {
@@ -130,6 +134,19 @@ public class Repetition implements Serializable {
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public Repetition subject(Subject subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -153,7 +170,7 @@ public class Repetition implements Serializable {
     public String toString() {
         return "Repetition{" +
             "id=" + getId() +
-            ", subject='" + getSubject() + "'" +
+            ", topic='" + getTopic() + "'" +
             ", dateRepetition='" + getDateRepetition() + "'" +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +

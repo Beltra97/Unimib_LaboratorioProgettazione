@@ -10,12 +10,18 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IMyRepetition, MyRepetition } from 'app/shared/model/my-repetition.model';
 import { MyRepetitionService } from './my-repetition.service';
 
+import { ISubject } from 'app/shared/model/subject.model';
+import { SubjectService } from 'app/entities/subject/subject.service';
+
+type SelectableEntity = ISubject;
+
 @Component({
   selector: 'jhi-my-repetition-update',
   templateUrl: './my-repetition-update.component.html',
 })
 export class MyRepetitionUpdateComponent implements OnInit {
   isSaving = false;
+  subjects: ISubject[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -26,7 +32,12 @@ export class MyRepetitionUpdateComponent implements OnInit {
     dateDeleted: [],
   });
 
-  constructor(protected myRepetitionService: MyRepetitionService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected myRepetitionService: MyRepetitionService,
+    protected subjectService: SubjectService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ myRepetition }) => {
@@ -36,6 +47,8 @@ export class MyRepetitionUpdateComponent implements OnInit {
       }
 
       this.updateForm(myRepetition);
+
+      this.subjectService.query().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects = res.body || []));
     });
   }
 
@@ -87,4 +100,8 @@ export class MyRepetitionUpdateComponent implements OnInit {
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
+  trackById(index: number, item: ISubject): any {
+      return item.id;
+    }
 }

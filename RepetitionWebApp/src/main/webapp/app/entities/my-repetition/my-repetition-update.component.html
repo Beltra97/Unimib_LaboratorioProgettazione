@@ -12,9 +12,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="repetitionWebApp.myRepetition.subject" for="field_subject">Subject</label>
-                    <input type="text" class="form-control" name="subject" id="field_subject"
-                           formControlName="subject"/>
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.subject" for="field_subject">Subject</label>
+                    <select class="form-control" id="field_subject" name="subject" formControlName="subject">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="subjectOption.id === editForm.get('subject')!.value?.id ? editForm.get('subject')!.value : subjectOption" *ngFor="let subjectOption of subjects; trackBy: trackById">{{ subjectOption.name }}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">

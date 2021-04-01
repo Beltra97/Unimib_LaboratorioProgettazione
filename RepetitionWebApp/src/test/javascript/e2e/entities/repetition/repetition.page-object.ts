@@ -29,24 +29,25 @@ export class RepetitionUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  subjectInput = element(by.id('field_subject'));
+  topicInput = element(by.id('field_topic'));
   dateRepetitionInput = element(by.id('field_dateRepetition'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
   dateDeletedInput = element(by.id('field_dateDeleted'));
 
   tutorSelect = element(by.id('field_tutor'));
+  subjectSelect = element(by.id('field_subject'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setSubjectInput(subject: string): Promise<void> {
-    await this.subjectInput.sendKeys(subject);
+  async setTopicInput(topic: string): Promise<void> {
+    await this.topicInput.sendKeys(topic);
   }
 
-  async getSubjectInput(): Promise<string> {
-    return await this.subjectInput.getAttribute('value');
+  async getTopicInput(): Promise<string> {
+    return await this.topicInput.getAttribute('value');
   }
 
   async setDateRepetitionInput(dateRepetition: string): Promise<void> {
@@ -95,6 +96,22 @@ export class RepetitionUpdatePage {
 
   async getTutorSelectedOption(): Promise<string> {
     return await this.tutorSelect.element(by.css('option:checked')).getText();
+  }
+
+  async subjectSelectLastOption(): Promise<void> {
+    await this.subjectSelect.all(by.tagName('option')).last().click();
+  }
+
+  async subjectSelectOption(option: string): Promise<void> {
+    await this.subjectSelect.sendKeys(option);
+  }
+
+  getSubjectSelect(): ElementFinder {
+    return this.subjectSelect;
+  }
+
+  async getSubjectSelectedOption(): Promise<string> {
+    return await this.subjectSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

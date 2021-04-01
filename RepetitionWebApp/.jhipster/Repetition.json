@@ -2,7 +2,7 @@
   "name": "Repetition",
   "fields": [
     {
-      "fieldName": "subject",
+      "fieldName": "topic",
       "fieldType": "String"
     },
     {
@@ -31,6 +31,13 @@
       "otherEntityName": "tutor",
       "otherEntityRelationshipName": "repetition",
       "relationshipName": "tutor",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "repetition",
+      "relationshipName": "subject",
       "otherEntityField": "id"
     }
   ],

@@ -8,9 +8,9 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="repetitionWebApp.repetition.subject">Subject</span></dt>
+                <dt><span jhiTranslate="repetitionWebApp.repetition.topic">Topic</span></dt>
                 <dd>
-                    <span>{{ repetition.subject }}</span>
+                    <span>{{ repetition.topic }}</span>
                 </dd>
                 <dt><span jhiTranslate="repetitionWebApp.repetition.dateRepetition">Date Repetition</span></dt>
                 <dd>
@@ -32,6 +32,12 @@
                 <dd>
                     <div *ngIf="repetition.tutor">
                         <a [routerLink]="['/tutor', repetition.tutor?.id, 'view']">{{ repetition.tutor?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.repetition.subject">Subject</span></dt>
+                <dd>
+                    <div *ngIf="repetition.subject">
+                        <a [routerLink]="['/subject', repetition.subject?.id, 'view']">{{ repetition.subject?.id }}</a>
                     </div>
                 </dd>
             </dl>

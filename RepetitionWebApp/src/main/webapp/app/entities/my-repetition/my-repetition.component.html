@@ -18,26 +18,22 @@
         <span jhiTranslate="repetitionWebApp.myRepetition.home.notFound">No myRepetitions found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="myRepetitions && myRepetitions.length > 0">
+    <div id="entities" *ngIf="myRepetitions && myRepetitions.length > 0">
 
-        <mat-card style="margin:2em;" *ngFor="let myRepetition of myRepetitions" class="example-card"
-                  [routerLink]="['/my-repetition', myRepetition.id, 'view']">
+        <mat-card style="background-color:blue;margin:2em;" *ngFor="let myRepetition of myRepetitions">
+
             <mat-card-header>
-                <mat-card-title>{{ myRepetition.subject }} </mat-card-title>
-                <mat-card-subtitle>{{ myRepetition.dateRepetition | date:'medium' }}</mat-card-subtitle>
+                <mat-card-title>{{ myRepetition.subject.name }} </mat-card-title>
+                <mat-card-subtitle>{{ myRepetition.dateRepetition | date:'short' }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                    bred for hunting.
-                </p>
+                <p>{{ myRepetition.topic }}</p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-fab>
+                <button mat-fab [routerLink]="['/my-repetition', myRepetition.id, 'view']">
                     <mat-icon>update</mat-icon>
                 </button>
-                <button type="submit" (click)="delete(myRepetition)" mat-fab>
+                <button mat-fab style="background-color:red;float: right;" type="submit" (click)="delete(myRepetition)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-card-actions>

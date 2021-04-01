@@ -1,8 +1,10 @@
 package com.company.repetitionwebapp.service;
 
 import com.company.repetitionwebapp.domain.Repetition;
+import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.domain.Tutor;
 import com.company.repetitionwebapp.repository.RepetitionRepository;
+import com.company.repetitionwebapp.repository.SubjectRepository;
 import com.company.repetitionwebapp.repository.TutorRepository;
 import com.company.repetitionwebapp.repository.UserRepository;
 import com.company.repetitionwebapp.security.SecurityUtils;
@@ -28,6 +30,7 @@ public class RepetitionService {
     private final RepetitionRepository repetitionRepository;
     private final TutorRepository tutorRepository;
     private final UserRepository userRepository;
+    private final SubjectRepository subjectRepository;
 
     private final CacheManager cacheManager;
 
@@ -35,11 +38,13 @@ public class RepetitionService {
         RepetitionRepository repetitionRepository,
         TutorRepository tutorRepository,
         UserRepository userRepository,
+        SubjectRepository subjectRepository,
         CacheManager cacheManager
     ) {
         this.repetitionRepository = repetitionRepository;
         this.tutorRepository = tutorRepository;
         this.userRepository = userRepository;
+        this.subjectRepository = subjectRepository;
         this.cacheManager = cacheManager;
     }
 
@@ -85,9 +90,13 @@ public class RepetitionService {
                             tutor = t;
                     }
 
-                    if(tutor != null) {
+                    Subject subject = subjectRepository.findById(repetitionDTO.getSubject().getId()).get();
+
+                    if(tutor != null && subject != null) {
+
                         Repetition newRepetition = new Repetition();
                         newRepetition.setTutor(tutor);
+                        newRepetition.setSubject(subject);
                         newRepetition.setDateRepetition(repetitionDTO.getDateRepetition());
                         newRepetition.setDateCreated(Instant.now());
                         newRepetition.setDateModified(Instant.now());
@@ -99,6 +108,25 @@ public class RepetitionService {
                     }
                 }
             );
+        return result.get();
+    }
+
+    public Repetition updateRepetition(RepetitionDTO repetitionDTO) {
+
+        AtomicReference<Repetition> result = new AtomicReference<>(new Repetition());
+
+        Subject subject = subjectRepository.findById(repetitionDTO.getSubject().getId()).get();
+        Repetition repetition = repetitionRepository.findById(repetitionDTO.getId()).get();
+
+        if(repetition != null && subject != null) {
+
+            repetition.setSubject(subject);
+            repetition.setDateRepetition(repetitionDTO.getDateRepetition());
+            repetition.setDateModified(Instant.now());
+            repetitionRepository.save(repetition);
+            log.debug("Updated Information for Repetition: {}", repetition);
+            result.set(repetition);
+        }
         return result.get();
     }
 
