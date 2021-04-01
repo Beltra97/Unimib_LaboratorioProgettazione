@@ -31,6 +31,7 @@ export class SubjectUpdatePage {
 
   nameInput = element(by.id('field_name'));
   descriptionInput = element(by.id('field_description'));
+  imageUrlInput = element(by.id('field_imageUrl'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
   dateDeletedInput = element(by.id('field_dateDeleted'));
@@ -53,6 +54,14 @@ export class SubjectUpdatePage {
 
   async getDescriptionInput(): Promise<string> {
     return await this.descriptionInput.getAttribute('value');
+  }
+
+  async setImageUrlInput(imageUrl: string): Promise<void> {
+    await this.imageUrlInput.sendKeys(imageUrl);
+  }
+
+  async getImageUrlInput(): Promise<string> {
+    return await this.imageUrlInput.getAttribute('value');
   }
 
   async setDateCreatedInput(dateCreated: string): Promise<void> {

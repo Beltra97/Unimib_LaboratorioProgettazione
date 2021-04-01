@@ -13,6 +13,10 @@
       ]
     },
     {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "dateCreated",
       "fieldType": "Instant"
     },

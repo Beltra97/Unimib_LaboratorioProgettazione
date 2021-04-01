@@ -25,6 +25,7 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.subject.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.subject.description">Description</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.subject.imageUrl">Image Url</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.subject.dateCreated">Date Created</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.subject.dateModified">Date Modified</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.subject.dateDeleted">Date Deleted</span></th>
@@ -36,6 +37,7 @@
                     <td><a [routerLink]="['/subject', subject.id, 'view']">{{ subject.id }}</a></td>
                     <td>{{ subject.name }}</td>
                     <td>{{ subject.description }}</td>
+                    <td>{{ subject.imageUrl }}</td>
                     <td>{{ subject.dateCreated | date:'medium' }}</td>
                     <td>{{ subject.dateModified | date:'medium' }}</td>
                     <td>{{ subject.dateDeleted | date:'medium' }}</td>

@@ -21,6 +21,7 @@ export class SubjectUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     description: [null, [Validators.required]],
+    imageUrl: [null, [Validators.required, Validators.maxLength(1024)]],
     dateCreated: [],
     dateModified: [],
     dateDeleted: [],
@@ -46,6 +47,7 @@ export class SubjectUpdateComponent implements OnInit {
       id: subject.id,
       name: subject.name,
       description: subject.description,
+      imageUrl: subject.imageUrl,
       dateCreated: subject.dateCreated ? subject.dateCreated.format(DATE_TIME_FORMAT) : null,
       dateModified: subject.dateModified ? subject.dateModified.format(DATE_TIME_FORMAT) : null,
       dateDeleted: subject.dateDeleted ? subject.dateDeleted.format(DATE_TIME_FORMAT) : null,
@@ -72,6 +74,7 @@ export class SubjectUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       description: this.editForm.get(['description'])!.value,
+      imageUrl: this.editForm.get(['imageUrl'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value
         ? moment(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)
         : undefined,

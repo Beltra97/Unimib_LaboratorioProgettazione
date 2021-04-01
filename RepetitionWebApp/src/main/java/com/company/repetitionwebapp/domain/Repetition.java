@@ -31,6 +31,9 @@ public class Repetition implements Serializable {
     @Column(name = "date_repetition", nullable = false)
     private Instant dateRepetition;
 
+    @Column(name = "duration")
+    private Integer duration;
+
     @Column(name = "date_created")
     private Instant dateCreated;
 
@@ -81,6 +84,19 @@ public class Repetition implements Serializable {
 
     public void setDateRepetition(Instant dateRepetition) {
         this.dateRepetition = dateRepetition;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public Repetition duration(Integer duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public Instant getDateCreated() {
@@ -172,6 +188,7 @@ public class Repetition implements Serializable {
             "id=" + getId() +
             ", topic='" + getTopic() + "'" +
             ", dateRepetition='" + getDateRepetition() + "'" +
+            ", duration=" + getDuration() +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +
             ", dateDeleted='" + getDateDeleted() + "'" +

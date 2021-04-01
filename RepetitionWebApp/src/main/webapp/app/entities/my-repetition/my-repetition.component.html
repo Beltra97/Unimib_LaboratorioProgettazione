@@ -20,23 +20,34 @@
 
     <div id="entities" *ngIf="myRepetitions && myRepetitions.length > 0">
 
-        <mat-card style="background-color:blue;margin:2em;" *ngFor="let myRepetition of myRepetitions">
+        <mat-card class="alert alert-warning" *ngFor="let myRepetition of myRepetitions">
+
+            <img mat-card-lg-image style="float:right" src="{{myRepetition.subject?.imageUrl}}">
 
             <mat-card-header>
-                <mat-card-title>{{ myRepetition.subject.name }} </mat-card-title>
+                <mat-card-title>{{ myRepetition.subject?.name }} </mat-card-title>
                 <mat-card-subtitle>{{ myRepetition.dateRepetition | date:'short' }}</mat-card-subtitle>
             </mat-card-header>
+
             <mat-card-content>
                 <p>{{ myRepetition.topic }}</p>
             </mat-card-content>
+
             <mat-card-actions>
-                <button mat-fab [routerLink]="['/my-repetition', myRepetition.id, 'view']">
-                    <mat-icon>update</mat-icon>
-                </button>
-                <button mat-fab style="background-color:red;float: right;" type="submit" (click)="delete(myRepetition)">
-                    <mat-icon>delete</mat-icon>
-                </button>
+                <div style="float:right">
+                    <button mat-mini-fab style="background-color:red;" type="submit" (click)="delete(myRepetition)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button style="margin-left:50px;margin-right:50px" mat-mini-fab [routerLink]="['/my-repetition', myRepetition.id, 'view']">
+                        <mat-icon>forward</mat-icon>
+                    </button>
+                </div>
             </mat-card-actions>
+
+            <mat-card-footer>
+                footer
+            </mat-card-footer>
+
         </mat-card>
     </div>
 </div>

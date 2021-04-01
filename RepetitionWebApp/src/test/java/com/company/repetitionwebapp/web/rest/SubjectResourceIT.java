@@ -37,6 +37,9 @@ public class SubjectResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_IMAGE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_URL = "BBBBBBBBBB";
+
     private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -67,6 +70,7 @@ public class SubjectResourceIT {
         Subject subject = new Subject()
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
+            .imageUrl(DEFAULT_IMAGE_URL)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
             .dateDeleted(DEFAULT_DATE_DELETED);
@@ -82,6 +86,7 @@ public class SubjectResourceIT {
         Subject subject = new Subject()
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
+            .imageUrl(UPDATED_IMAGE_URL)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -109,6 +114,7 @@ public class SubjectResourceIT {
         Subject testSubject = subjectList.get(subjectList.size() - 1);
         assertThat(testSubject.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSubject.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testSubject.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
         assertThat(testSubject.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
         assertThat(testSubject.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
         assertThat(testSubject.getDateDeleted()).isEqualTo(DEFAULT_DATE_DELETED);
@@ -174,6 +180,25 @@ public class SubjectResourceIT {
 
     @Test
     @Transactional
+    public void checkImageUrlIsRequired() throws Exception {
+        int databaseSizeBeforeTest = subjectRepository.findAll().size();
+        // set the field null
+        subject.setImageUrl(null);
+
+        // Create the Subject, which fails.
+
+
+        restSubjectMockMvc.perform(post("/api/subjects")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(subject)))
+            .andExpect(status().isBadRequest());
+
+        List<Subject> subjectList = subjectRepository.findAll();
+        assertThat(subjectList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllSubjects() throws Exception {
         // Initialize the database
         subjectRepository.saveAndFlush(subject);
@@ -185,6 +210,7 @@ public class SubjectResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(subject.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
@@ -203,6 +229,7 @@ public class SubjectResourceIT {
             .andExpect(jsonPath("$.id").value(subject.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
             .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
             .andExpect(jsonPath("$.dateDeleted").value(DEFAULT_DATE_DELETED.toString()));
@@ -230,6 +257,7 @@ public class SubjectResourceIT {
         updatedSubject
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
+            .imageUrl(UPDATED_IMAGE_URL)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -245,6 +273,7 @@ public class SubjectResourceIT {
         Subject testSubject = subjectList.get(subjectList.size() - 1);
         assertThat(testSubject.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSubject.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testSubject.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
         assertThat(testSubject.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
         assertThat(testSubject.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
         assertThat(testSubject.getDateDeleted()).isEqualTo(UPDATED_DATE_DELETED);

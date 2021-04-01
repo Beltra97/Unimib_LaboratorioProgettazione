@@ -43,6 +43,7 @@ describe('Subject e2e test', () => {
     await promise.all([
       subjectUpdatePage.setNameInput('name'),
       subjectUpdatePage.setDescriptionInput('description'),
+      subjectUpdatePage.setImageUrlInput('imageUrl'),
       subjectUpdatePage.setDateCreatedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       subjectUpdatePage.setDateModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       subjectUpdatePage.setDateDeletedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -50,6 +51,7 @@ describe('Subject e2e test', () => {
 
     expect(await subjectUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await subjectUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
+    expect(await subjectUpdatePage.getImageUrlInput()).to.eq('imageUrl', 'Expected ImageUrl value to be equals to imageUrl');
     expect(await subjectUpdatePage.getDateCreatedInput()).to.contain(
       '2001-01-01T02:30',
       'Expected dateCreated value to be equals to 2000-12-31'

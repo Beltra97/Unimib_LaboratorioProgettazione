@@ -22,6 +22,7 @@ entity Student {
 entity Repetition {
     topic String,
     dateRepetition Instant required,
+    duration Integer,
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant
@@ -36,6 +37,7 @@ entity RepetitionStudent {
 entity Subject {
     name String required,
     description String required,
+    imageUrl String required maxlength(1024),
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant

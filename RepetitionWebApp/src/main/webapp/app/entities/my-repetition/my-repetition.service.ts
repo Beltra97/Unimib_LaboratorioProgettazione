@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IMyRepetition } from 'app/shared/model/my-repetition.model';
-import { MyRepetition } from 'app/shared/model/repetition.model';
+import { IRepetition } from 'app/shared/model/repetition.model';
 
 type EntityResponseType = HttpResponse<IMyRepetition>;
 type EntityArrayResponseType = HttpResponse<IMyRepetition[]>;

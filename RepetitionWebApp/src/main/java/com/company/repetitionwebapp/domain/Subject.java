@@ -33,6 +33,11 @@ public class Subject implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @NotNull
+    @Size(max = 1024)
+    @Column(name = "image_url", length = 1024, nullable = false)
+    private String imageUrl;
+
     @Column(name = "date_created")
     private Instant dateCreated;
 
@@ -79,6 +84,19 @@ public class Subject implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public Subject imageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Instant getDateCreated() {
@@ -169,6 +187,7 @@ public class Subject implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +
             ", dateDeleted='" + getDateDeleted() + "'" +

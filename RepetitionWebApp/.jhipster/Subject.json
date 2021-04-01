@@ -16,6 +16,15 @@
       ]
     },
     {
+      "fieldName": "imageUrl",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "1024"
+    },
+    {
       "fieldName": "dateCreated",
       "fieldType": "Instant"
     },

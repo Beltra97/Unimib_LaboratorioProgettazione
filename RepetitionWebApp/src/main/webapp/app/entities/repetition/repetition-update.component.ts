@@ -29,6 +29,7 @@ export class RepetitionUpdateComponent implements OnInit {
     id: [],
     topic: [],
     dateRepetition: [null, [Validators.required]],
+    duration: [],
     dateCreated: [],
     dateModified: [],
     dateDeleted: [],
@@ -67,6 +68,7 @@ export class RepetitionUpdateComponent implements OnInit {
       id: repetition.id,
       topic: repetition.topic,
       dateRepetition: repetition.dateRepetition ? repetition.dateRepetition.format(DATE_TIME_FORMAT) : null,
+      duration: repetition.duration,
       dateCreated: repetition.dateCreated ? repetition.dateCreated.format(DATE_TIME_FORMAT) : null,
       dateModified: repetition.dateModified ? repetition.dateModified.format(DATE_TIME_FORMAT) : null,
       dateDeleted: repetition.dateDeleted ? repetition.dateDeleted.format(DATE_TIME_FORMAT) : null,
@@ -97,6 +99,7 @@ export class RepetitionUpdateComponent implements OnInit {
       dateRepetition: this.editForm.get(['dateRepetition'])!.value
         ? moment(this.editForm.get(['dateRepetition'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      duration: this.editForm.get(['duration'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value
         ? moment(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)
         : undefined,

@@ -18,6 +18,7 @@
       },
       "name": "Name",
       "description": "Description",
+      "imageUrl": "Image Url",
       "dateCreated": "Date Created",
       "dateModified": "Date Modified",
       "dateDeleted": "Date Deleted",
