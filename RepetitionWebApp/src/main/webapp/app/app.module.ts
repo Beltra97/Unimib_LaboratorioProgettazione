@@ -7,7 +7,6 @@ import { RepetitionWebAppCoreModule } from 'app/core/core.module';
 import { RepetitionWebAppAppRoutingModule } from './app-routing.module';
 import { RepetitionWebAppHomeModule } from './home/home.module';
 import { RepetitionWebAppEntityModule } from './entities/entity.module';
-// jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
@@ -16,7 +15,6 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 
 import { RepetitionService } from './services/repetition.service';
-import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -24,7 +22,6 @@ import { HomeComponent } from './home/home.component';
     RepetitionWebAppSharedModule,
     RepetitionWebAppCoreModule,
     RepetitionWebAppHomeModule,
-    // jhipster-needle-angular-add-module JHipster will add new module here
     RepetitionWebAppEntityModule,
     RepetitionWebAppAppRoutingModule,
   ],

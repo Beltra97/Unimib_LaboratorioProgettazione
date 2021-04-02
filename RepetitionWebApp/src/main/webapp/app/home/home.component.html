@@ -1,29 +1,26 @@
-<!-- https://reelyactive.github.io/web-style-guide/fontawesome-icons/ -->
-
 <div class="card jh-card">
     <div class="row row-content">
         <div class="col-md-4">
             <div class="faImg">
                 <fa-icon [icon]="faSchool"></fa-icon>
             </div>
-            <!-- <img src="../../content/images/chalkboard-teacher-solid.svg"> -->
         </div>
-    
+        
         <div class="col-md-8">
             <h1 class="display-4" jhiTranslate="home.title">Welcome to the Repetition WebApp!</h1>
-    
+            
             <div [ngSwitch]="isAuthenticated()">
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
-                        [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
+                    [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
                 </div>
-    
+                
                 <div class="alert alert-warning" *ngSwitchCase="false">
                     <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
                     <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
                 </div>
             </div>
-    
+            
         </div>
     </div>
 </div>
@@ -34,12 +31,11 @@
             <h1 class="display-4" jhiTranslate="home.functioning">How does it work?</h1>
             <h4 jhiTranslate="home.description">The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. Simple and effective.</h4>
         </div>
-    
+        
         <div class="col-md-4">
             <div class="faImg">
                 <fa-icon [icon]="faUserFriends"></fa-icon>
             </div>
-            <!-- <img src="../../content/images/users-solid.svg"> -->
         </div>
     </div>
 </div>
@@ -53,7 +49,7 @@
     
     <div class="row row-content">
         <div class="col-12">
-
+            
             <div id="cardRepetitions" class="card" *ngFor="let repetition of repetitions">
                 <div class="card-body">
                     <div class="d-flex flex-column">
@@ -64,18 +60,59 @@
                             <p id="cardTextRepetitions" class="card-text">{{repetition.description}}</p>
                         </div>
                         <div class="p-2" [ngSwitch]="isAuthenticated()">
-                            <div *ngSwitchCase="true">
-                                <a href="#" class="btn btn-outline-primary btn-block">Enroll</a>
-                            </div>
-                            <div *ngSwitchCase="false">
-                                <a href="#" class="btn btn-outline-primary btn-block disabled">Enroll</a>
+                            <div class="container">
+                                <div class="row row-content">
+                                    <div class="col-6">
+                                        <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)">Info</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <div *ngSwitchCase="true">
+                                            <a href="#" class="btn btn-outline-primary btn-block">Enroll</a>
+                                        </div>
+                                        <div *ngSwitchCase="false">
+                                            <a href="#" class="btn btn-outline-primary btn-block disabled">Enroll</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
         </div>
     </div>
+    
+<!--
+    <div class="card jh-card">
+        <div class="row row-content">
+            <div class="col-12">
+                <ngb-carousel *ngIf="images" #carousel [interval]="1500" [showNavigationArrows]="false" [pauseOnHover]="true" [keyboard]="false">
+                    <ng-template ngbSlide *ngFor="let img of images">
+                        <div class="picsum-img-wrapper">
+                            <img class="d-block w-100" [src]="img">
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+        </div>
+    </div>
+    
+    <button mat-stroked-button color="warn">Warn</button>
+    
+    <mat-selection-list>
+        <mat-list-option *ngFor="let shoe of typesOfShoes">
+            {{shoe}}
+        </mat-list-option>
+    </mat-selection-list> 
 
+    <div class="container">
+        <div class="row row-content">
+            <div class="col-5">
+                <button mat-raised-button matBadge="10" matBadgeColor="warn" color="primary">TEST</button>
+            </div>
+        </div>
+    </div>
+-->
+    
 </div>
