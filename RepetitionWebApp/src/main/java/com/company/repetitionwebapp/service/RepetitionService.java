@@ -1,13 +1,9 @@
 package com.company.repetitionwebapp.service;
 
-import com.company.repetitionwebapp.domain.Repetition;
-import com.company.repetitionwebapp.domain.Subject;
-import com.company.repetitionwebapp.domain.Tutor;
-import com.company.repetitionwebapp.repository.RepetitionRepository;
-import com.company.repetitionwebapp.repository.SubjectRepository;
-import com.company.repetitionwebapp.repository.TutorRepository;
-import com.company.repetitionwebapp.repository.UserRepository;
+import com.company.repetitionwebapp.domain.*;
+import com.company.repetitionwebapp.repository.*;
 import com.company.repetitionwebapp.security.SecurityUtils;
+import com.company.repetitionwebapp.service.dto.MyRepetitionRS;
 import com.company.repetitionwebapp.service.dto.RepetitionDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +27,7 @@ public class RepetitionService {
     private final TutorRepository tutorRepository;
     private final UserRepository userRepository;
     private final SubjectRepository subjectRepository;
+    private final RepetitionStudentRepository repetitionStudentRepository;
 
     private final CacheManager cacheManager;
 
@@ -39,18 +36,20 @@ public class RepetitionService {
         TutorRepository tutorRepository,
         UserRepository userRepository,
         SubjectRepository subjectRepository,
+        RepetitionStudentRepository repetitionStudentRepository,
         CacheManager cacheManager
     ) {
         this.repetitionRepository = repetitionRepository;
         this.tutorRepository = tutorRepository;
         this.userRepository = userRepository;
         this.subjectRepository = subjectRepository;
+        this.repetitionStudentRepository = repetitionStudentRepository;
         this.cacheManager = cacheManager;
     }
 
-    public List<Repetition> getMyRepetitions() {
+    public List<MyRepetitionRS> getMyRepetitions() {
 
-        List<Repetition> myRepetitions = new ArrayList<Repetition>();
+        List<MyRepetitionRS> myRepetitions = new ArrayList<MyRepetitionRS>();
 
         SecurityUtils
             .getCurrentUserLogin()
@@ -66,7 +65,18 @@ public class RepetitionService {
                     if(tutor != null) {
                         for(Repetition r : repetitionRepository.findAll()){
                             if(r.getTutor() != null && r.getTutor().getId() == tutor.getId() && r.getDateDeleted() == null)
-                                myRepetitions.add(r);
+                            {
+                                List<Student> students = new ArrayList<Student>();
+                                for(RepetitionStudent s : repetitionStudentRepository.findAll()){
+                                    if(s.getRepetition() != null && s.getRepetition().getId() == r.getId()){
+                                        students.add(s.getStudent());
+                                    }
+                                }
+
+                                MyRepetitionRS myRepetitionRS = new MyRepetitionRS(r);
+                                myRepetitionRS.setStudents(students);
+                                myRepetitions.add(myRepetitionRS);
+                            }
                         }
                     }
                 }
@@ -97,6 +107,7 @@ public class RepetitionService {
                         Repetition newRepetition = new Repetition();
                         newRepetition.setTutor(tutor);
                         newRepetition.setSubject(subject);
+                        newRepetition.setDuration(repetitionDTO.getDuration());
                         newRepetition.setDateRepetition(repetitionDTO.getDateRepetition());
                         newRepetition.setDateCreated(Instant.now());
                         newRepetition.setDateModified(Instant.now());
@@ -121,6 +132,7 @@ public class RepetitionService {
         if(repetition != null && subject != null) {
 
             repetition.setSubject(subject);
+            repetition.setDuration(repetitionDTO.getDuration());
             repetition.setDateRepetition(repetitionDTO.getDateRepetition());
             repetition.setDateModified(Instant.now());
             repetitionRepository.save(repetition);

@@ -26,6 +26,7 @@ export class MyRepetitionUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     subject: [],
+    duration: [],
     dateRepetition: [null, [Validators.required]],
     dateCreated: [],
     dateModified: [],
@@ -56,6 +57,7 @@ export class MyRepetitionUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: myRepetition.id,
       subject: myRepetition.subject,
+      duration: myRepetition.duration,
       dateRepetition: myRepetition.dateRepetition ? myRepetition.dateRepetition.format(DATE_TIME_FORMAT) : null,
     });
   }
@@ -79,6 +81,7 @@ export class MyRepetitionUpdateComponent implements OnInit {
       ...new MyRepetition(),
       id: this.editForm.get(['id'])!.value,
       subject: this.editForm.get(['subject'])!.value,
+      duration: this.editForm.get(['duration'])!.value,
       dateRepetition: this.editForm.get(['dateRepetition'])!.value
         ? moment(this.editForm.get(['dateRepetition'])!.value, DATE_TIME_FORMAT)
         : undefined

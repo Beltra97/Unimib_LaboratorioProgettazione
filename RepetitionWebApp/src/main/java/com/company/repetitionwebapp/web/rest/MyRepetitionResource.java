@@ -3,6 +3,7 @@ package com.company.repetitionwebapp.web.rest;
 import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.repository.RepetitionRepository;
 import com.company.repetitionwebapp.service.RepetitionService;
+import com.company.repetitionwebapp.service.dto.MyRepetitionRS;
 import com.company.repetitionwebapp.service.dto.RepetitionDTO;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
@@ -89,7 +90,7 @@ public class MyRepetitionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of repetitions in body.
      */
     @GetMapping("/my-repetitions")
-    public List<Repetition> getAllRepetitions() {
+    public List<MyRepetitionRS> getAllRepetitions() {
         log.debug("REST request to get all Repetitions");
         return repetitionService.getMyRepetitions();
     }

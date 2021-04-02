@@ -1,40 +1,40 @@
 package com.company.repetitionwebapp.service.dto;
 
-import com.company.repetitionwebapp.config.Constants;
-import com.company.repetitionwebapp.domain.Authority;
 import com.company.repetitionwebapp.domain.Repetition;
+import com.company.repetitionwebapp.domain.Student;
 import com.company.repetitionwebapp.domain.Subject;
-import com.company.repetitionwebapp.domain.User;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
- * A DTO representing a user, with his authorities.
+ * A DTO representing a MyRepetitionRS.
  */
-public class RepetitionDTO {
+public class MyRepetitionRS {
     private Long id;
 
     private Subject subject;
+
+    private String topic;
 
     private Integer duration;
 
     private Instant dateRepetition;
 
-    public RepetitionDTO() {
+    private List<Student> students = new ArrayList<Student>();
+
+    public MyRepetitionRS() {
         // Empty constructor needed for Jackson.
     }
 
-    public RepetitionDTO(Repetition repetition) {
+    public MyRepetitionRS(Repetition repetition) {
         this.id = repetition.getId();
         this.subject = repetition.getSubject();
-        this.dateRepetition = repetition.getDateRepetition();
+        this.topic = repetition.getTopic();
         this.duration = repetition.getDuration();
+        this.dateRepetition = repetition.getDateRepetition();
     }
 
     public Long getId() {
@@ -61,11 +61,27 @@ public class RepetitionDTO {
         this.duration = duration;
     }
 
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
     public Instant getDateRepetition() {
         return dateRepetition;
     }
 
     public void setDateRepetition(Instant dateRepetition) {
         this.dateRepetition = dateRepetition;
+    }
+
+    public List<Student> getStudents() {
+        return (List<Student>) students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }
