@@ -52,7 +52,15 @@
       "confirmpassword.placeholder": "Confirm the new password",
       "email.label": "Email",
       "email.placeholder": "Your email",
-      "birthdate.label": "Birthdate"
+      "birthdate.label": "Birthdate",
+      "role.label": "Role",
+      "role.label.student": "Student",
+      "role.label.tutor": "Tutor",
+      "grade.label": "Grade",
+      "grade.label.high_school": "High School",
+      "grade.label.university": "University",
+      "grade.label.master": "Master",
+      "subject.label": "Subject"
     },
     "messages": {
       "info": {
@@ -105,6 +113,18 @@
           "required": "Your birthdate is required.",
           "invalid": "Your birthdate is invalid.",
           "pattern": "Your birthdate can only contain letters."
+        },
+        "role": {
+          "required": "Your role is required.",
+          "invalid": "Your role is invalid."
+        },
+        "grade": {
+          "required": "Your grade is required.",
+          "invalid": "Your grade is invalid."
+        },
+        "subject": {
+          "required": "Your subject is required.",
+          "invalid": "Your subject is invalid."
         }
       }
     },
