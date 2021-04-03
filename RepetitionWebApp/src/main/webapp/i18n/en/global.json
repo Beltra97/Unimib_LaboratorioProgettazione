@@ -56,10 +56,10 @@
       "role.label": "Role",
       "role.label.student": "Student",
       "role.label.tutor": "Tutor",
-      "grade.label": "Grade",
-      "grade.label.high_school": "High School",
-      "grade.label.university": "University",
-      "grade.label.master": "Master",
+      "degree.label": "Degree",
+      "degree.label.high_school": "High School",
+      "degree.label.university": "University",
+      "degree.label.master": "Master",
       "subject.label": "Subject"
     },
     "messages": {
@@ -118,9 +118,9 @@
           "required": "Your role is required.",
           "invalid": "Your role is invalid."
         },
-        "grade": {
-          "required": "Your grade is required.",
-          "invalid": "Your grade is invalid."
+        "degree": {
+          "required": "Your degree is required.",
+          "invalid": "Your degree is invalid."
         },
         "subject": {
           "required": "Your subject is required.",

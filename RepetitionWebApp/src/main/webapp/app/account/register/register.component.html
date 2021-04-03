@@ -179,8 +179,8 @@
                 <div class="form-group">
                     <label class="form-control-label" for="role" jhiTranslate="global.form.role.label">Role</label>
                     <select type="text" class="form-control" formControlName="role" id="role" name="role" [(ngModel)]="optionValue">
-                     <option value="student" jhiTranslate="global.form.role.label.student">Student</option>
-                     <option value="tutor" jhiTranslate="global.form.role.label.tutor">Tutor</option>
+                     <option value=true jhiTranslate="global.form.role.label.student">Student</option>
+                     <option value=false jhiTranslate="global.form.role.label.tutor">Tutor</option>
                     </select>           
 
                     <div *ngIf="registerForm.get('role')!.invalid && (registerForm.get('role')!.dirty || registerForm.get('role')!.touched)">
@@ -192,27 +192,27 @@
                     </div>
                 </div>
 
-                <ng-container *ngIf="optionValue == 'tutor'">
+                <ng-container *ngIf="optionValue=='false'">
                     <div class="form-group">
-                        <label class="form-control-label" for="grade" jhiTranslate="global.form.grade.label">Grade</label>
-                        <select type="text" class="form-control" formControlName="grade" id="grade" name="grade" >
-                         <option value="high_school" jhiTranslate="global.form.grade.label.high_school">High school</option>
-                         <option value="university" jhiTranslate="global.form.grade.label.university">University</option>
-                         <option value="master" jhiTranslate="global.form.grade.label.master">Master</option>
+                        <label class="form-control-label" for="degree" jhiTranslate="global.form.degree.label">Degree</label>
+                        <select type="text" class="form-control" formControlName="degree" id="degree" name="degree" [required]="optionValue =='false'">
+                         <option value="high_school" jhiTranslate="global.form.degree.label.high_school">High school</option>
+                         <option value="university" jhiTranslate="global.form.degree.label.university">University</option>
+                         <option value="master" jhiTranslate="global.form.degree.label.master">Master</option>
                         </select>           
     
-                        <div *ngIf="registerForm.get('grade')!.invalid && (registerForm.get('grade')!.dirty || registerForm.get('grade')!.touched) && optionValue == 'tutor'">
+                        <div *ngIf="registerForm.get('degree')!.invalid && (registerForm.get('degree')!.dirty || registerForm.get('degree')!.touched) && optionValue == 'false'">
                             <small class="form-text text-danger"
-                                   *ngIf="registerForm.get('grade')?.errors?.required"
-                                   jhiTranslate="global.messages.validate.grade.required">
-                                Your grade is required.
+                                   *ngIf="registerForm.get('degree')?.errors?.required"
+                                   jhiTranslate="global.messages.validate.degree.required">
+                                Your degree is required.
                             </small>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-control-label" for="subject" jhiTranslate="global.form.subject.label">Subject</label>
-                        <select type="text" class="form-control" formControlName="subject" id="subject" name="subject" >
+                        <select type="text" class="form-control" formControlName="subject" id="subject" name="subject" [required]="optionValue =='false'">
                          <option value="math">Math</option>
                          <option value="history">History</option>
                          <option value="music">Music</option>
@@ -220,7 +220,7 @@
                          <option value="cs">Computer science</option>
                         </select>           
     
-                        <div *ngIf="registerForm.get('subject')!.invalid && (registerForm.get('subject')!.dirty || registerForm.get('subject')!.touched) && optionValue == 'tutor'">
+                        <div *ngIf="registerForm.get('subject')!.invalid && (registerForm.get('subject')!.dirty || registerForm.get('subject')!.touched) && optionValue == 'false'">
                             <small class="form-text text-danger"
                                    *ngIf="registerForm.get('subject')?.errors?.required"
                                    jhiTranslate="global.messages.validate.subject.required">
