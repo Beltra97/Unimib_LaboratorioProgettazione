@@ -4,6 +4,9 @@ import { RepetitionWebAppTestModule } from '../../test.module';
 import { HomeComponent } from 'app/home/home.component';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
+import { Repetition } from 'app/shared/repetition/repetition';
+import { NgbdModalContentComponent } from 'app/home/home.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('Component Tests', () => {
   describe('Home Component', () => {
@@ -50,6 +53,14 @@ describe('Component Tests', () => {
 
       // THEN
       expect(loginModalService.open).toHaveBeenCalled();
+    });
+
+    it('Should call jhi-ngbd-modal-content on info', () => {
+      // WHEN
+      comp.openDialog(new Repetition());
+
+      // THEN
+      expect(new NgbdModalContentComponent(new NgbActiveModal())).toHaveBeenCalled();
     });
   });
 });
