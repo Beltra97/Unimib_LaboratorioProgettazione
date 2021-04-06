@@ -12,9 +12,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.subject" for="field_subject">Subject</label>
-                    <input type="text" class="form-control" name="subject" id="field_subject"
-                           formControlName="subject"/>
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.topic" for="field_topic">Topic</label>
+                    <input type="text" class="form-control" name="topic" id="field_topic"
+                           formControlName="topic"/>
                 </div>
 
                 <div class="form-group">
@@ -32,6 +32,12 @@
                             This field should be a date and time.
                         </small>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.duration" for="field_duration">Duration</label>
+                    <input type="number" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration"/>
                 </div>
 
                 <div class="form-group">
@@ -60,6 +66,14 @@
                     <select class="form-control" id="field_tutor" name="tutor" formControlName="tutor">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="tutorOption.id === editForm.get('tutor')!.value?.id ? editForm.get('tutor')!.value : tutorOption" *ngFor="let tutorOption of tutors; trackBy: trackById">{{ tutorOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.subject" for="field_subject">Subject</label>
+                    <select class="form-control" id="field_subject" name="subject" formControlName="subject">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="subjectOption.id === editForm.get('subject')!.value?.id ? editForm.get('subject')!.value : subjectOption" *ngFor="let subjectOption of subjects; trackBy: trackById">{{ subjectOption.id }}</option>
                     </select>
                 </div>
             </div>

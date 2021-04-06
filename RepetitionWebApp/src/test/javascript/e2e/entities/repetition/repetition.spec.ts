@@ -41,19 +41,22 @@ describe('Repetition e2e test', () => {
     await repetitionComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      repetitionUpdatePage.setSubjectInput('subject'),
+      repetitionUpdatePage.setTopicInput('topic'),
       repetitionUpdatePage.setDateRepetitionInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+      repetitionUpdatePage.setDurationInput('5'),
       repetitionUpdatePage.setDateCreatedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       repetitionUpdatePage.setDateModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       repetitionUpdatePage.setDateDeletedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       repetitionUpdatePage.tutorSelectLastOption(),
+      repetitionUpdatePage.subjectSelectLastOption(),
     ]);
 
-    expect(await repetitionUpdatePage.getSubjectInput()).to.eq('subject', 'Expected Subject value to be equals to subject');
+    expect(await repetitionUpdatePage.getTopicInput()).to.eq('topic', 'Expected Topic value to be equals to topic');
     expect(await repetitionUpdatePage.getDateRepetitionInput()).to.contain(
       '2001-01-01T02:30',
       'Expected dateRepetition value to be equals to 2000-12-31'
     );
+    expect(await repetitionUpdatePage.getDurationInput()).to.eq('5', 'Expected duration value to be equals to 5');
     expect(await repetitionUpdatePage.getDateCreatedInput()).to.contain(
       '2001-01-01T02:30',
       'Expected dateCreated value to be equals to 2000-12-31'

@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Repetition(0, 'AAAAAAA', currentDate, currentDate, currentDate, currentDate);
+      elemDefault = new Repetition(0, 'AAAAAAA', currentDate, 0, currentDate, currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -78,8 +78,9 @@ describe('Service Tests', () => {
       it('should update a Repetition', () => {
         const returnedFromService = Object.assign(
           {
-            subject: 'BBBBBB',
+            topic: 'BBBBBB',
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
+            duration: 1,
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
             dateDeleted: currentDate.format(DATE_TIME_FORMAT),
@@ -107,8 +108,9 @@ describe('Service Tests', () => {
       it('should return a list of Repetition', () => {
         const returnedFromService = Object.assign(
           {
-            subject: 'BBBBBB',
+            topic: 'BBBBBB',
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
+            duration: 1,
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
             dateDeleted: currentDate.format(DATE_TIME_FORMAT),

@@ -31,11 +31,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class RepetitionResourceIT {
 
-    private static final String DEFAULT_SUBJECT = "AAAAAAAAAA";
-    private static final String UPDATED_SUBJECT = "BBBBBBBBBB";
+    private static final String DEFAULT_TOPIC = "AAAAAAAAAA";
+    private static final String UPDATED_TOPIC = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_DATE_REPETITION = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_REPETITION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Integer DEFAULT_DURATION = 1;
+    private static final Integer UPDATED_DURATION = 2;
 
     private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -65,8 +68,9 @@ public class RepetitionResourceIT {
      */
     public static Repetition createEntity(EntityManager em) {
         Repetition repetition = new Repetition()
-            .subject(DEFAULT_SUBJECT)
+            .topic(DEFAULT_TOPIC)
             .dateRepetition(DEFAULT_DATE_REPETITION)
+            .duration(DEFAULT_DURATION)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
             .dateDeleted(DEFAULT_DATE_DELETED);
@@ -80,8 +84,9 @@ public class RepetitionResourceIT {
      */
     public static Repetition createUpdatedEntity(EntityManager em) {
         Repetition repetition = new Repetition()
-            .subject(UPDATED_SUBJECT)
+            .topic(UPDATED_TOPIC)
             .dateRepetition(UPDATED_DATE_REPETITION)
+            .duration(UPDATED_DURATION)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -107,8 +112,9 @@ public class RepetitionResourceIT {
         List<Repetition> repetitionList = repetitionRepository.findAll();
         assertThat(repetitionList).hasSize(databaseSizeBeforeCreate + 1);
         Repetition testRepetition = repetitionList.get(repetitionList.size() - 1);
-        assertThat(testRepetition.getSubject()).isEqualTo(DEFAULT_SUBJECT);
+        assertThat(testRepetition.getTopic()).isEqualTo(DEFAULT_TOPIC);
         assertThat(testRepetition.getDateRepetition()).isEqualTo(DEFAULT_DATE_REPETITION);
+        assertThat(testRepetition.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testRepetition.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
         assertThat(testRepetition.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
         assertThat(testRepetition.getDateDeleted()).isEqualTo(DEFAULT_DATE_DELETED);
@@ -164,8 +170,9 @@ public class RepetitionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(repetition.getId().intValue())))
-            .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT)))
+            .andExpect(jsonPath("$.[*].topic").value(hasItem(DEFAULT_TOPIC)))
             .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
+            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
@@ -182,8 +189,9 @@ public class RepetitionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(repetition.getId().intValue()))
-            .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT))
+            .andExpect(jsonPath("$.topic").value(DEFAULT_TOPIC))
             .andExpect(jsonPath("$.dateRepetition").value(DEFAULT_DATE_REPETITION.toString()))
+            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
             .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
             .andExpect(jsonPath("$.dateDeleted").value(DEFAULT_DATE_DELETED.toString()));
@@ -209,8 +217,9 @@ public class RepetitionResourceIT {
         // Disconnect from session so that the updates on updatedRepetition are not directly saved in db
         em.detach(updatedRepetition);
         updatedRepetition
-            .subject(UPDATED_SUBJECT)
+            .topic(UPDATED_TOPIC)
             .dateRepetition(UPDATED_DATE_REPETITION)
+            .duration(UPDATED_DURATION)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -224,8 +233,9 @@ public class RepetitionResourceIT {
         List<Repetition> repetitionList = repetitionRepository.findAll();
         assertThat(repetitionList).hasSize(databaseSizeBeforeUpdate);
         Repetition testRepetition = repetitionList.get(repetitionList.size() - 1);
-        assertThat(testRepetition.getSubject()).isEqualTo(UPDATED_SUBJECT);
+        assertThat(testRepetition.getTopic()).isEqualTo(UPDATED_TOPIC);
         assertThat(testRepetition.getDateRepetition()).isEqualTo(UPDATED_DATE_REPETITION);
+        assertThat(testRepetition.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testRepetition.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
         assertThat(testRepetition.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
         assertThat(testRepetition.getDateDeleted()).isEqualTo(UPDATED_DATE_DELETED);

@@ -23,26 +23,34 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.subject">Subject</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.topic">Topic</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateRepetition">Date Repetition</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.duration">Duration</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateCreated">Date Created</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateModified">Date Modified</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateDeleted">Date Deleted</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.tutor">Tutor</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.subject">Subject</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let repetition of repetitions ;trackBy: trackId">
                     <td><a [routerLink]="['/repetition', repetition.id, 'view']">{{ repetition.id }}</a></td>
-                    <td>{{ repetition.subject }}</td>
+                    <td>{{ repetition.topic }}</td>
                     <td>{{ repetition.dateRepetition | date:'medium' }}</td>
+                    <td>{{ repetition.duration }}</td>
                     <td>{{ repetition.dateCreated | date:'medium' }}</td>
                     <td>{{ repetition.dateModified | date:'medium' }}</td>
                     <td>{{ repetition.dateDeleted | date:'medium' }}</td>
                     <td>
                         <div *ngIf="repetition.tutor">
                             <a [routerLink]="['/tutor', repetition.tutor?.id, 'view']" >{{ repetition.tutor?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="repetition.subject">
+                            <a [routerLink]="['/subject', repetition.subject?.id, 'view']" >{{ repetition.subject?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

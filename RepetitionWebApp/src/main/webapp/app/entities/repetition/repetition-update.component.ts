@@ -11,6 +11,10 @@ import { IRepetition, Repetition } from 'app/shared/model/repetition.model';
 import { RepetitionService } from './repetition.service';
 import { ITutor } from 'app/shared/model/tutor.model';
 import { TutorService } from 'app/entities/tutor/tutor.service';
+import { ISubject } from 'app/shared/model/subject.model';
+import { SubjectService } from 'app/entities/subject/subject.service';
+
+type SelectableEntity = ITutor | ISubject;
 
 @Component({
   selector: 'jhi-repetition-update',
@@ -19,20 +23,24 @@ import { TutorService } from 'app/entities/tutor/tutor.service';
 export class RepetitionUpdateComponent implements OnInit {
   isSaving = false;
   tutors: ITutor[] = [];
+  subjects: ISubject[] = [];
 
   editForm = this.fb.group({
     id: [],
-    subject: [],
+    topic: [],
     dateRepetition: [null, [Validators.required]],
+    duration: [],
     dateCreated: [],
     dateModified: [],
     dateDeleted: [],
     tutor: [],
+    subject: [],
   });
 
   constructor(
     protected repetitionService: RepetitionService,
     protected tutorService: TutorService,
+    protected subjectService: SubjectService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -50,18 +58,22 @@ export class RepetitionUpdateComponent implements OnInit {
       this.updateForm(repetition);
 
       this.tutorService.query().subscribe((res: HttpResponse<ITutor[]>) => (this.tutors = res.body || []));
+
+      this.subjectService.query().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects = res.body || []));
     });
   }
 
   updateForm(repetition: IRepetition): void {
     this.editForm.patchValue({
       id: repetition.id,
-      subject: repetition.subject,
+      topic: repetition.topic,
       dateRepetition: repetition.dateRepetition ? repetition.dateRepetition.format(DATE_TIME_FORMAT) : null,
+      duration: repetition.duration,
       dateCreated: repetition.dateCreated ? repetition.dateCreated.format(DATE_TIME_FORMAT) : null,
       dateModified: repetition.dateModified ? repetition.dateModified.format(DATE_TIME_FORMAT) : null,
       dateDeleted: repetition.dateDeleted ? repetition.dateDeleted.format(DATE_TIME_FORMAT) : null,
       tutor: repetition.tutor,
+      subject: repetition.subject,
     });
   }
 
@@ -83,10 +95,11 @@ export class RepetitionUpdateComponent implements OnInit {
     return {
       ...new Repetition(),
       id: this.editForm.get(['id'])!.value,
-      subject: this.editForm.get(['subject'])!.value,
+      topic: this.editForm.get(['topic'])!.value,
       dateRepetition: this.editForm.get(['dateRepetition'])!.value
         ? moment(this.editForm.get(['dateRepetition'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      duration: this.editForm.get(['duration'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value
         ? moment(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)
         : undefined,
@@ -97,6 +110,7 @@ export class RepetitionUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['dateDeleted'])!.value, DATE_TIME_FORMAT)
         : undefined,
       tutor: this.editForm.get(['tutor'])!.value,
+      subject: this.editForm.get(['subject'])!.value,
     };
   }
 
@@ -116,7 +130,7 @@ export class RepetitionUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: ITutor): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

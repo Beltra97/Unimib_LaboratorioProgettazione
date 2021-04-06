@@ -20,6 +20,14 @@ import { RouterModule } from '@angular/router';
         path: 'repetition-student',
         loadChildren: () => import('./repetition-student/repetition-student.module').then(m => m.RepetitionWebAppRepetitionStudentModule),
       },
+      {
+        path: 'my-repetition',
+        loadChildren: () => import('./my-repetition/my-repetition.module').then(m => m.RepetitionWebAppMyRepetitionModule),
+      },
+      {
+        path: 'subject',
+        loadChildren: () => import('./subject/subject.module').then(m => m.RepetitionWebAppSubjectModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

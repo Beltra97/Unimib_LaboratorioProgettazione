@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tutor"/>
 
+        <addForeignKeyConstraint baseColumnNames="subject_id"
+                                 baseTableName="repetition"
+                                 constraintName="fk_repetition_subject_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="subject"/>
+
     </changeSet>
 </databaseChangeLog>
