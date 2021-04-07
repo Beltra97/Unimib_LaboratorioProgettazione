@@ -47,6 +47,12 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    /*
+    private boolean isStudent;
+    private Set<String> subject;
+    private String degree;
+    private Date birthdate;
+    */
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
