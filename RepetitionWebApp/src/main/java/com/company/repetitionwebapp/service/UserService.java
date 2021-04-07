@@ -150,7 +150,6 @@ public class UserService {
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
-        newUser.setAuthorities(authorities);
 
         if (userDTO.getIsStudent()) {
             Student newStudent = new Student();
@@ -160,6 +159,7 @@ public class UserService {
             newStudent.setDateCreated(Instant.now());
             newStudent.setBirthDate(userDTO.getBirthdate());
             studentRepository.save(newStudent);
+            authorityRepository.findById(AuthoritiesConstants.STUDENT).ifPresent(authorities::add);
         } else {
             Tutor newTutor = new Tutor();
             newTutor.setDateCreated(Instant.now());
@@ -170,8 +170,9 @@ public class UserService {
             newTutor.setBirthDate(userDTO.getBirthdate());
             newTutor.setUser(newUser);
             tutorRepository.save(newTutor);
+            authorityRepository.findById(AuthoritiesConstants.TUTOR).ifPresent(authorities::add);
         }
-
+        newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
