@@ -28,6 +28,7 @@ public class RepetitionStudentService {
     private final RepetitionStudentRepository repetitionStudentRepository;
 
     private final StudentService studentService;
+    private final MailService mailService;
 
     private final CacheManager cacheManager;
 
@@ -35,11 +36,13 @@ public class RepetitionStudentService {
         RepetitionRepository repetitionRepository,
         RepetitionStudentRepository repetitionStudentRepository,
         StudentService studentService,
+        MailService mailService,
         CacheManager cacheManager
     ) {
         this.repetitionRepository = repetitionRepository;
         this.repetitionStudentRepository = repetitionStudentRepository;
         this.studentService = studentService;
+        this.mailService = mailService;
         this.cacheManager = cacheManager;
     }
 
@@ -98,6 +101,8 @@ public class RepetitionStudentService {
             repetitionStudentRepository.save(newRepetitionStudent);
             log.debug("Updated Information for Repetition: {}", repetition);
             log.debug("Created Information for RepetitionStudent: {}", newRepetitionStudent);
+
+            mailService.sendRepetitionBookingMail(repetition.getTutor().getUser(), student, repetition, true);
         }
         return newRepetitionStudent;
     }
@@ -136,6 +141,8 @@ public class RepetitionStudentService {
                     repetitionStudent.setDateDeleted(Instant.now());
                 }
             );
+
+            mailService.sendRepetitionBookingMail(repetition.getTutor().getUser(), student, repetition, false);
         }
     }
 }
