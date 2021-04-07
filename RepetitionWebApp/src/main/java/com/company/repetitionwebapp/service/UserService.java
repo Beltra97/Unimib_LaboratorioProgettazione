@@ -152,28 +152,26 @@ public class UserService {
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
 
-        if (userDTO.getStudentFlag()) {
+        if (userDTO.getIsStudent()) {
             Student newStudent = new Student();
             newStudent.setName(userDTO.getFirstName());
             newStudent.setSurname(userDTO.getLastName());
             newStudent.setUser(newUser);
             newStudent.setDateCreated(Instant.now());
-            newStudent.setBirthDate(Instant.now()); //NON HO LA DATA DI NASCITA
+            newStudent.setBirthDate(userDTO.getBirthdate());
             studentRepository.save(newStudent);
-        }
-        /*        
-        }else{
+        } else {
             Tutor newTutor = new Tutor();
             newTutor.setDateCreated(Instant.now());
-            //newTutor.setDegree(degree);NON HO IL DEGREE
+            newTutor.setDegree(userDTO.getDegree());
             newTutor.setName(userDTO.getFirstName());
             newTutor.setSurname(userDTO.getLastName());
-            //newTutor.setSubject(subject); NON HO IL SUBJECT
-            //newTutor.setBirthDate(birthDate); MI MANCA ANCHE QUESTO
+            newTutor.setSubject(userDTO.getSubject());
+            newTutor.setBirthDate(userDTO.getBirthdate());
             newTutor.setUser(newUser);
             tutorRepository.save(newTutor);
         }
-      */
+
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
