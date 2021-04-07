@@ -1,0 +1,20 @@
+<div style="padding:20px;">
+    <h4 *ngIf="myRepetitionStudent" mat-dialog-title jhiTranslate="repetitionWebApp.myRepetitionStudent.book.title">Book repetition</h4>
+    <div mat-dialog-content>
+        <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.question"
+           [translateValues]="{ id: myRepetitionStudent?.id }">Are you sure you want to book this Repetition {{ id }}?</p>
+
+    </div>
+
+    <div *ngIf="myRepetitionStudent" class="form-group">
+        <label class="form-control-label" jhiTranslate="repetitionWebApp.myRepetitionStudent.topic">Topic</label>
+        <input type="text" class="form-control" [(ngModel)]="topic"/>
+    </div>
+
+
+    <div mat-dialog-actions>
+        <button mat-button style="float:left" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
+        <button *ngIf="myRepetitionStudent" mat-button id="jhi-confirm-delete-myRepetitionStudent" cdkFocusInitial style="float:right" class="btn btn-primary"
+                (click)="confirmBook(myRepetitionStudent)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">Book</button>
+    </div>
+</div>

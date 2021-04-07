@@ -13,6 +13,7 @@
         "repetitionStudent": "Repetition Student",
         "myRepetition": "My Repetition",
         "subject": "Subject",
+        "myRepetitionStudent": "My Repetition Student",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
