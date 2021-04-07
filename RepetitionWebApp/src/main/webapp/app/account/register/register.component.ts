@@ -76,7 +76,9 @@ export class RegisterComponent implements AfterViewInit {
       const birthdate = this.registerForm.get(['birthdate'])!.value;
       const isStudent = this.registerForm.get(['role'])!.value;
       const degree = this.registerForm.get(['degree'])!.value;
-      this.registerService.save({ login, firstName, lastName, birthdate, degree, isStudent, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe( 
+      const subject = this.registerForm.get(['subject'])!.value;
+      
+      this.registerService.save({ login, firstName, lastName, birthdate, degree, subject, isStudent, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe( 
         () => (this.success = true),
         response => this.processError(response)
       );
