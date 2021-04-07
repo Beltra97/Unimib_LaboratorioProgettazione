@@ -14,7 +14,13 @@ public class ManagedUserVM extends UserDTO {
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
-    private boolean studentFlag;
+    private boolean isStudent;
+
+    private Set<String> subject;
+
+    private String degree;
+
+    private Date birthdate;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -28,12 +34,36 @@ public class ManagedUserVM extends UserDTO {
         this.password = password;
     }
 
-    public boolean getStudentFlag() {
-        return studentFlag;
+    public void setIsStudent(boolean isStudent){
+        this.isStudent = isStudent;
     }
 
-    public void setIsStudent(boolean studentFlag) {
-        this.studentFlag = studentFlag;
+    public boolean getItStudent(){
+        return isStudent;
+    }
+
+    public void setDegree(String degree){
+        this.degree = degree;
+    }
+
+    public String getDegree(){
+        return degree;
+    }
+
+    public void setBirthdate(Date birthdate){
+        this.birthdate = birthdate;
+    }
+
+    public Date getBirthdate(){
+        return degree;
+    }
+
+    public Set<String> getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Set<String> subject) {
+        this.subject = subject;
     }
 
     // prettier-ignore

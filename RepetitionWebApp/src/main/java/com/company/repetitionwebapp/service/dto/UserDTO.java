@@ -47,14 +47,6 @@ public class UserDTO {
 
     private Set<String> authorities;
 
-    private boolean isStudent;
-
-    private Set<String> subject;
-
-    private String degree;
-
-    private Date birthdate;
-    
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -69,9 +61,6 @@ public class UserDTO {
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
-        this.subject = user.getSubject();
-        this.degree = user.getDegree();
-        this.birthdate = user.getBirthdate();
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
@@ -180,38 +169,6 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
-    }
-
-    public void setIsStudent(boolean isStudent){
-        this.isStudent = isStudent;
-    }
-
-    public boolean getItStudent(){
-        return this.isStudent;
-    }
-
-    public void setDegree(String degree){
-        this.degree = degree;
-    }
-
-    public String getDegree(){
-        return this.degree;
-    }
-
-    public void setBirthdate(Date birthdate){
-        this.birthdate = birthdate;
-    }
-
-    public Date getBirthdate(){
-        return this.degree;
-    }
-
-    public Set<String> getSubject() {
-        return this.subject;
-    }
-
-    public void setSubject(Set<String> subject) {
-        this.subject = subject;
     }
 
     // prettier-ignore
