@@ -41,6 +41,10 @@
       "language": "Language"
     },
     "form": {
+      "name.label": "Name",
+      "name.placeholder": "Your name",
+      "surname.label": "Surname",
+      "surname.placeholder": "Your surname",
       "username.label": "Username",
       "username.placeholder": "Your username",
       "currentpassword.label": "Current password",
@@ -50,7 +54,19 @@
       "confirmpassword.label": "New password confirmation",
       "confirmpassword.placeholder": "Confirm the new password",
       "email.label": "Email",
-      "email.placeholder": "Your email"
+      "email.placeholder": "Your email",
+      "birthdate.label": "Birthdate",
+      "role.label": "Role",
+      "role.placeholder": "Your role",
+      "role.label.student": "Student",
+      "role.label.tutor": "Tutor",
+      "degree.label": "Degree",
+      "degree.placeholder": "Your degree",
+      "degree.label.high_school": "High School",
+      "degree.label.university": "University",
+      "degree.label.master": "Master",
+      "subject.label": "Subject",
+      "subject.placeholder": "Your main subject"
     },
     "messages": {
       "info": {
@@ -84,6 +100,37 @@
           "invalid": "Your email is invalid.",
           "minlength": "Your email is required to be at least 5 characters.",
           "maxlength": "Your email cannot be longer than 50 characters."
+        },
+        "name": {
+          "required": "Your name is required.",
+          "invalid": "Your name is invalid.",
+          "pattern": "Your name can only contain letters.",
+          "minlength": "Your name is required to be at least 1 characters.",
+          "maxlength": "Your name cannot be longer than 50 characters."
+        },
+        "surname": {
+          "required": "Your surname is required.",
+          "invalid": "Your surname is invalid.",
+          "pattern": "Your surname can only contain letters.",
+          "minlength": "Your surname is required to be at least 1 characters.",
+          "maxlength": "Your surname cannot be longer than 50 characters."
+        },
+        "birthdate": {
+          "required": "Your birthdate is required.",
+          "invalid": "Your birthdate is invalid.",
+          "pattern": "Your birthdate can only contain letters."
+        },
+        "role": {
+          "required": "Your role is required.",
+          "invalid": "Your role is invalid."
+        },
+        "degree": {
+          "required": "Your degree is required.",
+          "invalid": "Your degree is invalid."
+        },
+        "subject": {
+          "required": "Your subject is required.",
+          "invalid": "Your subject is invalid."
         }
       }
     },
