@@ -15,7 +15,7 @@
       },
       "book": {
         "title": "Book repetition",
-        "question": "Are you sure you want to book this Repetition {{ id }}?",
+        "question": "Are you sure you want to book this Repetition ?",
         "btnConfirm": "Book"
       },
       "topic": "Topic"

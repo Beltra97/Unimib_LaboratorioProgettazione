@@ -2,6 +2,7 @@ package com.company.repetitionwebapp.web.rest;
 
 import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.domain.RepetitionStudent;
+import com.company.repetitionwebapp.repository.RepetitionRepository;
 import com.company.repetitionwebapp.repository.RepetitionStudentRepository;
 import com.company.repetitionwebapp.service.RepetitionStudentService;
 import com.company.repetitionwebapp.service.dto.MyRepetitionStudentRS;
@@ -37,11 +38,14 @@ public class MyRepetitionStudentResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final RepetitionRepository repetitionRepository;
     private final RepetitionStudentRepository repetitionStudentRepository;
     private final RepetitionStudentService repetitionStudentService;
 
-    public MyRepetitionStudentResource(RepetitionStudentRepository repetitionStudentRepository,
+    public MyRepetitionStudentResource(RepetitionRepository repetitionRepository,
+                                       RepetitionStudentRepository repetitionStudentRepository,
                                        RepetitionStudentService repetitionStudentService) {
+        this.repetitionRepository = repetitionRepository;
         this.repetitionStudentRepository = repetitionStudentRepository;
         this.repetitionStudentService = repetitionStudentService;
     }
@@ -104,10 +108,10 @@ public class MyRepetitionStudentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the RepetitionStudent, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/my-repetition-students/{id}")
-    public ResponseEntity<RepetitionStudent> getRepetitionStudent(@PathVariable Long id) {
-        log.debug("REST request to get RepetitionStudent : {}", id);
-        Optional<RepetitionStudent> repetitionStudent = repetitionStudentRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(repetitionStudent);
+    public ResponseEntity<Repetition> getRepetitionStudent(@PathVariable Long id) {
+        log.debug("REST request to get Repetition : {}", id);
+        Optional<Repetition> repetition = repetitionRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(repetition);
     }
 
     /**

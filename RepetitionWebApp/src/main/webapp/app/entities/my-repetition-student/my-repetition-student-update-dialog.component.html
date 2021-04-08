@@ -1,8 +1,9 @@
-<div style="padding:20px;">
-    <h4 *ngIf="myRepetitionStudent" mat-dialog-title jhiTranslate="repetitionWebApp.myRepetitionStudent.book.title">Book repetition</h4>
+<div *ngIf="myRepetitionStudent" style="padding:20px;">
+    <h4 mat-dialog-title jhiTranslate="repetitionWebApp.myRepetitionStudent.book.title">Book repetition</h4>
     <div mat-dialog-content>
-        <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.question"
-           [translateValues]="{ id: myRepetitionStudent?.id }">Are you sure you want to book this Repetition {{ id }}?</p>
+        <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.question">
+            Are you sure you want to book this Repetition ?
+        </p>
 
     </div>
 

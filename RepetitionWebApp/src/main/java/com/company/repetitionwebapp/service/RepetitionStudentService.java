@@ -109,17 +109,14 @@ public class RepetitionStudentService {
 
     public Repetition updateRepetition(RepetitionStudentDTO repetitionStudentDTO) {
 
-        RepetitionStudent repetitionStudent = repetitionStudentRepository.findById(repetitionStudentDTO.getId()).get();
-
         Repetition repetition = repetitionRepository.findById(repetitionStudentDTO.getId()).get();
 
-        if(repetitionStudent != null && repetition != null) {
+        if(repetition != null) {
 
             repetition.setTopic(repetitionStudentDTO.getTopic());
             repetition.setDateModified(Instant.now());
             repetitionRepository.save(repetition);
             log.debug("Updated Information for Repetition: {}", repetition);
-            log.debug("Updated Information for RepetitionStudent: {}", repetitionStudent);
         }
         return repetition;
     }

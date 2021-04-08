@@ -6,7 +6,7 @@ import static org.mockito.Mockito.*;
 
 import com.company.repetitionwebapp.RepetitionWebApp;
 import com.company.repetitionwebapp.config.Constants;
-import com.company.repetitionwebapp.domain.User;
+import com.company.repetitionwebapp.domain.*;
 import io.github.jhipster.config.JHipsterProperties;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -184,6 +184,93 @@ public class MailServiceIT {
         user.setLogin("john");
         user.setEmail("john.doe@example.com");
         mailService.sendPasswordResetMail(user);
+        verify(javaMailSender).send(messageCaptor.capture());
+        MimeMessage message = messageCaptor.getValue();
+        assertThat(message.getAllRecipients()[0].toString()).isEqualTo(user.getEmail());
+        assertThat(message.getFrom()[0].toString()).isEqualTo(jHipsterProperties.getMail().getFrom());
+        assertThat(message.getContent().toString()).isNotEmpty();
+        assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
+    }
+
+    @Test
+    public void sendRepetitionBookedMail() throws Exception {
+        User user = new User();
+        user.setLangKey(Constants.DEFAULT_LANGUAGE);
+        user.setLogin("john");
+        user.setEmail("john.doe@example.com");
+
+        Student student = new Student();
+        student.setName("STUDENT");
+        student.setSurname("STUDENT");
+        student.setUser(user);
+
+        Subject subject = new Subject();
+        subject.setName("SUBJECT");
+
+        Repetition repetition = new Repetition();
+        repetition.setTopic("TOPIC");
+        repetition.setSubject(subject);
+        student.setUser(user);
+
+        mailService.sendRepetitionBookingMail(user, student, repetition, true);
+        verify(javaMailSender).send(messageCaptor.capture());
+        MimeMessage message = messageCaptor.getValue();
+        assertThat(message.getAllRecipients()[0].toString()).isEqualTo(user.getEmail());
+        assertThat(message.getFrom()[0].toString()).isEqualTo(jHipsterProperties.getMail().getFrom());
+        assertThat(message.getContent().toString()).isNotEmpty();
+        assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
+    }
+
+    @Test
+    public void sendRepetitionUnBookedMail() throws Exception {
+        User user = new User();
+        user.setLangKey(Constants.DEFAULT_LANGUAGE);
+        user.setLogin("john");
+        user.setEmail("john.doe@example.com");
+
+        Student student = new Student();
+        student.setName("STUDENT");
+        student.setSurname("STUDENT");
+        student.setUser(user);
+
+        Subject subject = new Subject();
+        subject.setName("SUBJECT");
+
+        Repetition repetition = new Repetition();
+        repetition.setTopic("TOPIC");
+        repetition.setSubject(subject);
+        student.setUser(user);
+
+        mailService.sendRepetitionBookingMail(user, student, repetition, false);
+        verify(javaMailSender).send(messageCaptor.capture());
+        MimeMessage message = messageCaptor.getValue();
+        assertThat(message.getAllRecipients()[0].toString()).isEqualTo(user.getEmail());
+        assertThat(message.getFrom()[0].toString()).isEqualTo(jHipsterProperties.getMail().getFrom());
+        assertThat(message.getContent().toString()).isNotEmpty();
+        assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
+    }
+
+    @Test
+    public void sendRepetitionDeletedMail() throws Exception {
+        User user = new User();
+        user.setLangKey(Constants.DEFAULT_LANGUAGE);
+        user.setLogin("john");
+        user.setEmail("john.doe@example.com");
+
+        Tutor tutor = new Tutor();
+        tutor.setName("TUTOR");
+        tutor.setSurname("TUTOR");
+        tutor.setUser(user);
+
+        Subject subject = new Subject();
+        subject.setName("SUBJECT");
+
+        Repetition repetition = new Repetition();
+        repetition.setTopic("TOPIC");
+        repetition.setSubject(subject);
+        repetition.setTutor(tutor);
+
+        mailService.sendRepetitionDeletedMail(user, tutor, repetition);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         assertThat(message.getAllRecipients()[0].toString()).isEqualTo(user.getEmail());
