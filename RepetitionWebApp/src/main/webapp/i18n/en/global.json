@@ -54,13 +54,16 @@
       "email.placeholder": "Your email",
       "birthdate.label": "Birthdate",
       "role.label": "Role",
+      "role.placeholder": "Your role",
       "role.label.student": "Student",
       "role.label.tutor": "Tutor",
       "degree.label": "Degree",
+      "degree.placeholder": "Your degree",
       "degree.label.high_school": "High School",
       "degree.label.university": "University",
       "degree.label.master": "Master",
-      "subject.label": "Subject"
+      "subject.label": "Subject",
+      "subject.placeholder": "Your main subject"
     },
     "messages": {
       "info": {
