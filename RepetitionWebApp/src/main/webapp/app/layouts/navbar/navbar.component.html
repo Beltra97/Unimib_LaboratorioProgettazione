@@ -66,6 +66,12 @@
                     <span jhiTranslate="global.menu.entities.myRepetition">My Repetition</span>
                 </a>
             </li>
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="my-repetition-student" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
+                    <span jhiTranslate="global.menu.entities.myRepetitionStudent">My Repetition Student</span>
+                </a>
+            </li>
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>

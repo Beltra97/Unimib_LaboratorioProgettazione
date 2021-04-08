@@ -26,6 +26,7 @@ public class RepetitionService {
     private final RepetitionStudentRepository repetitionStudentRepository;
 
     private final TutorService tutorService;
+    private final MailService mailService;
 
     private final CacheManager cacheManager;
 
@@ -34,12 +35,14 @@ public class RepetitionService {
         SubjectRepository subjectRepository,
         RepetitionStudentRepository repetitionStudentRepository,
         TutorService tutorService,
+        MailService mailService,
         CacheManager cacheManager
     ) {
         this.repetitionRepository = repetitionRepository;
         this.subjectRepository = subjectRepository;
         this.repetitionStudentRepository = repetitionStudentRepository;
         this.tutorService = tutorService;
+        this.mailService = mailService;
         this.cacheManager = cacheManager;
     }
 
@@ -117,6 +120,17 @@ public class RepetitionService {
         .ifPresent(
             repetition -> {
                 repetition.setDateDeleted(Instant.now());
+
+                List<Student> students = new ArrayList<Student>();
+                for(RepetitionStudent s : repetitionStudentRepository.findAll()){
+                    if(s.getRepetition() != null && s.getRepetition().getId() == repetition.getId() && s.getDateDeleted() == null){
+                        students.add(s.getStudent());
+                    }
+                }
+
+                for (Student s : students) {
+                    mailService.sendRepetitionDeletedMail(s.getUser(), repetition.getTutor(), repetition);
+                }
             }
         );
     }

@@ -1,19 +1,19 @@
 {
   "reset": {
     "request": {
-      "title": "Reset your password",
+      "title": "Reset password",
       "form": {
         "button": "Reset password"
       },
       "messages": {
         "info": "Enter the email address you used to register",
-        "success": "Check your emails for details on how to reset your password."
+        "success": "Check your email address for details on how to reset your password."
       }
     },
     "finish": {
       "title": "Reset password",
       "form": {
-        "button": "Validate new password"
+        "button": "Confirm new password"
       },
       "messages": {
         "info": "Choose a new password",

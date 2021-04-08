@@ -1,0 +1,24 @@
+{
+  "repetitionWebApp": {
+    "myRepetitionStudent": {
+      "home": {
+        "title": "My Repetition",
+        "notFound": "No Repetition found"
+      },
+      "created": "A Repetition with identifier {{ param }} is booked",
+      "updated": "A Repetition with identifier {{ param }} is updated",
+      "deleted": "A book for the repetition with identifier {{ param }} is removed",
+      "delete": {
+        "title": "Unbook repetition",
+        "question": "Are you sure you want to remove the reservation for the repetition with identifier {{ id }}?",
+        "btnConfirm": "UnBook"
+      },
+      "book": {
+        "title": "Book repetition",
+        "question": "Are you sure you want to book this Repetition ?",
+        "btnConfirm": "Book"
+      },
+      "topic": "Topic"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+    <head>
+        <title th:text="#{email.unbookRepetition.title}">RepetitionWebApp reservation removed</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.unbookRepetition.greeting}">
+            Dear
+        </p>
+        <p th:text="#{email.unbookRepetition.text1(
+            ${repetition.dateRepetition},
+            ${repetition.subject.name},
+            ${student.surname},
+            ${student.name})}">
+            Your repetition on {0}, with subject {1} is unbooked by {2} {3}
+        </p>
+        <p>
+            <span th:text="#{email.regards}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">RepetitionWebApp.</em>
+        </p>
+    </body>
+</html>
