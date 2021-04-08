@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { MyRepetitionService } from 'app/entities/my-repetition/my-repetition.service';
 import { IMyRepetition, MyRepetition } from 'app/shared/model/my-repetition.model';
+import { Subject } from 'app/shared/model/subject.model';
 
 describe('Service Tests', () => {
   describe('MyRepetition Service', () => {
@@ -24,7 +25,14 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new MyRepetition(0, 'AAAAAAA', currentDate, currentDate, currentDate, currentDate);
+      elemDefault = new MyRepetition(
+        0,
+        new Subject(0, 'TestSubject', 'This is an example', undefined, currentDate, currentDate, currentDate, undefined),
+        'Topic example',
+        100,
+        currentDate,
+        undefined
+      );
     });
 
     describe('Service methods', () => {
