@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+    <head>
+        <title th:text="#{email.bookRepetition.title}">RepetitionWebApp reservation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.bookRepetition.greeting}">
+            Dear
+        </p>
+        <p th:text="#{email.bookRepetition.text1(
+            ${repetition.dateRepetition},
+            ${repetition.subject.name},
+            ${student.surname},
+            ${student.name})}">
+            Your repetition on {0}, with subject {1} is booked by {2} {3}
+        </p>
+        <p th:text="#{email.bookRepetition.text2(${repetition.topic})}">
+            Topic selected: {0}
+        </p>
+        <p>
+            <span th:text="#{email.regards}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">RepetitionWebApp.</em>
+        </p>
+    </body>
+</html>
