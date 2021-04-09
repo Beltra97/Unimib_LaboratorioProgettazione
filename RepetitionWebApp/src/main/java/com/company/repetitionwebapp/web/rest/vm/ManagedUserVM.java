@@ -1,6 +1,8 @@
 package com.company.repetitionwebapp.web.rest.vm;
 
 import com.company.repetitionwebapp.service.dto.UserDTO;
+//import java.util.Set;
+import java.time.Instant;
 import javax.validation.constraints.Size;
 
 /**
@@ -14,6 +16,16 @@ public class ManagedUserVM extends UserDTO {
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
+    private boolean isStudent;
+
+    //private Set<String> subject;
+
+    private String subject;
+
+    private String degree;
+
+    private Instant birthdate;
+
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
     }
@@ -24,6 +36,42 @@ public class ManagedUserVM extends UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setIsStudent(boolean isStudent) {
+        this.isStudent = isStudent;
+    }
+
+    public boolean getIsStudent() {
+        return isStudent;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setBirthdate(Instant birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public Instant getBirthdate() {
+        return birthdate;
+    }
+
+    //public Set<String> getSubject() {
+    //    return subject;
+    //}
+    public String getSubject() {
+        return subject;
+    }
+
+    //public void setSubject(Set<String> subject) {
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     // prettier-ignore
