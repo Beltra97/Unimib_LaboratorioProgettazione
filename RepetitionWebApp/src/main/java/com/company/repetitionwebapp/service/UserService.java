@@ -157,7 +157,7 @@ public class UserService {
             newStudent.setSurname(userDTO.getLastName());
             newStudent.setUser(newUser);
             newStudent.setDateCreated(Instant.now());
-            newStudent.setBirthDate(userDTO.getBirthdate());
+            newStudent.setBirthDate(userDTO.getBirthdate().toInstant());
             studentRepository.save(newStudent);
             authorityRepository.findById(AuthoritiesConstants.STUDENT).ifPresent(authorities::add);
         } else {
@@ -167,7 +167,7 @@ public class UserService {
             newTutor.setName(userDTO.getFirstName());
             newTutor.setSurname(userDTO.getLastName());
             newTutor.setSubject(userDTO.getSubject());
-            newTutor.setBirthDate(userDTO.getBirthdate());
+            newTutor.setBirthDate(userDTO.getBirthdate().toInstant());
             newTutor.setUser(newUser);
             tutorRepository.save(newTutor);
             authorityRepository.findById(AuthoritiesConstants.TUTOR).ifPresent(authorities::add);

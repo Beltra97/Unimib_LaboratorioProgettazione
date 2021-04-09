@@ -2,7 +2,7 @@ package com.company.repetitionwebapp.web.rest.vm;
 
 import com.company.repetitionwebapp.service.dto.UserDTO;
 //import java.util.Set;
-import java.time.Instant;
+import java.util.Date;
 import javax.validation.constraints.Size;
 
 /**
@@ -24,7 +24,7 @@ public class ManagedUserVM extends UserDTO {
 
     private String degree;
 
-    private Instant birthdate;
+    private Date birthdate;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -54,11 +54,11 @@ public class ManagedUserVM extends UserDTO {
         return degree;
     }
 
-    public void setBirthdate(Instant birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
-    public Instant getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
