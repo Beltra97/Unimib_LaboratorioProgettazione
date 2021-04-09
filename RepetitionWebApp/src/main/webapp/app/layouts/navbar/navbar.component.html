@@ -60,13 +60,13 @@
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="'ROLE_TUTOR'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="my-repetition" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                     <span jhiTranslate="global.menu.entities.myRepetition">My Repetition</span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="'ROLE_STUDENT'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="my-repetition-student" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                     <span jhiTranslate="global.menu.entities.myRepetitionStudent">My Repetition Student</span>

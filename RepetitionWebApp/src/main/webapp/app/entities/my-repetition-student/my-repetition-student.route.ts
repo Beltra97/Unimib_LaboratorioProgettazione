@@ -37,7 +37,7 @@ export const myRepetitionStudentRoute: Routes = [
     path: '',
     component: MyRepetitionStudentComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.STUDENT],
       pageTitle: 'repetitionWebApp.myRepetitionStudent.home.title',
     },
     canActivate: [UserRouteAccessService],

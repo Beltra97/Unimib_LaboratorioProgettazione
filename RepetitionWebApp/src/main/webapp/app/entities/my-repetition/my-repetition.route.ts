@@ -39,7 +39,7 @@ export const myRepetitionRoute: Routes = [
     path: '',
     component: MyRepetitionComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.TUTOR],
       pageTitle: 'repetitionWebApp.myRepetition.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const myRepetitionRoute: Routes = [
       myRepetition: MyRepetitionResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.TUTOR],
       pageTitle: 'repetitionWebApp.myRepetition.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const myRepetitionRoute: Routes = [
       myRepetition: MyRepetitionResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.TUTOR],
       pageTitle: 'repetitionWebApp.myRepetition.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -75,7 +75,7 @@ export const myRepetitionRoute: Routes = [
       myRepetition: MyRepetitionResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.TUTOR],
       pageTitle: 'repetitionWebApp.myRepetition.home.title',
     },
     canActivate: [UserRouteAccessService],
