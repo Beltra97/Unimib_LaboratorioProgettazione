@@ -54,23 +54,30 @@
                     {{loadData()}}
                     <div class="col-12">
                         
-                        <div id="cardRepetitions" class="card" *ngFor="let repetition of repetitions">
-                            <div class="card-body">
-                                <div class="d-flex flex-column">
-                                    <div class="p-2">
-                                        <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
-                                    </div>
-                                    <div class="p-2">
-                                        <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
-                                    </div>
-                                    <div class="p-2">
-                                        <div class="container">
-                                            <div class="row row-content">
-                                                <div class="col-6">
-                                                    <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
+                        <div *ngFor="let repetition of repetitions">
+                            <div id="cardRepetitions" class="card" *ngIf="!repetition!.dateDeleted">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column">
+                                        <div class="p-2">
+                                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                        </div>
+                                        <div class="p-2">
+                                            <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="container">
+                                                <div class="row row-content" *ngIf="!repetition!.topic">
+                                                    <div class="col-6">
+                                                        <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a routerLink="my-repetition-student" class="btn btn-outline-primary btn-block" jhiTranslate="home.enroll">Enroll</a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <a routerLink="my-repetition-student" class="btn btn-outline-primary btn-block" jhiTranslate="home.enroll">Enroll</a>
+                                                <div class="row row-content" *ngIf="repetition!.topic">
+                                                    <div class="col-12">
+                                                        <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

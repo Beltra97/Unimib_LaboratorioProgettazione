@@ -8,6 +8,7 @@ import 'hammerjs';
 import { RepetitionWebAppSharedModule } from 'app/shared/shared.module';
 import { HOME_ROUTE } from './home.route';
 import { HomeComponent } from './home.component';
+import { NgbdModalContentComponent } from './home.info.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -27,6 +28,6 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatListModule,
     MatBadgeModule,
   ],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, NgbdModalContentComponent],
 })
 export class RepetitionWebAppHomeModule {}
