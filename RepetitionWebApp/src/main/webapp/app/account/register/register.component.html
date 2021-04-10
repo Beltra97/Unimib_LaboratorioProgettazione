@@ -1,4 +1,4 @@
-<div>
+<div class="card jh-card">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 jhiTranslate="register.title">Registration</h1>
@@ -215,13 +215,16 @@
                     <label class="form-control-label" for="subject" jhiTranslate="global.form.subject.label">Subject</label>
                     <select type="text" class="form-control" formControlName="subject" id="subject" name="subject" [required]="optionValue=='false'">
                      <option value="" [hidden]="true" jhiTranslate="global.form.subject.placeholder">Your main subject</option>
-                     <option value="Maths">Maths</option>
-                     <option value="History">History</option>
+                     <option value="Math">Math</option>
+                     <option value="Physics">Physics</option>
+                     <option value="Information Technology">Information Technology</option>
                      <option value="Music">Music</option>
+                     <option value="Art">Art</option>
                      <option value="English">English</option>
-                     <option value="Literature">Literature</option>
-                     <option value="Compute science">Computer science</option>
-                     <option value="Philosophy">Philosophy</option>
+                     <option value="Italian">Italian</option>
+                     <option value="Biology">Biology</option>
+                     <option value="Law">Law</option>
+                     <option value="History">History</option>
                     </select>           
     
                     <div *ngIf="registerForm.get('subject')!.invalid && (registerForm.get('subject')!.dirty || registerForm.get('subject')!.touched) && optionValue == 'false'">
