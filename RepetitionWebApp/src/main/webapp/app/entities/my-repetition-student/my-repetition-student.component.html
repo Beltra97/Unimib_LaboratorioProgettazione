@@ -40,10 +40,16 @@
 
             <mat-card-actions>
                 <button *ngIf="!myRepetition?.isAlreadyBooked" class="btn btn-primary float-right jh-create-entity create-my-repetition"
-                        type="submit" (click)="book(myRepetition)">book</button>
+                        type="submit" (click)="book(myRepetition)">
+                    <fa-icon icon="book"></fa-icon>
+                    Book
+                </button>
 
                 <button *ngIf="myRepetition?.isAlreadyBooked" class="btn btn-danger float-right jh-create-entity create-my-repetition"
-                            type="submit" (click)="delete(myRepetition)">unbook</button>
+                            type="submit" (click)="delete(myRepetition)">
+                    <fa-icon icon="times"></fa-icon>
+                    UnBook
+                </button>
             </mat-card-actions>
 
             <hr />

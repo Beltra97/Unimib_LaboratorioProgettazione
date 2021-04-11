@@ -23,10 +23,12 @@ export class MyRepetitionUpdateComponent implements OnInit {
   isSaving = false;
   subjects: ISubject[] = [];
 
+  minDate = new Date().toJSON().split('T')[0];
+
   editForm = this.fb.group({
     id: [],
-    subject: [],
-    duration: [],
+    subject: ['', [Validators.required]],
+    duration: ['', [Validators.required]],
     dateRepetition: [null, [Validators.required]],
     dateCreated: [],
     dateModified: [],

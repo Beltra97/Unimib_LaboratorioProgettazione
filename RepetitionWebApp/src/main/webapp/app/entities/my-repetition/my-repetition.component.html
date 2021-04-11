@@ -44,11 +44,11 @@
             <mat-card-actions style="float:right">
                 <div>
                     <button *ngIf="myRepetition.students?.length === 0" style="margin-left:50px;margin-right:50px" mat-mini-fab [routerLink]="['/my-repetition', myRepetition.id, 'edit']">
-                        <mat-icon>edit</mat-icon>
+                        <fa-icon icon="pencil-alt"></fa-icon>
                     </button>
 
                     <button mat-mini-fab style="background-color:red;" type="submit" (click)="delete(myRepetition)">
-                        <mat-icon>delete</mat-icon>
+                        <fa-icon icon="trash-alt"></fa-icon>
                     </button>
 
                 </div>

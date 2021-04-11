@@ -131,6 +131,10 @@
         "subject": {
           "required": "Your subject is required.",
           "invalid": "Your subject is invalid."
+        },
+        "dateRepetition": {
+          "required": "Date repetition is required.",
+          "invalid": "Date repetition is invalid, must be greater than today."
         }
       }
     },
