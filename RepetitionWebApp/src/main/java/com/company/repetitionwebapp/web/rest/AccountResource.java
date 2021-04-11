@@ -9,7 +9,7 @@ import com.company.repetitionwebapp.service.dto.PasswordChangeDTO;
 import com.company.repetitionwebapp.service.dto.UserDTO;
 import com.company.repetitionwebapp.web.rest.errors.*;
 import com.company.repetitionwebapp.web.rest.vm.KeyAndPasswordVM;
-import com.company.repetitionwebapp.web.rest.vm.ManagedUserVM;
+import com.company.repetitionwebapp.service.dto.ManagedUserVM;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

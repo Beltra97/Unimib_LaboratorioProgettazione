@@ -1,6 +1,5 @@
 package com.company.repetitionwebapp.service;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.company.repetitionwebapp.config.Constants;
 import com.company.repetitionwebapp.domain.Authority;
 import com.company.repetitionwebapp.domain.Student;
@@ -13,7 +12,7 @@ import com.company.repetitionwebapp.repository.UserRepository;
 import com.company.repetitionwebapp.security.AuthoritiesConstants;
 import com.company.repetitionwebapp.security.SecurityUtils;
 import com.company.repetitionwebapp.service.dto.UserDTO;
-import com.company.repetitionwebapp.web.rest.vm.ManagedUserVM;
+import com.company.repetitionwebapp.service.dto.ManagedUserVM;
 import io.github.jhipster.security.RandomUtil;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -183,6 +182,16 @@ public class UserService {
         if (existingUser.getActivated()) {
             return false;
         }
+        tutorRepository.findAll().stream().filter(t ->
+            t.getUser() != null && t.getUser().getId() == existingUser.getId()).findFirst().ifPresent(t -> {
+            tutorRepository.delete(t);
+        });
+
+        studentRepository.findAll().stream().filter(s ->
+            s.getUser() != null && s.getUser().getId() == existingUser.getId()).findFirst().ifPresent(s -> {
+            studentRepository.delete(s);
+            });
+
         userRepository.delete(existingUser);
         userRepository.flush();
         this.clearUserCaches(existingUser);

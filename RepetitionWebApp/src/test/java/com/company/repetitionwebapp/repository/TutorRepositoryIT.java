@@ -22,22 +22,22 @@ public class TutorRepositoryIT {
     @Test
     public void addTutorEvent() {
         Tutor tutor = new Tutor();
-        long id = 1;
         tutor.setName("name1");
         tutor.setSurname("surname");
         tutor.setBirthDate(Instant.now());
         tutorRepository.save(tutor);
+        long id = tutor.getId();
         assertThat(tutorRepository.findById(id).get()).isEqualTo(tutor);
     }
 
     @Test
     public void deleteTutorEvent() {
         Tutor tutor = new Tutor();
-        long id = 1;
         tutor.setName("name1");
         tutor.setSurname("surname");
         tutor.setBirthDate(Instant.now());
         tutorRepository.save(tutor);
+        long id = tutor.getId();
         assertThat(tutorRepository.findById(id)).isNotEmpty();
         tutorRepository.deleteById(id);
         assertThat(tutorRepository.findById(id)).isEmpty();

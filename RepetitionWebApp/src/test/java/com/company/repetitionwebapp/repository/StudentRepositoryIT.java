@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Integration tests for {@link studentRepository}.
+ * Integration tests for studentRepository}.
  */
 @SpringBootTest(classes = RepetitionWebApp.class)
 @Transactional
@@ -22,22 +22,22 @@ public class StudentRepositoryIT {
     @Test
     public void addStudentEvent() {
         Student student = new Student();
-        long id = 1;
         student.setName("student1");
         student.setSurname("surnames1");
         student.setBirthDate(Instant.now());
         studentRepository.save(student);
+        long id = student.getId();
         assertThat(studentRepository.findById(id).get()).isEqualTo(student);
     }
 
     @Test
     public void deleteStudentEvent() {
         Student student = new Student();
-        long id = 1;
         student.setName("student1");
         student.setSurname("surnames1");
         student.setBirthDate(Instant.now());
         studentRepository.save(student);
+        long id = student.getId();
         assertThat(studentRepository.findById(id)).isNotEmpty();
         studentRepository.deleteById(id);
         assertThat(studentRepository.findById(id)).isEmpty();

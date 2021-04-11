@@ -1,6 +1,5 @@
-package com.company.repetitionwebapp.web.rest.vm;
+package com.company.repetitionwebapp.service.dto;
 
-import com.company.repetitionwebapp.service.dto.UserDTO;
 //import java.util.Set;
 import java.util.Date;
 import javax.validation.constraints.Size;
