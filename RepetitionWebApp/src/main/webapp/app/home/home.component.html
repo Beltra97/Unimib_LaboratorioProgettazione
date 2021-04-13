@@ -24,25 +24,69 @@
     </div>
 </div>
 
-<div class="card jh-card">
-    <div class="row row-content">
-        <div class="col-md-8">
-            <h1 class="display-4" jhiTranslate="home.functioning">How does it work?</h1>
-            <h4 jhiTranslate="home.description">The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. If you haven't tried our service yet, sign up to see available repetitions or create your own.</h4>
-            <h2 jhiTranslate="home.description_summary" class="vSpaced text-muted">Simple and effective.</h2>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="faImg">
-                <fa-icon [icon]="faUserFriends"></fa-icon>
+<div [ngSwitch]="isAuthenticated()">
+    <div class="card jh-card" *ngSwitchCase="false">
+        <div class="row row-content">
+            <div class="col-md-8">
+                <h1 class="display-4" jhiTranslate="home.functioning">How does it work?</h1>
+                <h4 jhiTranslate="home.description">The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. If you haven't tried our service yet, sign up to see available repetitions or create your own.</h4>
+                <h2 jhiTranslate="home.description_summary" class="vSpaced text-muted">Simple and effective.</h2>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="faImg">
+                    <fa-icon [icon]="faUserFriends"></fa-icon>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div [ngSwitch]="isAuthenticated()">
+    <div *jhiHasAnyAuthority="'ROLE_TUTOR'">
+        <div *ngIf="repetitionsTutor?.length !== 0">
+            <div class="card jh-card" *ngSwitchCase="true">
+                <div class="row row-content"> 
+                    <div class="col-12">
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.myRepetitions">My Repetitions</h1>
+                    </div>
+                </div>
+                
+                <div class="row row-content" *ngSwitchCase="true">
+                    {{loadTutorData()}}
+                    <div class="col-12">
+                        
+                        <div *ngFor="let repetition of repetitionsTutor">
+                            <div id="cardRepetitions" class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column">
+                                        <div class="p-2">
+                                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                        </div>
+                                        <div class="p-2">
+                                            <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
+                                        </div>
+                                        <div class="p-2">
+                                            <p id="cardTextRepetitions" class="card-text">Duration: {{repetition!.duration}} minutes</p>
+                                        </div>
+                                        <div class="p-2">
+                                            <p id="cardTextRepetitions" class="card-text">Date: {{repetition!.dateRepetition | date:'medium'}}</p>
+                                        </div>
+                                        <div class="p-2" *ngIf="repetition.students && repetition.students.length > 0">
+                                            <p id="cardTextRepetitions" class="card-text" jhiTranslate="home.bookedBy">Booked By:</p>
+                                            <li class="li_center" *ngFor="let student of repetition.students">{{ student.name }} {{ student.surname }}</li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div *jhiHasAnyAuthority="'ROLE_STUDENT'">
-        <div *ngIf="repetitions?.length !== 0">
+        <div *ngIf="repetitionsStudent?.length !== 0">
             <div class="card jh-card" *ngSwitchCase="true">
                 <div class="row row-content"> 
                     <div class="col-12">
@@ -51,10 +95,10 @@
                 </div>
                 
                 <div class="row row-content" *ngSwitchCase="true">
-                    {{loadData()}}
+                    {{loadStudentData()}}
                     <div class="col-12">
                         
-                        <div *ngFor="let repetition of repetitions">
+                        <div *ngFor="let repetition of repetitionsStudent">
                             <div id="cardRepetitions" class="card" *ngIf="!repetition!.dateDeleted">
                                 <div class="card-body">
                                     <div class="d-flex flex-column">

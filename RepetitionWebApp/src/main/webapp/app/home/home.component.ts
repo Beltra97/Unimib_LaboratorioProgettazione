@@ -12,6 +12,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IRepetition } from 'app/shared/model/repetition.model';
 import { RepetitionService } from '../entities/repetition/repetition.service';
 
+import { IMyRepetition } from 'app/shared/model/my-repetition.model';
+import { MyRepetitionService } from '../entities/my-repetition/my-repetition.service';
+
 import { NgbdModalContentComponent } from './home.info.component';
 
 @Component({
@@ -26,27 +29,38 @@ export class HomeComponent implements OnInit, OnDestroy {
   faSchool = faSchool;
   faUserFriends = faUserFriends;
 
-  dataLoaded = false;
-  repetitions?: IRepetition[];
+  dataStudentLoaded = false;
+  dataTutorLoaded = false;
+  repetitionsStudent?: IRepetition[];
+  repetitionsTutor?: IMyRepetition[];
 
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
-    private repetitionService: RepetitionService,
+    private repetitionStudentService: RepetitionService,
+    private repetitionTutorService: MyRepetitionService,
     private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
     if (this.isAuthenticated()) {
-      this.loadData();
+      this.loadStudentData();
+      this.loadTutorData();
     }
   }
 
-  loadData(): void {
-    if (!this.dataLoaded) {
-      this.repetitionService.query().subscribe((res: HttpResponse<IRepetition[]>) => (this.repetitions = res.body || []));
-      this.dataLoaded = true;
+  loadStudentData(): void {
+    if (!this.dataStudentLoaded) {
+      this.repetitionStudentService.query().subscribe((res: HttpResponse<IRepetition[]>) => (this.repetitionsStudent = res.body || []));
+      this.dataStudentLoaded = true;
+    }
+  }
+
+  loadTutorData(): void {
+    if (!this.dataTutorLoaded) {
+      this.repetitionTutorService.query().subscribe((res: HttpResponse<IMyRepetition[]>) => (this.repetitionsTutor = res.body || []));
+      this.dataTutorLoaded = true;
     }
   }
 
@@ -62,7 +76,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
     }
-    this.dataLoaded = false;
+    this.dataStudentLoaded = false;
+    this.dataTutorLoaded = false;
   }
 
   openDialog(repetition: IRepetition): void {
