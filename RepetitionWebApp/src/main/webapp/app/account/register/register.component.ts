@@ -21,10 +21,12 @@ export class RegisterComponent implements AfterViewInit {
   errorUserExists = false;
   success = false;
 
+  maxDate = new Date().toJSON().split('T')[0];
+
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), 
                 Validators.pattern('^[A-Za-z\\s]+')]],
-    surname: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), 
+    surname: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50),
                 Validators.pattern('^[A-Za-z\\s]+')]],
     login: [
       '',

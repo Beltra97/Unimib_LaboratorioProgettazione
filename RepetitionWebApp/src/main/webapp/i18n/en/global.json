@@ -117,7 +117,7 @@
         },
         "birthdate": {
           "required": "Your birthdate is required.",
-          "invalid": "Your birthdate is invalid.",
+          "invalid": "Your birthdate is invalid, must be less than today.",
           "pattern": "Your birthdate can only contain letters."
         },
         "role": {

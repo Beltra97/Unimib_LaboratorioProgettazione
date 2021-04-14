@@ -142,6 +142,10 @@
                             Your birthdate can only contain letters.
                         </small>
                     </div>
+                    <small class="form-text text-danger" *ngIf="registerForm.get('birthdate')!.valid && registerForm.get('birthdate')!.value >= maxDate"
+                           jhiTranslate="global.messages.validate.birthdate.invalid">
+                        Your birthdate is invalid, must be less than today.
+                    </small>
                 </div>
 
                 <div class="form-group">
