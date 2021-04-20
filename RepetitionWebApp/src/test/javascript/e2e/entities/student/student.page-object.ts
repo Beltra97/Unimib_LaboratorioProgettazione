@@ -90,8 +90,8 @@ export class StudentUpdatePage {
     return await this.dateDeletedInput.getAttribute('value');
   }
 
-  async userSelectLastOption(): Promise<void> {
-    await this.userSelect.all(by.tagName('option')).last().click();
+  async userSelectFirstOption(): Promise<void> {
+    await this.userSelect.all(by.tagName('option')).first().click();
   }
 
   async userSelectOption(option: string): Promise<void> {

@@ -10,6 +10,8 @@ export class NavBarPage {
   signOut = element(by.id('logout'));
   passwordMenu = element(by.css('[routerLink="account/password"]'));
   settingsMenu = element(by.css('[routerLink="account/settings"]'));
+  myRepetition = element(by.css('[routerLink="my-repetition"]'));
+  myRepetitionStudent = element(by.css('[routerLink="my-repetition-student"]'));
 
   constructor(asAdmin?: Boolean) {
     if (asAdmin) {
@@ -55,6 +57,14 @@ export class NavBarPage {
 
   async clickOnAdmin(entityName: string): Promise<void> {
     await element(by.css('[routerLink="admin/' + entityName + '"]')).click();
+  }
+
+  async clickOnMyRepetition(): Promise<void> {
+    await this.myRepetition.click();
+  }
+
+  async clickOnMyRepetitionStudent(): Promise<void> {
+    await this.myRepetitionStudent.click();
   }
 
   async getSignInPage(): Promise<SignInPage> {

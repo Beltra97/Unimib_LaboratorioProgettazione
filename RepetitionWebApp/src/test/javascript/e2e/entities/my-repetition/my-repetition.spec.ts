@@ -16,12 +16,11 @@ describe('MyRepetition e2e test', () => {
     await browser.get('/');
     navBarPage = new NavBarPage();
     signInPage = await navBarPage.getSignInPage();
-    await signInPage.autoSignInUsing('admin', 'admin');
-    await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
+    await signInPage.autoSignInUsing('tutor', '12345a');
   });
 
   it('should load MyRepetitions', async () => {
-    await navBarPage.goToEntity('my-repetition');
+    await navBarPage.clickOnMyRepetition();
     myRepetitionComponentsPage = new MyRepetitionComponentsPage();
     await browser.wait(ec.visibilityOf(myRepetitionComponentsPage.title), 5000);
     expect(await myRepetitionComponentsPage.getTitle()).to.eq('repetitionWebApp.myRepetition.home.title');
@@ -44,30 +43,12 @@ describe('MyRepetition e2e test', () => {
     await myRepetitionComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      myRepetitionUpdatePage.setSubjectInput('subject'),
-      myRepetitionUpdatePage.setDateRepetitionInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      myRepetitionUpdatePage.setDateCreatedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      myRepetitionUpdatePage.setDateModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      myRepetitionUpdatePage.setDateDeletedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+      myRepetitionUpdatePage.subjectSelectLastOption(),
+      myRepetitionUpdatePage.setDateRepetitionInput('31/12/2021' + protractor.Key.TAB + '02:30AM'),
+      myRepetitionUpdatePage.setDurationInput('5'),
     ]);
 
-    expect(await myRepetitionUpdatePage.getSubjectInput()).to.eq('subject', 'Expected Subject value to be equals to subject');
-    expect(await myRepetitionUpdatePage.getDateRepetitionInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected dateRepetition value to be equals to 2000-12-31'
-    );
-    expect(await myRepetitionUpdatePage.getDateCreatedInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected dateCreated value to be equals to 2000-12-31'
-    );
-    expect(await myRepetitionUpdatePage.getDateModifiedInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected dateModified value to be equals to 2000-12-31'
-    );
-    expect(await myRepetitionUpdatePage.getDateDeletedInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected dateDeleted value to be equals to 2000-12-31'
-    );
+    expect(await myRepetitionUpdatePage.getDurationInput()).to.eq('5', 'Expected duration value to be equals to 5');
 
     await myRepetitionUpdatePage.save();
     expect(await myRepetitionUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
