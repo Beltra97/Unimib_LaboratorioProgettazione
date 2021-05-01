@@ -31,6 +31,12 @@ describe('Component Tests', () => {
 
     it('should ensure the two passwords entered match', () => {
       comp.registerForm.patchValue({
+        firstName: '',
+        lastName: '',
+        birthdate: '',
+        degree: '',
+        subject: '',
+        isStudent: '',
         password: 'password',
         confirmPassword: 'non-matching',
       });
@@ -45,6 +51,12 @@ describe('Component Tests', () => {
       fakeAsync((service: RegisterService, mockTranslate: MockLanguageService) => {
         spyOn(service, 'save').and.returnValue(of({}));
         comp.registerForm.patchValue({
+          firstName: '',
+          lastName: '',
+          birthdate: '',
+          degree: '',
+          subject: '',
+          isStudent: '',
           password: 'password',
           confirmPassword: 'password',
         });
@@ -53,6 +65,12 @@ describe('Component Tests', () => {
         tick();
 
         expect(service.save).toHaveBeenCalledWith({
+          firstName: '',
+          lastName: '',
+          birthdate: '',
+          degree: '',
+          subject: '',
+          isStudent: '',
           email: '',
           password: 'password',
           login: '',
@@ -76,6 +94,12 @@ describe('Component Tests', () => {
           })
         );
         comp.registerForm.patchValue({
+          firstName: '',
+          lastName: '',
+          birthdate: '',
+          degree: '',
+          subject: '',
+          isStudent: '',
           password: 'password',
           confirmPassword: 'password',
         });
@@ -99,6 +123,12 @@ describe('Component Tests', () => {
           })
         );
         comp.registerForm.patchValue({
+          firstName: '',
+          lastName: '',
+          birthdate: '',
+          degree: '',
+          subject: '',
+          isStudent: '',
           password: 'password',
           confirmPassword: 'password',
         });
@@ -121,6 +151,12 @@ describe('Component Tests', () => {
           })
         );
         comp.registerForm.patchValue({
+          firstName: '',
+          lastName: '',
+          birthdate: '',
+          degree: '',
+          subject: '',
+          isStudent: '',
           password: 'password',
           confirmPassword: 'password',
         });

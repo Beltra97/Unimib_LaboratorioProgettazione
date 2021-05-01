@@ -1,5 +1,8 @@
 package com.company.repetitionwebapp.service;
 
+import com.company.repetitionwebapp.domain.Repetition;
+import com.company.repetitionwebapp.domain.Student;
+import com.company.repetitionwebapp.domain.Tutor;
 import com.company.repetitionwebapp.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +27,13 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
  */
 @Service
 public class MailService {
+
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
+    private static final String TUTOR = "tutor";
+    private static final String STUDENT = "student";
+    private static final String REPETITION = "repetition";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -107,5 +114,48 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+    }
+
+    @Async
+    public void sendRepetitionBookingMail(User tutor, Student student, Repetition repetition, Boolean isBooked) {
+        log.debug("Sending repetition status email to '{}'", tutor.getEmail());
+
+        if (tutor.getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", tutor.getLogin());
+            return;
+        }
+        Locale locale = Locale.forLanguageTag(tutor.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(STUDENT, student);
+        context.setVariable(REPETITION, repetition);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+
+        String template = isBooked ? "mail/bookRepetition" : "mail/unbookRepetition";
+        String subjectMessage = isBooked ? "email.bookRepetition.title" : "email.unbookRepetition.title";
+
+        String content = templateEngine.process(template, context);
+        String subject = messageSource.getMessage(subjectMessage, null, locale);
+
+        sendEmail(tutor.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendRepetitionDeletedMail(User student, Tutor tutor, Repetition repetition) {
+        log.debug("Sending repetition status email to '{}'", student.getEmail());
+
+        if (student.getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", student.getLogin());
+            return;
+        }
+        Locale locale = Locale.forLanguageTag(student.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(TUTOR, tutor);
+        context.setVariable(REPETITION, repetition);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+
+        String content = templateEngine.process("mail/deleteRepetition", context);
+        String subject = messageSource.getMessage("email.deleteRepetition.title", null, locale);
+
+        sendEmail(student.getEmail(), subject, content, false, true);
     }
 }

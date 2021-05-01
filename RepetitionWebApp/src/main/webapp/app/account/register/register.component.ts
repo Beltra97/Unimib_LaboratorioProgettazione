@@ -21,7 +21,13 @@ export class RegisterComponent implements AfterViewInit {
   errorUserExists = false;
   success = false;
 
+  maxDate = new Date().toJSON().split('T')[0];
+
   registerForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), 
+                Validators.pattern('^[A-Za-z\\s]+')]],
+    surname: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50),
+                Validators.pattern('^[A-Za-z\\s]+')]],
     login: [
       '',
       [
@@ -31,10 +37,16 @@ export class RegisterComponent implements AfterViewInit {
         Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
       ],
     ],
+    birthdate: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+    role: ['', [Validators.required]],
+    degree: [''],
+    subject: [''],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
   });
+
+  optionValue: any;
 
   constructor(
     private languageService: JhiLanguageService,
@@ -60,8 +72,15 @@ export class RegisterComponent implements AfterViewInit {
       this.doNotMatch = true;
     } else {
       const login = this.registerForm.get(['login'])!.value;
+      const firstName = this.registerForm.get(['name'])!.value;
+      const lastName = this.registerForm.get(['surname'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
+      const birthdate = this.registerForm.get(['birthdate'])!.value;
+      const isStudent = this.registerForm.get(['role'])!.value;
+      const degree = this.registerForm.get(['degree'])!.value;
+      const subject = this.registerForm.get(['subject'])!.value;
+      
+      this.registerService.save({ login, firstName, lastName, birthdate, degree, subject, isStudent, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe( 
         () => (this.success = true),
         response => this.processError(response)
       );

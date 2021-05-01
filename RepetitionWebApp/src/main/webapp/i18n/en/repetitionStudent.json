@@ -1,0 +1,26 @@
+{
+  "repetitionWebApp": {
+    "repetitionStudent": {
+      "home": {
+        "title": "Repetition Students",
+        "createLabel": "Create a new Repetition Student",
+        "createOrEditLabel": "Create or edit a Repetition Student",
+        "notFound": "No Repetition Students found"
+      },
+      "created": "A new Repetition Student is created with identifier {{ param }}",
+      "updated": "A Repetition Student is updated with identifier {{ param }}",
+      "deleted": "A Repetition Student is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Repetition Student {{ id }}?"
+      },
+      "detail": {
+        "title": "Repetition Student"
+      },
+      "dateCreated": "Date Created",
+      "dateModified": "Date Modified",
+      "dateDeleted": "Date Deleted",
+      "repetition": "Repetition",
+      "student": "Student"
+    }
+  }
+}

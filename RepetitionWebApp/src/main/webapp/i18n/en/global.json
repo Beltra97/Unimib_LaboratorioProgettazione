@@ -1,12 +1,19 @@
 {
   "global": {
-    "title": "RepetitionWebApp",
+    "title": "Repetition WebApp",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "tutor": "Tutor",
+        "student": "Student",
+        "repetition": "Repetition",
+        "repetitionStudent": "Repetition Student",
+        "myRepetition": "My Repetition",
+        "subject": "Subject",
+        "myRepetitionStudent": "My Repetition Student",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -34,6 +41,10 @@
       "language": "Language"
     },
     "form": {
+      "name.label": "Name",
+      "name.placeholder": "Your name",
+      "surname.label": "Surname",
+      "surname.placeholder": "Your surname",
       "username.label": "Username",
       "username.placeholder": "Your username",
       "currentpassword.label": "Current password",
@@ -43,7 +54,19 @@
       "confirmpassword.label": "New password confirmation",
       "confirmpassword.placeholder": "Confirm the new password",
       "email.label": "Email",
-      "email.placeholder": "Your email"
+      "email.placeholder": "Your email",
+      "birthdate.label": "Birthdate",
+      "role.label": "Role",
+      "role.placeholder": "Your role",
+      "role.label.student": "Student",
+      "role.label.tutor": "Tutor",
+      "degree.label": "Degree",
+      "degree.placeholder": "Your degree",
+      "degree.label.high_school": "High School",
+      "degree.label.university": "University",
+      "degree.label.master": "Master",
+      "subject.label": "Subject",
+      "subject.placeholder": "Your main subject"
     },
     "messages": {
       "info": {
@@ -77,6 +100,41 @@
           "invalid": "Your email is invalid.",
           "minlength": "Your email is required to be at least 5 characters.",
           "maxlength": "Your email cannot be longer than 50 characters."
+        },
+        "name": {
+          "required": "Your name is required.",
+          "invalid": "Your name is invalid.",
+          "pattern": "Your name can only contain letters.",
+          "minlength": "Your name is required to be at least 1 characters.",
+          "maxlength": "Your name cannot be longer than 50 characters."
+        },
+        "surname": {
+          "required": "Your surname is required.",
+          "invalid": "Your surname is invalid.",
+          "pattern": "Your surname can only contain letters.",
+          "minlength": "Your surname is required to be at least 1 characters.",
+          "maxlength": "Your surname cannot be longer than 50 characters."
+        },
+        "birthdate": {
+          "required": "Your birthdate is required.",
+          "invalid": "Your birthdate is invalid, must be less than today.",
+          "pattern": "Your birthdate can only contain letters."
+        },
+        "role": {
+          "required": "Your role is required.",
+          "invalid": "Your role is invalid."
+        },
+        "degree": {
+          "required": "Your degree is required.",
+          "invalid": "Your degree is invalid."
+        },
+        "subject": {
+          "required": "Your subject is required.",
+          "invalid": "Your subject is invalid."
+        },
+        "dateRepetition": {
+          "required": "Date repetition is required.",
+          "invalid": "Date repetition is invalid, must be greater than today."
         }
       }
     },
@@ -136,5 +194,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": "Powered by: <strong>Beltramelli</strong> Fabio - <strong>Bucci</strong> Davide - <strong>Capelli</strong> Alessandro - <strong>Finati</strong> Davide"
 }

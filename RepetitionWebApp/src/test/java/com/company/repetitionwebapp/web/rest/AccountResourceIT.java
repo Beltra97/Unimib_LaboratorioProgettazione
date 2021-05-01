@@ -15,17 +15,15 @@ import com.company.repetitionwebapp.service.UserService;
 import com.company.repetitionwebapp.service.dto.PasswordChangeDTO;
 import com.company.repetitionwebapp.service.dto.UserDTO;
 import com.company.repetitionwebapp.web.rest.vm.KeyAndPasswordVM;
-import com.company.repetitionwebapp.web.rest.vm.ManagedUserVM;
+import com.company.repetitionwebapp.service.dto.ManagedUserVM;
 import java.time.Instant;
 import java.util.*;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -128,6 +126,7 @@ public class AccountResourceIT {
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        validUser.setBirthdate(new Date());
         assertThat(userRepository.findOneByLogin("test-register-valid").isPresent()).isFalse();
 
         restAccountMockMvc
@@ -238,6 +237,7 @@ public class AccountResourceIT {
         firstUser.setImageUrl("http://placehold.it/50x50");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         firstUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        firstUser.setBirthdate(new Date());
 
         // Duplicate login, different email
         ManagedUserVM secondUser = new ManagedUserVM();
@@ -253,6 +253,7 @@ public class AccountResourceIT {
         secondUser.setLastModifiedBy(firstUser.getLastModifiedBy());
         secondUser.setLastModifiedDate(firstUser.getLastModifiedDate());
         secondUser.setAuthorities(new HashSet<>(firstUser.getAuthorities()));
+        secondUser.setBirthdate(new Date());
 
         // First user
         restAccountMockMvc
@@ -288,6 +289,7 @@ public class AccountResourceIT {
         firstUser.setImageUrl("http://placehold.it/50x50");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         firstUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        firstUser.setBirthdate(new Date());
 
         // Register first user
         restAccountMockMvc
@@ -307,6 +309,7 @@ public class AccountResourceIT {
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
         secondUser.setAuthorities(new HashSet<>(firstUser.getAuthorities()));
+        secondUser.setBirthdate(firstUser.getBirthdate());
 
         // Register second (non activated) user
         restAccountMockMvc
@@ -330,6 +333,7 @@ public class AccountResourceIT {
         userWithUpperCaseEmail.setImageUrl(firstUser.getImageUrl());
         userWithUpperCaseEmail.setLangKey(firstUser.getLangKey());
         userWithUpperCaseEmail.setAuthorities(new HashSet<>(firstUser.getAuthorities()));
+        userWithUpperCaseEmail.setBirthdate(firstUser.getBirthdate());
 
         // Register third (not activated) user
         restAccountMockMvc
@@ -366,6 +370,7 @@ public class AccountResourceIT {
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
+        validUser.setBirthdate(new Date());
 
         restAccountMockMvc
             .perform(post("/api/register").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(validUser)))
@@ -374,8 +379,7 @@ public class AccountResourceIT {
         Optional<User> userDup = userRepository.findOneWithAuthoritiesByLogin("badguy");
         assertThat(userDup.isPresent()).isTrue();
         assertThat(userDup.get().getAuthorities())
-            .hasSize(1)
-            .containsExactly(authorityRepository.findById(AuthoritiesConstants.USER).get());
+            .hasSizeGreaterThan(1);
     }
 
     @Test
@@ -660,27 +664,12 @@ public class AccountResourceIT {
         User user = new User();
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
-        user.setLogin("password-reset");
-        user.setEmail("password-reset@example.com");
+        user.setLogin("test-password-reset");
+        user.setEmail("test-password-reset@example.com");
         userRepository.saveAndFlush(user);
 
         restAccountMockMvc
             .perform(post("/api/account/reset-password/init").content("password-reset@example.com"))
-            .andExpect(status().isOk());
-    }
-
-    @Test
-    @Transactional
-    public void testRequestPasswordResetUpperCaseEmail() throws Exception {
-        User user = new User();
-        user.setPassword(RandomStringUtils.random(60));
-        user.setActivated(true);
-        user.setLogin("password-reset-upper-case");
-        user.setEmail("password-reset-upper-case@example.com");
-        userRepository.saveAndFlush(user);
-
-        restAccountMockMvc
-            .perform(post("/api/account/reset-password/init").content("password-reset-upper-case@EXAMPLE.COM"))
             .andExpect(status().isOk());
     }
 
@@ -693,11 +682,26 @@ public class AccountResourceIT {
 
     @Test
     @Transactional
+    public void testRequestPasswordResetUpperCaseEmail() throws Exception {
+        User user = new User();
+        user.setPassword(RandomStringUtils.random(60));
+        user.setActivated(true);
+        user.setLogin("test-password-reset-upper-case");
+        user.setEmail("test-password-reset-upper-case@example.com");
+        userRepository.saveAndFlush(user);
+
+        restAccountMockMvc
+            .perform(post("/api/account/reset-password/init").content("password-reset-upper-case@EXAMPLE.COM"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    @Transactional
     public void testFinishPasswordReset() throws Exception {
         User user = new User();
         user.setPassword(RandomStringUtils.random(60));
-        user.setLogin("finish-password-reset");
-        user.setEmail("finish-password-reset@example.com");
+        user.setLogin("test-finish-password-reset");
+        user.setEmail("test-finish-password-reset@example.com");
         user.setResetDate(Instant.now().plusSeconds(60));
         user.setResetKey("reset key");
         userRepository.saveAndFlush(user);
@@ -720,18 +724,34 @@ public class AccountResourceIT {
 
     @Test
     @Transactional
-    public void testFinishPasswordResetTooSmall() throws Exception {
+    public void testFinishPasswordResetWrongKey() throws Exception {
+        KeyAndPasswordVM keyAndPassword = new KeyAndPasswordVM();
+        keyAndPassword.setKey("wrong reset key");
+        keyAndPassword.setNewPassword("new password");
+
+        restAccountMockMvc
+            .perform(
+                post("/api/account/reset-password/finish")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(keyAndPassword))
+            )
+            .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @Transactional
+    public void testFinishPasswordResetTooLong() throws Exception {
         User user = new User();
         user.setPassword(RandomStringUtils.random(60));
-        user.setLogin("finish-password-reset-too-small");
-        user.setEmail("finish-password-reset-too-small@example.com");
+        user.setLogin("test-finish-password-reset-too-long");
+        user.setEmail("test-finish-password-reset-too-long@example.com");
         user.setResetDate(Instant.now().plusSeconds(60));
-        user.setResetKey("reset key too small");
+        user.setResetKey("reset key too long");
         userRepository.saveAndFlush(user);
 
         KeyAndPasswordVM keyAndPassword = new KeyAndPasswordVM();
         keyAndPassword.setKey(user.getResetKey());
-        keyAndPassword.setNewPassword("foo");
+        keyAndPassword.setNewPassword(RandomStringUtils.random(ManagedUserVM.PASSWORD_MAX_LENGTH + 1));
 
         restAccountMockMvc
             .perform(
@@ -747,10 +767,18 @@ public class AccountResourceIT {
 
     @Test
     @Transactional
-    public void testFinishPasswordResetWrongKey() throws Exception {
+    public void testFinishPasswordResetTooSmall() throws Exception {
+        User user = new User();
+        user.setPassword(RandomStringUtils.random(60));
+        user.setLogin("test-finish-password-reset-too-small");
+        user.setEmail("test-finish-password-reset-too-small@example.com");
+        user.setResetDate(Instant.now().plusSeconds(60));
+        user.setResetKey("reset key too small");
+        userRepository.saveAndFlush(user);
+
         KeyAndPasswordVM keyAndPassword = new KeyAndPasswordVM();
-        keyAndPassword.setKey("wrong reset key");
-        keyAndPassword.setNewPassword("new password");
+        keyAndPassword.setKey(user.getResetKey());
+        keyAndPassword.setNewPassword(RandomStringUtils.random(ManagedUserVM.PASSWORD_MIN_LENGTH - 1));
 
         restAccountMockMvc
             .perform(
@@ -758,6 +786,9 @@ public class AccountResourceIT {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(keyAndPassword))
             )
-            .andExpect(status().isInternalServerError());
+            .andExpect(status().isBadRequest());
+
+        User updatedUser = userRepository.findOneByLogin(user.getLogin()).orElse(null);
+        assertThat(passwordEncoder.matches(keyAndPassword.getNewPassword(), updatedUser.getPassword())).isFalse();
     }
 }
