@@ -43,6 +43,12 @@
       "otherEntityName": "repetition",
       "otherEntityRelationshipName": "subject",
       "relationshipName": "repetition"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "topic",
+      "otherEntityRelationshipName": "subject",
+      "relationshipName": "topic"
     }
   ],
   "changelogDate": "20210331093848",

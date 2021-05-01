@@ -29,6 +29,7 @@ describe('Service Tests', () => {
         0,
         new Subject(0, 'TestSubject', 'This is an example', undefined, currentDate, currentDate, currentDate, undefined),
         'Topic example',
+        'Additional note example',
         100,
         currentDate,
         undefined

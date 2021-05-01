@@ -21,6 +21,7 @@
       },
       "subject": "Subject",
       "topic": "Topic: {{ param }}",
+      "additionalNote": "Additional Note: {{ param }}",
       "duration": "Duration",
       "dateRepetition": "Date Repetition",
       "dateCreated": "Date Created",

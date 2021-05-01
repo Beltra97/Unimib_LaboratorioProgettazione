@@ -30,6 +30,7 @@ export class RepetitionUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   topicInput = element(by.id('field_topic'));
+  additionalNoteInput = element(by.id('field_additionalNote'));
   dateRepetitionInput = element(by.id('field_dateRepetition'));
   durationInput = element(by.id('field_duration'));
   dateCreatedInput = element(by.id('field_dateCreated'));
@@ -49,6 +50,14 @@ export class RepetitionUpdatePage {
 
   async getTopicInput(): Promise<string> {
     return await this.topicInput.getAttribute('value');
+  }
+
+  async setAdditionalNoteInput(additionalNote: string): Promise<void> {
+    await this.additionalNoteInput.sendKeys(additionalNote);
+  }
+
+  async getAdditionalNoteInput(): Promise<string> {
+    return await this.additionalNoteInput.getAttribute('value');
   }
 
   async setDateRepetitionInput(dateRepetition: string): Promise<void> {

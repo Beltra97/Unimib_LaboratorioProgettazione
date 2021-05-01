@@ -19,6 +19,9 @@
             <column name="topic" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="additional_note" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="date_repetition" type="datetime">
                 <constraints nullable="false" />
             </column>
@@ -68,6 +71,7 @@
                   tableName="repetition">
             <column name="id" type="numeric"/>
             <column name="topic" type="string"/>
+            <column name="additional_note" type="string"/>
             <column name="date_repetition" type="datetime"/>
             <column name="duration" type="numeric"/>
             <column name="date_created" type="datetime"/>

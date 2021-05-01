@@ -5,22 +5,35 @@
             Are you sure you want to book this Repetition ?
         </p>
 
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let topic of myTopics" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(topic)">
+                {{ topic }}
+                <fa-icon matChipRemove *ngIf="removable" icon="times"></fa-icon>
+            </mat-chip>
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
+                {{ topic }}
+            </mat-option>
+        </mat-autocomplete>
+        <input
+            style="width:100%"
+            placeholder="New topic ..." #topicInput  [formControl]="topicCtrl"
+            [matAutocomplete]="auto"  [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
     </div>
 
-    <div *ngIf="myRepetitionStudent" class="form-group">
-        <label class="form-control-label" jhiTranslate="repetitionWebApp.myRepetitionStudent.topic">Topic</label>
-        <input type="text" class="form-control" [(ngModel)]="topic"/>
-        <div *ngIf="topic == ''">
-            <small class="form-text text-danger" jhiTranslate="entity.validation.required">
-                This field is required.
-            </small>
-        </div>
+    <div style="margin-top:50px" *ngIf="myRepetitionStudent" class="form-group">
+        <label class="form-control-label" jhiTranslate="repetitionWebApp.myRepetitionStudent.additionalNote">Additional notes</label>
+        <input type="text" class="form-control" [(ngModel)]="additionalNote"/>
     </div>
 
 
     <div mat-dialog-actions>
         <button mat-button style="float:left" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
         <button *ngIf="myRepetitionStudent" mat-button id="jhi-confirm-delete-myRepetitionStudent" cdkFocusInitial style="float:right" class="btn btn-primary"
-                [disabled]="topic == ''" (click)="confirmBook(myRepetitionStudent)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">Book</button>
+                [disabled]="myTopics.length == 0" (click)="confirmBook(myRepetitionStudent)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">Book</button>
     </div>
 </div>

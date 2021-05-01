@@ -25,7 +25,10 @@ public class Repetition implements Serializable {
     private Long id;
 
     @Column(name = "topic")
-    private String topic;
+    private String topic = "";
+
+    @Column(name = "additional_note")
+    private String additionalNote;
 
     @NotNull
     @Column(name = "date_repetition", nullable = false)
@@ -71,6 +74,19 @@ public class Repetition implements Serializable {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public String getAdditionalNote() {
+        return additionalNote;
+    }
+
+    public Repetition additionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
+        return this;
+    }
+
+    public void setAdditionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
     }
 
     public Instant getDateRepetition() {
@@ -187,6 +203,7 @@ public class Repetition implements Serializable {
         return "Repetition{" +
             "id=" + getId() +
             ", topic='" + getTopic() + "'" +
+            ", additionalNote='" + getAdditionalNote() + "'" +
             ", dateRepetition='" + getDateRepetition() + "'" +
             ", duration=" + getDuration() +
             ", dateCreated='" + getDateCreated() + "'" +

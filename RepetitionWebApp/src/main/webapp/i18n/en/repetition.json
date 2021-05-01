@@ -17,6 +17,7 @@
         "title": "Repetition"
       },
       "topic": "Topic",
+      "additionalNote": "Additional Note",
       "dateRepetition": "Date Repetition",
       "duration": "Duration",
       "dateCreated": "Date Created",

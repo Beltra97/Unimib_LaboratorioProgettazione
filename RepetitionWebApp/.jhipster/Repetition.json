@@ -6,6 +6,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "additionalNote",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "dateRepetition",
       "fieldType": "Instant",
       "fieldValidateRules": [

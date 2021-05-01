@@ -6,6 +6,7 @@ export interface IMyRepetitionStudent {
   id?: any;
   subject?: ISubject;
   topic?: string;
+  additionalNote?: string;
   duration?: number,
   dateRepetition?: Moment;
   tutor?: ITutor;
@@ -17,6 +18,7 @@ export class MyRepetitionStudent implements IMyRepetitionStudent {
     public id?: any,
     public subject?: ISubject,
     public topic?: string,
+    public additionalNote?: string,
     public duration?: number,
     public dateRepetition?: Moment,
     public tutor?: ITutor,

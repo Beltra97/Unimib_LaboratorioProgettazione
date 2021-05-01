@@ -91,6 +91,7 @@ public class RepetitionStudentService {
         if(repetition != null && student != null) {
 
             repetition.setTopic(repetitionStudentDTO.getTopic());
+            repetition.setAdditionalNote(repetitionStudentDTO.getAdditionalNote());
 
             newRepetitionStudent = new RepetitionStudent();
             newRepetitionStudent.setStudent(student);
@@ -130,6 +131,7 @@ public class RepetitionStudentService {
         if(repetition != null && repetition != null) {
 
             repetition.setTopic("");
+            repetition.setAdditionalNote("");
 
             repetitionStudentRepository.findAll().stream().filter(s ->
                 s.getRepetition() != null && s.getRepetition().getId() == idRepetition &&

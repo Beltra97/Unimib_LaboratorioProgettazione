@@ -18,7 +18,8 @@
         "question": "Are you sure you want to book this Repetition ?",
         "btnConfirm": "Book"
       },
-      "topic": "Topic"
+      "topic": "Topic",
+      "additionalNote": "Additional Note"
     }
   }
 }
