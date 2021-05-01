@@ -6,6 +6,7 @@ import { RepetitionWebAppSharedModule } from 'app/shared/shared.module';
 import { MyRepetitionStudentComponent } from './my-repetition-student.component';
 import { MyRepetitionStudentUpdateDialogComponent } from './my-repetition-student-update-dialog.component';
 import { MyRepetitionStudentDeleteDialogComponent } from './my-repetition-student-delete-dialog.component';
+import { MyRepetitionStudentJoinDialogComponent } from './my-repetition-student-join-dialog.component';
 import { myRepetitionStudentRoute } from './my-repetition-student.route';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -29,10 +30,12 @@ import { MatChipsModule } from '@angular/material/chips';
     MyRepetitionStudentComponent,
     MyRepetitionStudentUpdateDialogComponent,
     MyRepetitionStudentDeleteDialogComponent,
+    MyRepetitionStudentJoinDialogComponent
   ],
   entryComponents: [
     MyRepetitionStudentDeleteDialogComponent,
-    MyRepetitionStudentUpdateDialogComponent
+    MyRepetitionStudentUpdateDialogComponent,
+    MyRepetitionStudentJoinDialogComponent
   ],
 })
 export class RepetitionWebAppMyRepetitionStudentModule {}

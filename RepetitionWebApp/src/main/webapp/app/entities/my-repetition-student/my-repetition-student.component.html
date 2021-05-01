@@ -42,14 +42,20 @@
             </mat-card-content>
 
             <mat-card-actions>
-                <button *ngIf="!myRepetition?.isAlreadyBooked" class="btn btn-primary float-right jh-create-entity create-my-repetition"
-                        type="submit" (click)="book(myRepetition)">
+                <button *ngIf="!myRepetition?.isAlreadyBooked && myRepetition?.isFree" class="btn btn-primary float-right jh-create-entity create-my-repetition"
+                        type="submit" (click)="book(myRepetition)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">
                     <fa-icon icon="book"></fa-icon>
                     Book
                 </button>
 
+                <button *ngIf="!myRepetition?.isAlreadyBooked && !myRepetition?.isFree" class="btn btn-warning float-right jh-create-entity create-my-repetition"
+                        type="submit" (click)="join(myRepetition)" jhiTranslate="repetitionWebApp.myRepetitionStudent.join.btnConfirm">
+                    <fa-icon icon="book"></fa-icon>
+                    Join
+                </button>
+
                 <button *ngIf="myRepetition?.isAlreadyBooked" class="btn btn-danger float-right jh-create-entity create-my-repetition"
-                            type="submit" (click)="delete(myRepetition)">
+                            type="submit" (click)="delete(myRepetition)" jhiTranslate="repetitionWebApp.myRepetitionStudent.delete.btnConfirm">
                     <fa-icon icon="times"></fa-icon>
                     UnBook
                 </button>

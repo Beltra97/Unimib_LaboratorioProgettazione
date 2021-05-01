@@ -18,6 +18,11 @@
         "question": "Are you sure you want to book this Repetition ?",
         "btnConfirm": "Book"
       },
+      "join": {
+        "title": "Join repetition",
+        "question": "Are you sure you want to join this Repetition ?",
+        "btnConfirm": "Join"
+      },
       "topic": "Topic",
       "additionalNote": "Additional Note"
     }
