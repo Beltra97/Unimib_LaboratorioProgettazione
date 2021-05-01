@@ -27,6 +27,8 @@ public class MyRepetitionStudentRS {
 
     private Instant dateRepetition;
 
+    private Boolean isFree;
+
     private Boolean isAlreadyBooked;
 
     public MyRepetitionStudentRS() {
@@ -97,6 +99,14 @@ public class MyRepetitionStudentRS {
 
     public void setDateRepetition(Instant dateRepetition) {
         this.dateRepetition = dateRepetition;
+    }
+
+    public Boolean getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Boolean isFree) {
+        this.isFree = isFree;
     }
 
     public Boolean getIsAlreadyBooked() {

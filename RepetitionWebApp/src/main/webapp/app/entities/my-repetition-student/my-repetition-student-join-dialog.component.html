@@ -1,0 +1,13 @@
+<div style="padding:20px;">
+    <h4 *ngIf="myRepetitionStudent" mat-dialog-title jhiTranslate="repetitionWebApp.myRepetitionStudent.join.title">Join repetition</h4>
+    <div mat-dialog-content>
+        <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetitionStudent.join.question"
+           [translateValues]="{ id: myRepetitionStudent?.id }">Are you sure you want to join this Repetition ?</p>
+
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button style="float:left" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
+        <button mat-button id="jhi-confirm-delete-myRepetitionStudent" cdkFocusInitial style="float:right" class="btn btn btn-warning"
+                (click)="confirmJoin(myRepetitionStudent!)" jhiTranslate="repetitionWebApp.myRepetitionStudent.join.btnConfirm">Join</button>
+    </div>
+</div>

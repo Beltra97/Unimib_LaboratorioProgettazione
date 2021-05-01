@@ -10,6 +10,7 @@ export interface IMyRepetitionStudent {
   duration?: number,
   dateRepetition?: Moment;
   tutor?: ITutor;
+  isFree?: boolean;
   isAlreadyBooked?: boolean;
 }
 
@@ -22,5 +23,6 @@ export class MyRepetitionStudent implements IMyRepetitionStudent {
     public duration?: number,
     public dateRepetition?: Moment,
     public tutor?: ITutor,
+    public isFree?: boolean,
     public isAlreadyBooked?: boolean) {}
 }

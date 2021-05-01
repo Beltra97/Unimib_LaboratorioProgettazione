@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class for managing users.
@@ -58,21 +59,25 @@ public class RepetitionStudentService {
 
                     List<RepetitionStudent> students = new ArrayList<RepetitionStudent>();
                     for(RepetitionStudent s : repetitionStudentRepository.findAll()){
-                        if(s.getRepetition() != null && s.getRepetition().getId() == repetition.getId() && s.getDateDeleted() == null){
+                        if(s.getRepetition() != null && s.getRepetition().getId().equals(repetition.getId()) && s.getDateDeleted() == null){
                             students.add(s);
                         }
                     }
 
-                    if(students.stream().count() == 0) {
+                    if((long) students.size() < 5){
+
                         MyRepetitionStudentRS myRepetitionRS = new MyRepetitionStudentRS(repetition);
+                        myRepetitionRS.setIsFree(false);
                         myRepetitionRS.setIsAlreadyBooked(false);
-                        myRepetitions.add(myRepetitionRS);
-                    }
-                    else if(students.stream().filter(s ->
-                        s.getStudent() != null && s.getStudent().getId() == student.getId()).findFirst().isPresent())
-                    {
-                        MyRepetitionStudentRS myRepetitionRS = new MyRepetitionStudentRS(repetition);
-                        myRepetitionRS.setIsAlreadyBooked(true);
+
+                        if(students.stream().anyMatch(s ->
+                            s.getStudent() != null && s.getStudent().getId().equals(student.getId()))) {
+                            myRepetitionRS.setIsAlreadyBooked(true);
+                        }
+                        else if((long) students.size() == 0){
+                            myRepetitionRS.setIsFree(true);
+                        }
+
                         myRepetitions.add(myRepetitionRS);
                     }
                 }
@@ -85,13 +90,18 @@ public class RepetitionStudentService {
 
         RepetitionStudent newRepetitionStudent = null;
 
-        Repetition repetition = repetitionRepository.findById(repetitionStudentDTO.getId()).get();
+        Optional<Repetition> optionalRepetition = repetitionRepository.findById(repetitionStudentDTO.getId());
         Student student = studentService.getStudentByUser();
 
-        if(repetition != null && student != null) {
+        if(optionalRepetition.isPresent() && student != null) {
 
-            repetition.setTopic(repetitionStudentDTO.getTopic());
-            repetition.setAdditionalNote(repetitionStudentDTO.getAdditionalNote());
+            Repetition repetition = optionalRepetition.get();
+
+            if(repetitionStudentRepository.findAll().stream().noneMatch(s ->
+                s.getRepetition() == repetition && s.getDateDeleted() == null)) {
+                repetition.setTopic(repetitionStudentDTO.getTopic());
+                repetition.setAdditionalNote(repetitionStudentDTO.getAdditionalNote());
+            }
 
             newRepetitionStudent = new RepetitionStudent();
             newRepetitionStudent.setStudent(student);
@@ -110,9 +120,12 @@ public class RepetitionStudentService {
 
     public Repetition updateRepetition(RepetitionStudentDTO repetitionStudentDTO) {
 
-        Repetition repetition = repetitionRepository.findById(repetitionStudentDTO.getId()).get();
+        Repetition repetition = null;
+        Optional<Repetition> optionalRepetition = repetitionRepository.findById(repetitionStudentDTO.getId());
 
-        if(repetition != null) {
+        if(optionalRepetition.isPresent()) {
+
+            repetition = optionalRepetition.get();
 
             repetition.setTopic(repetitionStudentDTO.getTopic());
             repetition.setDateModified(Instant.now());
@@ -125,17 +138,21 @@ public class RepetitionStudentService {
     public void setDateDeleted(long idRepetition) {
 
         Student student = studentService.getStudentByUser();
+        Optional<Repetition> optionalRepetition = repetitionRepository.findById(idRepetition);
 
-        Repetition repetition = repetitionRepository.findById(idRepetition).get();
+        if(optionalRepetition.isPresent() && student != null) {
 
-        if(repetition != null && repetition != null) {
+            Repetition repetition = optionalRepetition.get();
 
-            repetition.setTopic("");
-            repetition.setAdditionalNote("");
+            if(repetitionStudentRepository.findAll().stream().filter(s -> s.getRepetition() == repetition &&
+                    s.getDateDeleted() == null).count() == 1) {
+                repetition.setTopic("");
+                repetition.setAdditionalNote("");
+            }
 
             repetitionStudentRepository.findAll().stream().filter(s ->
-                s.getRepetition() != null && s.getRepetition().getId() == idRepetition &&
-                    s.getStudent() != null && s.getStudent().getId() == student.getId()).forEach(
+                    s.getRepetition() != null && s.getRepetition().getId() == idRepetition &&
+                    s.getStudent() != null && s.getStudent().getId().equals(student.getId())).forEach(
                 repetitionStudent -> {
                     repetitionStudent.setDateDeleted(Instant.now());
                 }
