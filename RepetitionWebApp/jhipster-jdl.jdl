@@ -21,6 +21,7 @@ entity Student {
 
 entity Repetition {
     topic String,
+    additionalNote String,
     dateRepetition Instant required,
     duration Integer,
     dateCreated Instant, 
@@ -38,6 +39,14 @@ entity Subject {
     name String required,
     description String required,
     imageUrl String required maxlength(1024),
+    dateCreated Instant, 
+    dateModified Instant, 
+    dateDeleted Instant
+}
+
+entity Topic {
+    name String required,
+    description String required,
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant
@@ -65,4 +74,8 @@ relationship ManyToOne {
 
 relationship OneToMany {
     Subject{repetition(id)} to Repetition,
+}
+
+relationship OneToMany {
+    Subject{topic(id)} to Topic,
 }

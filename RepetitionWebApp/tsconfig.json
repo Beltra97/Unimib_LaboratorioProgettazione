@@ -7,5 +7,9 @@
     {
       "path": "./tsconfig.e2e.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "noImplicitReturns": false,
+    "strictPropertyInitialization": false
+  }
 }

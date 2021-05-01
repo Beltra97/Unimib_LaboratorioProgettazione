@@ -19,6 +19,8 @@ public class MyRepetitionRS {
 
     private String topic;
 
+    private String additionalNote;
+
     private Integer duration;
 
     private Instant dateRepetition;
@@ -33,6 +35,7 @@ public class MyRepetitionRS {
         this.id = repetition.getId();
         this.subject = repetition.getSubject();
         this.topic = repetition.getTopic();
+        this.additionalNote = repetition.getAdditionalNote();
         this.duration = repetition.getDuration();
         this.dateRepetition = repetition.getDateRepetition();
     }
@@ -67,6 +70,14 @@ public class MyRepetitionRS {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public String getAdditionalNote() {
+        return additionalNote;
+    }
+
+    public void setAdditionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
     }
 
     public Instant getDateRepetition() {

@@ -36,6 +36,9 @@
                 <h4> {{ myRepetition.subject?.name }} </h4>
                 <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
                     [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+
+                <h6 *ngIf="myRepetition?.additionalNote" jhiTranslate="repetitionWebApp.myRepetition.additionalNote"
+                    [translateValues]="{ param: myRepetition.additionalNote }">Additional Note: {{ myRepetition.additionalNote }}</h6>
             </mat-card-content>
 
             <mat-card-actions>

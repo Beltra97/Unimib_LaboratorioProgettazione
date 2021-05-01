@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IRepetition } from 'app/shared/model/repetition.model';
+import { ITopic } from 'app/shared/model/topic.model';
 
 export interface ISubject {
   id?: number;
@@ -10,6 +11,7 @@ export interface ISubject {
   dateModified?: Moment;
   dateDeleted?: Moment;
   repetitions?: IRepetition[];
+  topics?: ITopic[];
 }
 
 export class Subject implements ISubject {
@@ -21,6 +23,7 @@ export class Subject implements ISubject {
     public dateCreated?: Moment,
     public dateModified?: Moment,
     public dateDeleted?: Moment,
-    public repetitions?: IRepetition[]
+    public repetitions?: IRepetition[],
+    public topics?: ITopic[]
   ) {}
 }

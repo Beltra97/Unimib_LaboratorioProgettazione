@@ -2,8 +2,6 @@ package com.company.repetitionwebapp.web.rest;
 
 import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.repository.RepetitionRepository;
-import com.company.repetitionwebapp.service.RepetitionService;
-import com.company.repetitionwebapp.service.dto.RepetitionDTO;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -37,11 +35,9 @@ public class RepetitionResource {
     private String applicationName;
 
     private final RepetitionRepository repetitionRepository;
-    private final RepetitionService repetitionService;
 
-    public RepetitionResource(RepetitionRepository repetitionRepository, RepetitionService repetitionService) {
+    public RepetitionResource(RepetitionRepository repetitionRepository) {
         this.repetitionRepository = repetitionRepository;
-        this.repetitionService = repetitionService;
     }
 
     /**
@@ -62,7 +58,6 @@ public class RepetitionResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
-
 
     /**
      * {@code PUT  /repetitions} : Updates an existing repetition.

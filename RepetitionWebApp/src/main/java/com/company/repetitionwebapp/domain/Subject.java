@@ -51,6 +51,10 @@ public class Subject implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Repetition> repetitions = new HashSet<>();
 
+    @OneToMany(mappedBy = "subject")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Topic> topics = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -161,6 +165,31 @@ public class Subject implements Serializable {
 
     public void setRepetitions(Set<Repetition> repetitions) {
         this.repetitions = repetitions;
+    }
+
+    public Set<Topic> getTopics() {
+        return topics;
+    }
+
+    public Subject topics(Set<Topic> topics) {
+        this.topics = topics;
+        return this;
+    }
+
+    public Subject addTopic(Topic topic) {
+        this.topics.add(topic);
+        topic.setSubject(this);
+        return this;
+    }
+
+    public Subject removeTopic(Topic topic) {
+        this.topics.remove(topic);
+        topic.setSubject(null);
+        return this;
+    }
+
+    public void setTopics(Set<Topic> topics) {
+        this.topics = topics;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

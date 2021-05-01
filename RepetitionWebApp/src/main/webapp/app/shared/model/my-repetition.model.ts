@@ -6,6 +6,7 @@ export interface IMyRepetition {
   id?: any;
   subject?: ISubject;
   topic?: string;
+  additionalNote?: string;
   duration?: number,
   dateRepetition?: Moment;
   students?: IStudent[];
@@ -16,6 +17,7 @@ export class MyRepetition implements IMyRepetition {
     public id?: any,
     public subject?: ISubject,
     public topic?: string,
+    public additionalNote?: string,
     public duration?: number,
     public dateRepetition?: Moment,
     public students?: IStudent[]
