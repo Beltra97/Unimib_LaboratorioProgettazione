@@ -41,6 +41,22 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.nPartecipants" for="field_nPartecipants">N Partecipants</label>
+                    <input type="number" class="form-control" name="nPartecipants" id="field_nPartecipants"
+                           formControlName="nPartecipants"/>
+                    <div *ngIf="editForm.get('nPartecipants')!.invalid && (editForm.get('nPartecipants')!.dirty || editForm.get('nPartecipants')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nPartecipants')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('nPartecipants')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.duration" for="field_duration">Duration</label>
                     <input type="number" class="form-control" name="duration" id="field_duration"
                            formControlName="duration"/>

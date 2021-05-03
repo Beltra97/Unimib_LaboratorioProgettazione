@@ -27,6 +27,8 @@ public class MyRepetitionRS {
 
     private List<Student> students = new ArrayList<Student>();
 
+    private Integer nPartecipants;
+
     public MyRepetitionRS() {
         // Empty constructor needed for Jackson.
     }
@@ -38,6 +40,7 @@ public class MyRepetitionRS {
         this.additionalNote = repetition.getAdditionalNote();
         this.duration = repetition.getDuration();
         this.dateRepetition = repetition.getDateRepetition();
+        this.nPartecipants = repetition.getnPartecipants();
     }
 
     public Long getId() {
@@ -94,5 +97,13 @@ public class MyRepetitionRS {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public Integer getnPartecipants() {
+        return nPartecipants;
+    }
+
+    public void setnPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
     }
 }

@@ -34,6 +34,10 @@ public class Repetition implements Serializable {
     @Column(name = "date_repetition", nullable = false)
     private Instant dateRepetition;
 
+    @NotNull
+    @Column(name = "n_partecipants", nullable = false)
+    private Integer nPartecipants = 1;
+
     @Column(name = "duration")
     private Integer duration;
 
@@ -100,6 +104,19 @@ public class Repetition implements Serializable {
 
     public void setDateRepetition(Instant dateRepetition) {
         this.dateRepetition = dateRepetition;
+    }
+
+    public Integer getnPartecipants() {
+        return nPartecipants;
+    }
+
+    public Repetition nPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
+        return this;
+    }
+
+    public void setnPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
     }
 
     public Integer getDuration() {
@@ -205,6 +222,7 @@ public class Repetition implements Serializable {
             ", topic='" + getTopic() + "'" +
             ", additionalNote='" + getAdditionalNote() + "'" +
             ", dateRepetition='" + getDateRepetition() + "'" +
+            ", nPartecipants=" + getnPartecipants() +
             ", duration=" + getDuration() +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +

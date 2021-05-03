@@ -13,6 +13,7 @@
       "created": "A Repetition is posted with identifier {{ param }}",
       "updated": "A Repetition is updated with identifier {{ param }}",
       "deleted": "A Repetition is deleted with identifier {{ param }}",
+      "madeRepetitionGroup": "A Repetition with identifier {{ param }} is became a group repetition",
       "delete": {
         "question": "Are you sure you want to delete Repetition {{ id }}?"
       },
@@ -22,8 +23,12 @@
       "subject": "Subject",
       "topic": "Topic: {{ param }}",
       "additionalNote": "Additional Note: {{ param }}",
+      "nPartecipants": "Max partecipants: {{ param }}",
+      "singleRepetition": "Single Repetition",
+      "groupRepetition": "Group Repetition",
       "duration": "Duration",
       "dateRepetition": "Date Repetition",
+      "timeRepetition": "Time Repetition",
       "dateCreated": "Date Created",
       "dateModified": "Date Modified",
       "dateDeleted": "Date Deleted"

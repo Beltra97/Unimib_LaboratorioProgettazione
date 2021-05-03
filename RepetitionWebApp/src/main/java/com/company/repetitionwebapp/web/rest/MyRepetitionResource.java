@@ -11,6 +11,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -119,5 +120,23 @@ public class MyRepetitionResource {
         log.debug("REST request to delete Repetition : {}", id);
         repetitionService.setDateDeleted(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code GET  /make-repetition-group/:{id} : change into group repetition.
+     *
+     * @param id the id of the repetition to make groupable.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @GetMapping("/make-repetition-group/{id}")
+    public ResponseEntity<Void> makeRepetitionGroup(@PathVariable Long id) {
+        log.debug("REST request to make group Repetition : {}", id);
+        repetitionService.makeRepetitionGroup(id);
+        return ResponseEntity.noContent().headers(madeRepetitionGroupAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    public static HttpHeaders madeRepetitionGroupAlert(String applicationName, boolean enableTranslation, String entityName, String param) {
+        String message = enableTranslation ? applicationName + "." + entityName + ".madeRepetitionGroup" : "A " + entityName + " with identifier " + param + " is became a group repetition.";
+        return HeaderUtil.createAlert(applicationName, message, param);
     }
 }

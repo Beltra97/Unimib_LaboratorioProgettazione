@@ -5,7 +5,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IMyRepetition, MyRepetition } from 'app/shared/model/my-repetition.model';
 import { MyRepetitionService } from './my-repetition.service';
@@ -30,6 +31,7 @@ export class MyRepetitionUpdateComponent implements OnInit {
     subject: ['', [Validators.required]],
     duration: ['', [Validators.required]],
     dateRepetition: [null, [Validators.required]],
+    timeRepetition: [null, [Validators.required]],
     dateCreated: [],
     dateModified: [],
     dateDeleted: [],
@@ -45,7 +47,7 @@ export class MyRepetitionUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ myRepetition }) => {
       if (!myRepetition.id) {
-        const today = moment().startOf('day');
+        const today = moment().add(1, 'days').startOf('day');
         myRepetition.dateRepetition = today;
       }
 
@@ -60,7 +62,8 @@ export class MyRepetitionUpdateComponent implements OnInit {
       id: myRepetition.id,
       subject: myRepetition.subject,
       duration: myRepetition.duration,
-      dateRepetition: myRepetition.dateRepetition ? myRepetition.dateRepetition.format(DATE_TIME_FORMAT) : null,
+      dateRepetition: myRepetition.dateRepetition ? myRepetition.dateRepetition.format(DATE_FORMAT) : null,
+      timeRepetition: myRepetition.dateRepetition ? myRepetition.dateRepetition.format(TIME_FORMAT) : null,
     });
   }
 
@@ -71,6 +74,10 @@ export class MyRepetitionUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const myRepetition = this.createFromForm();
+    myRepetition.dateRepetition = moment(myRepetition.dateRepetition).add({
+            hours: moment(myRepetition.timeRepetition).hours(),
+            minutes: moment(myRepetition.timeRepetition).minutes()
+          });
     if (myRepetition.id !== undefined) {
       this.subscribeToSaveResponse(this.myRepetitionService.update(myRepetition));
     } else {
@@ -85,8 +92,11 @@ export class MyRepetitionUpdateComponent implements OnInit {
       subject: this.editForm.get(['subject'])!.value,
       duration: this.editForm.get(['duration'])!.value,
       dateRepetition: this.editForm.get(['dateRepetition'])!.value
-        ? moment(this.editForm.get(['dateRepetition'])!.value, DATE_TIME_FORMAT)
-        : undefined
+                    ? moment(this.editForm.get(['dateRepetition'])!.value, DATE_FORMAT)
+                    : undefined,
+      timeRepetition: this.editForm.get(['timeRepetition'])!.value
+                    ? moment(this.editForm.get(['timeRepetition'])!.value, TIME_FORMAT)
+                    : undefined,
     };
   }
 

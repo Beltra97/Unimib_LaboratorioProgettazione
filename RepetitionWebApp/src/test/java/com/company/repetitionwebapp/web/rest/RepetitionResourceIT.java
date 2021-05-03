@@ -40,6 +40,9 @@ public class RepetitionResourceIT {
     private static final Instant DEFAULT_DATE_REPETITION = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_REPETITION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Integer DEFAULT_N_PARTECIPANTS = 1;
+    private static final Integer UPDATED_N_PARTECIPANTS = 2;
+
     private static final Integer DEFAULT_DURATION = 1;
     private static final Integer UPDATED_DURATION = 2;
 
@@ -74,6 +77,7 @@ public class RepetitionResourceIT {
             .topic(DEFAULT_TOPIC)
             .additionalNote(DEFAULT_ADDITIONAL_NOTE)
             .dateRepetition(DEFAULT_DATE_REPETITION)
+            .nPartecipants(DEFAULT_N_PARTECIPANTS)
             .duration(DEFAULT_DURATION)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
@@ -91,6 +95,7 @@ public class RepetitionResourceIT {
             .topic(UPDATED_TOPIC)
             .additionalNote(UPDATED_ADDITIONAL_NOTE)
             .dateRepetition(UPDATED_DATE_REPETITION)
+            .nPartecipants(UPDATED_N_PARTECIPANTS)
             .duration(UPDATED_DURATION)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
@@ -120,6 +125,7 @@ public class RepetitionResourceIT {
         assertThat(testRepetition.getTopic()).isEqualTo(DEFAULT_TOPIC);
         assertThat(testRepetition.getAdditionalNote()).isEqualTo(DEFAULT_ADDITIONAL_NOTE);
         assertThat(testRepetition.getDateRepetition()).isEqualTo(DEFAULT_DATE_REPETITION);
+        assertThat(testRepetition.getnPartecipants()).isEqualTo(DEFAULT_N_PARTECIPANTS);
         assertThat(testRepetition.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testRepetition.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
         assertThat(testRepetition.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
@@ -179,12 +185,13 @@ public class RepetitionResourceIT {
             .andExpect(jsonPath("$.[*].topic").value(hasItem(DEFAULT_TOPIC)))
             .andExpect(jsonPath("$.[*].additionalNote").value(hasItem(DEFAULT_ADDITIONAL_NOTE)))
             .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
+            .andExpect(jsonPath("$.[*].nPartecipants").value(hasItem(DEFAULT_N_PARTECIPANTS)))
             .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getRepetition() throws Exception {
@@ -199,6 +206,7 @@ public class RepetitionResourceIT {
             .andExpect(jsonPath("$.topic").value(DEFAULT_TOPIC))
             .andExpect(jsonPath("$.additionalNote").value(DEFAULT_ADDITIONAL_NOTE))
             .andExpect(jsonPath("$.dateRepetition").value(DEFAULT_DATE_REPETITION.toString()))
+            .andExpect(jsonPath("$.nPartecipants").value(DEFAULT_N_PARTECIPANTS))
             .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
             .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
@@ -228,6 +236,7 @@ public class RepetitionResourceIT {
             .topic(UPDATED_TOPIC)
             .additionalNote(UPDATED_ADDITIONAL_NOTE)
             .dateRepetition(UPDATED_DATE_REPETITION)
+            .nPartecipants(UPDATED_N_PARTECIPANTS)
             .duration(UPDATED_DURATION)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
@@ -245,6 +254,7 @@ public class RepetitionResourceIT {
         assertThat(testRepetition.getTopic()).isEqualTo(UPDATED_TOPIC);
         assertThat(testRepetition.getAdditionalNote()).isEqualTo(UPDATED_ADDITIONAL_NOTE);
         assertThat(testRepetition.getDateRepetition()).isEqualTo(UPDATED_DATE_REPETITION);
+        assertThat(testRepetition.getnPartecipants()).isEqualTo(UPDATED_N_PARTECIPANTS);
         assertThat(testRepetition.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testRepetition.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
         assertThat(testRepetition.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);

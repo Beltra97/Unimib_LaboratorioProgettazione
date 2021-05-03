@@ -17,6 +17,13 @@
       ]
     },
     {
+      "fieldName": "nPartecipants",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "duration",
       "fieldType": "Integer"
     },

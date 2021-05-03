@@ -64,7 +64,8 @@ public class RepetitionStudentService {
                         }
                     }
 
-                    if((long) students.size() < 5){
+                    if((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
+                        || (long) students.size() < repetition.getnPartecipants()){
 
                         MyRepetitionStudentRS myRepetitionRS = new MyRepetitionStudentRS(repetition);
                         myRepetitionRS.setIsFree(false);

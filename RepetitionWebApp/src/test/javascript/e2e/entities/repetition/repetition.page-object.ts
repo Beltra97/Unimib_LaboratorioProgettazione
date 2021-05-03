@@ -32,6 +32,7 @@ export class RepetitionUpdatePage {
   topicInput = element(by.id('field_topic'));
   additionalNoteInput = element(by.id('field_additionalNote'));
   dateRepetitionInput = element(by.id('field_dateRepetition'));
+  nPartecipantsInput = element(by.id('field_nPartecipants'));
   durationInput = element(by.id('field_duration'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
@@ -66,6 +67,14 @@ export class RepetitionUpdatePage {
 
   async getDateRepetitionInput(): Promise<string> {
     return await this.dateRepetitionInput.getAttribute('value');
+  }
+
+  async setNPartecipantsInput(nPartecipants: string): Promise<void> {
+    await this.nPartecipantsInput.sendKeys(nPartecipants);
+  }
+
+  async getNPartecipantsInput(): Promise<string> {
+    return await this.nPartecipantsInput.getAttribute('value');
   }
 
   async setDurationInput(duration: string): Promise<void> {

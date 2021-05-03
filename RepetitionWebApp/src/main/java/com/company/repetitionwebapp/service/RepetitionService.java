@@ -134,4 +134,14 @@ public class RepetitionService {
             }
         );
     }
+
+    public void makeRepetitionGroup(long id) {
+
+        repetitionRepository.findById(id)
+            .ifPresent(
+                repetition -> {
+                    repetition.setnPartecipants(4);
+                }
+            );
+    }
 }
