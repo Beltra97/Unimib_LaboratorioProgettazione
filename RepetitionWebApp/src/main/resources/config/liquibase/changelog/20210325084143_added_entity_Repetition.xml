@@ -25,6 +25,9 @@
             <column name="date_repetition" type="datetime">
                 <constraints nullable="false" />
             </column>
+            <column name="n_partecipants" type="integer">
+                <constraints nullable="false" />
+            </column>
             <column name="duration" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -73,6 +76,7 @@
             <column name="topic" type="string"/>
             <column name="additional_note" type="string"/>
             <column name="date_repetition" type="datetime"/>
+            <column name="n_partecipants" type="numeric"/>
             <column name="duration" type="numeric"/>
             <column name="date_created" type="datetime"/>
             <column name="date_modified" type="datetime"/>

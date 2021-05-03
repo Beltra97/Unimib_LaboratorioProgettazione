@@ -23,6 +23,7 @@ entity Repetition {
     topic String,
     additionalNote String,
     dateRepetition Instant required,
+    nPartecipants Integer required,
     duration Integer,
     dateCreated Instant, 
     dateModified Instant, 

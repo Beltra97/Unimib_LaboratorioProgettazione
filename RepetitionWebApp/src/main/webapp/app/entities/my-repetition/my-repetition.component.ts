@@ -50,4 +50,10 @@ export class MyRepetitionComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(MyRepetitionDeleteDialogComponent, { size: 'sm', backdrop: 'static' });
     modalRef.componentInstance.myRepetition = myRepetition;
   }
+
+  makeRepetitionGroup(id: number): void {
+    this.myRepetitionService.makeRepetitionGroup(id).subscribe(() => {
+      this.eventManager.broadcast('myRepetitionListModification');
+    });
+  }
 }

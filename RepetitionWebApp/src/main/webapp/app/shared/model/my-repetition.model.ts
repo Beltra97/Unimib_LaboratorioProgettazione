@@ -9,7 +9,9 @@ export interface IMyRepetition {
   additionalNote?: string;
   duration?: number,
   dateRepetition?: Moment;
+  timeRepetition?: Moment;
   students?: IStudent[];
+  nPartecipants?: number;
 }
 
 export class MyRepetition implements IMyRepetition {
@@ -20,6 +22,8 @@ export class MyRepetition implements IMyRepetition {
     public additionalNote?: string,
     public duration?: number,
     public dateRepetition?: Moment,
-    public students?: IStudent[]
+    public timeRepetition?: Moment,
+    public students?: IStudent[],
+    public nPartecipants?: number
   ) {}
 }

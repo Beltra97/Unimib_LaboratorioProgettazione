@@ -7,6 +7,7 @@ export interface IRepetition {
   topic?: string;
   additionalNote?: string;
   dateRepetition?: Moment;
+  nPartecipants?: number;
   duration?: number;
   dateCreated?: Moment;
   dateModified?: Moment;
@@ -21,6 +22,7 @@ export class Repetition implements IRepetition {
     public topic?: string,
     public additionalNote?: string,
     public dateRepetition?: Moment,
+    public nPartecipants?: number,
     public duration?: number,
     public dateCreated?: Moment,
     public dateModified?: Moment,
