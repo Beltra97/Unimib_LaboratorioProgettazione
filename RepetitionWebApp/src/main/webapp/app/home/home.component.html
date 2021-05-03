@@ -10,6 +10,11 @@
             <h1 class="display-4" jhiTranslate="home.title">Welcome to the Repetition WebApp!</h1>
             
             <div [ngSwitch]="isAuthenticated()">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <div class="alert alert-danger">
+                        <span id="home-logged-message" jhiTranslate="home.logged.admin">You are the site ADMINISTRATOR, pay attention to the changes to ensure proper functioning of the service.</span>
+                    </div>
+                </div>
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
                 </div>

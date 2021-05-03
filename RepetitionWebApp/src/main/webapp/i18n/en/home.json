@@ -2,6 +2,7 @@
   "home": {
     "title": "Welcome to the Repetition WebApp!",
     "logged": {
+      "admin": "You are the site ADMINISTRATOR, pay attention to the changes to ensure proper functioning of the service.",
       "message": "You are logged in as user \"{{username}}\"."
     },
     "functioning": "How does it work?",
