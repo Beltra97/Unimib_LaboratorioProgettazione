@@ -1,4 +1,5 @@
 <div>
+    <!--s
     <h2 id="page-heading">
         <span jhiTranslate="repetitionWebApp.myRepetition.home.title">My Repetitions</span>
         <div>
@@ -21,7 +22,7 @@
         </div>
 
     </h2>
-
+     -->
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
@@ -48,36 +49,14 @@
             </mat-card-header>
 
             <hr />
-
+           
             <mat-card-content>
 
                 <h4> {{ myRepetition.subject?.name }} </h4>
                 <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
                     [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
             </mat-card-content>
-
-            <mat-card-actions style="float:right">
-                <div>
-                    <button
-                        *ngIf="myRepetition.students && myRepetition.students.length == 1 && myRepetition.nPartecipants == 1"
-                        style="background-color:#faac3d;margin-left:100px;margin-right:50px" mat-mini-fab type="submit"
-                        (click)="makeRepetitionGroup(myRepetition?.id!)">
-                        <fa-icon icon="plus"></fa-icon>
-                    </button>
-
-                    <button *ngIf="myRepetition.students?.length === 0" style="margin-left:50px;margin-right:50px"
-                        mat-mini-fab [routerLink]="['/my-repetition', myRepetition.id, 'edit']">
-                        <fa-icon icon="pencil-alt"></fa-icon>
-                    </button>
-
-                    <button mat-mini-fab class="btn btn-danger btn-sm" style="background-color:red;" type="submit"
-                        (click)="delete(myRepetition)">
-                        <fa-icon icon="trash-alt"></fa-icon>
-                    </button>
-
-                </div>
-            </mat-card-actions>
-
+            
             <hr />
 
             <mat-card-footer style="margin-left:20px;margin-bottom:10px">
