@@ -53,7 +53,7 @@ export class MyRepetitionUpdateComponent implements OnInit {
 
       this.updateForm(myRepetition);
 
-      this.subjectService.query().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects = res.body || []));
+      this.subjectService.queryMySubjects().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects = res.body || []));
     });
   }
 
