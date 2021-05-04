@@ -67,7 +67,8 @@
       "degree.label.university": "University",
       "degree.label.master": "Master",
       "subject.label": "Subject",
-      "subject.placeholder": "Your main subject"
+      "subject.placeholder": "Your main subject",
+      "subject2.placeholder": "Other subject"
     },
     "messages": {
       "info": {
@@ -130,7 +131,7 @@
           "invalid": "Your degree is invalid."
         },
         "subject": {
-          "required": "Your subject is required.",
+          "required": "Your main subject is required.",
           "invalid": "Your subject is invalid."
         },
         "dateRepetition": {
