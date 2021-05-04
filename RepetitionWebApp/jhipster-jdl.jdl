@@ -80,3 +80,7 @@ relationship OneToMany {
 relationship OneToMany {
     Subject{topic(id)} to Topic,
 }
+
+relationship ManyToMany {
+	Tutor{subject(id)} to Subject{tutor(id)}
+}

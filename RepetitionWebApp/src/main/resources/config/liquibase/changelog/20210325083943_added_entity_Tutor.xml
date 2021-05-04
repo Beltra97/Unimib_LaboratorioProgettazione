@@ -53,6 +53,17 @@
 
     <changeSet id="20210325083943-1-relations" author="jhipster">
 
+        <createTable tableName="tutor_subject">
+            <column name="subject_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tutor_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="tutor_id, subject_id" tableName="tutor_subject"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 

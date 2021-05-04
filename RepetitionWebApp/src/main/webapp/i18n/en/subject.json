@@ -23,7 +23,8 @@
       "dateModified": "Date Modified",
       "dateDeleted": "Date Deleted",
       "repetition": "Repetition",
-      "topic": "Topic"
+      "topic": "Topic",
+      "tutor": "Tutor"
     }
   }
 }

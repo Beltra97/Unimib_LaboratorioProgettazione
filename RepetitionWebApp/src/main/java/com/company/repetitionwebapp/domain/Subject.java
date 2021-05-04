@@ -1,15 +1,14 @@
 package com.company.repetitionwebapp.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Subject.
@@ -18,7 +17,6 @@ import java.util.Set;
 @Table(name = "subject")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Subject implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -45,7 +43,7 @@ public class Subject implements Serializable {
     private Instant dateModified;
 
     @Column(name = "date_deleted")
-    private Instant dateDeleted = null;
+    private Instant dateDeleted;
 
     @OneToMany(mappedBy = "subject")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -54,6 +52,11 @@ public class Subject implements Serializable {
     @OneToMany(mappedBy = "subject")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Topic> topics = new HashSet<>();
+
+    @ManyToMany(mappedBy = "subjects")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<Tutor> tutors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -191,6 +194,32 @@ public class Subject implements Serializable {
     public void setTopics(Set<Topic> topics) {
         this.topics = topics;
     }
+
+    public Set<Tutor> getTutors() {
+        return tutors;
+    }
+
+    public Subject tutors(Set<Tutor> tutors) {
+        this.tutors = tutors;
+        return this;
+    }
+
+    public Subject addTutor(Tutor tutor) {
+        this.tutors.add(tutor);
+        tutor.getSubjects().add(this);
+        return this;
+    }
+
+    public Subject removeTutor(Tutor tutor) {
+        this.tutors.remove(tutor);
+        tutor.getSubjects().remove(this);
+        return this;
+    }
+
+    public void setTutors(Set<Tutor> tutors) {
+        this.tutors = tutors;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

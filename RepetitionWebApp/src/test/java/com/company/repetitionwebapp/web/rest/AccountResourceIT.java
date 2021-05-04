@@ -12,10 +12,10 @@ import com.company.repetitionwebapp.repository.AuthorityRepository;
 import com.company.repetitionwebapp.repository.UserRepository;
 import com.company.repetitionwebapp.security.AuthoritiesConstants;
 import com.company.repetitionwebapp.service.UserService;
+import com.company.repetitionwebapp.service.dto.ManagedUserVM;
 import com.company.repetitionwebapp.service.dto.PasswordChangeDTO;
 import com.company.repetitionwebapp.service.dto.UserDTO;
 import com.company.repetitionwebapp.web.rest.vm.KeyAndPasswordVM;
-import com.company.repetitionwebapp.service.dto.ManagedUserVM;
 import java.time.Instant;
 import java.util.*;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -122,6 +122,8 @@ public class AccountResourceIT {
         validUser.setPassword("password");
         validUser.setFirstName("Alice");
         validUser.setLastName("Test");
+        validUser.setIsStudent(true);
+        validUser.setBirthdate(Date.from(Instant.now()));
         validUser.setEmail("test-register-valid@example.com");
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -233,6 +235,8 @@ public class AccountResourceIT {
         firstUser.setPassword("password");
         firstUser.setFirstName("Alice");
         firstUser.setLastName("Something");
+        firstUser.setIsStudent(true);
+        firstUser.setBirthdate(Date.from(Instant.now()));
         firstUser.setEmail("alice@example.com");
         firstUser.setImageUrl("http://placehold.it/50x50");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -245,6 +249,8 @@ public class AccountResourceIT {
         secondUser.setPassword(firstUser.getPassword());
         secondUser.setFirstName(firstUser.getFirstName());
         secondUser.setLastName(firstUser.getLastName());
+        secondUser.setBirthdate(firstUser.getBirthdate());
+        secondUser.setIsStudent(firstUser.getIsStudent());
         secondUser.setEmail("alice2@example.com");
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
@@ -285,6 +291,8 @@ public class AccountResourceIT {
         firstUser.setPassword("password");
         firstUser.setFirstName("Alice");
         firstUser.setLastName("Test");
+        firstUser.setIsStudent(true);
+        firstUser.setBirthdate(Date.from(Instant.now()));
         firstUser.setEmail("test-register-duplicate-email@example.com");
         firstUser.setImageUrl("http://placehold.it/50x50");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -305,6 +313,8 @@ public class AccountResourceIT {
         secondUser.setPassword(firstUser.getPassword());
         secondUser.setFirstName(firstUser.getFirstName());
         secondUser.setLastName(firstUser.getLastName());
+        secondUser.setIsStudent(firstUser.getIsStudent());
+        secondUser.setBirthdate(firstUser.getBirthdate());
         secondUser.setEmail(firstUser.getEmail());
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
@@ -329,6 +339,8 @@ public class AccountResourceIT {
         userWithUpperCaseEmail.setPassword(firstUser.getPassword());
         userWithUpperCaseEmail.setFirstName(firstUser.getFirstName());
         userWithUpperCaseEmail.setLastName(firstUser.getLastName());
+        userWithUpperCaseEmail.setBirthdate(firstUser.getBirthdate());
+        userWithUpperCaseEmail.setIsStudent(firstUser.getIsStudent());
         userWithUpperCaseEmail.setEmail("TEST-register-duplicate-email@example.com");
         userWithUpperCaseEmail.setImageUrl(firstUser.getImageUrl());
         userWithUpperCaseEmail.setLangKey(firstUser.getLangKey());
@@ -366,6 +378,8 @@ public class AccountResourceIT {
         validUser.setFirstName("Bad");
         validUser.setLastName("Guy");
         validUser.setEmail("badguy@example.com");
+        validUser.setIsStudent(true);
+        validUser.setBirthdate(Date.from(Instant.now()));
         validUser.setActivated(true);
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -378,8 +392,7 @@ public class AccountResourceIT {
 
         Optional<User> userDup = userRepository.findOneWithAuthoritiesByLogin("badguy");
         assertThat(userDup.isPresent()).isTrue();
-        assertThat(userDup.get().getAuthorities())
-            .hasSizeGreaterThan(1);
+        assertThat(userDup.get().getAuthorities()).hasSizeGreaterThan(1);
     }
 
     @Test

@@ -1,36 +1,42 @@
 package com.company.repetitionwebapp.web.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.company.repetitionwebapp.RepetitionWebApp;
 import com.company.repetitionwebapp.domain.Tutor;
 import com.company.repetitionwebapp.repository.TutorRepository;
-
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link TutorResource} REST controller.
  */
 @SpringBootTest(classes = RepetitionWebApp.class)
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class TutorResourceIT {
-
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -58,6 +64,9 @@ public class TutorResourceIT {
     @Autowired
     private TutorRepository tutorRepository;
 
+    @Mock
+    private TutorRepository tutorRepositoryMock;
+
     @Autowired
     private EntityManager em;
 
@@ -84,6 +93,7 @@ public class TutorResourceIT {
             .dateDeleted(DEFAULT_DATE_DELETED);
         return tutor;
     }
+
     /**
      * Create an updated entity for this test.
      *
@@ -113,9 +123,8 @@ public class TutorResourceIT {
     public void createTutor() throws Exception {
         int databaseSizeBeforeCreate = tutorRepository.findAll().size();
         // Create the Tutor
-        restTutorMockMvc.perform(post("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(tutor)))
+        restTutorMockMvc
+            .perform(post("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tutor)))
             .andExpect(status().isCreated());
 
         // Validate the Tutor in the database
@@ -141,16 +150,14 @@ public class TutorResourceIT {
         tutor.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restTutorMockMvc.perform(post("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(tutor)))
+        restTutorMockMvc
+            .perform(post("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tutor)))
             .andExpect(status().isBadRequest());
 
         // Validate the Tutor in the database
         List<Tutor> tutorList = tutorRepository.findAll();
         assertThat(tutorList).hasSize(databaseSizeBeforeCreate);
     }
-
 
     @Test
     @Transactional
@@ -161,10 +168,8 @@ public class TutorResourceIT {
 
         // Create the Tutor, which fails.
 
-
-        restTutorMockMvc.perform(post("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(tutor)))
+        restTutorMockMvc
+            .perform(post("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tutor)))
             .andExpect(status().isBadRequest());
 
         List<Tutor> tutorList = tutorRepository.findAll();
@@ -180,10 +185,8 @@ public class TutorResourceIT {
 
         // Create the Tutor, which fails.
 
-
-        restTutorMockMvc.perform(post("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(tutor)))
+        restTutorMockMvc
+            .perform(post("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tutor)))
             .andExpect(status().isBadRequest());
 
         List<Tutor> tutorList = tutorRepository.findAll();
@@ -199,10 +202,8 @@ public class TutorResourceIT {
 
         // Create the Tutor, which fails.
 
-
-        restTutorMockMvc.perform(post("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(tutor)))
+        restTutorMockMvc
+            .perform(post("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tutor)))
             .andExpect(status().isBadRequest());
 
         List<Tutor> tutorList = tutorRepository.findAll();
@@ -216,7 +217,8 @@ public class TutorResourceIT {
         tutorRepository.saveAndFlush(tutor);
 
         // Get all the tutorList
-        restTutorMockMvc.perform(get("/api/tutors?sort=id,desc"))
+        restTutorMockMvc
+            .perform(get("/api/tutors?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tutor.getId().intValue())))
@@ -229,7 +231,25 @@ public class TutorResourceIT {
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
     }
-    
+
+    @SuppressWarnings({ "unchecked" })
+    public void getAllTutorsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(tutorRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restTutorMockMvc.perform(get("/api/tutors?eagerload=true")).andExpect(status().isOk());
+
+        verify(tutorRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    public void getAllTutorsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(tutorRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restTutorMockMvc.perform(get("/api/tutors?eagerload=true")).andExpect(status().isOk());
+
+        verify(tutorRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getTutor() throws Exception {
@@ -237,7 +257,8 @@ public class TutorResourceIT {
         tutorRepository.saveAndFlush(tutor);
 
         // Get the tutor
-        restTutorMockMvc.perform(get("/api/tutors/{id}", tutor.getId()))
+        restTutorMockMvc
+            .perform(get("/api/tutors/{id}", tutor.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tutor.getId().intValue()))
@@ -250,12 +271,12 @@ public class TutorResourceIT {
             .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
             .andExpect(jsonPath("$.dateDeleted").value(DEFAULT_DATE_DELETED.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingTutor() throws Exception {
         // Get the tutor
-        restTutorMockMvc.perform(get("/api/tutors/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+        restTutorMockMvc.perform(get("/api/tutors/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -280,9 +301,8 @@ public class TutorResourceIT {
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
 
-        restTutorMockMvc.perform(put("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedTutor)))
+        restTutorMockMvc
+            .perform(put("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(updatedTutor)))
             .andExpect(status().isOk());
 
         // Validate the Tutor in the database
@@ -305,9 +325,8 @@ public class TutorResourceIT {
         int databaseSizeBeforeUpdate = tutorRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restTutorMockMvc.perform(put("/api/tutors")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(tutor)))
+        restTutorMockMvc
+            .perform(put("/api/tutors").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tutor)))
             .andExpect(status().isBadRequest());
 
         // Validate the Tutor in the database
@@ -324,8 +343,8 @@ public class TutorResourceIT {
         int databaseSizeBeforeDelete = tutorRepository.findAll().size();
 
         // Delete the tutor
-        restTutorMockMvc.perform(delete("/api/tutors/{id}", tutor.getId())
-            .accept(MediaType.APPLICATION_JSON))
+        restTutorMockMvc
+            .perform(delete("/api/tutors/{id}", tutor.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

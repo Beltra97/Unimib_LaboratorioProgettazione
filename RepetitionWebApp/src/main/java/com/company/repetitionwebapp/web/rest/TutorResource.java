@@ -3,21 +3,19 @@ package com.company.repetitionwebapp.web.rest;
 import com.company.repetitionwebapp.domain.Tutor;
 import com.company.repetitionwebapp.repository.TutorRepository;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.Tutor}.
@@ -26,7 +24,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class TutorResource {
-
     private final Logger log = LoggerFactory.getLogger(TutorResource.class);
 
     private static final String ENTITY_NAME = "tutor";
@@ -54,7 +51,8 @@ public class TutorResource {
             throw new BadRequestAlertException("A new tutor cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Tutor result = tutorRepository.save(tutor);
-        return ResponseEntity.created(new URI("/api/tutors/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/tutors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -75,7 +73,8 @@ public class TutorResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Tutor result = tutorRepository.save(tutor);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, tutor.getId().toString()))
             .body(result);
     }
@@ -83,12 +82,13 @@ public class TutorResource {
     /**
      * {@code GET  /tutors} : get all the tutors.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of tutors in body.
      */
     @GetMapping("/tutors")
-    public List<Tutor> getAllTutors() {
+    public List<Tutor> getAllTutors(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Tutors");
-        return tutorRepository.findAll();
+        return tutorRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -100,7 +100,7 @@ public class TutorResource {
     @GetMapping("/tutors/{id}")
     public ResponseEntity<Tutor> getTutor(@PathVariable Long id) {
         log.debug("REST request to get Tutor : {}", id);
-        Optional<Tutor> tutor = tutorRepository.findById(id);
+        Optional<Tutor> tutor = tutorRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(tutor);
     }
 
@@ -114,6 +114,9 @@ public class TutorResource {
     public ResponseEntity<Void> deleteTutor(@PathVariable Long id) {
         log.debug("REST request to delete Tutor : {}", id);
         tutorRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

@@ -49,7 +49,8 @@ describe('Tutor e2e test', () => {
       tutorUpdatePage.setDateCreatedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       tutorUpdatePage.setDateModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       tutorUpdatePage.setDateDeletedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      tutorUpdatePage.userSelectFirstOption(),
+      tutorUpdatePage.userSelectLastOption(),
+      // tutorUpdatePage.subjectSelectLastOption(),
     ]);
 
     expect(await tutorUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');

@@ -39,6 +39,7 @@ export class TutorUpdatePage {
   dateDeletedInput = element(by.id('field_dateDeleted'));
 
   userSelect = element(by.id('field_user'));
+  subjectSelect = element(by.id('field_subject'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -108,8 +109,8 @@ export class TutorUpdatePage {
     return await this.dateDeletedInput.getAttribute('value');
   }
 
-  async userSelectFirstOption(): Promise<void> {
-    await this.userSelect.all(by.tagName('option')).first().click();
+  async userSelectLastOption(): Promise<void> {
+    await this.userSelect.all(by.tagName('option')).last().click();
   }
 
   async userSelectOption(option: string): Promise<void> {
@@ -122,6 +123,22 @@ export class TutorUpdatePage {
 
   async getUserSelectedOption(): Promise<string> {
     return await this.userSelect.element(by.css('option:checked')).getText();
+  }
+
+  async subjectSelectLastOption(): Promise<void> {
+    await this.subjectSelect.all(by.tagName('option')).last().click();
+  }
+
+  async subjectSelectOption(option: string): Promise<void> {
+    await this.subjectSelect.sendKeys(option);
+  }
+
+  getSubjectSelect(): ElementFinder {
+    return this.subjectSelect;
+  }
+
+  async getSubjectSelectedOption(): Promise<string> {
+    return await this.subjectSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

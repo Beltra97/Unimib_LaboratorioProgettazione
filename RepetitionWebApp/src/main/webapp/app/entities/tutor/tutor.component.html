@@ -32,6 +32,7 @@
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.dateModified">Date Modified</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.dateDeleted">Date Deleted</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.user">User</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -48,6 +49,11 @@
                     <td>{{ tutor.dateDeleted | date:'medium' }}</td>
                     <td>
                         {{ tutor.user?.id }}
+                    </td>
+                    <td>
+                        <span *ngFor="let subject of tutor.subjects; let last = last">
+                            <a class="form-control-static" [routerLink]="['/subject', subject?.id, 'view']">{{ subject.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

@@ -44,6 +44,12 @@
                 <dd>
                     {{ tutor.user?.id }}
                 </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></dt>
+                <dd>
+                    <span *ngFor="let subject of tutor.subjects; let last = last">
+                        <a [routerLink]="['/subject', subject?.id, 'view']">{{ subject.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"
