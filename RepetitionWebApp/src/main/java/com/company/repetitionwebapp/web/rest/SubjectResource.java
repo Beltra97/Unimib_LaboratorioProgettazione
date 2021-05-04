@@ -2,6 +2,7 @@ package com.company.repetitionwebapp.web.rest;
 
 import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.repository.SubjectRepository;
+import com.company.repetitionwebapp.service.SubjectService;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -35,9 +36,11 @@ public class SubjectResource {
     private String applicationName;
 
     private final SubjectRepository subjectRepository;
+    private final SubjectService subjectService;
 
-    public SubjectResource(SubjectRepository subjectRepository) {
+    public SubjectResource(SubjectRepository subjectRepository, SubjectService subjectService) {
         this.subjectRepository = subjectRepository;
+        this.subjectService = subjectService;
     }
 
     /**
@@ -89,6 +92,17 @@ public class SubjectResource {
     public List<Subject> getAllSubjects() {
         log.debug("REST request to get all Subjects");
         return subjectRepository.findAll();
+    }
+
+    /**
+     * {@code GET  /my-subjects} : get my subjects.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of subjects in body.
+     */
+    @GetMapping("/my-subjects")
+    public List<Subject> getMySubjects() {
+        log.debug("REST request to get all Subjects");
+        return subjectService.getMySubjects();
     }
 
     /**

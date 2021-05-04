@@ -14,6 +14,7 @@ type EntityArrayResponseType = HttpResponse<ISubject[]>;
 @Injectable({ providedIn: 'root' })
 export class SubjectService {
   public resourceUrl = SERVER_API_URL + 'api/subjects';
+  public mySubjectsResourceUrl = SERVER_API_URL + 'api/my-subjects';
 
   constructor(protected http: HttpClient) {}
 
@@ -41,6 +42,13 @@ export class SubjectService {
     const options = createRequestOption(req);
     return this.http
       .get<ISubject[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  queryMySubjects(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<ISubject[]>(this.mySubjectsResourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
