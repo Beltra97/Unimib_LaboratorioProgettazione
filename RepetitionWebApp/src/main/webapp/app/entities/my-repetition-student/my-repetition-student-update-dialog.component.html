@@ -1,39 +1,61 @@
 <div *ngIf="myRepetitionStudent" style="padding:20px;">
-    <h4 mat-dialog-title jhiTranslate="repetitionWebApp.myRepetitionStudent.book.title">Book repetition</h4>
-    <div mat-dialog-content>
-        <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.question">
-            Are you sure you want to book this Repetition ?
-        </p>
+
+    <div *ngIf="step == 1">
+
+        <h4 mat-dialog-title jhiTranslate="repetitionWebApp.myRepetitionStudent.book.title">Book repetition</h4>
+        <div mat-dialog-content>
+            <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.question">
+                Are you sure you want to book this Repetition ?
+            </p>
+
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let topic of myTopics" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(topic)">
+                    {{ topic }}
+                    <fa-icon matChipRemove *ngIf="removable" icon="times"></fa-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
+                    {{ topic }}
+                </mat-option>
+            </mat-autocomplete>
+            <input
+                style="width:100%"
+                placeholder="New topic ..." #topicInput  [formControl]="topicCtrl"
+                [matAutocomplete]="auto"  [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+        </div>
+
+        <div style="margin-top:50px" *ngIf="myRepetitionStudent" class="form-group">
+            <label class="form-control-label" jhiTranslate="repetitionWebApp.myRepetitionStudent.additionalNote">Additional notes</label>
+            <input type="text" class="form-control" [(ngModel)]="additionalNote"/>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button style="float:left" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
+            <button *ngIf="myRepetitionStudent" mat-button id="jhi-confirm-delete-myRepetitionStudent" cdkFocusInitial style="float:right" class="btn btn-primary"
+                    [disabled]="myTopics.length == 0" (click)="confirmBook(myRepetitionStudent)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">Book</button>
+        </div>
+    </div>
+
+    <div *ngIf="step == 2">
+        <h5> {{ myRepetitionStudent.tutor?.surname }} {{ myRepetitionStudent.tutor?.name }}</h5>
+        <h5> {{ myRepetitionStudent.dateRepetition | date:'medium' }} </h5>
+        <h5> {{ myRepetitionStudent.duration }} minutes </h5>
+        <h4> {{ myRepetitionStudent.subject?.name }} </h4>
 
         <mat-chip-list #chipList>
-            <mat-chip *ngFor="let topic of myTopics" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(topic)">
+            <mat-chip *ngFor="let topic of myTopics">
                 {{ topic }}
-                <fa-icon matChipRemove *ngIf="removable" icon="times"></fa-icon>
             </mat-chip>
         </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-            <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
-                {{ topic }}
-            </mat-option>
-        </mat-autocomplete>
-        <input
-            style="width:100%"
-            placeholder="New topic ..." #topicInput  [formControl]="topicCtrl"
-            [matAutocomplete]="auto"  [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)">
+
+        <hr/>
+        <br/>
+
+        <ngx-paypal style="margin-top:50px" [config]="payPalConfig"></ngx-paypal>
     </div>
 
-    <div style="margin-top:50px" *ngIf="myRepetitionStudent" class="form-group">
-        <label class="form-control-label" jhiTranslate="repetitionWebApp.myRepetitionStudent.additionalNote">Additional notes</label>
-        <input type="text" class="form-control" [(ngModel)]="additionalNote"/>
-    </div>
-
-
-    <div mat-dialog-actions>
-        <button mat-button style="float:left" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
-        <button *ngIf="myRepetitionStudent" mat-button id="jhi-confirm-delete-myRepetitionStudent" cdkFocusInitial style="float:right" class="btn btn-primary"
-                [disabled]="myTopics.length == 0" (click)="confirmBook(myRepetitionStudent)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">Book</button>
-    </div>
 </div>
