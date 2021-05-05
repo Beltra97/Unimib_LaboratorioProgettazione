@@ -88,6 +88,46 @@ public class RepetitionStudentService {
         return myRepetitions;
     }
 
+    public List<HistoryRepetitionStudentRS> getHistoryRepetitions() {
+
+        List<HistoryRepetitionStudentRS> historyRepetitions = new ArrayList<HistoryRepetitionStudentRS>();
+
+        Student student = studentService.getStudentByUser();
+
+        if(student != null) {
+            repetitionRepository.findAll().stream().filter(r -> r.getDateDeleted() == null).forEach(
+                repetition -> {
+
+                    List<RepetitionStudent> students = new ArrayList<RepetitionStudent>();
+                    for(RepetitionStudent s : repetitionStudentRepository.findAll()){
+                        if(s.getRepetition() != null && s.getRepetition().getId().equals(repetition.getId()) && s.getDateDeleted() == null){
+                            students.add(s);
+                        }
+                    }
+
+                    if((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
+                        || (long) students.size() < repetition.getnPartecipants()){
+
+                        HistoryRepetitionStudentRS historyRepetitionRS = new HistoryRepetitionStudentRS(repetition);
+                        historyRepetitionRS.setIsFree(false);
+                        historyRepetitionRS.setIsAlreadyBooked(false);
+
+                        if(students.stream().anyMatch(s ->
+                            s.getStudent() != null && s.getStudent().getId().equals(student.getId()))) {
+                            historyRepetitionRS.setIsAlreadyBooked(true);
+                        }
+                        else if((long) students.size() == 0){
+                            historyRepetitionRS.setIsFree(true);
+                        }
+
+                        historyRepetitions.add(historyRepetitionRS);
+                    }
+                }
+            );
+        }
+        return historyRepetitions;
+    }
+
     public RepetitionStudent bookRepetition(RepetitionStudentDTO repetitionStudentDTO) {
 
         RepetitionStudent newRepetitionStudent = null;
