@@ -37,6 +37,11 @@ import { RouterModule } from '@angular/router';
         path: 'topic',
         loadChildren: () => import('./topic/topic.module').then(m => m.RepetitionWebAppTopicModule),
       },
+      {
+        path: 'history-repetition-student',
+        loadChildren: () =>
+          import('./history-repetition-student/history-repetition-student.module').then(m => m.RepetitionWebAppHistoryRepetitionStudentModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

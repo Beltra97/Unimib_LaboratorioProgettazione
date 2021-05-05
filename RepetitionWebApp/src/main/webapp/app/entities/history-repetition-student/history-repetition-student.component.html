@@ -1,0 +1,48 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="repetitionWebApp.historyRepetitionStudent.home.title">History Repetitions</span>
+
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="historyRepetitionStudents?.length === 0">
+        <span jhiTranslate="repetitionWebApp.historyRepetition.home.notFound">No historyRepetitions found</span>
+    </div>
+
+    <div id="entities" *ngIf="historyRepetitionStudents && historyRepetitionStudents.length > 0">
+
+        <mat-card class="alert alert-warning" *ngFor="let historyRepetition of historyRepetitionStudents">
+
+            <!--<img mat-card-lg-image style="float:right" src="{{historyRepetition.subject?.imageUrl}}">-->
+
+            <mat-card-header>
+                <mat-card-title >
+                    <h5> {{ historyRepetition.tutor?.surname }} {{ historyRepetition.tutor?.name }}</h5>
+                    <h5> {{ historyRepetition.dateRepetition | date:'medium' }} </h5>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <h6 jhiTranslate="repetitionWebApp.historyRepetitionStudent.duration"
+                        [translateValues]="{ param: historyRepetition.duration }">Duration: {{ historyRepetition.duration }} minutes </h6>
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <hr/>
+
+            <mat-card-content>
+
+                <h4> {{ historyRepetition.subject?.name }} </h4>
+                <h6 *ngIf="historyRepetition?.topic" jhiTranslate="repetitionWebApp.historyRepetitionStudent.topic"
+                    [translateValues]="{ param: historyRepetition.topic }">Topic: {{ historyRepetition.topic }}</h6>
+
+                <h6 *ngIf="historyRepetition?.additionalNote" jhiTranslate="repetitionWebApp.historyRepetitionStudent.additionalNote"
+                    [translateValues]="{ param: historyRepetition.additionalNote }">Additional Note: {{ historyRepetition.additionalNote }}</h6>
+            </mat-card-content>
+
+            <hr />
+
+        </mat-card>
+    </div>
+</div>

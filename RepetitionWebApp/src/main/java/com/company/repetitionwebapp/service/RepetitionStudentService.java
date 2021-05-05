@@ -5,6 +5,7 @@ import com.company.repetitionwebapp.repository.RepetitionRepository;
 import com.company.repetitionwebapp.repository.RepetitionStudentRepository;
 import com.company.repetitionwebapp.service.dto.MyRepetitionRS;
 import com.company.repetitionwebapp.service.dto.MyRepetitionStudentRS;
+import com.company.repetitionwebapp.service.dto.HistoryRepetitionStudentRS;
 import com.company.repetitionwebapp.service.dto.RepetitionStudentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
