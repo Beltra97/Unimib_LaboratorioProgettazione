@@ -42,21 +42,28 @@
                     <h5> {{ myRepetition.dateRepetition | date:'medium' }} </h5>
                 </mat-card-title>
                 <mat-card-subtitle>
-                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
-                        [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }}
-                        minutes </h6>
+                    <div>
+                        <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
+                            [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }}
+                            minutes </h6>
+                    </div>
+                    <div>
+                        <h4> {{ myRepetition.subject?.name }} </h4>
+                        <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
+                            [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+                    </div>
                 </mat-card-subtitle>
             </mat-card-header>
-
+            <!--
             <hr />
-           
+
             <mat-card-content>
 
                 <h4> {{ myRepetition.subject?.name }} </h4>
                 <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
                     [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
             </mat-card-content>
-            
+            -->
             <hr />
 
             <mat-card-footer style="margin-left:20px;margin-bottom:10px">
