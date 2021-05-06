@@ -9,8 +9,10 @@ import { Account } from 'app/core/user/account.model';
 import { faSchool, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IRepetition } from 'app/shared/model/repetition.model';
-import { RepetitionService } from '../entities/repetition/repetition.service';
+import { IMyRepetitionStudent } from 'app/shared/model/my-repetition-student.model';
+import { MyRepetitionStudentService } from 'app/entities/my-repetition-student/my-repetition-student.service';
+//import { IRepetition } from 'app/shared/model/repetition.model';
+//import { RepetitionService } from '../entities/repetition/repetition.service';
 
 import { IMyRepetition } from 'app/shared/model/my-repetition.model';
 import { MyRepetitionService } from '../entities/my-repetition/my-repetition.service';
@@ -31,13 +33,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   dataStudentLoaded = false;
   dataTutorLoaded = false;
-  repetitionsStudent?: IRepetition[];
+  repetitionsStudent?: IMyRepetitionStudent[];
   repetitionsTutor?: IMyRepetition[];
 
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
-    private repetitionStudentService: RepetitionService,
+    private repetitionStudentService: MyRepetitionStudentService,
     private repetitionTutorService: MyRepetitionService,
     private modalService: NgbModal
   ) {}
@@ -52,7 +54,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadStudentData(): void {
     if (!this.dataStudentLoaded) {
-      this.repetitionStudentService.query().subscribe((res: HttpResponse<IRepetition[]>) => (this.repetitionsStudent = res.body || []));
+      this.repetitionStudentService
+        .query()
+        .subscribe((res: HttpResponse<IMyRepetitionStudent[]>) => (this.repetitionsStudent = res.body || []));
       this.dataStudentLoaded = true;
     }
   }
@@ -80,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.dataTutorLoaded = false;
   }
 
-  openDialog(repetition: IRepetition): void {
+  openDialog(repetition: IMyRepetitionStudent): void {
     const modalRef = this.modalService.open(NgbdModalContentComponent);
     modalRef.componentInstance.repetition = repetition;
   }
