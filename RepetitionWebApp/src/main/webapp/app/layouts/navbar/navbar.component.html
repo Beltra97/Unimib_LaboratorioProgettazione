@@ -72,6 +72,12 @@
                     <span jhiTranslate="global.menu.entities.myRepetition">My Repetition</span>
                 </a>
             </li>
+            <li *jhiHasAnyAuthority="'ROLE_TUTOR'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" [routerLink]="['/my-repetition/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon icon="history" [fixedWidth]="true"></fa-icon>
+                    <span jhiTranslate="global.menu.entities.repetitionsHistory">My History</span>
+                </a>
+            </li>
             <li *jhiHasAnyAuthority="'ROLE_STUDENT'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="my-repetition-student" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
