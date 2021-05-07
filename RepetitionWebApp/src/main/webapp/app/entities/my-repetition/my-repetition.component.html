@@ -1,24 +1,14 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="repetitionWebApp.myRepetition.home.title">My Repetitions</span>
-        <div>
-            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-repetition"
-                [routerLink]="['/my-repetition/new']">
-                <fa-icon icon="plus"></fa-icon>
-                <span jhiTranslate="repetitionWebApp.myRepetition.home.createLabel">
-                    Create a new My Repetition
-                </span>
-            </button>
-        </div>
-        <div>
-            <button id="jh-create-entity" class="btn btn-primary float-center jh-create-entity history-repetition"
-                [routerLink]="['/my-repetition/history']">
-                <fa-icon icon="plus"></fa-icon>
-                <span jhiTranslate="repetitionWebApp.myRepetition.home.historyLabel">
-                    Repetition History
-                </span>
-            </button>
-        </div>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-repetition"
+            [routerLink]="['/my-repetition/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="repetitionWebApp.myRepetition.home.createLabel">
+                Create a new My Repetition
+            </span>
+        </button>
 
     </h2>
 

@@ -6,7 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IMyRepetition } from 'app/shared/model/my-repetition.model';
 import { MyRepetitionService } from './my-repetition.service';
-import { MyRepetitionDeleteDialogComponent } from './my-repetition-delete-dialog.component';
+// import { MyRepetitionDeleteDialogComponent } from './my-repetition-delete-dialog.component';
+// import * as moment from 'moment';
 
 @Component({
   selector: 'jhi-my-repetition-history',
@@ -15,6 +16,7 @@ import { MyRepetitionDeleteDialogComponent } from './my-repetition-delete-dialog
 export class MyRepetitionHistoryComponent implements OnInit, OnDestroy {
   myRepetitions?: IMyRepetition[];
   eventSubscriber?: Subscription;
+  // today: moment.Moment = moment();
 
   constructor(
     protected myRepetitionService: MyRepetitionService,
@@ -23,11 +25,13 @@ export class MyRepetitionHistoryComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll(): void {
-    this.myRepetitionService.query().subscribe((res: HttpResponse<IMyRepetition[]>) => (this.myRepetitions = res.body || []));
+    this.myRepetitionService.history().subscribe((res: HttpResponse<IMyRepetition[]>) => (this.myRepetitions = res.body || []));
+    // this.myRepetitions = this.myRepetitions?.filter(element => (element.dateRepetition !< this.today));
   }
 
   ngOnInit(): void {
     this.loadAll();
+    // this.today = moment();
   }
 
   ngOnDestroy(): void {
