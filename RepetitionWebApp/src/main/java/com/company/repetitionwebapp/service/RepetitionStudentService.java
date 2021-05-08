@@ -13,7 +13,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +33,8 @@ public class RepetitionStudentService {
     private final MailService mailService;
 
     private final CacheManager cacheManager;
+
+    Clock cl = Clock.systemUTC();
 
     public RepetitionStudentService(
         RepetitionRepository repetitionRepository,
@@ -65,8 +67,8 @@ public class RepetitionStudentService {
                         }
                     }
 
-                    if((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
-                        || (long) students.size() < repetition.getnPartecipants()){
+                    if(((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
+                        || (long) students.size() < repetition.getnPartecipants()) && (Instant.now(cl).isBefore(repetition.getDateRepetition()))){
 
                         MyRepetitionStudentRS myRepetitionRS = new MyRepetitionStudentRS(repetition);
                         myRepetitionRS.setIsFree(false);
@@ -93,38 +95,20 @@ public class RepetitionStudentService {
         List<HistoryRepetitionStudentRS> historyRepetitions = new ArrayList<HistoryRepetitionStudentRS>();
 
         Student student = studentService.getStudentByUser();
-
-        if(student != null) {
-            repetitionRepository.findAll().stream().filter(r -> r.getDateDeleted() == null).forEach(
-                repetition -> {
-
-                    List<RepetitionStudent> students = new ArrayList<RepetitionStudent>();
-                    for(RepetitionStudent s : repetitionStudentRepository.findAll()){
-                        if(s.getRepetition() != null && s.getRepetition().getId().equals(repetition.getId()) && s.getDateDeleted() == null){
-                            students.add(s);
+               
+        for(RepetitionStudent s : repetitionStudentRepository.findAll()){
+            if(student != null) {
+                repetitionRepository.findAll().stream().filter(r ->
+                    s.getRepetition().getId().equals(r.getId()) && s.getStudent().getId().equals(student.getId()) && r.getDateDeleted() == null).forEach(
+                    repetition -> {
+                        if(Instant.now(cl).isAfter(repetition.getDateRepetition())){
+                            HistoryRepetitionStudentRS historyRepetitionRS = new HistoryRepetitionStudentRS(repetition);
+                            historyRepetitions.add(historyRepetitionRS);
                         }
                     }
-
-                    if((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
-                        || (long) students.size() < repetition.getnPartecipants()){
-
-                        HistoryRepetitionStudentRS historyRepetitionRS = new HistoryRepetitionStudentRS(repetition);
-                        historyRepetitionRS.setIsFree(false);
-                        historyRepetitionRS.setIsAlreadyBooked(false);
-
-                        if(students.stream().anyMatch(s ->
-                            s.getStudent() != null && s.getStudent().getId().equals(student.getId()))) {
-                            historyRepetitionRS.setIsAlreadyBooked(true);
-                        }
-                        else if((long) students.size() == 0){
-                            historyRepetitionRS.setIsFree(true);
-                        }
-
-                        historyRepetitions.add(historyRepetitionRS);
-                    }
-                }
-            );
-        }
+                );
+            }
+        } 
         return historyRepetitions;
     }
 
