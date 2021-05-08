@@ -5,6 +5,7 @@ import com.company.repetitionwebapp.repository.RepetitionRepository;
 import com.company.repetitionwebapp.repository.RepetitionStudentRepository;
 import com.company.repetitionwebapp.service.dto.MyRepetitionRS;
 import com.company.repetitionwebapp.service.dto.MyRepetitionStudentRS;
+import com.company.repetitionwebapp.service.dto.HistoryRepetitionStudentRS;
 import com.company.repetitionwebapp.service.dto.RepetitionStudentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,8 @@ public class RepetitionStudentService {
     private final MailService mailService;
 
     private final CacheManager cacheManager;
+
+    Clock cl = Clock.systemUTC();
 
     public RepetitionStudentService(
         RepetitionRepository repetitionRepository,
@@ -64,8 +67,8 @@ public class RepetitionStudentService {
                         }
                     }
 
-                    if((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
-                        || (long) students.size() < repetition.getnPartecipants()){
+                    if(((students.stream().filter(s -> s.getStudent().equals(student)).count() == 1)
+                        || (long) students.size() < repetition.getnPartecipants()) && (Instant.now(cl).isBefore(repetition.getDateRepetition()))){
 
                         MyRepetitionStudentRS myRepetitionRS = new MyRepetitionStudentRS(repetition);
                         myRepetitionRS.setIsFree(false);
@@ -85,6 +88,28 @@ public class RepetitionStudentService {
             );
         }
         return myRepetitions;
+    }
+
+    public List<HistoryRepetitionStudentRS> getHistoryRepetitions() {
+
+        List<HistoryRepetitionStudentRS> historyRepetitions = new ArrayList<HistoryRepetitionStudentRS>();
+
+        Student student = studentService.getStudentByUser();
+               
+        for(RepetitionStudent s : repetitionStudentRepository.findAll()){
+            if(student != null) {
+                repetitionRepository.findAll().stream().filter(r ->
+                    s.getRepetition().getId().equals(r.getId()) && s.getStudent().getId().equals(student.getId()) && r.getDateDeleted() == null).forEach(
+                    repetition -> {
+                        if(Instant.now(cl).isAfter(repetition.getDateRepetition())){
+                            HistoryRepetitionStudentRS historyRepetitionRS = new HistoryRepetitionStudentRS(repetition);
+                            historyRepetitions.add(historyRepetitionRS);
+                        }
+                    }
+                );
+            }
+        } 
+        return historyRepetitions;
     }
 
     public RepetitionStudent bookRepetition(RepetitionStudentDTO repetitionStudentDTO) {

@@ -14,6 +14,7 @@
         "myRepetition": "My Repetition",
         "subject": "Subject",
         "myRepetitionStudent": "My Repetition Student",
+        "historyRepetitionStudent": "History Repetition Student",
         "topic": "Topic",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
