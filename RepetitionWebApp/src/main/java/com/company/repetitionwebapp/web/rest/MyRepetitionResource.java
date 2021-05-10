@@ -8,6 +8,11 @@ import com.company.repetitionwebapp.service.dto.RepetitionDTO;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,12 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-
 /**
  * REST controller for managing {@link Repetition}.
  */
@@ -29,7 +28,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class MyRepetitionResource {
-
     private final Logger log = LoggerFactory.getLogger(MyRepetitionResource.class);
 
     private static final String ENTITY_NAME = "repetition";
@@ -59,7 +57,8 @@ public class MyRepetitionResource {
             throw new BadRequestAlertException("A new repetition cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Repetition result = repetitionService.postRepetition(repetition);
-        return ResponseEntity.created(new URI("/api/my-repetitions/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/my-repetitions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -80,7 +79,8 @@ public class MyRepetitionResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Repetition result = repetitionService.updateRepetition(repetition);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, repetition.getId().toString()))
             .body(result);
     }
@@ -94,6 +94,12 @@ public class MyRepetitionResource {
     public List<MyRepetitionRS> getAllRepetitions() {
         log.debug("REST request to get all Repetitions");
         return repetitionService.getMyRepetitions();
+    }
+
+    @GetMapping("/my-repetitions-history")
+    public List<MyRepetitionRS> getHistory() {
+        log.debug("REST request to get the history");
+        return repetitionService.getMyRepetitionsHistory();
     }
 
     /**
@@ -119,7 +125,10 @@ public class MyRepetitionResource {
     public ResponseEntity<Void> deleteRepetition(@PathVariable Long id) {
         log.debug("REST request to delete Repetition : {}", id);
         repetitionService.setDateDeleted(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 
     /**
@@ -136,7 +145,9 @@ public class MyRepetitionResource {
     }
 
     public static HttpHeaders madeRepetitionGroupAlert(String applicationName, boolean enableTranslation, String entityName, String param) {
-        String message = enableTranslation ? applicationName + "." + entityName + ".madeRepetitionGroup" : "A " + entityName + " with identifier " + param + " is became a group repetition.";
+        String message = enableTranslation
+            ? applicationName + "." + entityName + ".madeRepetitionGroup"
+            : "A " + entityName + " with identifier " + param + " is became a group repetition.";
         return HeaderUtil.createAlert(applicationName, message, param);
     }
 }

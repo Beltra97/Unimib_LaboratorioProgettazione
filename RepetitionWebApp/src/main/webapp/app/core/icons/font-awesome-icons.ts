@@ -1,4 +1,5 @@
 import {
+  faHistory,
   faUser,
   faSort,
   faSortUp,
@@ -37,6 +38,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
+  faHistory,
   faUser,
   faSort,
   faSortUp,

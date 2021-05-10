@@ -4,6 +4,7 @@
       "home": {
         "title": "My Repetitions",
         "createLabel": "Post Repetition",
+        "historyLabel": "Repetition History",
         "createOrEditLabel": "Post or edit Repetition",
         "notFound": "No My Repetitions found",
         "Reservations": "Booked by",
