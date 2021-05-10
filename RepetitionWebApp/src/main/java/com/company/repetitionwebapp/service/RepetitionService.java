@@ -54,7 +54,13 @@ public class RepetitionService {
             repetitionRepository
                 .findAll()
                 .stream()
-                .filter(r -> r.getTutor() != null && r.getTutor().getId() == tutor.getId() && r.getDateDeleted() == null)
+                .filter(
+                    r ->
+                        r.getTutor() != null &&
+                        r.getTutor().getId() == tutor.getId() &&
+                        r.getDateDeleted() == null &&
+                        r.getDateRepetition().compareTo(Instant.now()) > 0
+                )
                 .forEach(
                     repetition -> {
                         List<Student> students = new ArrayList<Student>();
@@ -87,11 +93,10 @@ public class RepetitionService {
                 .filter(
                     r ->
                         r.getTutor() != null &&
-                        r.getTutor().getId() ==
-                        tutor.getId() && // && r.getDateDeleted()
-                        // == null
-                        r.getDateRepetition().compareTo(Instant.now()) <
-                        0
+                        r.getTutor().getId() == tutor.getId() &&
+                        r.getDateDeleted() == null &&
+                        r.getDateRepetition().compareTo(Instant.now()) < 0 &&
+                        r.getDateDeleted() == null
                 )
                 .forEach(
                     repetition -> {
