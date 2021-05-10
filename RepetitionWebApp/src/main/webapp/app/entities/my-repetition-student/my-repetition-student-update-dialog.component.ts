@@ -133,11 +133,11 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
                 purchase_units: [{
                     amount: {
                         currency_code: 'EUR',
-                        value: '0.01',
+                        value: '9.99',
                         breakdown: {
                             item_total: {
                                 currency_code: 'EUR',
-                                value: '0.01'
+                                value: '9.99'
                             }
                         }
                     },
@@ -147,7 +147,7 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
                         category: 'DIGITAL_GOODS',
                         unit_amount: {
                             currency_code: 'EUR',
-                            value: '0.01',
+                            value: '9.99',
                         },
                     }]
                 }]
@@ -160,11 +160,10 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
                 layout: 'vertical'
             },
             onClientAuthorization: (data) => {
-              this.activeModal.close();
-                /*this.myRepetitionStudentService.create(this.myRepetitionStudent).subscribe(() => {
+                this.myRepetitionStudentService.create(this.myRepetitionStudent!).subscribe(() => {
                       this.eventManager.broadcast('myRepetitionStudentListModification');
                       this.activeModal.close();
-                    });*/
+                    });
             }
         };
     }
