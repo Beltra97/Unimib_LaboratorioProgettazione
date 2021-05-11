@@ -63,7 +63,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="tutor_id, subject_id" tableName="tutor_subject"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
@@ -89,6 +89,15 @@
             <column name="date_created" type="datetime"/>
             <column name="date_modified" type="datetime"/>
             <column name="date_deleted" type="datetime"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+
+        <loadData
+            file="config/liquibase/fake-data/tutor_subject.csv"
+            separator=";"
+            tableName="tutor_subject">
+            <column name="subject_id" type="numeric"/>
+            <column name="tutor_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
