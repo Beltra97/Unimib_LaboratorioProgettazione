@@ -46,6 +46,7 @@ describe('MyRepetition e2e test', () => {
       myRepetitionUpdatePage.subjectSelectLastOption(),
       myRepetitionUpdatePage.setDateRepetitionInput('31/12/2021' + protractor.Key.TAB + '02:30AM'),
       myRepetitionUpdatePage.setDurationInput('5'),
+      myRepetitionUpdatePage.setPriceInput('9.99'),
     ]);
 
     expect(await myRepetitionUpdatePage.getDurationInput()).to.eq('5', 'Expected duration value to be equals to 5');

@@ -32,6 +32,7 @@ export class MyRepetitionUpdatePage {
   subjectSelect = element(by.id('field_subject'));
   dateRepetitionInput = element(by.id('field_dateRepetition'));
   durationInput = element(by.id('field_duration'));
+  priceInput = element(by.id('field_price'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -68,6 +69,14 @@ export class MyRepetitionUpdatePage {
   async getDurationInput(): Promise<string> {
     return await this.durationInput.getAttribute('value');
   }
+
+  async setPriceInput(price: string): Promise<void> {
+      await this.priceInput.sendKeys(price);
+    }
+
+    async getPriceInput(): Promise<string> {
+      return await this.priceInput.getAttribute('value');
+    }
 
 
   async save(): Promise<void> {
