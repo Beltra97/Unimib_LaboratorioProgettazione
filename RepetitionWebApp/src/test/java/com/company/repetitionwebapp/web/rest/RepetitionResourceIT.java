@@ -46,6 +46,9 @@ public class RepetitionResourceIT {
     private static final Integer DEFAULT_DURATION = 1;
     private static final Integer UPDATED_DURATION = 2;
 
+    private static final Float DEFAULT_PRICE = 1F;
+    private static final Float UPDATED_PRICE = 2F;
+
     private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -79,6 +82,7 @@ public class RepetitionResourceIT {
             .dateRepetition(DEFAULT_DATE_REPETITION)
             .nPartecipants(DEFAULT_N_PARTECIPANTS)
             .duration(DEFAULT_DURATION)
+            .price(DEFAULT_PRICE)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
             .dateDeleted(DEFAULT_DATE_DELETED);
@@ -97,6 +101,7 @@ public class RepetitionResourceIT {
             .dateRepetition(UPDATED_DATE_REPETITION)
             .nPartecipants(UPDATED_N_PARTECIPANTS)
             .duration(UPDATED_DURATION)
+            .price(UPDATED_PRICE)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -127,6 +132,7 @@ public class RepetitionResourceIT {
         assertThat(testRepetition.getDateRepetition()).isEqualTo(DEFAULT_DATE_REPETITION);
         assertThat(testRepetition.getnPartecipants()).isEqualTo(DEFAULT_N_PARTECIPANTS);
         assertThat(testRepetition.getDuration()).isEqualTo(DEFAULT_DURATION);
+        assertThat(testRepetition.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testRepetition.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
         assertThat(testRepetition.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
         assertThat(testRepetition.getDateDeleted()).isEqualTo(DEFAULT_DATE_DELETED);
@@ -173,6 +179,44 @@ public class RepetitionResourceIT {
 
     @Test
     @Transactional
+    public void checkDurationIsRequired() throws Exception {
+        int databaseSizeBeforeTest = repetitionRepository.findAll().size();
+        // set the field null
+        repetition.setDuration(null);
+
+        // Create the Repetition, which fails.
+
+
+        restRepetitionMockMvc.perform(post("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(repetition)))
+            .andExpect(status().isBadRequest());
+
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = repetitionRepository.findAll().size();
+        // set the field null
+        repetition.setPrice(null);
+
+        // Create the Repetition, which fails.
+
+
+        restRepetitionMockMvc.perform(post("/api/repetitions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(repetition)))
+            .andExpect(status().isBadRequest());
+
+        List<Repetition> repetitionList = repetitionRepository.findAll();
+        assertThat(repetitionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRepetitions() throws Exception {
         // Initialize the database
         repetitionRepository.saveAndFlush(repetition);
@@ -187,6 +231,7 @@ public class RepetitionResourceIT {
             .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
             .andExpect(jsonPath("$.[*].nPartecipants").value(hasItem(DEFAULT_N_PARTECIPANTS)))
             .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
@@ -208,6 +253,7 @@ public class RepetitionResourceIT {
             .andExpect(jsonPath("$.dateRepetition").value(DEFAULT_DATE_REPETITION.toString()))
             .andExpect(jsonPath("$.nPartecipants").value(DEFAULT_N_PARTECIPANTS))
             .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
             .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
             .andExpect(jsonPath("$.dateDeleted").value(DEFAULT_DATE_DELETED.toString()));
@@ -238,6 +284,7 @@ public class RepetitionResourceIT {
             .dateRepetition(UPDATED_DATE_REPETITION)
             .nPartecipants(UPDATED_N_PARTECIPANTS)
             .duration(UPDATED_DURATION)
+            .price(UPDATED_PRICE)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -256,6 +303,7 @@ public class RepetitionResourceIT {
         assertThat(testRepetition.getDateRepetition()).isEqualTo(UPDATED_DATE_REPETITION);
         assertThat(testRepetition.getnPartecipants()).isEqualTo(UPDATED_N_PARTECIPANTS);
         assertThat(testRepetition.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testRepetition.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testRepetition.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
         assertThat(testRepetition.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
         assertThat(testRepetition.getDateDeleted()).isEqualTo(UPDATED_DATE_DELETED);

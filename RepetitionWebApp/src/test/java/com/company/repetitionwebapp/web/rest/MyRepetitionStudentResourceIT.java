@@ -42,6 +42,9 @@ public class MyRepetitionStudentResourceIT {
     private static final Integer DEFAULT_DURATION = 120;
     private static final Integer UPDATED_DURATION = 60;
 
+    private static final Float DEFAULT_PRICE = 9.99F;
+    private static final Float UPDATED_PRICE = 8.99F;
+
     private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -111,6 +114,7 @@ public class MyRepetitionStudentResourceIT {
             .subject(subject)
             .dateRepetition(DEFAULT_DATE_REPETITION)
             .duration(DEFAULT_DURATION)
+            .price(DEFAULT_PRICE)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
             .dateDeleted(DEFAULT_DATE_DELETED);
@@ -128,6 +132,7 @@ public class MyRepetitionStudentResourceIT {
         Repetition repetition = new Repetition()
             .dateRepetition(UPDATED_DATE_REPETITION)
             .duration(UPDATED_DURATION)
+            .price(UPDATED_PRICE)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -213,6 +218,8 @@ public class MyRepetitionStudentResourceIT {
             // .andExpect(jsonPath("$.[*].id").value(hasItem(repetition.getId().intValue())))
             // .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
             // .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)));
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(repetition.getId().intValue())))
     }
 
     @Test
@@ -224,10 +231,11 @@ public class MyRepetitionStudentResourceIT {
         // Get the repetition
         restRepetitionMockMvc.perform(get("/api/my-repetition-students/{id}", repetition.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
-            // .andExpect(jsonPath("$.id").value(repetition.getId().intValue()))
-            // .andExpect(jsonPath("$.dateRepetition").value(DEFAULT_DATE_REPETITION.toString()))
-            // .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION));
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.id").value(repetition.getId().intValue()))
+            .andExpect(jsonPath("$.dateRepetition").value(DEFAULT_DATE_REPETITION.toString()))
+            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE));
     }
     @Test
     @Transactional

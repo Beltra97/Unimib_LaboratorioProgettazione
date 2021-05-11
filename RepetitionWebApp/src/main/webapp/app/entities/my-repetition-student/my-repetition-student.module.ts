@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 
+import { NgxPayPalModule } from 'ngx-paypal';
+
 @NgModule({
   imports: [
     RepetitionWebAppSharedModule,
@@ -24,6 +26,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
+    NgxPayPalModule,
     RouterModule.forChild(myRepetitionStudentRoute)
   ],
   declarations: [

@@ -9,6 +9,7 @@ export interface IRepetition {
   dateRepetition?: Moment;
   nPartecipants?: number;
   duration?: number;
+  price?: number;
   dateCreated?: Moment;
   dateModified?: Moment;
   dateDeleted?: Moment;
@@ -24,6 +25,7 @@ export class Repetition implements IRepetition {
     public dateRepetition?: Moment,
     public nPartecipants?: number,
     public duration?: number,
+    public price?: number,
     public dateCreated?: Moment,
     public dateModified?: Moment,
     public dateDeleted?: Moment,

@@ -1,2 +1,2 @@
-id;topic;date_repetition;duration;date_created;date_modified;date_deleted;n_partecipants;tutor_id;subject_id
-1;A;2020-03-25T00:38:03;120;2020-03-25T00:38:03;2020-03-25T00:38:03;2020-03-25T00:38:03;1;1;1
+id;topic;date_repetition;duration;price;date_created;date_modified;date_deleted;n_partecipants;tutor_id;subject_id
+1;A;2020-03-25T00:38:03;120;9.99;2020-03-25T00:38:03;2020-03-25T00:38:03;2020-03-25T00:38:03;1;1;1

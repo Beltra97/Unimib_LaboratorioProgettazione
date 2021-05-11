@@ -9,7 +9,8 @@
         "notFound": "No My Repetitions found",
         "Reservations": "Booked by",
         "noReservations": "No reservations",
-        "duration": "Duration: {{ param }} minutes"
+        "duration": "Duration: {{ param }} minutes",
+        "price": "Price: {{ param }} €"
       },
       "created": "A Repetition is posted with identifier {{ param }}",
       "updated": "A Repetition is updated with identifier {{ param }}",

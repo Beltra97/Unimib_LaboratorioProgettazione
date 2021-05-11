@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Repetition(0, 'AAAAAAA', 'AAAAAAA', currentDate, 0, 0, currentDate, currentDate, currentDate);
+      elemDefault = new Repetition(0, 'AAAAAAA', 'AAAAAAA', currentDate, 0, 0, 0, currentDate, currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -83,6 +83,7 @@ describe('Service Tests', () => {
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             nPartecipants: 1,
             duration: 1,
+            price: 1,
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
             dateDeleted: currentDate.format(DATE_TIME_FORMAT),
@@ -115,6 +116,7 @@ describe('Service Tests', () => {
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             nPartecipants: 1,
             duration: 1,
+            price: 1,
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
             dateDeleted: currentDate.format(DATE_TIME_FORMAT),

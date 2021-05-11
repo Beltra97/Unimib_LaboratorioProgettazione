@@ -23,6 +23,8 @@ public class MyRepetitionRS {
 
     private Integer duration;
 
+    private Float price;
+
     private Instant dateRepetition;
 
     private List<Student> students = new ArrayList<Student>();
@@ -39,6 +41,7 @@ public class MyRepetitionRS {
         this.topic = repetition.getTopic();
         this.additionalNote = repetition.getAdditionalNote();
         this.duration = repetition.getDuration();
+        this.price = repetition.getPrice();
         this.dateRepetition = repetition.getDateRepetition();
         this.nPartecipants = repetition.getnPartecipants();
     }
@@ -65,6 +68,14 @@ public class MyRepetitionRS {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public String getTopic() {

@@ -25,7 +25,17 @@
     },
     {
       "fieldName": "duration",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Float",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "dateCreated",

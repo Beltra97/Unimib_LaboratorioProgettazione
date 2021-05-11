@@ -15,6 +15,8 @@ import { TopicService } from 'app/entities/topic/topic.service';
 import { IMyRepetitionStudent } from 'app/shared/model/my-repetition-student.model';
 import { MyRepetitionStudentService } from './my-repetition-student.service';
 
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+
 @Component({
   selector: 'jhi-my-repetition-student-update-dialog',
   templateUrl: './my-repetition-student-update-dialog.component.html',
@@ -36,6 +38,9 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
   @ViewChild('topicInput') topicInput?: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete?: MatAutocomplete;
 
+  public payPalConfig?: IPayPalConfig;
+  step: number;
+
   constructor(
     protected myRepetitionStudentService: MyRepetitionStudentService,
     public activeModal: NgbActiveModal,
@@ -46,9 +51,13 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
     this.filteredTopics = this.topicCtrl.valueChanges.pipe(
           startWith(null),
           map((topic: string | null) => topic ? this._filter(topic) : this.allTopics.slice()));
+
+    this.step = 1;
   }
 
   ngOnInit(): void {
+    this.initConfig();
+
     this.topicService.query().subscribe((res: HttpResponse<ITopic[]>) => {
       this.topics = res.body || [];
       for (const t of this.topics) {
@@ -65,16 +74,13 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
 
   confirmBook(myRepetitionStudent: IMyRepetitionStudent): void {
 
+    this.step = 2;
+
     for (const t of this.myTopics) {
       myRepetitionStudent.topic += t + "; "
     }
 
     myRepetitionStudent.additionalNote = this.additionalNote;
-
-    this.myRepetitionStudentService.create(myRepetitionStudent).subscribe(() => {
-      this.eventManager.broadcast('myRepetitionStudentListModification');
-      this.activeModal.close();
-    });
   }
 
   add(event: MatChipInputEvent): void {
@@ -116,4 +122,52 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
 
     return this.allTopics.filter(topic => topic.toLowerCase().startsWith(filterValue));
   }
+
+
+  private initConfig(): void {
+    if(this.myRepetitionStudent != null)
+    {
+        this.payPalConfig = {
+            currency: 'EUR',
+            clientId: 'AT64NAFESdpd78G8yN2ejrQ0oArQ09ycJx44ZyPfExCqViVBOXh0R-C0fEqHExoorL6b_oqzOrvW45JF',
+            createOrderOnClient: (data) => <ICreateOrderRequest> {
+                intent: 'CAPTURE',
+                purchase_units: [{
+                    amount: {
+                        currency_code: 'EUR',
+                        value: this.myRepetitionStudent!.price!.toString(),
+                        breakdown: {
+                            item_total: {
+                                currency_code: 'EUR',
+                                value: this.myRepetitionStudent!.price!.toString()
+                            }
+                        }
+                    },
+                    items: [{
+                        name: 'Enterprise Subscription',
+                        quantity: '1',
+                        category: 'DIGITAL_GOODS',
+                        unit_amount: {
+                            currency_code: 'EUR',
+                            value: this.myRepetitionStudent!.price!.toString()
+                        },
+                    }]
+                }]
+            },
+            advanced: {
+                commit: 'true'
+            },
+            style: {
+                label: 'paypal',
+                layout: 'vertical'
+            },
+            onClientAuthorization: (data) => {
+                this.myRepetitionStudentService.create(this.myRepetitionStudent!).subscribe(() => {
+                      this.eventManager.broadcast('myRepetitionStudentListModification');
+                      this.activeModal.close();
+                    });
+            }
+          };
+        }
+    }
 }
