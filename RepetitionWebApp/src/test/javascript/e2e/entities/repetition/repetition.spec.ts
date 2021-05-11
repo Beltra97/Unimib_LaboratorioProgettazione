@@ -46,6 +46,7 @@ describe('Repetition e2e test', () => {
       repetitionUpdatePage.setDateRepetitionInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       repetitionUpdatePage.setNPartecipantsInput('5'),
       repetitionUpdatePage.setDurationInput('5'),
+      repetitionUpdatePage.setPriceInput('5'),
       repetitionUpdatePage.setDateCreatedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       repetitionUpdatePage.setDateModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       repetitionUpdatePage.setDateDeletedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -64,6 +65,7 @@ describe('Repetition e2e test', () => {
     );
     expect(await repetitionUpdatePage.getNPartecipantsInput()).to.eq('5', 'Expected nPartecipants value to be equals to 5');
     expect(await repetitionUpdatePage.getDurationInput()).to.eq('5', 'Expected duration value to be equals to 5');
+    expect(await repetitionUpdatePage.getPriceInput()).to.eq('5', 'Expected price value to be equals to 5');
     expect(await repetitionUpdatePage.getDateCreatedInput()).to.contain(
       '2001-01-01T02:30',
       'Expected dateCreated value to be equals to 2000-12-31'

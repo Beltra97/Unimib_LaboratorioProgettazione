@@ -25,6 +25,8 @@ public class MyRepetitionStudentRS {
 
     private Integer duration;
 
+    private Float price;
+
     private Instant dateRepetition;
 
     private Boolean isFree;
@@ -42,6 +44,7 @@ public class MyRepetitionStudentRS {
         this.topic = repetition.getTopic();
         this.additionalNote = repetition.getAdditionalNote();
         this.duration = repetition.getDuration();
+        this.price = repetition.getPrice();
         this.dateRepetition = repetition.getDateRepetition();
     }
 
@@ -75,6 +78,14 @@ public class MyRepetitionStudentRS {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public String getTopic() {

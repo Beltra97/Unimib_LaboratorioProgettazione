@@ -86,6 +86,7 @@ public class RepetitionService {
             newRepetition.setTutor(tutor);
             newRepetition.setSubject(subject);
             newRepetition.setDuration(repetitionDTO.getDuration());
+            newRepetition.setPrice(repetitionDTO.getPrice());
             newRepetition.setDateRepetition(repetitionDTO.getDateRepetition());
             newRepetition.setDateCreated(Instant.now());
             newRepetition.setDateModified(Instant.now());
@@ -106,6 +107,7 @@ public class RepetitionService {
 
             repetition.setSubject(subject);
             repetition.setDuration(repetitionDTO.getDuration());
+            repetition.setPrice(repetitionDTO.getPrice());
             repetition.setDateRepetition(repetitionDTO.getDateRepetition());
             repetition.setDateModified(Instant.now());
             repetitionRepository.save(repetition);

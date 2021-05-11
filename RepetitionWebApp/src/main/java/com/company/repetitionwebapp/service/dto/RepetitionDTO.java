@@ -26,6 +26,8 @@ public class RepetitionDTO {
 
     private Instant dateRepetition;
 
+    private Float price;
+
     public RepetitionDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -35,6 +37,7 @@ public class RepetitionDTO {
         this.subject = repetition.getSubject();
         this.dateRepetition = repetition.getDateRepetition();
         this.duration = repetition.getDuration();
+        this.price = repetition.getPrice();
     }
 
     public Long getId() {
@@ -67,5 +70,13 @@ public class RepetitionDTO {
 
     public void setDateRepetition(Instant dateRepetition) {
         this.dateRepetition = dateRepetition;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 }

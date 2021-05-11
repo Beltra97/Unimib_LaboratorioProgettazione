@@ -125,19 +125,21 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
 
 
   private initConfig(): void {
+    if(this.myRepetitionStudent != null)
+    {
         this.payPalConfig = {
             currency: 'EUR',
-            clientId: 'sb',
+            clientId: 'AT64NAFESdpd78G8yN2ejrQ0oArQ09ycJx44ZyPfExCqViVBOXh0R-C0fEqHExoorL6b_oqzOrvW45JF',
             createOrderOnClient: (data) => <ICreateOrderRequest> {
                 intent: 'CAPTURE',
                 purchase_units: [{
                     amount: {
                         currency_code: 'EUR',
-                        value: '9.99',
+                        value: this.myRepetitionStudent!.price!.toString(),
                         breakdown: {
                             item_total: {
                                 currency_code: 'EUR',
-                                value: '9.99'
+                                value: this.myRepetitionStudent!.price!.toString()
                             }
                         }
                     },
@@ -147,7 +149,7 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
                         category: 'DIGITAL_GOODS',
                         unit_amount: {
                             currency_code: 'EUR',
-                            value: '9.99',
+                            value: this.myRepetitionStudent!.price!.toString()
                         },
                     }]
                 }]
@@ -165,6 +167,7 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
                       this.activeModal.close();
                     });
             }
-        };
+          };
+        }
     }
 }

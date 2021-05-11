@@ -24,7 +24,8 @@ entity Repetition {
     additionalNote String,
     dateRepetition Instant required,
     nPartecipants Integer required,
-    duration Integer,
+    duration Integer required,
+    price Float required,
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant
