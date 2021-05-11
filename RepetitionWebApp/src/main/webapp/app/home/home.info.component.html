@@ -7,7 +7,8 @@
 <div class="modal-body">
     <p style="text-align: center;">
         Subject: {{ repetition!.subject!.name }}<br />
-        Topic: {{ repetition!.topic }}<br />
+        <span *ngIf="repetition!.topic">Topic: {{ repetition!.topic }}<br /></span>
+        <span *ngIf="repetition!.additionalNote">Additional Note: {{ repetition!.additionalNote }}<br /></span>
         Date: {{ repetition!.dateRepetition | date:'medium' }}<br />
         Duration: {{ repetition!.duration }} minutes<br />
         Tutor: {{ repetition!.tutor!.name }} {{ repetition!.tutor!.surname }}

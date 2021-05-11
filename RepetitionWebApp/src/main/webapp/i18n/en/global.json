@@ -43,6 +43,16 @@
       },
       "language": "Language"
     },
+    "find": {
+      "title": "Find repetitions",
+      "placeholder": "Search by tutor or subject",
+      "group": "Allow group repetitions?",
+      "group.yes": "Yes (allow group repetitions)",
+      "group.no": "No (enable single repetitions only)",
+      "search": "Search",
+      "results": "Results",
+      "nores": "No results found"
+    },
     "form": {
       "name.label": "Name",
       "name.placeholder": "Your name",
