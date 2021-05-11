@@ -42,6 +42,9 @@ public class HistoryRepetitionStudentResourceIT {
     private static final Integer DEFAULT_DURATION = 120;
     private static final Integer UPDATED_DURATION = 60;
 
+    private static final Float DEFAULT_PRICE = 9.99F;
+    private static final Float UPDATED_PRICE = 8.99F;
+
     private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -111,6 +114,7 @@ public class HistoryRepetitionStudentResourceIT {
             .subject(subject)
             .dateRepetition(DEFAULT_DATE_REPETITION)
             .duration(DEFAULT_DURATION)
+            .price(DEFAULT_PRICE)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
             .dateDeleted(DEFAULT_DATE_DELETED);
@@ -118,7 +122,7 @@ public class HistoryRepetitionStudentResourceIT {
 
         return repetition;
     }
-    
+
     /**
      * Create an updated entity for this test.
      *
@@ -129,6 +133,7 @@ public class HistoryRepetitionStudentResourceIT {
         Repetition repetition = new Repetition()
             .dateRepetition(UPDATED_DATE_REPETITION)
             .duration(UPDATED_DURATION)
+            .price(UPDATED_PRICE)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
             .dateDeleted(UPDATED_DATE_DELETED);
@@ -173,7 +178,7 @@ public class HistoryRepetitionStudentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
     }
-    
+
     @Test
     @Transactional
     public void getNonExistingRepetition() throws Exception {

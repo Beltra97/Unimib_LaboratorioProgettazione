@@ -36,8 +36,8 @@ public class MyRepetitionStudentResourceIT {
     private static final String DEFAULT_TOPIC = "AAAAAAAAAA";
     private static final String UPDATED_TOPIC = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DATE_REPETITION = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATE_REPETITION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_DATE_REPETITION = Instant.now().plus(1, ChronoUnit.DAYS);
+    private static final Instant UPDATED_DATE_REPETITION = Instant.now().plus(3, ChronoUnit.DAYS);
 
     private static final Integer DEFAULT_DURATION = 120;
     private static final Integer UPDATED_DURATION = 60;
@@ -214,12 +214,10 @@ public class MyRepetitionStudentResourceIT {
         // Get all the repetitionList
         restRepetitionMockMvc.perform(get("/api/my-repetition-students"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
-            // .andExpect(jsonPath("$.[*].id").value(hasItem(repetition.getId().intValue())))
-            // .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
-            // .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)));
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(repetition.getId().intValue())))
+            .andExpect(jsonPath("$.[*].dateRepetition").value(hasItem(DEFAULT_DATE_REPETITION.toString())))
+            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)));
     }
 
     @Test
