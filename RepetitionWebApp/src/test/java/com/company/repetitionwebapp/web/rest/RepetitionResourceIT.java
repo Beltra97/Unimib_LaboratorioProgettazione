@@ -179,25 +179,6 @@ public class RepetitionResourceIT {
 
     @Test
     @Transactional
-    public void checknPartecipantsIsRequired() throws Exception {
-        int databaseSizeBeforeTest = repetitionRepository.findAll().size();
-        // set the field null
-        repetition.setnPartecipants(null);
-
-        // Create the Repetition, which fails.
-
-
-        restRepetitionMockMvc.perform(post("/api/repetitions")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(repetition)))
-            .andExpect(status().isBadRequest());
-
-        List<Repetition> repetitionList = repetitionRepository.findAll();
-        assertThat(repetitionList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkDurationIsRequired() throws Exception {
         int databaseSizeBeforeTest = repetitionRepository.findAll().size();
         // set the field null
@@ -255,7 +236,7 @@ public class RepetitionResourceIT {
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].dateDeleted").value(hasItem(DEFAULT_DATE_DELETED.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getRepetition() throws Exception {
