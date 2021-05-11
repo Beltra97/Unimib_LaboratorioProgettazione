@@ -66,8 +66,11 @@
                                         <div class="p-2">
                                             <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
                                         </div>
-                                        <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
+                                        <div class="p-2" *ngIf="repetition!.topic">
+                                            <p id="cardTextRepetitions" class="card-text">Topic: {{repetition!.topic}}</p>
+                                        </div>
+                                        <div class="p-2" *ngIf="repetition!.additionalNote">
+                                            <p id="cardTextRepetitions" class="card-text">Additional Note: {{repetition!.additionalNote}}</p>
                                         </div>
                                         <div class="p-2">
                                             <p id="cardTextRepetitions" class="card-text">Duration: {{repetition!.duration}} minutes</p>
@@ -97,25 +100,84 @@
                     <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="global.find.title">Find repetitions</h1>
                 </div>
                 <div class="col-md-8">
-                    <form name="form" role="form" (ngSubmit)="search()" [formGroup]="searchForm">
+                    <form name="form" role="form" [formGroup]="findForm" (ngSubmit)="search()">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="find" name="find" placeholder="{{ 'global.find.placeholder' | translate }}">
+                            <input type="text" class="form-control" id="findGlobal" name="findGlobal" placeholder="{{ 'global.find.placeholder' | translate }}" formControlName="findGlobal">
                         </div>
                         <div class="form-group">
-                            <input type="date" class="form-control" id="find_date" name="find_date">
+                            <input type="date" class="form-control" id="findDate" name="findDate" [min]="minDate" formControlName="findDate">
                         </div>
                         <div class="form-group">
-                            <select type="text" class="form-control" id="find_group" name="find_group" [(ngModel)]="optionValue">
-                                <option value="" [selected]="true" [hidden]="true" jhiTranslate="global.find.group">Group repetition?</option>
-                                <option value=true jhiTranslate="global.find.group.yes">Yes</option>
-                                <option value=false jhiTranslate="global.find.group.no">No</option>
-                            </select>   
+                            <select type="text" class="form-control" id="findGroup" name="findGroup" formControlName="findGroup">
+                                <option value="" [selected]="true" [hidden]="true" jhiTranslate="global.find.group">Allow group repetitions?</option>
+                                <option value="true" jhiTranslate="global.find.group.yes">Yes (allow group repetitions)</option>
+                                <option value="false" jhiTranslate="global.find.group.no">No (enable single repetitions only)</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-outline-primary btn-block" jhiTranslate="global.find.search">Search</button>
+                            <button type="submit" class="btn btn-outline-primary btn-block" jhiTranslate="global.find.search" [disabled]="findForm.invalid">Search</button>
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+
+        <div *ngIf="dataFound">
+            <div class="card jh-card" *ngSwitchCase="true">
+                <div class="row row-content justify-content-center"> 
+                    <div class="col-8">
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="global.find.results">Results</h1>
+                    </div>
+                </div>
+
+                <div class="row row-content justify-content-center" *ngIf="repetitionsFound?.length === 0">
+                    <div class="col-8">
+                        <div class="alert alert-danger">
+                            <span id="home-logged-message" jhiTranslate="global.find.nores">No results found</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="repetitionsFound?.length !== 0">
+                    <div class="row row-content justify-content-center">
+                        <div class="col-8">
+                            <div *ngFor="let repetition of repetitionsFound">
+                                <div id="cardRepetitions" class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <div class="p-2">
+                                                <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                            </div>
+                                            <div class="p-2" *ngIf="repetition!.topic">
+                                                <p id="cardTextRepetitions" class="card-text">Topic: {{repetition!.topic}}</p>
+                                            </div>
+                                            <div class="p-2" *ngIf="repetition!.additionalNote">
+                                                <p id="cardTextRepetitions" class="card-text">Additional Note: {{repetition!.additionalNote}}</p>
+                                            </div>
+                                            <div class="p-2">
+                                                <p id="cardTextRepetitions" class="card-text">Tutor: {{repetition!.tutor!.name}} {{repetition!.tutor!.surname}}</p>
+                                            </div>
+                                            <div class="p-2">
+                                                <p id="cardTextRepetitions" class="card-text">Date: {{repetition!.dateRepetition | date:'medium' }}</p>
+                                            </div>
+                                            <div class="p-2">
+                                                <div class="container">
+                                                    <div class="row row-content justify-content-center">
+                                                        <div class="col-6">
+                                                            <a routerLink="my-repetition-student" class="btn btn-outline-primary btn-block" jhiTranslate="home.enroll">Enroll</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
@@ -132,27 +194,19 @@
                     <div class="col-8">
                         
                         <div *ngFor="let repetition of repetitionsStudent">
-                            <div id="cardRepetitions" class="card" *ngIf="!repetition!.dateDeleted">
+                            <div id="cardRepetitions" class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column">
                                         <div class="p-2">
                                             <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
                                         </div>
-                                        <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
+                                        <div class="p-2" *ngIf="repetition!.topic">
+                                            <p id="cardTextRepetitions" class="card-text">Topic: {{repetition!.topic}}</p>
                                         </div>
                                         <div class="p-2">
                                             <div class="container">
-                                                <div class="row row-content justify-content-center" *ngIf="!repetition!.topic">
+                                                <div class="row row-content justify-content-center">
                                                     <div class="col-6">
-                                                        <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <a routerLink="my-repetition-student" class="btn btn-outline-primary btn-block" jhiTranslate="home.enroll">Enroll</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-content justify-content-center" *ngIf="repetition!.topic">
-                                                    <div class="col-12">
                                                         <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
                                                     </div>
                                                 </div>
