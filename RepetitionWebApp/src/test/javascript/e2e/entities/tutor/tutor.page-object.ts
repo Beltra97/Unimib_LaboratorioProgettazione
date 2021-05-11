@@ -32,7 +32,6 @@ export class TutorUpdatePage {
   nameInput = element(by.id('field_name'));
   surnameInput = element(by.id('field_surname'));
   birthDateInput = element(by.id('field_birthDate'));
-  subjectInput = element(by.id('field_subject'));
   degreeInput = element(by.id('field_degree'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
@@ -67,14 +66,6 @@ export class TutorUpdatePage {
 
   async getBirthDateInput(): Promise<string> {
     return await this.birthDateInput.getAttribute('value');
-  }
-
-  async setSubjectInput(subject: string): Promise<void> {
-    await this.subjectInput.sendKeys(subject);
-  }
-
-  async getSubjectInput(): Promise<string> {
-    return await this.subjectInput.getAttribute('value');
   }
 
   async setDegreeInput(degree: string): Promise<void> {

@@ -25,9 +25,6 @@
             <column name="birth_date" type="datetime">
                 <constraints nullable="false" />
             </column>
-            <column name="subject" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="degree" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -84,7 +81,6 @@
             <column name="name" type="string"/>
             <column name="surname" type="string"/>
             <column name="birth_date" type="datetime"/>
-            <column name="subject" type="string"/>
             <column name="degree" type="string"/>
             <column name="date_created" type="datetime"/>
             <column name="date_modified" type="datetime"/>

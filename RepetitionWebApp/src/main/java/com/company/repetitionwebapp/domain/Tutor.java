@@ -34,9 +34,6 @@ public class Tutor implements Serializable {
     @Column(name = "birth_date", nullable = false)
     private Instant birthDate;
 
-    @Column(name = "subject")
-    private String subject;
-
     @Column(name = "degree")
     private String degree;
 
@@ -112,19 +109,6 @@ public class Tutor implements Serializable {
 
     public void setBirthDate(Instant birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public Tutor subject(String subject) {
-        this.subject = subject;
-        return this;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public String getDegree() {
@@ -241,7 +225,6 @@ public class Tutor implements Serializable {
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -268,7 +251,6 @@ public class Tutor implements Serializable {
             ", name='" + getName() + "'" +
             ", surname='" + getSurname() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
-            ", subject='" + getSubject() + "'" +
             ", degree='" + getDegree() + "'" +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +

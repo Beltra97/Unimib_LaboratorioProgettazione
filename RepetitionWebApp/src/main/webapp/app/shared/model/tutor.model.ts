@@ -8,7 +8,6 @@ export interface ITutor {
   name?: string;
   surname?: string;
   birthDate?: Moment;
-  subject?: string;
   degree?: string;
   dateCreated?: Moment;
   dateModified?: Moment;
@@ -24,7 +23,6 @@ export class Tutor implements ITutor {
     public name?: string,
     public surname?: string,
     public birthDate?: Moment,
-    public subject?: string,
     public degree?: string,
     public dateCreated?: Moment,
     public dateModified?: Moment,

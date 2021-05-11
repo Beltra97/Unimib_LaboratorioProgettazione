@@ -30,7 +30,6 @@ export class TutorUpdateComponent implements OnInit {
     name: [null, [Validators.required]],
     surname: [null, [Validators.required]],
     birthDate: [null, [Validators.required]],
-    subject: [],
     degree: [],
     dateCreated: [],
     dateModified: [],
@@ -71,7 +70,6 @@ export class TutorUpdateComponent implements OnInit {
       name: tutor.name,
       surname: tutor.surname,
       birthDate: tutor.birthDate ? tutor.birthDate.format(DATE_TIME_FORMAT) : null,
-      subject: tutor.subject,
       degree: tutor.degree,
       dateCreated: tutor.dateCreated ? tutor.dateCreated.format(DATE_TIME_FORMAT) : null,
       dateModified: tutor.dateModified ? tutor.dateModified.format(DATE_TIME_FORMAT) : null,
@@ -102,7 +100,6 @@ export class TutorUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       surname: this.editForm.get(['surname'])!.value,
       birthDate: this.editForm.get(['birthDate'])!.value ? moment(this.editForm.get(['birthDate'])!.value, DATE_TIME_FORMAT) : undefined,
-      subject: this.editForm.get(['subject'])!.value,
       degree: this.editForm.get(['degree'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value
         ? moment(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)

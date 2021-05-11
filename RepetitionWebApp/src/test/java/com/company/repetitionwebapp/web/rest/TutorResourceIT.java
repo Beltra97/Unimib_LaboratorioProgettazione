@@ -46,9 +46,6 @@ public class TutorResourceIT {
     private static final Instant DEFAULT_BIRTH_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_BIRTH_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_SUBJECT = "AAAAAAAAAA";
-    private static final String UPDATED_SUBJECT = "BBBBBBBBBB";
-
     private static final String DEFAULT_DEGREE = "AAAAAAAAAA";
     private static final String UPDATED_DEGREE = "BBBBBBBBBB";
 
@@ -86,7 +83,6 @@ public class TutorResourceIT {
             .name(DEFAULT_NAME)
             .surname(DEFAULT_SURNAME)
             .birthDate(DEFAULT_BIRTH_DATE)
-            .subject(DEFAULT_SUBJECT)
             .degree(DEFAULT_DEGREE)
             .dateCreated(DEFAULT_DATE_CREATED)
             .dateModified(DEFAULT_DATE_MODIFIED)
@@ -105,7 +101,6 @@ public class TutorResourceIT {
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
             .birthDate(UPDATED_BIRTH_DATE)
-            .subject(UPDATED_SUBJECT)
             .degree(UPDATED_DEGREE)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
@@ -134,7 +129,6 @@ public class TutorResourceIT {
         assertThat(testTutor.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTutor.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testTutor.getBirthDate()).isEqualTo(DEFAULT_BIRTH_DATE);
-        assertThat(testTutor.getSubject()).isEqualTo(DEFAULT_SUBJECT);
         assertThat(testTutor.getDegree()).isEqualTo(DEFAULT_DEGREE);
         assertThat(testTutor.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
         assertThat(testTutor.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
@@ -225,7 +219,6 @@ public class TutorResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)))
             .andExpect(jsonPath("$.[*].birthDate").value(hasItem(DEFAULT_BIRTH_DATE.toString())))
-            .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT)))
             .andExpect(jsonPath("$.[*].degree").value(hasItem(DEFAULT_DEGREE)))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
             .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
@@ -265,7 +258,6 @@ public class TutorResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME))
             .andExpect(jsonPath("$.birthDate").value(DEFAULT_BIRTH_DATE.toString()))
-            .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT))
             .andExpect(jsonPath("$.degree").value(DEFAULT_DEGREE))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
             .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
@@ -295,7 +287,6 @@ public class TutorResourceIT {
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
             .birthDate(UPDATED_BIRTH_DATE)
-            .subject(UPDATED_SUBJECT)
             .degree(UPDATED_DEGREE)
             .dateCreated(UPDATED_DATE_CREATED)
             .dateModified(UPDATED_DATE_MODIFIED)
@@ -312,7 +303,6 @@ public class TutorResourceIT {
         assertThat(testTutor.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTutor.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testTutor.getBirthDate()).isEqualTo(UPDATED_BIRTH_DATE);
-        assertThat(testTutor.getSubject()).isEqualTo(UPDATED_SUBJECT);
         assertThat(testTutor.getDegree()).isEqualTo(UPDATED_DEGREE);
         assertThat(testTutor.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
         assertThat(testTutor.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);

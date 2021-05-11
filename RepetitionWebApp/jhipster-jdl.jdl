@@ -1,9 +1,8 @@
 
 entity Tutor {
     name String required,
-    surname String required
-    birthDate Instant required
-    subject String,
+    surname String required,
+    birthDate Instant required,
     degree String,
     dateCreated Instant,
     dateModified Instant,
