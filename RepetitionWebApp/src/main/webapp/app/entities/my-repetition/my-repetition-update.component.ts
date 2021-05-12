@@ -29,8 +29,8 @@ export class MyRepetitionUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     subject: ['', [Validators.required]],
-    duration: [null, [Validators.required]],
-    price: [null, [Validators.required]],
+    duration: [null, [Validators.required, Validators.min(30), Validators.max(250)]],
+    price: [null, [Validators.required, Validators.min(5), Validators.max(50)]],
     dateRepetition: [null, [Validators.required]],
     timeRepetition: [null, [Validators.required]],
     dateCreated: [],
