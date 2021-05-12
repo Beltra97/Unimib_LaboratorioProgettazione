@@ -72,6 +72,9 @@
                                         <div class="p-2" *ngIf="repetition!.additionalNote">
                                             <p id="cardTextRepetitions" class="card-text">Additional Note: {{repetition!.additionalNote}}</p>
                                         </div>
+                                        <div class="p-2" *ngIf="repetition!.price">
+                                            <p id="cardTextRepetitions" class="card-text">Price: {{repetition!.price}}€</p>
+                                        </div>
                                         <div class="p-2">
                                             <p id="cardTextRepetitions" class="card-text">Duration: {{repetition!.duration}} minutes</p>
                                         </div>
@@ -92,6 +95,8 @@
             </div>
         </div>
     </div>
+
+    DEBUG: *{{ debug }}*
 
     <div *jhiHasAnyAuthority="'ROLE_STUDENT'">
         <div class="card jh-card">
@@ -153,6 +158,9 @@
                                             </div>
                                             <div class="p-2" *ngIf="repetition!.additionalNote">
                                                 <p id="cardTextRepetitions" class="card-text">Additional Note: {{repetition!.additionalNote}}</p>
+                                            </div>
+                                            <div class="p-2" *ngIf="repetition!.price">
+                                                <p id="cardTextRepetitions" class="card-text">Price: {{repetition!.price}}€</p>
                                             </div>
                                             <div class="p-2">
                                                 <p id="cardTextRepetitions" class="card-text">Tutor: {{repetition!.tutor!.name}} {{repetition!.tutor!.surname}}</p>

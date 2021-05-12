@@ -7,12 +7,13 @@ export interface IMyRepetitionStudent {
   subject?: ISubject;
   topic?: string;
   additionalNote?: string;
-  duration?: number,
-  price?: number,
+  duration?: number;
+  price?: number;
   dateRepetition?: Moment;
   tutor?: ITutor;
   isFree?: boolean;
   isAlreadyBooked?: boolean;
+  nPartecipants?: number;
 }
 
 export class MyRepetitionStudent implements IMyRepetitionStudent {
@@ -26,5 +27,7 @@ export class MyRepetitionStudent implements IMyRepetitionStudent {
     public dateRepetition?: Moment,
     public tutor?: ITutor,
     public isFree?: boolean,
-    public isAlreadyBooked?: boolean) {}
+    public isAlreadyBooked?: boolean,
+    public nPartecipants?: number
+  ) {}
 }

@@ -16,7 +16,7 @@ import { MyRepetitionStudentService } from 'app/entities/my-repetition-student/m
 // import { IRepetition } from 'app/shared/model/repetition.model';
 // import { RepetitionService } from '../entities/repetition/repetition.service';
 
-import { IMyRepetition } from 'app/shared/model/my-repetition.model';
+import { IMyRepetition, MyRepetition } from 'app/shared/model/my-repetition.model';
 import { MyRepetitionService } from '../entities/my-repetition/my-repetition.service';
 
 import { NgbdModalContentComponent } from './home.info.component';
@@ -53,6 +53,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   findDate = '';
   findGroup = 'true';
 
+  debug = '';
+
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
@@ -74,6 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // This function is used to load data for the student accounts
   loadStudentData(): void {
     if (!this.dataStudentLoaded) {
       this.repetitionStudentService
@@ -83,6 +86,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // This function is used to load data for the tutor accounts
   loadTutorData(): void {
     if (!this.dataTutorLoaded) {
       this.repetitionTutorService.query().subscribe((res: HttpResponse<IMyRepetition[]>) => (this.repetitionsTutor = res.body || []));
@@ -147,10 +151,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           const tutorName = repetition.tutor!.name!.toLowerCase().trim();
           const tutorSurname = repetition.tutor!.surname!.toLowerCase().trim();
 
-          // TODO: Use a specific attribute for group repetitions
           if (
             (subject === this.findSubjectTutor || tutorName === this.findSubjectTutor || tutorSurname === this.findSubjectTutor) &&
-            !(!repetition.isAlreadyBooked && !repetition.isFree)
+            repetition.nPartecipants === 1
           ) {
             this.repetitionsFound!.push(repetition);
           }
@@ -183,10 +186,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           const tutorName = repetition.tutor!.name!.toLowerCase().trim();
           const tutorSurname = repetition.tutor!.surname!.toLowerCase().trim();
 
-          // TODO: Use a specific attribute for group repetitions
           if (
             (subject === this.findSubjectTutor || tutorName === this.findSubjectTutor || tutorSurname === this.findSubjectTutor) &&
-            !(!repetition.isAlreadyBooked && !repetition.isFree) &&
+            repetition.nPartecipants === 1 &&
             dateT!.toString() === this.findDate
           ) {
             this.repetitionsFound!.push(repetition);
@@ -209,10 +211,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // disallow group repetitions
       else {
         for (const repetition of this.repetitionsStudent!) {
-          // TODO: Use a specific attribute for group repetitions
           const dateT = this.pipe.transform(repetition.dateRepetition, 'yyyy-MM-dd');
 
-          if (!(!repetition.isAlreadyBooked && !repetition.isFree) && dateT!.toString() === this.findDate) {
+          if (repetition.nPartecipants === 1 && dateT!.toString() === this.findDate) {
             this.repetitionsFound!.push(repetition);
           }
         }
@@ -229,8 +230,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       // disallow group repetitions
       else {
         for (const repetition of this.repetitionsStudent!) {
-          // TODO: Use a specific attribute for group repetitions
-          if (!(!repetition.isAlreadyBooked && !repetition.isFree)) {
+          this.debug = this.debug + 'Subject: ' + repetition.subject!.name + ' - Partecipants: ' + repetition.nPartecipants + ' ***** ';
+          if (repetition.nPartecipants === 1) {
             this.repetitionsFound!.push(repetition);
           }
         }

@@ -4,7 +4,6 @@ import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.domain.Student;
 import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.domain.Tutor;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,8 @@ public class MyRepetitionStudentRS {
 
     private Boolean isAlreadyBooked;
 
+    private Integer nPartecipants;
+
     public MyRepetitionStudentRS() {
         // Empty constructor needed for Jackson.
     }
@@ -46,6 +47,7 @@ public class MyRepetitionStudentRS {
         this.duration = repetition.getDuration();
         this.price = repetition.getPrice();
         this.dateRepetition = repetition.getDateRepetition();
+        this.nPartecipants = repetition.getnPartecipants();
     }
 
     public Long getId() {
@@ -126,5 +128,13 @@ public class MyRepetitionStudentRS {
 
     public void setIsAlreadyBooked(Boolean isAlreadyBooked) {
         this.isAlreadyBooked = isAlreadyBooked;
+    }
+
+    public Integer getnPartecipants() {
+        return nPartecipants;
+    }
+
+    public void setnPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
     }
 }
