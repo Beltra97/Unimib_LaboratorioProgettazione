@@ -37,6 +37,12 @@ export class StudentService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  getStudentByUser(): Observable<EntityResponseType> {
+    return this.http
+      .get<IStudent>(`${this.resourceUrl}-user`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
