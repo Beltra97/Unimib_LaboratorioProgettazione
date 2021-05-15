@@ -1,6 +1,7 @@
 package com.company.repetitionwebapp.web.rest;
 
 import com.company.repetitionwebapp.domain.Tutor;
+import com.company.repetitionwebapp.service.TutorService;
 import com.company.repetitionwebapp.repository.TutorRepository;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
@@ -32,9 +33,11 @@ public class TutorResource {
     private String applicationName;
 
     private final TutorRepository tutorRepository;
+    private final TutorService tutorService;
 
-    public TutorResource(TutorRepository tutorRepository) {
+    public TutorResource(TutorRepository tutorRepository, TutorService tutorService) {
         this.tutorRepository = tutorRepository;
+        this.tutorService = tutorService;
     }
 
     /**
@@ -89,6 +92,17 @@ public class TutorResource {
     public List<Tutor> getAllTutors(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Tutors");
         return tutorRepository.findAllWithEagerRelationships();
+    }
+
+    /**
+     * {@code GET  /students-user} : get the student by the logged user.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
+     */
+    @GetMapping("/tutors-user")
+    public Tutor getTutorUser() {
+        log.debug("REST request to get all Turors");
+        return tutorService.getTutorByUser();
     }
 
     /**

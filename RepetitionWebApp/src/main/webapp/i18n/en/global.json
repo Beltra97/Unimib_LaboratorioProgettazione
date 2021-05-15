@@ -58,6 +58,7 @@
       "email.label": "Email",
       "email.placeholder": "Your email",
       "birthdate.label": "Birthdate",
+      "birthdate.placeholder": "Your Birthdate",
       "role.label": "Role",
       "role.placeholder": "Your role",
       "role.label.student": "Student",

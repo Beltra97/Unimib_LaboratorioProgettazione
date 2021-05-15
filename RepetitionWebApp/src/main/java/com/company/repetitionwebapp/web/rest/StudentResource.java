@@ -95,7 +95,7 @@ public class StudentResource {
     }
 
     /**
-     * {@code GET  /students} : get all the students.
+     * {@code GET  /students-user} : get the student by the logged user.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
      */
