@@ -21,11 +21,10 @@ export class SettingsComponent implements OnInit {
   account!: Account;
   student?: IStudent;
   tutor?: ITutor;
-  subjects?: ISubject[] = [];
   subjects2: ISubject[] = [];
-  
+
   maxDate = new Date().toJSON().split('T')[0];
-  public DropdownVar = 1;
+  public DropdownVar!: Number;
 
   success = false;
   languages = LANGUAGES;
@@ -48,20 +47,25 @@ export class SettingsComponent implements OnInit {
     langKey: [undefined],
   });
 
-  constructor(private tutorService: TutorService, private studentService: StudentService, private subjectService: SubjectService,
-    private accountService: AccountService, private fb: FormBuilder, private languageService: JhiLanguageService) {
-      this.subjectService.query().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects2 = res.body || []));
-    }
+  constructor(
+    private tutorService: TutorService,
+    private studentService: StudentService,
+    private subjectService: SubjectService,
+    private accountService: AccountService,
+    private fb: FormBuilder,
+    private languageService: JhiLanguageService
+  ) {
+    this.subjectService.query().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects2 = res.body || []));
+  }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.accountService.identity().subscribe(account => {
       if (account) {
         this.account = account;
       }
     });
 
-    if (this.account.authorities.includes("ROLE_STUDENT")) {
-      window.alert("STUDENT");
+    if (this.account.authorities.includes('ROLE_STUDENT')) {
       this.studentService.getStudentByUser().subscribe((res: HttpResponse<IStudent>) => {
         this.student = res.body || undefined;
 
@@ -73,23 +77,31 @@ export class SettingsComponent implements OnInit {
           langKey: this.student?.user?.langKey,
         });
       });
-    } else if (this.account.authorities.includes("ROLE_TUTOR")) {
-      window.alert("TUTOR");
+    } else if (this.account.authorities.includes('ROLE_TUTOR')) {
       this.tutorService.getTutorByUser().subscribe((res: HttpResponse<ITutor>) => {
         this.tutor = res.body || undefined;
-        console.log(this.tutor?.subjects);
+        window.alert('TUTOR');
+        window.alert(this.tutor!.subjects);
+        // this.DropdownVar = this.tutor!.subjects!.length;
+
         this.settingsForm.patchValue({
           firstName: this.tutor?.user?.firstName,
           lastName: this.tutor?.user?.lastName,
           birthDate: this.tutor?.birthDate,
           email: this.tutor?.user?.email,
           degree: this.tutor?.degree,
-          // subject1: this.tutor?.subjects?[0].name,
+          // subject1: this.tutor?.subjects?,
           langKey: this.tutor?.user?.langKey,
         });
       });
+    } else if (this.account.authorities.includes('ROLE_ADMIN')) {
+      this.settingsForm.patchValue({
+        firstName: this.account?.firstName,
+        lastName: this.account?.lastName,
+        email: this.account?.email,
+        langKey: this.account?.langKey,
+      });
     }
-
   }
 
   save(): void {
