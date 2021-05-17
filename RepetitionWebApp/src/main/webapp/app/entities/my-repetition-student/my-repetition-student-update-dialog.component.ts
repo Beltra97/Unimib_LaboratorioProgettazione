@@ -69,6 +69,8 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
   }
 
   cancel(): void {
+    this.myRepetitionStudent!.topic = '';
+    this.myRepetitionStudent.additionalNote = '';
     this.activeModal.dismiss();
   }
 

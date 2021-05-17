@@ -56,6 +56,10 @@
         <br/>
 
         <ngx-paypal style="margin-top:50px" [config]="payPalConfig"></ngx-paypal>
+
+        <div mat-dialog-actions>
+            <button mat-button style="float:left" class="btn btn-danger" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
+        </div>
     </div>
 
 </div>
