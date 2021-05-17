@@ -70,19 +70,13 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
 
   cancel(): void {
     this.myRepetitionStudent!.topic = '';
-    this.myRepetitionStudent.additionalNote = '';
+    this.myRepetitionStudent!.additionalNote = '';
     this.activeModal.dismiss();
   }
 
   confirmBook(myRepetitionStudent: IMyRepetitionStudent): void {
 
     this.step = 2;
-
-    for (const t of this.myTopics) {
-      myRepetitionStudent.topic += t + "; "
-    }
-
-    myRepetitionStudent.additionalNote = this.additionalNote;
   }
 
   add(event: MatChipInputEvent): void {
@@ -164,6 +158,12 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
                 layout: 'vertical'
             },
             onClientAuthorization: (data) => {
+
+                for (const t of this.myTopics) {
+                  this.myRepetitionStudent!.topic += t + "; "
+                }
+                this.myRepetitionStudent!.additionalNote = this.additionalNote;
+
                 this.myRepetitionStudentService.create(this.myRepetitionStudent!).subscribe(() => {
                       this.eventManager.broadcast('myRepetitionStudentListModification');
                       this.activeModal.close();
