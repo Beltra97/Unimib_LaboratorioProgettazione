@@ -24,8 +24,8 @@ export class SettingsComponent implements OnInit {
   subjects2: ISubject[] = [];
 
   maxDate = new Date().toJSON().split('T')[0];
-  public DropdownVar!: Number;
-
+  DropdownVar = 1;
+  
   success = false;
   languages = LANGUAGES;
   settingsForm = this.fb.group({
@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     birthDate: [undefined, [Validators.required]],
     degree: [undefined, [Validators.required]],
-    subject1: [''],
+    subject1: ['', [Validators.required]],
     subject2: [''],
     subject3: [''],
     subject4: [''],
@@ -72,7 +72,7 @@ export class SettingsComponent implements OnInit {
         this.settingsForm.patchValue({
           firstName: this.student?.user?.firstName,
           lastName: this.student?.user?.lastName,
-          birthDate: this.student?.birthDate,
+          birthDate: this.student?.birthDate?.format('YYYY-MM-DD'),
           email: this.student?.user?.email,
           langKey: this.student?.user?.langKey,
         });
@@ -80,19 +80,22 @@ export class SettingsComponent implements OnInit {
     } else if (this.account.authorities.includes('ROLE_TUTOR')) {
       this.tutorService.getTutorByUser().subscribe((res: HttpResponse<ITutor>) => {
         this.tutor = res.body || undefined;
-        window.alert('TUTOR');
-        window.alert(this.tutor!.subjects);
-        // this.DropdownVar = this.tutor!.subjects!.length;
+        this.DropdownVar = this.tutor!.subjects!.length;
 
         this.settingsForm.patchValue({
           firstName: this.tutor?.user?.firstName,
           lastName: this.tutor?.user?.lastName,
-          birthDate: this.tutor?.birthDate,
+          birthDate: this.tutor?.birthDate?.format('YYYY-MM-DD'),
           email: this.tutor?.user?.email,
           degree: this.tutor?.degree,
-          // subject1: this.tutor?.subjects?,
           langKey: this.tutor?.user?.langKey,
         });
+
+        for (let i = 1; i <= this.DropdownVar; i++) {
+          this.settingsForm.patchValue({
+            ["subject" + i]: this.tutor!.subjects![i-1].name,
+          });
+        }
       });
     } else if (this.account.authorities.includes('ROLE_ADMIN')) {
       this.settingsForm.patchValue({
