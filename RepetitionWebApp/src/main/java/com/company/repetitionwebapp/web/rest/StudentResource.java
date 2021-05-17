@@ -1,6 +1,7 @@
 package com.company.repetitionwebapp.web.rest;
 
 import com.company.repetitionwebapp.domain.Student;
+import com.company.repetitionwebapp.service.StudentService;
 import com.company.repetitionwebapp.repository.StudentRepository;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
@@ -35,9 +36,11 @@ public class StudentResource {
     private String applicationName;
 
     private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
-    public StudentResource(StudentRepository studentRepository) {
+    public StudentResource(StudentService studentService, StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
+        this.studentService = studentService;
     }
 
     /**
@@ -89,6 +92,17 @@ public class StudentResource {
     public List<Student> getAllStudents() {
         log.debug("REST request to get all Students");
         return studentRepository.findAll();
+    }
+
+    /**
+     * {@code GET  /students-user} : get the student by the logged user.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
+     */
+    @GetMapping("/students-user")
+    public Student getStudentUser() {
+        log.debug("REST request to get all Students");
+        return studentService.getStudentByUser();
     }
 
     /**
