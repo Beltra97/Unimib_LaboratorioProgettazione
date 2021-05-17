@@ -5,7 +5,6 @@ import { RepetitionWebAppSharedModule } from 'app/shared/shared.module';
 import { MyRepetitionComponent } from './my-repetition.component';
 import { MyRepetitionDetailComponent } from './my-repetition-detail.component';
 import { MyRepetitionUpdateComponent } from './my-repetition-update.component';
-import { MyRepetitionHistoryComponent } from './my-repetition-history.component';
 import { MyRepetitionDeleteDialogComponent } from './my-repetition-delete-dialog.component';
 import { myRepetitionRoute } from './my-repetition.route';
 
@@ -19,8 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MyRepetitionComponent,
     MyRepetitionDetailComponent,
     MyRepetitionUpdateComponent,
-    MyRepetitionDeleteDialogComponent,
-    MyRepetitionHistoryComponent,
+    MyRepetitionDeleteDialogComponent
   ],
   entryComponents: [MyRepetitionDeleteDialogComponent],
 })

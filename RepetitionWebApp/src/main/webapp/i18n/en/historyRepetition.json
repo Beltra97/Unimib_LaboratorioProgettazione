@@ -1,0 +1,13 @@
+{
+  "repetitionWebApp": {
+    "historyRepetition": {
+      "home": {
+        "title": "History Repetition",
+        "notFound": "No Repetition found"
+      },
+      "duration": "Duration: {{ param }} minutes",
+      "topic": "Topic: {{ param }}",
+      "additionalNote": "Additional Note: {{ param }}"
+    }
+  }
+}

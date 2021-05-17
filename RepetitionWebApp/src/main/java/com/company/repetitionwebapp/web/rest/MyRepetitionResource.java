@@ -96,12 +96,6 @@ public class MyRepetitionResource {
         return repetitionService.getMyRepetitions();
     }
 
-    @GetMapping("/my-repetitions-history")
-    public List<MyRepetitionRS> getHistory() {
-        log.debug("REST request to get the history");
-        return repetitionService.getMyRepetitionsHistory();
-    }
-
     /**
      * {@code GET  /repetitions/:id} : get the "id" repetition.
      *

@@ -11,7 +11,6 @@ import { MyRepetitionService } from './my-repetition.service';
 import { MyRepetitionComponent } from './my-repetition.component';
 import { MyRepetitionDetailComponent } from './my-repetition-detail.component';
 import { MyRepetitionUpdateComponent } from './my-repetition-update.component';
-import { MyRepetitionHistoryComponent } from './my-repetition-history.component';
 
 @Injectable({ providedIn: 'root' })
 export class MyRepetitionResolve implements Resolve<IMyRepetition> {
@@ -60,18 +59,6 @@ export const myRepetitionRoute: Routes = [
   {
     path: 'new',
     component: MyRepetitionUpdateComponent,
-    resolve: {
-      myRepetition: MyRepetitionResolve,
-    },
-    data: {
-      authorities: [Authority.TUTOR],
-      pageTitle: 'repetitionWebApp.myRepetition.home.title',
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: 'history',
-    component: MyRepetitionHistoryComponent,
     resolve: {
       myRepetition: MyRepetitionResolve,
     },
