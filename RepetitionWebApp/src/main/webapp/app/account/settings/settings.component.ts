@@ -128,21 +128,23 @@ export class SettingsComponent implements OnInit {
       this.student!.surname = this.settingsForm.get('lastName')!.value;
       if (this.student) this.studentService.update(this.student).subscribe();
     } else if (this.account.authorities.includes('ROLE_TUTOR')) {
-      // this.tutor!.birthDate = moment(this.settingsForm.get('birthDate')!.value);
-      // this.tutor!.name = this.settingsForm.get('firstName')!.value;
-      // this.tutor!.surname = this.settingsForm.get('lastName')!.value;
-      // this.tutor!.degree = this.settingsForm.get('degree')!.value;
+      this.tutor!.birthDate = moment(this.settingsForm.get('birthDate')!.value);
+      this.tutor!.name = this.settingsForm.get('firstName')!.value;
+      this.tutor!.surname = this.settingsForm.get('lastName')!.value;
+      this.tutor!.degree = this.settingsForm.get('degree')!.value;
       const subjectsSet = new Set<ISubject>();
       for (let _i = 1; _i <= this.DropdownVar; _i++) {
         if (this.settingsForm.get(['subject' + _i])!.value !== '') {
-          //subjectsSet.add(this.subjects2.find(this.settingsForm.get(['subject' + _i])!.value));
-          //subjectsSet.add(this.settingsForm.get(['subject' + _i])!.value);
+          this.subjects2.forEach(subject => {
+            if (subject.name === this.settingsForm.get(['subject' + _i])!.value) subjectsSet.add(subject);
+          });
         }
       }
-      window.alert(subjectsSet.values);
-      // this.tutor!.subjects = Array.from(subjectsSet.values());
-      // if (this.tutor)
-      //   this.tutorService.update(this.tutor).subscribe();
+      subjectsSet.forEach(n => {
+        window.alert(n.name);
+      });
+      this.tutor!.subjects = Array.from(subjectsSet.values());
+      if (this.tutor) this.tutorService.update(this.tutor).subscribe();
     }
 
     this.accountService.save(this.account).subscribe(() => {
