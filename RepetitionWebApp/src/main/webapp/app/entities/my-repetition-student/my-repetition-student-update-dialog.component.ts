@@ -159,9 +159,7 @@ export class MyRepetitionStudentUpdateDialogComponent implements OnInit {
             },
             onClientAuthorization: (data) => {
 
-                for (const t of this.myTopics) {
-                  this.myRepetitionStudent!.topic += t + "; "
-                }
+                this.myRepetitionStudent!.topic = this.myTopics.join(';');
                 this.myRepetitionStudent!.additionalNote = this.additionalNote;
 
                 this.myRepetitionStudentService.create(this.myRepetitionStudent!).subscribe(() => {

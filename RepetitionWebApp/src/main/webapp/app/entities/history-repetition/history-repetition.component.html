@@ -29,11 +29,19 @@
                                 <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
                                     [translateValues]="{ param: historyRepetition.duration }">Duration: {{ historyRepetition.duration }}
                                     minutes </h6>
+
+                                <h6 jhiTranslate="repetitionWebApp.myRepetition.home.price"
+                                    [translateValues]="{ param: historyRepetition.price }">Price: {{ historyRepetition.price }} € </h6>
                             </div>
                             <div>
                                 <h4> {{ historyRepetition.subject?.name }} </h4>
-                                <h6 *ngIf="historyRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
-                                    [translateValues]="{ param: historyRepetition.topic }">Topic: {{ historyRepetition.topic }}</h6>
+
+                                <mat-chip-list *ngIf="historyRepetition.topic != ''" #chipList>
+                                    <mat-chip *ngFor="let topic of historyRepetition.topic!.split(';')">
+                                        {{ topic }}
+                                    </mat-chip>
+                                </mat-chip-list>
+
                             </div>
                         </mat-card-subtitle>
                     </div>

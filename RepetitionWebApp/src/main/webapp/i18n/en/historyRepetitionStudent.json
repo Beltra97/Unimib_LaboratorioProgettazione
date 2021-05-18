@@ -6,7 +6,8 @@
         "notFound": "No Repetition found"
       },
       "duration": "Duration: {{ param }} minutes",
-      "topic": "Topic: {{ param }}",
+      "price": "Price: {{ param }} minutes",
+      "topic": "Topic: {{ param }} €",
       "additionalNote": "Additional Note: {{ param }}"
     }
   }

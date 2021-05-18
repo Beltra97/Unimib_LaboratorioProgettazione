@@ -95,9 +95,9 @@ public class RepetitionStudentService {
         List<HistoryRepetitionStudentRS> historyRepetitions = new ArrayList<HistoryRepetitionStudentRS>();
 
         Student student = studentService.getStudentByUser();
-               
+
         for(RepetitionStudent s : repetitionStudentRepository.findAll()){
-            if(student != null) {
+            if(student != null && s.getDateDeleted() == null) {
                 repetitionRepository.findAll().stream().filter(r ->
                     s.getRepetition().getId().equals(r.getId()) && s.getStudent().getId().equals(student.getId()) && r.getDateDeleted() == null).forEach(
                     repetition -> {
@@ -108,7 +108,7 @@ public class RepetitionStudentService {
                     }
                 );
             }
-        } 
+        }
         return historyRepetitions;
     }
 

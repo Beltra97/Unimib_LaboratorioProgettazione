@@ -26,6 +26,9 @@
                 <mat-card-subtitle>
                     <h6 jhiTranslate="repetitionWebApp.historyRepetitionStudent.duration"
                         [translateValues]="{ param: historyRepetition.duration }">Duration: {{ historyRepetition.duration }} minutes </h6>
+
+                    <h6 jhiTranslate="repetitionWebApp.historyRepetitionStudent.price"
+                        [translateValues]="{ param: historyRepetition.price }">Price: {{ historyRepetition.price }} € </h6>
                 </mat-card-subtitle>
             </mat-card-header>
 
@@ -34,8 +37,12 @@
             <mat-card-content>
 
                 <h4> {{ historyRepetition.subject?.name }} </h4>
-                <h6 *ngIf="historyRepetition?.topic" jhiTranslate="repetitionWebApp.historyRepetitionStudent.topic"
-                    [translateValues]="{ param: historyRepetition.topic }">Topic: {{ historyRepetition.topic }}</h6>
+
+                <mat-chip-list *ngIf="historyRepetition.topic != ''" #chipList>
+                    <mat-chip *ngFor="let topic of historyRepetition.topic!.split(';')">
+                        {{ topic }}
+                    </mat-chip>
+                </mat-chip-list>
 
                 <h6 *ngIf="historyRepetition?.additionalNote" jhiTranslate="repetitionWebApp.historyRepetitionStudent.additionalNote"
                     [translateValues]="{ param: historyRepetition.additionalNote }">Additional Note: {{ historyRepetition.additionalNote }}</h6>

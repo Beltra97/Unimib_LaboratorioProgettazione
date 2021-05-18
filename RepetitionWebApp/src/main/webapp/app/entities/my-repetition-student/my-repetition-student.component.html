@@ -37,8 +37,12 @@
             <mat-card-content>
 
                 <h4> {{ myRepetition.subject?.name }} </h4>
-                <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
-                    [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+
+                <mat-chip-list *ngIf="myRepetition.topic != ''" #chipList>
+                    <mat-chip *ngFor="let topic of myRepetition.topic!.split(';')">
+                        {{ topic }}
+                    </mat-chip>
+                </mat-chip-list>
 
                 <h6 *ngIf="myRepetition?.additionalNote" jhiTranslate="repetitionWebApp.myRepetition.additionalNote"
                     [translateValues]="{ param: myRepetition.additionalNote }">Additional Note: {{ myRepetition.additionalNote }}</h6>

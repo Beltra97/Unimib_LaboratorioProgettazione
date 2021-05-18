@@ -8,6 +8,7 @@ export interface IHistoryRepetitionStudent {
   topic?: string;
   additionalNote?: string;
   duration?: number,
+  price?: number;
   dateRepetition?: Moment;
   tutor?: ITutor;
   isFree?: boolean;
@@ -21,6 +22,7 @@ export class HistoryRepetitionStudent implements IHistoryRepetitionStudent {
     public topic?: string,
     public additionalNote?: string,
     public duration?: number,
+    public price?: number,
     public dateRepetition?: Moment,
     public tutor?: ITutor,
     public isFree?: boolean,
