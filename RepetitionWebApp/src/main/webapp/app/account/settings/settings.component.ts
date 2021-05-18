@@ -141,9 +141,6 @@ export class SettingsComponent implements OnInit {
           });
         }
       }
-      subjectsSet.forEach(n => {
-        window.alert(n.name);
-      });
       this.tutor!.subjects = Array.from(subjectsSet.values());
       if (this.tutor) this.tutorService.update(this.tutor).subscribe();
     }
