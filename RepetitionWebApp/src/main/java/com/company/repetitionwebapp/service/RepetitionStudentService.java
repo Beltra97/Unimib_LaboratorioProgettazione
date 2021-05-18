@@ -129,10 +129,22 @@ public class RepetitionStudentService {
                 repetition.setAdditionalNote(repetitionStudentDTO.getAdditionalNote());
             }
 
-            newRepetitionStudent = new RepetitionStudent();
-            newRepetitionStudent.setStudent(student);
-            newRepetitionStudent.setRepetition(repetition);
-            newRepetitionStudent.setDateCreated(Instant.now());
+            if(repetitionStudentRepository.findAll().stream().noneMatch(s ->
+                s.getStudent().getId().equals(student.getId()) &&
+                s.getRepetition() == repetition && s.getDateDeleted() != null)) {
+
+                newRepetitionStudent = new RepetitionStudent();
+                newRepetitionStudent.setStudent(student);
+                newRepetitionStudent.setRepetition(repetition);
+                newRepetitionStudent.setDateCreated(Instant.now());
+            }
+            else{
+
+                newRepetitionStudent = repetitionStudentRepository.findAll().stream().filter(s ->
+                        s.getStudent().getId().equals(student.getId()) &&
+                        s.getRepetition() == repetition && s.getDateDeleted() != null).findFirst().get();
+            }
+
             newRepetitionStudent.setDateModified(Instant.now());
             newRepetitionStudent.setDateDeleted(null);
             repetitionStudentRepository.save(newRepetitionStudent);
