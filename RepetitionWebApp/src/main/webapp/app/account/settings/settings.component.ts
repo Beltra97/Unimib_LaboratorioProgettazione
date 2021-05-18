@@ -12,6 +12,9 @@ import { HttpResponse } from '@angular/common/http';
 import { IStudent } from 'app/shared/model/student.model';
 import { ITutor } from 'app/shared/model/tutor.model';
 import { ISubject } from 'app/shared/model/subject.model';
+import { Observable } from 'rxjs';
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
+import * as moment from 'moment';
 
 @Component({
   selector: 'jhi-settings',
@@ -25,15 +28,17 @@ export class SettingsComponent implements OnInit {
 
   maxDate = new Date().toJSON().split('T')[0];
   DropdownVar = 1;
-  
+
   success = false;
   languages = LANGUAGES;
   settingsForm = this.fb.group({
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     birthDate: [undefined, [Validators.required]],
-    degree: [undefined, [Validators.required]],
-    subject1: ['', [Validators.required]],
+    // degree: [undefined, [Validators.required]],
+    degree: [''],
+    // subject1: ['', [Validators.required]],
+    subject1: [''],
     subject2: [''],
     subject3: [''],
     subject4: [''],
@@ -46,6 +51,8 @@ export class SettingsComponent implements OnInit {
     email: [undefined, [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     langKey: [undefined],
   });
+
+  optionValue = false;
 
   constructor(
     private tutorService: TutorService,
@@ -68,7 +75,6 @@ export class SettingsComponent implements OnInit {
     if (this.account.authorities.includes('ROLE_STUDENT')) {
       this.studentService.getStudentByUser().subscribe((res: HttpResponse<IStudent>) => {
         this.student = res.body || undefined;
-
         this.settingsForm.patchValue({
           firstName: this.student?.user?.firstName,
           lastName: this.student?.user?.lastName,
@@ -78,6 +84,7 @@ export class SettingsComponent implements OnInit {
         });
       });
     } else if (this.account.authorities.includes('ROLE_TUTOR')) {
+      this.optionValue = true;
       this.tutorService.getTutorByUser().subscribe((res: HttpResponse<ITutor>) => {
         this.tutor = res.body || undefined;
         this.DropdownVar = this.tutor!.subjects!.length;
@@ -93,7 +100,7 @@ export class SettingsComponent implements OnInit {
 
         for (let i = 1; i <= this.DropdownVar; i++) {
           this.settingsForm.patchValue({
-            ["subject" + i]: this.tutor!.subjects![i-1].name,
+            ['subject' + i]: this.tutor!.subjects![i - 1].name,
           });
         }
       });
@@ -115,11 +122,32 @@ export class SettingsComponent implements OnInit {
     this.account.email = this.settingsForm.get('email')!.value;
     this.account.langKey = this.settingsForm.get('langKey')!.value;
 
+    if (this.account.authorities.includes('ROLE_STUDENT')) {
+      this.student!.birthDate = moment(this.settingsForm.get('birthDate')!.value);
+      this.student!.name = this.settingsForm.get('firstName')!.value;
+      this.student!.surname = this.settingsForm.get('lastName')!.value;
+      if (this.student) this.studentService.update(this.student).subscribe();
+    } else if (this.account.authorities.includes('ROLE_TUTOR')) {
+      // this.tutor!.birthDate = moment(this.settingsForm.get('birthDate')!.value);
+      // this.tutor!.name = this.settingsForm.get('firstName')!.value;
+      // this.tutor!.surname = this.settingsForm.get('lastName')!.value;
+      // this.tutor!.degree = this.settingsForm.get('degree')!.value;
+      const subjectsSet = new Set<ISubject>();
+      for (let _i = 1; _i <= this.DropdownVar; _i++) {
+        if (this.settingsForm.get(['subject' + _i])!.value !== '') {
+          //subjectsSet.add(this.subjects2.find(this.settingsForm.get(['subject' + _i])!.value));
+          //subjectsSet.add(this.settingsForm.get(['subject' + _i])!.value);
+        }
+      }
+      window.alert(subjectsSet.values);
+      // this.tutor!.subjects = Array.from(subjectsSet.values());
+      // if (this.tutor)
+      //   this.tutorService.update(this.tutor).subscribe();
+    }
+
     this.accountService.save(this.account).subscribe(() => {
       this.success = true;
-
       this.accountService.authenticate(this.account);
-
       if (this.account.langKey !== this.languageService.getCurrentLanguage()) {
         this.languageService.changeLanguage(this.account.langKey);
       }

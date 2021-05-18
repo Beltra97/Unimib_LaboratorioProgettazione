@@ -114,7 +114,7 @@
                 
                 <div *jhiHasAnyAuthority="'ROLE_TUTOR'" class="form-group">
                     <label class="form-control-label" for="degree" jhiTranslate="global.form.degree.label">Degree</label>
-                    <select type="text" class="form-control" formControlName="degree" id="degree" name="degree">
+                    <select type="text" class="form-control" formControlName="degree" id="degree" name="degree" [required]="optionValue">
                         <option value="High school" jhiTranslate="global.form.degree.label.high_school">High school</option>
                         <option value="University" jhiTranslate="global.form.degree.label.university">University</option>
                         <option value="Master" jhiTranslate="global.form.degree.label.master">Master</option>
@@ -132,7 +132,7 @@
                 <div *jhiHasAnyAuthority="'ROLE_TUTOR'" class="form-group">
                     <label class="form-control-label" jhiTranslate="global.form.subject.label" for="subject1">Subject</label>
 
-                    <select class="form-control" id="subject1" name="subject1" formControlName="subject1">
+                    <select class="form-control" id="subject1" name="subject1" formControlName="subject1" [required]="optionValue">
                         <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById">{{ subjectOption.name }}</option>
                     </select>
 
@@ -200,7 +200,7 @@
                     </select>
                 </div>
 
-                <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
+                <button  type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
             </form>
         </div>
     </div>
