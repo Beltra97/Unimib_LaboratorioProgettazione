@@ -45,10 +45,22 @@ describe('Component Tests', () => {
       // GIVEN
       mockAuth.saveSpy.and.returnValue(of({}));
       const settingsFormValues = {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@mail.com',
-        langKey: 'en',
+        firstName: null,
+        lastName: null,
+        email: null,
+        langKey: null,
+        birthDate: "",
+        degree: "",
+        subject1: "",
+        subject2: "",
+        subject3: "",
+        subject4: "",
+        subject5: "",
+        subject6: "",
+        subject7: "",
+        subject8: "",
+        subject9: "",
+        subject10: ""
       };
 
       // WHEN
