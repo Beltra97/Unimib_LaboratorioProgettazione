@@ -34,11 +34,8 @@ export class SettingsComponent implements OnInit {
   settingsForm = this.fb.group({
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-    // birthDate: [undefined, [Validators.required]],
     birthDate: '',
-    // degree: [undefined, [Validators.required]],
     degree: [''],
-    // subject1: ['', [Validators.required]],
     subject1: [''],
     subject2: [''],
     subject3: [''],
