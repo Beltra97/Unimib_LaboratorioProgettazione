@@ -54,6 +54,7 @@ export class SettingsComponent implements OnInit {
   });
 
   optionValue = false;
+  birthValue = false;
 
   constructor(
     private tutorService: TutorService,
@@ -76,6 +77,7 @@ export class SettingsComponent implements OnInit {
     if (this.account.authorities.includes('ROLE_STUDENT')) {
       this.studentService.getStudentByUser().subscribe((res: HttpResponse<IStudent>) => {
         this.student = res.body || undefined;
+        this.birthValue = true;
         this.settingsForm.patchValue({
           firstName: this.student?.user?.firstName,
           lastName: this.student?.user?.lastName,
@@ -86,6 +88,7 @@ export class SettingsComponent implements OnInit {
       });
     } else if (this.account.authorities.includes('ROLE_TUTOR')) {
       this.optionValue = true;
+      this.birthValue = true;
       this.tutorService.getTutorByUser().subscribe((res: HttpResponse<ITutor>) => {
         this.tutor = res.body || undefined;
         this.DropdownVar = this.tutor!.subjects!.length;

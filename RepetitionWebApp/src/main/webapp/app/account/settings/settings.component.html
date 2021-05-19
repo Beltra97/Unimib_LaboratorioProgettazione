@@ -97,7 +97,7 @@
                 <div *jhiHasAnyAuthority="['ROLE_STUDENT', 'ROLE_TUTOR']" class="form-group">
                     <label class="form-control-label" for="birthDate" jhiTranslate="global.form.birthdate.label">Birthdate</label>
                     <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="{{ 'global.form.birthdate.placeholder' | translate }}"
-                           formControlName="birthDate">
+                           formControlName="birthDate" [required]="birthValue">
 
                     <div *ngIf="settingsForm.get('birthDate')!.invalid && (settingsForm.get('birthDate')!.dirty || settingsForm.get('birthDate')!.touched)">
                         <small class="form-text text-danger"
@@ -119,14 +119,6 @@
                         <option value="University" jhiTranslate="global.form.degree.label.university">University</option>
                         <option value="Master" jhiTranslate="global.form.degree.label.master">Master</option>
                     </select>     
-    
-                    <div *ngIf="settingsForm.get('degree')!.invalid && (settingsForm.get('degree')!.dirty || settingsForm.get('degree')!.touched)">
-                        <small class="form-text text-danger"
-                                *ngIf="settingsForm.get('degree')?.errors?.required"
-                                jhiTranslate="global.messages.validate.degree.required">
-                            Your degree is required.
-                        </small>
-                    </div>
                 </div>
 
                 <div *jhiHasAnyAuthority="'ROLE_TUTOR'" class="form-group">
