@@ -32,6 +32,7 @@ describe('Service Tests', () => {
         'Additional note example',
         100,
         9.99,
+        'https://meet.google.com/example',
         currentDate,
         currentDate,
         undefined,
