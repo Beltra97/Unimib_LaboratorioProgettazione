@@ -130,7 +130,7 @@ public class RepetitionService {
             newRepetition.setSubject(subject);
             newRepetition.setDuration(repetitionDTO.getDuration());
             newRepetition.setPrice(repetitionDTO.getPrice());
-            newRepetition.setMeetingLink("https://meet.google.com/" + generateLink(3) + "-" + generateLink(4) + "-" + generateLink(3));
+            newRepetition.setMeetingLink("https://www.experte.com/online-meeting?join=" + generateLink(10));
             newRepetition.setDateRepetition(repetitionDTO.getDateRepetition());
             newRepetition.setDateCreated(Instant.now());
             newRepetition.setDateModified(Instant.now());
