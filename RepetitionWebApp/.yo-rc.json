@@ -14,7 +14,7 @@
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
-    "prodDatabaseType": "mysql",
+    "prodDatabaseType": "postgresql",
     "searchEngine": false,
     "enableSwaggerCodegen": false,
     "messageBroker": false,
@@ -36,6 +36,9 @@
     "dtoSuffix": "DTO",
     "otherModules": [],
     "blueprints": [],
-    "prettierJava": true
+    "prettierJava": true,
+    "herokuAppName": "repetition-web-app-staging",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }
