@@ -3,11 +3,10 @@ package com.company.repetitionwebapp.service.dto;
 import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.domain.Student;
 import com.company.repetitionwebapp.domain.Subject;
-
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * A DTO representing a MyRepetitionRS.
@@ -24,6 +23,8 @@ public class MyRepetitionRS {
     private Integer duration;
 
     private Float price;
+
+    private String meetingLink;
 
     private Instant dateRepetition;
 
@@ -44,6 +45,7 @@ public class MyRepetitionRS {
         this.price = repetition.getPrice();
         this.dateRepetition = repetition.getDateRepetition();
         this.nPartecipants = repetition.getnPartecipants();
+        this.meetingLink = repetition.getMeetingLink();
     }
 
     public Long getId() {
@@ -116,5 +118,13 @@ public class MyRepetitionRS {
 
     public void setnPartecipants(Integer nPartecipants) {
         this.nPartecipants = nPartecipants;
+    }
+
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 }

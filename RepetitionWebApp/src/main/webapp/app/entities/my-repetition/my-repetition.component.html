@@ -31,12 +31,12 @@
                     <h5> {{ myRepetition.dateRepetition | date:'medium' }} </h5>
                 </mat-card-title>
                 <mat-card-subtitle>
-                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
-                        [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }}
-                        minutes </h6>
+                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration" [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }} minutes </h6>
                 </mat-card-subtitle>
                 <mat-card-subtitle>
-                    <h6 *ngIf="myRepetition?.meetingLink" jhiTranslate="repetitionWebApp.myRepetition.meetingLink">Meeting Link: {{ myRepetition.meetingLink }}</h6>
+                    <mat-chip *ngIf="myRepetition?.meetingLink">
+                        <a href="{{ myRepetition!.meetingLink }}" target="_blank"><span jhiTranslate="repetitionWebApp.myRepetition.meetingLink">Meeting Link</span></a>
+                    </mat-chip>
                 </mat-card-subtitle>
             </mat-card-header>
 
@@ -45,8 +45,12 @@
             <mat-card-content>
 
                 <h4> {{ myRepetition.subject?.name }} </h4>
-                <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
-                    [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+
+                <mat-chip-list *ngIf="myRepetition?.topic != ''" #chipList>
+                    <mat-chip *ngFor="let topic of myRepetition!.topic!.split(';')">
+                        {{ topic }}
+                    </mat-chip>
+                </mat-chip-list>
             </mat-card-content>
 
             <mat-card-actions style="float:right">

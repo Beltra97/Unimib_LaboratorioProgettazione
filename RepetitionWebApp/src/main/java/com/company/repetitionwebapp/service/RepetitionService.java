@@ -130,7 +130,7 @@ public class RepetitionService {
             newRepetition.setSubject(subject);
             newRepetition.setDuration(repetitionDTO.getDuration());
             newRepetition.setPrice(repetitionDTO.getPrice());
-            newRepetition.setMeetingLink("https://apps.google.com/meet/");
+            newRepetition.setMeetingLink("https://meet.google.com/" + generateLink(3) + "-" + generateLink(4) + "-" + generateLink(3));
             newRepetition.setDateRepetition(repetitionDTO.getDateRepetition());
             newRepetition.setDateCreated(Instant.now());
             newRepetition.setDateModified(Instant.now());
@@ -139,6 +139,14 @@ public class RepetitionService {
             log.debug("Created Information for Repetition: {}", newRepetition);
         }
         return newRepetition;
+    }
+
+    public String generateLink(int n) {
+        byte[] array = new byte[n];
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+
+        return generatedString;
     }
 
     public Repetition updateRepetition(RepetitionDTO repetitionDTO) {

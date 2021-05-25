@@ -34,6 +34,8 @@ public class MyRepetitionStudentRS {
 
     private Integer nPartecipants;
 
+    private String meetingLink;
+
     public MyRepetitionStudentRS() {
         // Empty constructor needed for Jackson.
     }
@@ -48,6 +50,7 @@ public class MyRepetitionStudentRS {
         this.price = repetition.getPrice();
         this.dateRepetition = repetition.getDateRepetition();
         this.nPartecipants = repetition.getnPartecipants();
+        this.meetingLink = repetition.getMeetingLink();
     }
 
     public Long getId() {
@@ -136,5 +139,13 @@ public class MyRepetitionStudentRS {
 
     public void setnPartecipants(Integer nPartecipants) {
         this.nPartecipants = nPartecipants;
+    }
+
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 }
