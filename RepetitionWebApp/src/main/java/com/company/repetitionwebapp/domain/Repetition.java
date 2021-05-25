@@ -1,14 +1,12 @@
 package com.company.repetitionwebapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.time.Instant;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Repetition.
@@ -17,7 +15,6 @@ import java.time.Instant;
 @Table(name = "repetition")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Repetition implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -45,6 +42,9 @@ public class Repetition implements Serializable {
     @NotNull
     @Column(name = "price", nullable = false)
     private Float price;
+
+    @Column(name = "meeting_link")
+    private String meetingLink;
 
     @Column(name = "date_created")
     private Instant dateCreated;
@@ -150,6 +150,19 @@ public class Repetition implements Serializable {
         this.price = price;
     }
 
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public Repetition meetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
+        return this;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
+    }
+
     public Instant getDateCreated() {
         return dateCreated;
     }
@@ -214,6 +227,7 @@ public class Repetition implements Serializable {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -243,6 +257,7 @@ public class Repetition implements Serializable {
             ", nPartecipants=" + getnPartecipants() +
             ", duration=" + getDuration() +
             ", price=" + getPrice() +
+            ", meetingLink='" + getMeetingLink() + "'" +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +
             ", dateDeleted='" + getDateDeleted() + "'" +

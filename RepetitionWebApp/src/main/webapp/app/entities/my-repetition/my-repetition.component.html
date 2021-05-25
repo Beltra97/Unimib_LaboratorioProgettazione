@@ -35,6 +35,9 @@
                         [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }}
                         minutes </h6>
                 </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <h6 *ngIf="myRepetition?.meetingLink" jhiTranslate="repetitionWebApp.myRepetition.meetingLink">Meeting Link: {{ myRepetition.meetingLink }}</h6>
+                </mat-card-subtitle>
             </mat-card-header>
 
             <hr />

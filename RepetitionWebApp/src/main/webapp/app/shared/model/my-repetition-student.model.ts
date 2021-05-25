@@ -9,6 +9,7 @@ export interface IMyRepetitionStudent {
   additionalNote?: string;
   duration?: number;
   price?: number;
+  meetingLink?: string;
   dateRepetition?: Moment;
   tutor?: ITutor;
   isFree?: boolean;
@@ -24,6 +25,7 @@ export class MyRepetitionStudent implements IMyRepetitionStudent {
     public additionalNote?: string,
     public duration?: number,
     public price?: number,
+    public meetingLink?: string,
     public dateRepetition?: Moment,
     public tutor?: ITutor,
     public isFree?: boolean,

@@ -25,6 +25,7 @@ entity Repetition {
     nPartecipants Integer required,
     duration Integer required,
     price Float required,
+    meetingLink String,
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant

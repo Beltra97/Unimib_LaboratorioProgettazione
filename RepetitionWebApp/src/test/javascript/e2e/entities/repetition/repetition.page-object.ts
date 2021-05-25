@@ -35,6 +35,7 @@ export class RepetitionUpdatePage {
   nPartecipantsInput = element(by.id('field_nPartecipants'));
   durationInput = element(by.id('field_duration'));
   priceInput = element(by.id('field_price'));
+  meetingLinkInput = element(by.id('field_meetingLink'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
   dateDeletedInput = element(by.id('field_dateDeleted'));
@@ -92,6 +93,14 @@ export class RepetitionUpdatePage {
 
   async getPriceInput(): Promise<string> {
     return await this.priceInput.getAttribute('value');
+  }
+
+  async setMeetingLinkInput(meetingLink: string): Promise<void> {
+    await this.meetingLinkInput.sendKeys(meetingLink);
+  }
+
+  async getMeetingLinkInput(): Promise<string> {
+    return await this.meetingLinkInput.getAttribute('value');
   }
 
   async setDateCreatedInput(dateCreated: string): Promise<void> {

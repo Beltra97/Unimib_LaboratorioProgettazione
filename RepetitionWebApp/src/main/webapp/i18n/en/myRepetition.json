@@ -24,6 +24,7 @@
       },
       "subject": "Subject",
       "topic": "Topic: {{ param }}",
+      "meetingLink": "Meeting Link:",
       "additionalNote": "Additional Note: {{ param }}",
       "nPartecipants": "Max partecipants: {{ param }}",
       "singleRepetition": "Single Repetition",

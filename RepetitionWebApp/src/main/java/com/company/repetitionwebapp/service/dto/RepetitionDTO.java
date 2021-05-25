@@ -5,14 +5,13 @@ import com.company.repetitionwebapp.domain.Authority;
 import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.domain.User;
-
+import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -28,6 +27,8 @@ public class RepetitionDTO {
 
     private Float price;
 
+    private String meetingLink;
+
     public RepetitionDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -38,6 +39,7 @@ public class RepetitionDTO {
         this.dateRepetition = repetition.getDateRepetition();
         this.duration = repetition.getDuration();
         this.price = repetition.getPrice();
+        this.meetingLink = repetition.getMeetingLink();
     }
 
     public Long getId() {
@@ -78,5 +80,13 @@ public class RepetitionDTO {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 }
