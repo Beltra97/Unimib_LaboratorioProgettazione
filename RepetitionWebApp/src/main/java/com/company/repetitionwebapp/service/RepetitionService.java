@@ -141,12 +141,17 @@ public class RepetitionService {
         return newRepetition;
     }
 
-    public String generateLink(int n) {
-        byte[] array = new byte[n];
-        new Random().nextBytes(array);
-        String generatedString = new String(array, Charset.forName("UTF-8"));
+    protected String generateLink(int n) {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < n) {
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
 
-        return generatedString;
+        return saltStr;
     }
 
     public Repetition updateRepetition(RepetitionDTO repetitionDTO) {
