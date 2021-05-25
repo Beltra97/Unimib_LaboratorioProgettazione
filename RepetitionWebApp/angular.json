@@ -31,6 +31,7 @@
   },
   "defaultProject": "repetition-web-app",
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "1536b07e-2c4b-4d58-be63-05e07c4f45db"
   }
 }

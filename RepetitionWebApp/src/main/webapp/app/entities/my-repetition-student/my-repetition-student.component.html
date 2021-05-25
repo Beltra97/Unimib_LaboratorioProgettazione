@@ -1,0 +1,59 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="repetitionWebApp.myRepetition.home.title">My Repetitions</span>
+
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="myRepetitionStudents?.length === 0">
+        <span jhiTranslate="repetitionWebApp.myRepetition.home.notFound">No myRepetitions found</span>
+    </div>
+
+    <div id="entities" *ngIf="myRepetitionStudents && myRepetitionStudents.length > 0">
+
+        <mat-card class="alert alert-warning" *ngFor="let myRepetition of myRepetitionStudents">
+
+            <!--<img mat-card-lg-image style="float:right" src="{{myRepetition.subject?.imageUrl}}">-->
+
+            <mat-card-header>
+                <mat-card-title >
+                    <h5> {{ myRepetition.tutor?.surname }} {{ myRepetition.tutor?.name }}</h5>
+                    <h5> {{ myRepetition.dateRepetition | date:'medium' }} </h5>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
+                        [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }} minutes </h6>
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <hr/>
+
+            <mat-card-content>
+
+                <h4> {{ myRepetition.subject?.name }} </h4>
+                <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
+                    [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button *ngIf="!myRepetition?.isAlreadyBooked" class="btn btn-primary float-right jh-create-entity create-my-repetition"
+                        type="submit" (click)="book(myRepetition)">
+                    <fa-icon icon="book"></fa-icon>
+                    Book
+                </button>
+
+                <button *ngIf="myRepetition?.isAlreadyBooked" class="btn btn-danger float-right jh-create-entity create-my-repetition"
+                            type="submit" (click)="delete(myRepetition)">
+                    <fa-icon icon="times"></fa-icon>
+                    UnBook
+                </button>
+            </mat-card-actions>
+
+            <hr />
+
+        </mat-card>
+    </div>
+</div>

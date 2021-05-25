@@ -13,7 +13,7 @@ import com.company.repetitionwebapp.repository.UserRepository;
 import com.company.repetitionwebapp.security.AuthoritiesConstants;
 import com.company.repetitionwebapp.service.dto.UserDTO;
 import com.company.repetitionwebapp.service.mapper.UserMapper;
-import com.company.repetitionwebapp.web.rest.vm.ManagedUserVM;
+import com.company.repetitionwebapp.service.dto.ManagedUserVM;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;

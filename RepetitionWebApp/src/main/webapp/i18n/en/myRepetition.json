@@ -1,0 +1,31 @@
+{
+  "repetitionWebApp": {
+    "myRepetition": {
+      "home": {
+        "title": "My Repetitions",
+        "createLabel": "Post Repetition",
+        "createOrEditLabel": "Post or edit Repetition",
+        "notFound": "No My Repetitions found",
+        "Reservations": "Booked by",
+        "noReservations": "No reservations",
+        "duration": "Duration: {{ param }} minutes"
+      },
+      "created": "A Repetition is posted with identifier {{ param }}",
+      "updated": "A Repetition is updated with identifier {{ param }}",
+      "deleted": "A Repetition is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Repetition {{ id }}?"
+      },
+      "detail": {
+        "title": "My Repetition"
+      },
+      "subject": "Subject",
+      "topic": "Topic: {{ param }}",
+      "duration": "Duration",
+      "dateRepetition": "Date Repetition",
+      "dateCreated": "Date Created",
+      "dateModified": "Date Modified",
+      "dateDeleted": "Date Deleted"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "repetitionWebApp": {
+    "repetition": {
+      "home": {
+        "title": "Repetitions",
+        "createLabel": "Create a new Repetition",
+        "createOrEditLabel": "Create or edit a Repetition",
+        "notFound": "No Repetitions found"
+      },
+      "created": "A new Repetition is created with identifier {{ param }}",
+      "updated": "A Repetition is updated with identifier {{ param }}",
+      "deleted": "A Repetition is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Repetition {{ id }}?"
+      },
+      "detail": {
+        "title": "Repetition"
+      },
+      "topic": "Topic",
+      "dateRepetition": "Date Repetition",
+      "duration": "Duration",
+      "dateCreated": "Date Created",
+      "dateModified": "Date Modified",
+      "dateDeleted": "Date Deleted",
+      "tutor": "Tutor",
+      "subject": "Subject"
+    }
+  }
+}

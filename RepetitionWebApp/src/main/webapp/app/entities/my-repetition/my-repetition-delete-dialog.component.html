@@ -1,0 +1,12 @@
+<div style="padding:20px;">
+    <h4 *ngIf="myRepetition" mat-dialog-title jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+    <div mat-dialog-content>
+        <p id="jhi-delete-myRepetition-heading" jhiTranslate="repetitionWebApp.myRepetition.delete.question" [translateValues]="{ id: myRepetition?.id }">Are you sure you want to delete this My Repetition?</p>
+
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button style="float:left" (click)="cancel()" jhiTranslate="entity.action.cancel">Cancel</button>
+        <button mat-button id="jhi-confirm-delete-myRepetition" cdkFocusInitial style="float:right" class="btn btn-danger"
+                (click)="confirmDelete(myRepetition?.id!)" jhiTranslate="entity.action.delete">Delete</button>
+    </div>
+</div>

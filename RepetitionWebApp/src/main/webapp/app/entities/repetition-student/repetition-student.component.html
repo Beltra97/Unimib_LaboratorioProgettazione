@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="repetitionWebApp.repetitionStudent.home.title">Repetition Students</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-repetition-student" [routerLink]="['/repetition-student/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="repetitionWebApp.repetitionStudent.home.createLabel">
+            Create a new Repetition Student
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="repetitionStudents?.length === 0">
+        <span jhiTranslate="repetitionWebApp.repetitionStudent.home.notFound">No repetitionStudents found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="repetitionStudents && repetitionStudents.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetitionStudent.dateCreated">Date Created</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetitionStudent.dateModified">Date Modified</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetitionStudent.dateDeleted">Date Deleted</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetitionStudent.repetition">Repetition</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetitionStudent.student">Student</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let repetitionStudent of repetitionStudents ;trackBy: trackId">
+                    <td><a [routerLink]="['/repetition-student', repetitionStudent.id, 'view']">{{ repetitionStudent.id }}</a></td>
+                    <td>{{ repetitionStudent.dateCreated | date:'medium' }}</td>
+                    <td>{{ repetitionStudent.dateModified | date:'medium' }}</td>
+                    <td>{{ repetitionStudent.dateDeleted | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="repetitionStudent.repetition">
+                            <a [routerLink]="['/repetition', repetitionStudent.repetition?.id, 'view']" >{{ repetitionStudent.repetition?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="repetitionStudent.student">
+                            <a [routerLink]="['/student', repetitionStudent.student?.id, 'view']" >{{ repetitionStudent.student?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/repetition-student', repetitionStudent.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/repetition-student', repetitionStudent.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(repetitionStudent)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

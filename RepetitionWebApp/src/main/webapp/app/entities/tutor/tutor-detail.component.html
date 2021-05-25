@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tutor">
+            <h2><span jhiTranslate="repetitionWebApp.tutor.detail.title">Tutor</span> {{ tutor.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="repetitionWebApp.tutor.name">Name</span></dt>
+                <dd>
+                    <span>{{ tutor.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.surname">Surname</span></dt>
+                <dd>
+                    <span>{{ tutor.surname }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.birthDate">Birth Date</span></dt>
+                <dd>
+                    <span>{{ tutor.birthDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></dt>
+                <dd>
+                    <span>{{ tutor.subject }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.degree">Degree</span></dt>
+                <dd>
+                    <span>{{ tutor.degree }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.dateCreated">Date Created</span></dt>
+                <dd>
+                    <span>{{ tutor.dateCreated }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.dateModified">Date Modified</span></dt>
+                <dd>
+                    <span>{{ tutor.dateModified }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.dateDeleted">Date Deleted</span></dt>
+                <dd>
+                    <span>{{ tutor.dateDeleted }}</span>
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.user">User</span></dt>
+                <dd>
+                    {{ tutor.user?.id }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tutor', tutor.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-repetition-student-heading" jhiTranslate="repetitionWebApp.repetitionStudent.home.createOrEditLabel">Create or edit a Repetition Student</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetitionStudent.dateCreated" for="field_dateCreated">Date Created</label>
+                    <div class="d-flex">
+                        <input id="field_dateCreated" type="datetime-local" class="form-control" name="dateCreated" formControlName="dateCreated" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetitionStudent.dateModified" for="field_dateModified">Date Modified</label>
+                    <div class="d-flex">
+                        <input id="field_dateModified" type="datetime-local" class="form-control" name="dateModified" formControlName="dateModified" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetitionStudent.dateDeleted" for="field_dateDeleted">Date Deleted</label>
+                    <div class="d-flex">
+                        <input id="field_dateDeleted" type="datetime-local" class="form-control" name="dateDeleted" formControlName="dateDeleted" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetitionStudent.repetition" for="field_repetition">Repetition</label>
+                    <select class="form-control" id="field_repetition" name="repetition" formControlName="repetition">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="repetitionOption.id === editForm.get('repetition')!.value?.id ? editForm.get('repetition')!.value : repetitionOption" *ngFor="let repetitionOption of repetitions; trackBy: trackById">{{ repetitionOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetitionStudent.student" for="field_student">Student</label>
+                    <select class="form-control" id="field_student" name="student" formControlName="student">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption" *ngFor="let studentOption of students; trackBy: trackById">{{ studentOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
