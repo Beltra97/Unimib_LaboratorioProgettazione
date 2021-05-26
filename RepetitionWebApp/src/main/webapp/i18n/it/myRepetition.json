@@ -1,0 +1,44 @@
+{
+  "repetitionWebApp": {
+    "myRepetition": {
+      "home": {
+        "title": "Mie Ripetizioni",
+        "createLabel": "Posta Ripetizione",
+        "historyLabel": "Ripetizione storica",
+        "createOrEditLabel": "Posta o modifica Ripetizione",
+        "notFound": "Nessuna Ripetizione trovata",
+        "Reservations": "Prenotata da",
+        "noReservations": "Nessuna prenotazione",
+        "duration": "Durata: {{ param }} minuti",
+        "price": "Prezzo: {{ param }} €"
+      },
+      "created": "Una Ripetizione con identificativo {{ param }} è stata postata",
+      "updated": "Una Ripetizione con identificativo {{ param }} è stata modificata",
+      "deleted": "Una Ripetizione con identificativo {{ param }} è stata cancellata",
+      "madeRepetitionGroup": "Una Ripetizione con identificativo {{ param }} è diventata una Ripetizione di gruppo",
+      "delete": {
+        "question": "Sei sicuro di voler eliminare la Ripetizione {{ id }}?"
+      },
+      "detail": {
+        "title": "Mie Ripetizioni"
+      },
+      "subject": "Materia",
+      "subject.Math": "Matematica",
+      "subject.Physics": "Fisica",
+      "subject.Information Technology": "Informatica",
+      "subject.Music": "Musica",
+      "subject.Art": "Arte",
+      "topic": "Argomento: {{ param }}",
+      "additionalNote": "Note Addizionali: {{ param }}",
+      "nPartecipants": "Massimo partecipanti: {{ param }}",
+      "singleRepetition": "Ripetizione singola",
+      "groupRepetition": "Ripetizione di gruppo",
+      "duration": "Durata",
+      "dateRepetition": "Data Ripetizione",
+      "timeRepetition": "Orario Ripetizione",
+      "dateCreated": "Data Creazione",
+      "dateModified": "Data Modifica",
+      "dateDeleted": "Data Eliminazione"
+    }
+  }
+}

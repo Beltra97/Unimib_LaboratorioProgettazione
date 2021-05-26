@@ -1,0 +1,28 @@
+{
+  "repetitionWebApp": {
+    "student": {
+      "home": {
+        "title": "Estudiantes",
+        "createLabel": "Crea un nuevo Estudiante",
+        "createOrEditLabel": "Crear o editar un Estudiante",
+        "notFound": "No se encontraron Estudiantes"
+      },
+      "created": "Se ha creado un nuevo estudiante con identificador {{param}}",
+      "updated": "Se ha cambiado un estudiante con identificador {{param}}",
+      "deleted": "Se ha eliminado un estudiante con identificador {{param}}",
+      "delete": {
+        "question": "¿Estás seguro de eliminar al estudiante {{id}}?"
+      },
+      "detail": {
+        "title": "Estudiantes"
+      },
+      "name": "Nombre",
+      "surname": "Apellido",
+      "birthDate": "Fecha de Nacimiento",
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación",
+      "user": "Usuario"
+    }
+  }
+}

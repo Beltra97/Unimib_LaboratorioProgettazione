@@ -51,7 +51,8 @@
       "group.no": "No (enable single repetitions only)",
       "search": "Search",
       "results": "Results",
-      "nores": "No results found"
+      "nores": "No results found",
+      "button.info": "Close"
     },
     "form": {
       "name.label": "Name",
@@ -133,7 +134,7 @@
         "birthdate": {
           "required": "Your birthdate is required.",
           "invalid": "Your birthdate is invalid, must be less than today.",
-          "pattern": "Your birthdate can only contain letters."
+          "pattern": "Your birthdate can only contain numbers."
         },
         "role": {
           "required": "Your role is required.",

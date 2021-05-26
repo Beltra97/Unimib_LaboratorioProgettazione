@@ -1,0 +1,27 @@
+{
+  "repetitionWebApp": {
+    "topic": {
+      "home": {
+        "title": "Sujet",
+        "createLabel": "Créer un nouveau sujet",
+        "createOrEditLabel": "Créer ou modifier un sujet",
+        "notFound": "Aucun sujet trouvé"
+      },
+      "created": "Un nouveau sujet avec l'identifiant {{ param }} est créé",
+      "updated": "Un sujet avec l'identifiant {{ param }} est modifié",
+      "deleted": "Un sujet avec l'identifiant {{ param }} est supprimé",
+      "delete": {
+        "question": "Voulez-vous vraiment supprimer le sujet {{ id }}?"
+      },
+      "detail": {
+        "title": "Sujet"
+      },
+      "name": "Nom",
+      "description": "Description",
+      "dateCreated": "Date Créée",
+      "dateModified": "Date Modifiée",
+      "dateDeleted": "Date de Suppression",
+      "subject": "Matière"
+    }
+  }
+}

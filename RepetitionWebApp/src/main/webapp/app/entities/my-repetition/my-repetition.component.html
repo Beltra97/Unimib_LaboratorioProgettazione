@@ -28,7 +28,7 @@
 
             <mat-card-header>
                 <mat-card-title>
-                    <h5> {{ myRepetition.dateRepetition | date:'medium' }} </h5>
+                    <h5> {{ myRepetition.dateRepetition | date:'dd-MM-yyyy, HH:mm' }} </h5>
                 </mat-card-title>
                 <mat-card-subtitle>
                     <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration" [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }} minutes </h6>
@@ -44,7 +44,7 @@
 
             <mat-card-content>
 
-                <h4> {{ myRepetition.subject?.name }} </h4>
+                <h4 jhiTranslate="repetitionWebApp.myRepetition.subject.{{ myRepetition.subject?.name }}"> {{ myRepetition.subject?.name }} </h4>
 
                 <mat-chip-list *ngIf="myRepetition?.topic != ''" #chipList>
                     <mat-chip *ngFor="let topic of myRepetition!.topic!.split(';')">

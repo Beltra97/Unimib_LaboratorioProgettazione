@@ -1,0 +1,26 @@
+{
+  "repetitionWebApp": {
+    "repetitionStudent": {
+      "home": {
+        "title": "Repeticiones Estudiante",
+        "createLabel": "Crear una nueva Repetición Estudiante",
+        "createOrEditLabel": "Crear o editar la Repetición Estudiante",
+        "notFound": "No se encontraron repeticiones estudiantes"
+      },
+      "created": "Se ha publicado una repetición estudiante con el identificador {{param}}",
+      "updated": "Se ha cambiado una repetición estudiante con el identificador {{param}}",
+      "deleted": "Se ha eliminado una repetición estudiante con el identificador {{param}}",
+      "delete": {
+        "question": "¿Está seguro de eliminar la repetición estudiante {{id}}?"
+      },
+      "detail": {
+        "title": "Repeticiones Studente"
+      },
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación",
+      "repetition": "Repeticiones",
+      "student": "Estudiante"
+    }
+  }
+}

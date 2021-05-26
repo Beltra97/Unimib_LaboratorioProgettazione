@@ -1,0 +1,30 @@
+{
+  "repetitionWebApp": {
+    "subject": {
+      "home": {
+        "title": "Asignatura",
+        "createLabel": "Crear una Asignatura nueva",
+        "createOrEditLabel": "Crear o modificar una Asignatura",
+        "notFound": "No se encontraron Asignatura"
+      },
+      "created": "Se ha creado una nueva Asignatura con el identificador {{param}}",
+      "updated": "Se ha cambiado una Asignatura con identificador {{param}}",
+      "deleted": "Se ha eliminado una Asignatura con el identificador {{param}}",
+      "delete": {
+        "question": "¿Está seguro de que desea eliminar el Asignatura {{id}}?"
+      },
+      "detail": {
+        "title": "Asignatura"
+      },
+      "name": "Nombre",
+      "description": "Descripción",
+      "imageUrl": "Url Imagen",
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación",
+      "repetition": "Repetición",
+      "topic": "Tema",
+      "tutor": "Tutor"
+    }
+  }
+}

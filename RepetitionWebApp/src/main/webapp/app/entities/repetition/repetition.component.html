@@ -43,14 +43,14 @@
                     <td><a [routerLink]="['/repetition', repetition.id, 'view']">{{ repetition.id }}</a></td>
                     <td>{{ repetition.topic }}</td>
                     <td>{{ repetition.additionalNote }}</td>
-                    <td>{{ repetition.dateRepetition | date:'medium' }}</td>
+                    <td>{{ repetition.dateRepetition | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>{{ repetition.nPartecipants }}</td>
                     <td>{{ repetition.duration }}</td>
                     <td>{{ repetition.price }}</td>
                     <td>{{ repetition.meetingLink }}</td>
-                    <td>{{ repetition.dateCreated | date:'medium' }}</td>
-                    <td>{{ repetition.dateModified | date:'medium' }}</td>
-                    <td>{{ repetition.dateDeleted | date:'medium' }}</td>
+                    <td>{{ repetition.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetition.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetition.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         <div *ngIf="repetition.tutor">
                             <a [routerLink]="['/tutor', repetition.tutor?.id, 'view']" >{{ repetition.tutor?.id }}</a>

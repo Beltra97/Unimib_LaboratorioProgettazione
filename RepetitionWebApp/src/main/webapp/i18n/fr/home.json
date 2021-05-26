@@ -1,0 +1,17 @@
+{
+    "home": {
+        "title": "Bienvenue dans l'application Web de répétition !",
+        "logged": {
+            "admin": "Vous êtes l'ADMINISTRATEUR du site, faites attention aux évolutions pour assurer le bon fonctionnement du service.",
+            "message": "Vous êtes connecté en tant que \"{{username}}\"."
+        },
+        "functioning": "Comment ça marche?",
+        "description": "L'application consiste en la fourniture de répétitions. Les enseignants peuvent publier leurs offres et les étudiants peuvent s'inscrire. Si vous n'avez pas encore essayé notre service, inscrivez-vous pour voir les répétitions disponibles ou créez les vôtres.",
+        "description_summary": "Facile et efficace.",
+        "repetitions": "Répétitions disponibles",
+        "myRepetitions": "Mes répétitions",
+        "bookedBy": "Réservé par:",
+        "info": "Info",
+        "enroll": "Inscrire"
+    }
+}

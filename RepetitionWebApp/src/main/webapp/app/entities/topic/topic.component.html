@@ -37,9 +37,9 @@
                     <td><a [routerLink]="['/topic', topic.id, 'view']">{{ topic.id }}</a></td>
                     <td>{{ topic.name }}</td>
                     <td>{{ topic.description }}</td>
-                    <td>{{ topic.dateCreated | date:'medium' }}</td>
-                    <td>{{ topic.dateModified | date:'medium' }}</td>
-                    <td>{{ topic.dateDeleted | date:'medium' }}</td>
+                    <td>{{ topic.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ topic.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ topic.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         <div *ngIf="topic.subject">
                             <a [routerLink]="['/subject', topic.subject?.id, 'view']" >{{ topic.subject?.id }}</a>
