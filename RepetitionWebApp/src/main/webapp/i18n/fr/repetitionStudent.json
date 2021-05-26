@@ -1,0 +1,26 @@
+{
+  "repetitionWebApp": {
+    "repetitionStudent": {
+      "home": {
+        "title": "Répétition Étudiants",
+        "createLabel": "Créer une nouvelle répétition ètudiants",
+        "createOrEditLabel": "Créer ou modifier une répétition ètudiants",
+        "notFound": "Aucune répétition ètudiants trouvée"
+      },
+      "created": "Une nouvelle répétition ètudiants avec l'identifiant {{ param }} est créée",
+      "updated": "Une répétition ètudiants avec l'identifiant {{ param }} est modifiée",
+      "deleted": "Une répétition ètudiants avec l'identifiant {{ param }} est supprimée",
+      "delete": {
+        "question": "Voulez-vous vraiment supprimer la répétition ètudiants {{id}}?"
+      },
+      "detail": {
+        "title": "Répétition Étudiants"
+      },
+      "dateCreated": "Date Créée",
+      "dateModified": "Date Modifiée",
+      "dateDeleted": "Date de Suppression",
+      "repetition": "Répétition",
+      "student": "Étudiant"
+    }
+  }
+}
