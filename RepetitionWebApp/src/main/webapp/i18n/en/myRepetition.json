@@ -20,9 +20,14 @@
         "question": "Are you sure you want to delete Repetition {{ id }}?"
       },
       "detail": {
-        "title": "My Repetition"
+        "title": "My Repetitions"
       },
       "subject": "Subject",
+      "subject.Math": "Math",
+      "subject.Physics": "Physics",
+      "subject.Information Technology": "Information Technology",
+      "subject.Music": "Music",
+      "subject.Art": "Art",
       "topic": "Topic: {{ param }}",
       "meetingLink": "Meeting Link",
       "additionalNote": "Additional Note: {{ param }}",

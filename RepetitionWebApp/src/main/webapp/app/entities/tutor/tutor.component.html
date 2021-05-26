@@ -40,11 +40,11 @@
                     <td><a [routerLink]="['/tutor', tutor.id, 'view']">{{ tutor.id }}</a></td>
                     <td>{{ tutor.name }}</td>
                     <td>{{ tutor.surname }}</td>
-                    <td>{{ tutor.birthDate | date:'medium' }}</td>
+                    <td>{{ tutor.birthDate | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>{{ tutor.degree }}</td>
-                    <td>{{ tutor.dateCreated | date:'medium' }}</td>
-                    <td>{{ tutor.dateModified | date:'medium' }}</td>
-                    <td>{{ tutor.dateDeleted | date:'medium' }}</td>
+                    <td>{{ tutor.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ tutor.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ tutor.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         {{ tutor.user?.id }}
                     </td>

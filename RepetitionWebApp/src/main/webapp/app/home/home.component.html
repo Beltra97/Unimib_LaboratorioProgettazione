@@ -64,22 +64,22 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column">
                                         <div class="p-2">
-                                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                            <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{repetition!.subject!.name}}</h5>
                                         </div>
                                         <div class="p-2" *ngIf="repetition!.topic">
-                                            <p id="cardTextRepetitions" class="card-text">Topic: {{repetition!.topic}}</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.topic"></label>: {{repetition!.topic}}</p>
                                         </div>
                                         <div class="p-2" *ngIf="repetition!.additionalNote">
-                                            <p id="cardTextRepetitions" class="card-text">Additional Note: {{repetition!.additionalNote}}</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{repetition!.additionalNote}}</p>
                                         </div>
                                         <div class="p-2" *ngIf="repetition!.price">
-                                            <p id="cardTextRepetitions" class="card-text">Price: {{repetition!.price}}€</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{repetition!.price}}€</p>
                                         </div>
                                         <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">Duration: {{repetition!.duration}} minutes</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.duration"></label>: {{repetition!.duration}} minutes</p>
                                         </div>
                                         <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">Date: {{repetition!.dateRepetition | date:'medium'}}</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.myRepetition.dateRepetition"></label>: {{repetition!.dateRepetition | date:'dd-MM-yyyy, HH:mm'}}</p>
                                         </div>
                                         <div class="p-2" *ngIf="repetition.students && repetition.students.length > 0">
                                             <p id="cardTextRepetitions" class="card-text" jhiTranslate="home.bookedBy">Booked By:</p>
@@ -149,22 +149,22 @@
                                     <div class="card-body">
                                         <div class="d-flex flex-column">
                                             <div class="p-2">
-                                                <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                                <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{repetition!.subject!.name}}</h5>
                                             </div>
                                             <div class="p-2" *ngIf="repetition!.topic">
-                                                <p id="cardTextRepetitions" class="card-text">Topic: {{repetition!.topic}}</p>
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.topic"></label>: {{repetition!.topic}}</p>
                                             </div>
                                             <div class="p-2" *ngIf="repetition!.additionalNote">
-                                                <p id="cardTextRepetitions" class="card-text">Additional Note: {{repetition!.additionalNote}}</p>
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{repetition!.additionalNote}}</p>
                                             </div>
                                             <div class="p-2" *ngIf="repetition!.price">
-                                                <p id="cardTextRepetitions" class="card-text">Price: {{repetition!.price}}€</p>
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{repetition!.price}}€</p>
                                             </div>
                                             <div class="p-2">
-                                                <p id="cardTextRepetitions" class="card-text">Tutor: {{repetition!.tutor!.name}} {{repetition!.tutor!.surname}}</p>
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.tutor"></label>: {{repetition!.tutor!.name}} {{repetition!.tutor!.surname}}</p>
                                             </div>
                                             <div class="p-2">
-                                                <p id="cardTextRepetitions" class="card-text">Date: {{repetition!.dateRepetition | date:'medium' }}</p>
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.myRepetition.dateRepetition"></label>: {{repetition!.dateRepetition | date:'dd-MM-yyyy, HH:mm' }}</p>
                                             </div>
                                             <div class="p-2">
                                                 <div class="container">
@@ -204,10 +204,10 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column">
                                         <div class="p-2">
-                                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                            <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{repetition!.subject!.name}}</h5>
                                         </div>
                                         <div class="p-2" *ngIf="repetition!.topic">
-                                            <p id="cardTextRepetitions" class="card-text">Topic: {{repetition!.topic}}</p>
+                                            <p id="cardTextRepetitions" class="card-text"> <label jhiTranslate="global.menu.entities.topic"></label>: {{repetition!.topic}}</p>
                                         </div>
                                         <div class="p-2">
                                             <div class="container">

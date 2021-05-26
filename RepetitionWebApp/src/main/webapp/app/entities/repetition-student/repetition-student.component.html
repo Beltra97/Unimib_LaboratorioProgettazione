@@ -34,9 +34,9 @@
             <tbody>
                 <tr *ngFor="let repetitionStudent of repetitionStudents ;trackBy: trackId">
                     <td><a [routerLink]="['/repetition-student', repetitionStudent.id, 'view']">{{ repetitionStudent.id }}</a></td>
-                    <td>{{ repetitionStudent.dateCreated | date:'medium' }}</td>
-                    <td>{{ repetitionStudent.dateModified | date:'medium' }}</td>
-                    <td>{{ repetitionStudent.dateDeleted | date:'medium' }}</td>
+                    <td>{{ repetitionStudent.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetitionStudent.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetitionStudent.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         <div *ngIf="repetitionStudent.repetition">
                             <a [routerLink]="['/repetition', repetitionStudent.repetition?.id, 'view']" >{{ repetitionStudent.repetition?.id }}</a>

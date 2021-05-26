@@ -2,7 +2,7 @@
   "repetitionWebApp": {
     "myRepetitionStudent": {
       "home": {
-        "title": "My Repetition",
+        "title": "My Repetitions",
         "notFound": "No Repetition found"
       },
       "created": "A Repetition with identifier {{ param }} is booked",

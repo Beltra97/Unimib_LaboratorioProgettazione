@@ -21,7 +21,7 @@
             <mat-card-header>
                 <mat-card-title >
                     <h5> {{ historyRepetition.tutor?.surname }} {{ historyRepetition.tutor?.name }}</h5>
-                    <h5> {{ historyRepetition.dateRepetition | date:'medium' }} </h5>
+                    <h5> {{ historyRepetition.dateRepetition | date: 'dd-MM-yyyy, HH:mm' }} </h5>
                 </mat-card-title>
                 <mat-card-subtitle>
                     <h6 jhiTranslate="repetitionWebApp.historyRepetitionStudent.duration"
@@ -36,7 +36,7 @@
 
             <mat-card-content>
 
-                <h4> {{ historyRepetition.subject?.name }} </h4>
+                <h4 jhiTranslate="repetitionWebApp.myRepetition.subject.{{ historyRepetition.subject?.name }}"> {{ historyRepetition.subject?.name }} </h4>
 
                 <mat-chip-list *ngIf="historyRepetition.topic != ''" #chipList>
                     <mat-chip *ngFor="let topic of historyRepetition.topic!.split(';')">

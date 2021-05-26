@@ -21,10 +21,17 @@
     "buildTool": "maven",
     "useSass": true,
     "clientPackageManager": "npm",
-    "testFrameworks": ["protractor"],
+    "testFrameworks": [
+      "protractor"
+    ],
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": ["en"],
+    "languages": [
+      "en",
+      "it",
+      "fr",
+      "es"
+    ],
     "clientFramework": "angularX",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "6.10.5",

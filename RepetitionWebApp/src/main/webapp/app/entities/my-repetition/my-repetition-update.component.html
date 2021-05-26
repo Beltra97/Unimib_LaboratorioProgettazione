@@ -16,7 +16,8 @@
                         <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.subject" for="field_subject">Subject</label>
                         <select class="form-control" id="field_subject" name="subject" formControlName="subject">
                             <option [ngValue]="null"></option>
-                            <option [ngValue]="subjectOption.id === editForm.get('subject')!.value?.id ? editForm.get('subject')!.value : subjectOption" *ngFor="let subjectOption of subjects; trackBy: trackById">{{ subjectOption.name }}</option>
+                            <option [ngValue]="subjectOption.id === editForm.get('subject')!.value?.id ? editForm.get('subject')!.value : subjectOption" *ngFor="let subjectOption of subjects; trackBy: trackById"
+                            jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
                         </select>
                         <div *ngIf="editForm.get('subject')!.invalid && (editForm.get('subject')!.dirty || editForm.get('subject')!.touched)">
                             <small class="form-text text-danger"

@@ -16,7 +16,7 @@
 
     <div *ngIf="step == 2">
         <h5> {{ myRepetitionStudent.tutor?.surname }} {{ myRepetitionStudent.tutor?.name }}</h5>
-        <h5> {{ myRepetitionStudent.dateRepetition | date:'medium' }} </h5>
+        <h5> {{ myRepetitionStudent.dateRepetition | date:'dd-MM-yyyy, HH:mm' }} </h5>
         <h5> {{ myRepetitionStudent.duration }} minutes </h5>
         <h4> {{ myRepetitionStudent.subject?.name }} </h4>
 
