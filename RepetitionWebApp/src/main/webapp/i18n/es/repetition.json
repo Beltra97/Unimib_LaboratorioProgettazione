@@ -1,0 +1,33 @@
+{
+  "repetitionWebApp": {
+    "repetition": {
+      "home": {
+        "title": "Repeticiones",
+        "createLabel": "Crear una nueva repetición",
+        "createOrEditLabel": "Crear o editar la repetición",
+        "notFound": "No se encontraron repeticiones"
+      },
+      "created": "Se ha creado una nueva repetición con el identificador {{param}}",
+      "updated": "Se ha cambiado una repetición con el identificador {{param}}",
+      "deleted": "Se ha eliminado una repetición con el identificador {{param}}",
+      "madeRepetitionGroup": "Una repetición con el identificador {{param}} se ha convertido en una repetición de grupo",
+      "delete": {
+        "question": "¿Está seguro de eliminar la repetición {{id}}?"
+      },
+      "detail": {
+        "title": "Repeticiones"
+      },
+      "topic": "Tema",
+      "additionalNote": "Notas adicionales",
+      "dateRepetition": "Fecha Repetición",
+      "nPartecipants": "N Participantes",
+      "duration": "Duración",
+      "price": "Precio",
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación",
+      "tutor": "Tutor",
+      "subject": "Asignatura"
+    }
+  }
+}
