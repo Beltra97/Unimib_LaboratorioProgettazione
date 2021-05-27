@@ -19,6 +19,7 @@ before_script:
 nohttp:
     stage: check
     script:
+        - cd RepetitionWebApp
         - ./mvnw -ntp checkstyle:check -Dmaven.repo.local=$MAVEN_USER_HOME
     only:
         - master
@@ -26,6 +27,7 @@ nohttp:
 maven-compile:
     stage: build
     script:
+        - cd RepetitionWebApp
         - ./mvnw -ntp compile -P-webpack -Dmaven.repo.local=$MAVEN_USER_HOME
     artifacts:
         paths:
@@ -48,6 +50,7 @@ maven-test:
 
     stage: test
     script:
+        - cd RepetitionWebApp
         - ./mvnw -ntp verify -P-webpack -Dmaven.repo.local=$MAVEN_USER_HOME -Dspring.profiles.active=testcontainers
     artifacts:
         reports:
@@ -62,6 +65,7 @@ maven-test:
 frontend-test:
     stage: test
     script:
+        - cd RepetitionWebApp
         - npm install
         - npm test
     artifacts:
@@ -77,6 +81,7 @@ frontend-test:
 maven-package:
     stage: package
     script:
+        - cd RepetitionWebApp
         - ./mvnw -ntp verify -Pprod -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
     artifacts:
         paths:
@@ -94,6 +99,7 @@ release:
     dependencies:
         - maven-package
     script:
+        - cd RepetitionWebApp
         - ./mvnw -ntp compile jib:build -Pprod -Djib.to.image=$IMAGE_TAG -Djib.to.auth.username=gitlab-ci-token  -Djib.to.auth.password=$CI_BUILD_TOKEN -Dmaven.repo.local=$MAVEN_USER_HOME
     only:
         - master
@@ -102,6 +108,6 @@ deploy:
     stage: deploy
     script:
         - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/repetition-web-app-staging.git
-        - git push -f heroku HEAD:master
+        - git push --force heroku `git subtree split --prefix RepetitionWebApp HEAD`:master
     only:
         - master
