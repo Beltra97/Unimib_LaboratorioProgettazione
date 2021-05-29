@@ -35,6 +35,7 @@ public class TutorService {
         this.cacheManager = cacheManager;
     }
 
+    // return the tutor logged in the current session of the webapp
     public Tutor getTutorByUser() {
 
         AtomicReference<Tutor> loggedTutor = new AtomicReference<Tutor>();

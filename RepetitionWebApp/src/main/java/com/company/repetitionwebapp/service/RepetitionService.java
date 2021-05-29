@@ -45,12 +45,15 @@ public class RepetitionService {
         this.cacheManager = cacheManager;
     }
 
+    // get the tutor current repetitions (repetition date is after now instant)
     public List<MyRepetitionRS> getMyRepetitions() {
         List<MyRepetitionRS> myRepetitions = new ArrayList<MyRepetitionRS>();
 
+        // get only the logged tutor
         Tutor tutor = tutorService.getTutorByUser();
 
         if (tutor != null) {
+            // create the list of future repetitions for the logged tutor
             repetitionRepository
                 .findAll()
                 .stream()
@@ -63,6 +66,7 @@ public class RepetitionService {
                 )
                 .forEach(
                     repetition -> {
+                        // get only repetions student that have the repetition ID equal to at least one present in the repetitions set
                         List<Student> students = new ArrayList<Student>();
                         for (RepetitionStudent s : repetitionStudentRepository.findAll()) {
                             if (
@@ -81,12 +85,15 @@ public class RepetitionService {
         return myRepetitions;
     }
 
+    // get the tutot historical repetitions (repetition date is before now instant)
     public List<MyRepetitionRS> getMyRepetitionsHistory() {
         List<MyRepetitionRS> myRepetitions = new ArrayList<MyRepetitionRS>();
 
+        // get only the logged tutor
         Tutor tutor = tutorService.getTutorByUser();
 
         if (tutor != null) {
+            // create the list of past repetitions for the logged tutor
             repetitionRepository
                 .findAll()
                 .stream()
@@ -100,6 +107,7 @@ public class RepetitionService {
                 )
                 .forEach(
                     repetition -> {
+                        // get only repetions student that have the repetition ID equal to at least one present in the repetitions set
                         List<Student> students = new ArrayList<Student>();
                         for (RepetitionStudent s : repetitionStudentRepository.findAll()) {
                             if (
@@ -118,6 +126,7 @@ public class RepetitionService {
         return myRepetitions;
     }
 
+    // method for post the repetition
     public Repetition postRepetition(RepetitionDTO repetitionDTO) {
         Repetition newRepetition = null;
 
@@ -141,6 +150,7 @@ public class RepetitionService {
         return newRepetition;
     }
 
+    // method for genetere the random link for the repetion
     protected String generateLink(int n) {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder salt = new StringBuilder();
@@ -154,6 +164,7 @@ public class RepetitionService {
         return saltStr;
     }
 
+    // method for update the repetition
     public Repetition updateRepetition(RepetitionDTO repetitionDTO) {
         Repetition repetition = repetitionRepository.findById(repetitionDTO.getId()).get();
 
@@ -171,6 +182,7 @@ public class RepetitionService {
         return repetition;
     }
 
+    // method for set the date of the repetition
     public void setDateDeleted(long id) {
         repetitionRepository
             .findById(id)
@@ -192,6 +204,7 @@ public class RepetitionService {
             );
     }
 
+    // method for set a repetition as group repetition (4 partecipants)
     public void makeRepetitionGroup(long id) {
         repetitionRepository
             .findById(id)

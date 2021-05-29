@@ -36,10 +36,12 @@ public class SubjectService {
         this.cacheManager = cacheManager;
     }
 
+    // return the list of subjects associated to the tutor logged
     public List<Subject> getMySubjects() {
 
         List<Subject> mySubjects = new ArrayList<Subject>();
 
+        // get only the logged tutor
         Tutor tutor = tutorService.getTutorByUser();
 
         if(tutor != null) {
