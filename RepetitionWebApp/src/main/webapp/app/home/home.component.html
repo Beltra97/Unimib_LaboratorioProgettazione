@@ -51,7 +51,7 @@
             <div class="card jh-card" *ngSwitchCase="true">
                 <div class="row row-content justify-content-center"> 
                     <div class="col-8">
-                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.myRepetitions">My Repetitions</h1>
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.myRepetitions">Last Repetition</h1>
                     </div>
                 </div>
                 
@@ -59,36 +59,34 @@
                     {{loadTutorData()}}
                     <div class="col-8">
                         
-                        <div *ngFor="let repetition of repetitionsTutor">
                             <div id="cardRepetitions" class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column">
                                         <div class="p-2">
-                                            <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{repetition!.subject!.name}}</h5>
+                                            <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetitionsTutor![repetitionsTutor!.length-1].subject!.name }}">{{repetitionsTutor![repetitionsTutor!.length-1].subject!.name}}</h5>
                                         </div>
-                                        <div class="p-2" *ngIf="repetition!.topic">
-                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.topic"></label>: {{repetition!.topic}}</p>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].topic">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.topic"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].topic}}</p>
                                         </div>
-                                        <div class="p-2" *ngIf="repetition!.additionalNote">
-                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{repetition!.additionalNote}}</p>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].additionalNote">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].additionalNote}}</p>
                                         </div>
-                                        <div class="p-2" *ngIf="repetition!.price">
-                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{repetition!.price}}€</p>
-                                        </div>
-                                        <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.duration"></label>: {{repetition!.duration}} minutes</p>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].price">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].price}}€</p>
                                         </div>
                                         <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.myRepetition.dateRepetition"></label>: {{repetition!.dateRepetition | date:'dd-MM-yyyy, HH:mm'}}</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.duration"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].duration}} minutes</p>
                                         </div>
-                                        <div class="p-2" *ngIf="repetition.students && repetition.students.length > 0">
+                                        <div class="p-2">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.myRepetition.dateRepetition"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].dateRepetition | date:'dd-MM-yyyy, HH:mm'}}</p>
+                                        </div>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].students && repetitionsTutor![repetitionsTutor!.length-1].students!.length > 0">
                                             <p id="cardTextRepetitions" class="card-text" jhiTranslate="home.bookedBy">Booked By:</p>
-                                            <li class="li_center" *ngFor="let student of repetition.students">{{ student.name }} {{ student.surname }}</li>
+                                            <li class="li_center" *ngFor="let student of repetitionsTutor![repetitionsTutor!.length-1].students">{{ student.name }} {{ student.surname }}</li>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         
                     </div>
                 </div>
@@ -187,11 +185,11 @@
             </div>
         </div>
 
-        <div *ngIf="repetitionsStudent?.length !== 0">
+        <div *ngIf="nextRepetitionsStudent?.length !== 0">
             <div class="card jh-card" *ngSwitchCase="true">
                 <div class="row row-content justify-content-center"> 
                     <div class="col-8">
-                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.repetitions">Available repetitions</h1>
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.repetitions">Next repetitions</h1>
                     </div>
                 </div>
                 
@@ -199,7 +197,7 @@
                     {{loadStudentData()}}
                     <div class="col-8">
                         
-                        <div *ngFor="let repetition of repetitionsStudent">
+                        <div *ngFor="let repetition of nextRepetitionsStudent">
                             <div id="cardRepetitions" class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column">

@@ -20,6 +20,7 @@ import { IMyRepetition, MyRepetition } from 'app/shared/model/my-repetition.mode
 import { MyRepetitionService } from '../entities/my-repetition/my-repetition.service';
 
 import { NgbdModalContentComponent } from './home.info.component';
+import { RepetitionStudent } from 'app/shared/model/repetition-student.model';
 
 @Component({
   selector: 'jhi-home',
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   dataTutorLoaded = false;
   dataFound = false;
   repetitionsStudent?: IMyRepetitionStudent[];
+  nextRepetitionsStudent?: IMyRepetitionStudent[];
   repetitionsFound?: IMyRepetitionStudent[];
   repetitionsTutor?: IMyRepetition[];
 
@@ -52,8 +54,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   findSubjectTutor = '';
   findDate = '';
   findGroup = 'true';
-
-  debug = '';
 
   constructor(
     private accountService: AccountService,
@@ -82,6 +82,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.repetitionStudentService
         .query()
         .subscribe((res: HttpResponse<IMyRepetitionStudent[]>) => (this.repetitionsStudent = res.body || []));
+
+      this.nextRepetitionsStudent = this.repetitionsStudent!.filter(repetition => repetition.isAlreadyBooked);
+
       this.dataStudentLoaded = true;
     }
   }
@@ -90,6 +93,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadTutorData(): void {
     if (!this.dataTutorLoaded) {
       this.repetitionTutorService.query().subscribe((res: HttpResponse<IMyRepetition[]>) => (this.repetitionsTutor = res.body || []));
+
       this.dataTutorLoaded = true;
     }
   }
@@ -139,7 +143,11 @@ export class HomeComponent implements OnInit, OnDestroy {
           const tutorName = repetition.tutor!.name!.toLowerCase().trim();
           const tutorSurname = repetition.tutor!.surname!.toLowerCase().trim();
 
-          if (subject === this.findSubjectTutor || tutorName === this.findSubjectTutor || tutorSurname === this.findSubjectTutor) {
+          if (
+            subject.startsWith(this.findSubjectTutor) ||
+            tutorName.startsWith(this.findSubjectTutor) ||
+            tutorSurname.startsWith(this.findSubjectTutor)
+          ) {
             this.repetitionsFound!.push(repetition);
           }
         }
@@ -152,7 +160,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           const tutorSurname = repetition.tutor!.surname!.toLowerCase().trim();
 
           if (
-            (subject === this.findSubjectTutor || tutorName === this.findSubjectTutor || tutorSurname === this.findSubjectTutor) &&
+            (subject.startsWith(this.findSubjectTutor) ||
+              tutorName.startsWith(this.findSubjectTutor) ||
+              tutorSurname.startsWith(this.findSubjectTutor)) &&
             repetition.nPartecipants === 1
           ) {
             this.repetitionsFound!.push(repetition);
@@ -171,7 +181,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           const tutorSurname = repetition.tutor!.surname!.toLowerCase().trim();
 
           if (
-            (subject === this.findSubjectTutor || tutorName === this.findSubjectTutor || tutorSurname === this.findSubjectTutor) &&
+            (subject.startsWith(this.findSubjectTutor) ||
+              tutorName.startsWith(this.findSubjectTutor) ||
+              tutorSurname.startsWith(this.findSubjectTutor)) &&
             dateT!.toString() === this.findDate
           ) {
             this.repetitionsFound!.push(repetition);
@@ -187,7 +199,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           const tutorSurname = repetition.tutor!.surname!.toLowerCase().trim();
 
           if (
-            (subject === this.findSubjectTutor || tutorName === this.findSubjectTutor || tutorSurname === this.findSubjectTutor) &&
+            (subject.startsWith(this.findSubjectTutor) ||
+              tutorName.startsWith(this.findSubjectTutor) ||
+              tutorSurname.startsWith(this.findSubjectTutor)) &&
             repetition.nPartecipants === 1 &&
             dateT!.toString() === this.findDate
           ) {
@@ -230,7 +244,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       // disallow group repetitions
       else {
         for (const repetition of this.repetitionsStudent!) {
-          this.debug = this.debug + 'Subject: ' + repetition.subject!.name + ' - Partecipants: ' + repetition.nPartecipants + ' ***** ';
           if (repetition.nPartecipants === 1) {
             this.repetitionsFound!.push(repetition);
           }

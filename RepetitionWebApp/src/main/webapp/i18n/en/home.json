@@ -8,8 +8,8 @@
     "functioning": "How does it work?",
     "description": "The application consists in the provision of private lessons. Teachers can publish their offers and students can enroll. If you haven't tried our service yet, sign up to see available repetitions or create your own.",
     "description_summary": "Simple and effective.",
-    "repetitions": "Available repetitions",
-    "myRepetitions": "My Repetitions",
+    "repetitions": "Next repetitions",
+    "myRepetitions": "Last repetition",
     "bookedBy": "Booked By:",
     "info": "Info",
     "enroll": "Enroll"
