@@ -18,6 +18,9 @@ import java.net.URISyntaxException;
 import java.util.*;
 import java.util.Collections;
 import javax.validation.Valid;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,6 +58,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  * <p>
  * Another option would be to have a specific JPA entity graph to handle this case.
  */
+@Api(value="User Controller", description="Contains operations for managing user")
 @RestController
 @RequestMapping("/api")
 public class UserResource {
@@ -91,6 +95,7 @@ public class UserResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      * @throws BadRequestAlertException {@code 400 (Bad Request)} if the login or email is already in use.
      */
+    @ApiOperation(value="Create user = create new user with data inserted from admin")
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
@@ -121,6 +126,7 @@ public class UserResource {
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already in use.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already in use.
      */
+    @ApiOperation(value="Update user = update user with data inserted from admin")
     @PutMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
@@ -147,6 +153,7 @@ public class UserResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
      */
+    @ApiOperation(value="Get all users = return all users in the system")
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
         if (!onlyContainsAllowedProperties(pageable)) {
@@ -166,6 +173,7 @@ public class UserResource {
      * Gets a list of all roles.
      * @return a string list of all roles.
      */
+    @ApiOperation(value="Get all authorities = return all authorities in the system")
     @GetMapping("/users/authorities")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public List<String> getAuthorities() {
@@ -190,6 +198,7 @@ public class UserResource {
      * @param login the login of the user to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete user = remove user from the system")
     @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {

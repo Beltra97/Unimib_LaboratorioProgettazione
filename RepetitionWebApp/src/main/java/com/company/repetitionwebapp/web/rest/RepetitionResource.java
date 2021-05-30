@@ -6,6 +6,8 @@ import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,7 @@ import java.util.Optional;
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.Repetition}.
  */
+@Api(value="Repetition Controller", description="Contains operations for managing repetitions as a admin")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -47,6 +50,7 @@ public class RepetitionResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new repetition, or with status {@code 400 (Bad Request)} if the repetition has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Create repetition = create new repetition with data inserted from admin")
     @PostMapping("/repetitions")
     public ResponseEntity<Repetition> createRepetition(@Valid @RequestBody Repetition repetition) throws URISyntaxException {
         log.debug("REST request to save Repetition : {}", repetition);
@@ -68,6 +72,7 @@ public class RepetitionResource {
      * or with status {@code 500 (Internal Server Error)} if the repetition couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update repetition = update repetition with data inserted from admin")
     @PutMapping("/repetitions")
     public ResponseEntity<Repetition> updateRepetition(@Valid @RequestBody Repetition repetition) throws URISyntaxException {
         log.debug("REST request to update Repetition : {}", repetition);
@@ -85,6 +90,7 @@ public class RepetitionResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of repetitions in body.
      */
+    @ApiOperation(value="Get all repetitions = return all repetitions in the system")
     @GetMapping("/repetitions")
     public List<Repetition> getAllRepetitions() {
         log.debug("REST request to get all Repetitions");
@@ -97,6 +103,7 @@ public class RepetitionResource {
      * @param id the id of the repetition to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the repetition, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get repetition by id = return repetition by id")
     @GetMapping("/repetitions/{id}")
     public ResponseEntity<Repetition> getRepetition(@PathVariable Long id) {
         log.debug("REST request to get Repetition : {}", id);
@@ -110,6 +117,7 @@ public class RepetitionResource {
      * @param id the id of the repetition to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete repetition by id = remove the repetition from the system")
     @DeleteMapping("/repetitions/{id}")
     public ResponseEntity<Void> deleteRepetition(@PathVariable Long id) {
         log.debug("REST request to delete Repetition : {}", id);

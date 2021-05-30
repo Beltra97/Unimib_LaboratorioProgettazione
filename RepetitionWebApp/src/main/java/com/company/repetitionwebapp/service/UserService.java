@@ -70,6 +70,7 @@ public class UserService {
         this.cacheManager = cacheManager;
     }
 
+    // method for activate the user registration 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository
@@ -86,6 +87,7 @@ public class UserService {
             );
     }
 
+    // method for complete the operation of password reset for user account
     public Optional<User> completePasswordReset(String newPassword, String key) {
         log.debug("Reset user password for reset key {}", key);
         return userRepository
@@ -102,6 +104,7 @@ public class UserService {
             );
     }
 
+    // method for initializate the operation of password reset for user account 
     public Optional<User> requestPasswordReset(String mail) {
         return userRepository
             .findOneByEmailIgnoreCase(mail)
@@ -116,6 +119,7 @@ public class UserService {
             );
     }
 
+    // method for register a new user
     public User registerUser(ManagedUserVM userDTO, String password) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
@@ -156,6 +160,7 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
 
+        // check if the new user is a student or a tutor
         if (userDTO.getIsStudent()) {
             Student newStudent = new Student();
             newStudent.setName(userDTO.getFirstName());
@@ -184,6 +189,7 @@ public class UserService {
         return newUser;
     }
 
+    // method for remove the user that hasn't activate the account
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
             return false;
@@ -216,6 +222,7 @@ public class UserService {
         return true;
     }
 
+    // method for create a new user
     public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
@@ -291,6 +298,7 @@ public class UserService {
             .map(UserDTO::new);
     }
 
+    // method for delete a user
     public void deleteUser(String login) {
         userRepository
             .findOneByLogin(login)
@@ -332,6 +340,7 @@ public class UserService {
             );
     }
 
+    // method for change the password of user account
     @Transactional
     public void changePassword(String currentClearTextPassword, String newPassword) {
         SecurityUtils
