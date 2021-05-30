@@ -11,6 +11,8 @@ import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,8 +26,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing {@link com.company.repetitionwebapp.domain.RepetitionStudent}.
+ * REST controller for managing {@link RepetitionStudent}.
  */
+@Api(value="History Repetition Student Controller", description="Contains operations for managing repetitions already followed by student")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -55,6 +58,7 @@ public class HistoryRepetitionStudentResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of RepetitionStudents in body.
      */
+    @ApiOperation(value="Get all history repetitions = return all past repetitions followed by logged student")
     @GetMapping("/history-repetition-students")
     public List<HistoryRepetitionStudentRS> getAllRepetitionStudents() {
         log.debug("REST request to get all RepetitionStudents");
@@ -67,6 +71,7 @@ public class HistoryRepetitionStudentResource {
      * @param id the id of the RepetitionStudent to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the RepetitionStudent, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get history repetition by id = return past repetition followed by logged student")
     @GetMapping("/history-repetition-students/{id}")
     public ResponseEntity<Repetition> getRepetitionStudent(@PathVariable Long id) {
         log.debug("REST request to get Repetition : {}", id);

@@ -6,6 +6,8 @@ import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,7 @@ import java.util.Optional;
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.Topic}.
  */
+@Api(value="Topic Controller", description="Contains operations for managing topics as a admin")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -47,6 +50,7 @@ public class TopicResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new topic, or with status {@code 400 (Bad Request)} if the topic has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Create topic = create new topic with data inserted from admin")
     @PostMapping("/topics")
     public ResponseEntity<Topic> createTopic(@Valid @RequestBody Topic topic) throws URISyntaxException {
         log.debug("REST request to save Topic : {}", topic);
@@ -68,6 +72,7 @@ public class TopicResource {
      * or with status {@code 500 (Internal Server Error)} if the topic couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update topic = update topic with data inserted from admin")
     @PutMapping("/topics")
     public ResponseEntity<Topic> updateTopic(@Valid @RequestBody Topic topic) throws URISyntaxException {
         log.debug("REST request to update Topic : {}", topic);
@@ -85,6 +90,7 @@ public class TopicResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of topics in body.
      */
+    @ApiOperation(value="Get all topics = return all topics in the system")
     @GetMapping("/topics")
     public List<Topic> getAllTopics() {
         log.debug("REST request to get all Topics");
@@ -97,6 +103,7 @@ public class TopicResource {
      * @param id the id of the topic to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the topic, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get topic by id = return topic by id")
     @GetMapping("/topics/{id}")
     public ResponseEntity<Topic> getTopic(@PathVariable Long id) {
         log.debug("REST request to get Topic : {}", id);
@@ -110,6 +117,7 @@ public class TopicResource {
      * @param id the id of the topic to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete topic by id = remove the topic from the system")
     @DeleteMapping("/topics/{id}")
     public ResponseEntity<Void> deleteTopic(@PathVariable Long id) {
         log.debug("REST request to delete Topic : {}", id);

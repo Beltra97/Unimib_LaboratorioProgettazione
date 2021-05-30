@@ -7,6 +7,8 @@ import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +25,7 @@ import java.util.Optional;
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.Subject}.
  */
+@Api(value="Subject Controller", description="Contains operations for managing subjects as a admin")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -50,6 +53,7 @@ public class SubjectResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new subject, or with status {@code 400 (Bad Request)} if the subject has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Create subject = create new subject with data inserted from admin")
     @PostMapping("/subjects")
     public ResponseEntity<Subject> createSubject(@Valid @RequestBody Subject subject) throws URISyntaxException {
         log.debug("REST request to save Subject : {}", subject);
@@ -71,6 +75,7 @@ public class SubjectResource {
      * or with status {@code 500 (Internal Server Error)} if the subject couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update subject = update subject with data inserted from admin")
     @PutMapping("/subjects")
     public ResponseEntity<Subject> updateSubject(@Valid @RequestBody Subject subject) throws URISyntaxException {
         log.debug("REST request to update Subject : {}", subject);
@@ -88,6 +93,7 @@ public class SubjectResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of subjects in body.
      */
+    @ApiOperation(value="Get all subjects = return all subjects in the system")
     @GetMapping("/subjects")
     public List<Subject> getAllSubjects() {
         log.debug("REST request to get all Subjects");
@@ -99,6 +105,7 @@ public class SubjectResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of subjects in body.
      */
+    @ApiOperation(value="Get my subjects = return subjects provided by the logged tutor")
     @GetMapping("/my-subjects")
     public List<Subject> getMySubjects() {
         log.debug("REST request to get all Subjects");
@@ -111,6 +118,7 @@ public class SubjectResource {
      * @param id the id of the subject to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the subject, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get subject by id = return subject by id")
     @GetMapping("/subjects/{id}")
     public ResponseEntity<Subject> getSubject(@PathVariable Long id) {
         log.debug("REST request to get Subject : {}", id);
@@ -124,6 +132,7 @@ public class SubjectResource {
      * @param id the id of the subject to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete subject by id = remove the subject from the system")
     @DeleteMapping("/subjects/{id}")
     public ResponseEntity<Void> deleteSubject(@PathVariable Long id) {
         log.debug("REST request to delete Subject : {}", id);

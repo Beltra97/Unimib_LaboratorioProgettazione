@@ -7,6 +7,8 @@ import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +25,7 @@ import java.util.Optional;
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.Student}.
  */
+@Api(value="Student Controller", description="Contains operations for managing students as a admin")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -50,6 +53,7 @@ public class StudentResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new student, or with status {@code 400 (Bad Request)} if the student has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Create student = create new student with data inserted from admin")
     @PostMapping("/students")
     public ResponseEntity<Student> createStudent(@Valid @RequestBody Student student) throws URISyntaxException {
         log.debug("REST request to save Student : {}", student);
@@ -71,6 +75,7 @@ public class StudentResource {
      * or with status {@code 500 (Internal Server Error)} if the student couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update student = update student with data inserted from admin")
     @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@Valid @RequestBody Student student) throws URISyntaxException {
         log.debug("REST request to update Student : {}", student);
@@ -88,6 +93,7 @@ public class StudentResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
      */
+    @ApiOperation(value="Get all students = return all students in the system")
     @GetMapping("/students")
     public List<Student> getAllStudents() {
         log.debug("REST request to get all Students");
@@ -99,6 +105,7 @@ public class StudentResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
      */
+    @ApiOperation(value="Get student by logged User = return student information from logged user")
     @GetMapping("/students-user")
     public Student getStudentUser() {
         log.debug("REST request to get all Students");
@@ -111,6 +118,7 @@ public class StudentResource {
      * @param id the id of the student to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the student, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get student by id = return student by id")
     @GetMapping("/students/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         log.debug("REST request to get Student : {}", id);
@@ -124,6 +132,7 @@ public class StudentResource {
      * @param id the id of the student to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete student by id = remove the student from the system")
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         log.debug("REST request to delete Student : {}", id);

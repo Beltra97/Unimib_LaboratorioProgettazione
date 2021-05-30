@@ -13,6 +13,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * REST controller for managing {@link Repetition}.
  */
+@Api(value="Repetition Tutor Controller", description="Contains operations for managing future repetitions as a tutor")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -50,6 +54,7 @@ public class MyRepetitionResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new repetition, or with status {@code 400 (Bad Request)} if the repetition has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Post repetition = create new repetition with data inserted from tutor")
     @PostMapping("/my-repetitions")
     public ResponseEntity<Repetition> postRepetition(@Valid @RequestBody RepetitionDTO repetition) throws URISyntaxException {
         log.debug("REST request to save Repetition : {}", repetition);
@@ -72,6 +77,7 @@ public class MyRepetitionResource {
      * or with status {@code 500 (Internal Server Error)} if the repetition couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update repetition = update a repetition with data inserted from tutor")
     @PutMapping("/my-repetitions")
     public ResponseEntity<Repetition> updateRepetition(@Valid @RequestBody RepetitionDTO repetition) throws URISyntaxException {
         log.debug("REST request to update Repetition : {}", repetition);
@@ -90,6 +96,7 @@ public class MyRepetitionResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of repetitions in body.
      */
+    @ApiOperation(value="Get all repetitions = return all repetitions provided by logged tutor")
     @GetMapping("/my-repetitions")
     public List<MyRepetitionRS> getAllRepetitions() {
         log.debug("REST request to get all Repetitions");
@@ -102,6 +109,7 @@ public class MyRepetitionResource {
      * @param id the id of the repetition to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the repetition, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get repetition by id = return repetition by id for the logged tutor")
     @GetMapping("/my-repetitions/{id}")
     public ResponseEntity<Repetition> getRepetition(@PathVariable Long id) {
         log.debug("REST request to get Repetition : {}", id);
@@ -115,6 +123,8 @@ public class MyRepetitionResource {
      * @param id the id of the repetition to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete repetition by id = set date deleted at the repetition by id, " +
+        "if some students have already booked the repetition, is sent a mail to warn them")
     @DeleteMapping("/my-repetitions/{id}")
     public ResponseEntity<Void> deleteRepetition(@PathVariable Long id) {
         log.debug("REST request to delete Repetition : {}", id);
@@ -131,6 +141,7 @@ public class MyRepetitionResource {
      * @param id the id of the repetition to make groupable.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Make repetition group = set number of participants to 4")
     @GetMapping("/make-repetition-group/{id}")
     public ResponseEntity<Void> makeRepetitionGroup(@PathVariable Long id) {
         log.debug("REST request to make group Repetition : {}", id);

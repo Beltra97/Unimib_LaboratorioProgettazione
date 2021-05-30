@@ -6,6 +6,8 @@ import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +23,7 @@ import java.util.Optional;
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.RepetitionStudent}.
  */
+@Api(value="RepetitionStudent Controller", description="Contains operations for managing repetition reservations as a admin")
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -46,6 +49,7 @@ public class RepetitionStudentResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new repetitionStudent, or with status {@code 400 (Bad Request)} if the repetitionStudent has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Create reservation = create new student reservation with data inserted from admin")
     @PostMapping("/repetition-students")
     public ResponseEntity<RepetitionStudent> createRepetitionStudent(@RequestBody RepetitionStudent repetitionStudent) throws URISyntaxException {
         log.debug("REST request to save RepetitionStudent : {}", repetitionStudent);
@@ -67,6 +71,7 @@ public class RepetitionStudentResource {
      * or with status {@code 500 (Internal Server Error)} if the repetitionStudent couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update reservation = update reservation with data inserted from admin")
     @PutMapping("/repetition-students")
     public ResponseEntity<RepetitionStudent> updateRepetitionStudent(@RequestBody RepetitionStudent repetitionStudent) throws URISyntaxException {
         log.debug("REST request to update RepetitionStudent : {}", repetitionStudent);
@@ -84,6 +89,7 @@ public class RepetitionStudentResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of repetitionStudents in body.
      */
+    @ApiOperation(value="Get all reservations = return all reservations in the system")
     @GetMapping("/repetition-students")
     public List<RepetitionStudent> getAllRepetitionStudents() {
         log.debug("REST request to get all RepetitionStudents");
@@ -96,6 +102,7 @@ public class RepetitionStudentResource {
      * @param id the id of the repetitionStudent to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the repetitionStudent, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get reservation by id = return reservation by id")
     @GetMapping("/repetition-students/{id}")
     public ResponseEntity<RepetitionStudent> getRepetitionStudent(@PathVariable Long id) {
         log.debug("REST request to get RepetitionStudent : {}", id);
@@ -109,6 +116,7 @@ public class RepetitionStudentResource {
      * @param id the id of the repetitionStudent to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete reservation by id = remove the reservation from the system")
     @DeleteMapping("/repetition-students/{id}")
     public ResponseEntity<Void> deleteRepetitionStudent(@PathVariable Long id) {
         log.debug("REST request to delete RepetitionStudent : {}", id);
