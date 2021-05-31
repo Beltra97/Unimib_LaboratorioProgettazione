@@ -37,6 +37,7 @@ public class StudentService {
         this.cacheManager = cacheManager;
     }
 
+    // return the student logged in the current session of the webapp
     public Student getStudentByUser() {
 
         AtomicReference<Student> loggedStudent = new AtomicReference<Student>();

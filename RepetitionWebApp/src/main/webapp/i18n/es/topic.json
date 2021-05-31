@@ -1,0 +1,27 @@
+{
+  "repetitionWebApp": {
+    "topic": {
+      "home": {
+        "title": "Temas",
+        "createLabel": "Crear un Tema nuevo",
+        "createOrEditLabel": "Crear o editar un Tema",
+        "notFound": "No se encontraron Temas"
+      },
+      "created": "Se ha creado un nuevo tema con el identificador {{param}}",
+      "updated": "Se ha cambiado un argumento con el identificador {{param}}",
+      "deleted": "Se ha eliminado un argumento con el identificador {{param}}",
+      "delete": {
+        "question": "¿Está seguro de eliminar el tema {{id}}?"
+      },
+      "detail": {
+        "title": "Temas"
+      },
+      "name": "Nombre",
+      "description": "Descripción",
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación",
+      "subject": "Asignatura"
+    }
+  }
+}

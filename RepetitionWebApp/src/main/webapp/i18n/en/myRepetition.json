@@ -4,25 +4,39 @@
       "home": {
         "title": "My Repetitions",
         "createLabel": "Post Repetition",
+        "historyLabel": "Repetition History",
         "createOrEditLabel": "Post or edit Repetition",
         "notFound": "No My Repetitions found",
         "Reservations": "Booked by",
         "noReservations": "No reservations",
-        "duration": "Duration: {{ param }} minutes"
+        "duration": "Duration: {{ param }} minutes",
+        "price": "Price: {{ param }} €"
       },
       "created": "A Repetition is posted with identifier {{ param }}",
       "updated": "A Repetition is updated with identifier {{ param }}",
       "deleted": "A Repetition is deleted with identifier {{ param }}",
+      "madeRepetitionGroup": "A Repetition with identifier {{ param }} is became a group repetition",
       "delete": {
         "question": "Are you sure you want to delete Repetition {{ id }}?"
       },
       "detail": {
-        "title": "My Repetition"
+        "title": "My Repetitions"
       },
       "subject": "Subject",
+      "subject.Math": "Math",
+      "subject.Physics": "Physics",
+      "subject.Information Technology": "Information Technology",
+      "subject.Music": "Music",
+      "subject.Art": "Art",
       "topic": "Topic: {{ param }}",
+      "meetingLink": "Meeting Link",
+      "additionalNote": "Additional Note: {{ param }}",
+      "nPartecipants": "Max partecipants: {{ param }}",
+      "singleRepetition": "Single Repetition",
+      "groupRepetition": "Group Repetition",
       "duration": "Duration",
       "dateRepetition": "Date Repetition",
+      "timeRepetition": "Time Repetition",
       "dateCreated": "Date Created",
       "dateModified": "Date Modified",
       "dateDeleted": "Date Deleted"

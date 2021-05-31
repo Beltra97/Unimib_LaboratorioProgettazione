@@ -1,0 +1,31 @@
+{
+  "repetitionWebApp": {
+    "tutor": {
+      "home": {
+        "title": "Tutor",
+        "createLabel": "Crea un nuovo Tutor",
+        "createOrEditLabel": "Crea o modifica un Tutor",
+        "notFound": "Nessun Tutor trovato"
+      },
+      "created": "Un nuovo Tutor con identificativo {{ param }} è stato creato",
+      "updated": "Un Tutor con identificativo {{ param }} è stato modificato",
+      "deleted": "Un Tutor con identificativo {{ param }} è stato eliminato",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare il Tutor {{ id }}?"
+      },
+      "detail": {
+        "title": "Tutor"
+      },
+      "name": "Nome",
+      "surname": "Cognome",
+      "birthDate": "Data di Nascita",
+      "degree": "Grado Istruzione",
+      "dateCreated": "Data Creazione",
+      "dateModified": "Data Modifica",
+      "dateDeleted": "Data Eliminazione",
+      "user": "Utente",
+      "repetition": "Ripetizione",
+      "subject": "Materia"
+    }
+  }
+}

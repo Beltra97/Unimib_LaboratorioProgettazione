@@ -43,6 +43,20 @@
       "otherEntityName": "repetition",
       "otherEntityRelationshipName": "subject",
       "relationshipName": "repetition"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "topic",
+      "otherEntityRelationshipName": "subject",
+      "relationshipName": "topic"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "tutor",
+      "otherEntityRelationshipName": "subject",
+      "relationshipName": "tutor",
+      "otherEntityField": "id",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20210331093848",

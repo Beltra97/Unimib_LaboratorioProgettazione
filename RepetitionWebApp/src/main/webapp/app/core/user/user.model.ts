@@ -13,7 +13,7 @@ export interface IUser {
   lastModifiedDate?: Date;
   password?: string;
   isStudent?: boolean;
-  subject?: string[];
+  subject?: number[];
   degree?: string;
   birthdate?: Date;
 }
@@ -34,7 +34,7 @@ export class User implements IUser {
     public lastModifiedDate?: Date,
     public password?: string,
     public isStudent?: boolean,
-    public subject?: string[],
+    public subject?: number[],
     public degree?: string,
     public birthdate?: Date
   ) {}

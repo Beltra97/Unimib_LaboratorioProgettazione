@@ -20,10 +20,6 @@
                 <dd>
                     <span>{{ tutor.birthDate }}</span>
                 </dd>
-                <dt><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></dt>
-                <dd>
-                    <span>{{ tutor.subject }}</span>
-                </dd>
                 <dt><span jhiTranslate="repetitionWebApp.tutor.degree">Degree</span></dt>
                 <dd>
                     <span>{{ tutor.degree }}</span>
@@ -43,6 +39,12 @@
                 <dt><span jhiTranslate="repetitionWebApp.tutor.user">User</span></dt>
                 <dd>
                     {{ tutor.user?.id }}
+                </dd>
+                <dt><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></dt>
+                <dd>
+                    <span *ngFor="let subject of tutor.subjects; let last = last">
+                        <a [routerLink]="['/subject', subject?.id, 'view']">{{ subject.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
                 </dd>
             </dl>
 

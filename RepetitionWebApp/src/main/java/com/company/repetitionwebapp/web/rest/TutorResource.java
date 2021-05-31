@@ -1,11 +1,19 @@
 package com.company.repetitionwebapp.web.rest;
 
 import com.company.repetitionwebapp.domain.Tutor;
+import com.company.repetitionwebapp.service.TutorService;
 import com.company.repetitionwebapp.repository.TutorRepository;
 import com.company.repetitionwebapp.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import javax.validation.Valid;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,20 +21,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-
 /**
  * REST controller for managing {@link com.company.repetitionwebapp.domain.Tutor}.
  */
+@Api(value="Tutor Controller", description="Contains operations for managing tutor as a admin")
 @RestController
 @RequestMapping("/api")
 @Transactional
 public class TutorResource {
-
     private final Logger log = LoggerFactory.getLogger(TutorResource.class);
 
     private static final String ENTITY_NAME = "tutor";
@@ -35,9 +37,11 @@ public class TutorResource {
     private String applicationName;
 
     private final TutorRepository tutorRepository;
+    private final TutorService tutorService;
 
-    public TutorResource(TutorRepository tutorRepository) {
+    public TutorResource(TutorRepository tutorRepository, TutorService tutorService) {
         this.tutorRepository = tutorRepository;
+        this.tutorService = tutorService;
     }
 
     /**
@@ -47,6 +51,7 @@ public class TutorResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new tutor, or with status {@code 400 (Bad Request)} if the tutor has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Create tutor = create new tutor with data inserted from admin")
     @PostMapping("/tutors")
     public ResponseEntity<Tutor> createTutor(@Valid @RequestBody Tutor tutor) throws URISyntaxException {
         log.debug("REST request to save Tutor : {}", tutor);
@@ -54,7 +59,8 @@ public class TutorResource {
             throw new BadRequestAlertException("A new tutor cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Tutor result = tutorRepository.save(tutor);
-        return ResponseEntity.created(new URI("/api/tutors/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/tutors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -68,6 +74,7 @@ public class TutorResource {
      * or with status {@code 500 (Internal Server Error)} if the tutor couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @ApiOperation(value="Update tutor = update tutor with data inserted from admin")
     @PutMapping("/tutors")
     public ResponseEntity<Tutor> updateTutor(@Valid @RequestBody Tutor tutor) throws URISyntaxException {
         log.debug("REST request to update Tutor : {}", tutor);
@@ -75,7 +82,8 @@ public class TutorResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Tutor result = tutorRepository.save(tutor);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, tutor.getId().toString()))
             .body(result);
     }
@@ -83,12 +91,26 @@ public class TutorResource {
     /**
      * {@code GET  /tutors} : get all the tutors.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of tutors in body.
      */
+    @ApiOperation(value="Get all tutors = return all tutors in the system")
     @GetMapping("/tutors")
-    public List<Tutor> getAllTutors() {
+    public List<Tutor> getAllTutors(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Tutors");
-        return tutorRepository.findAll();
+        return tutorRepository.findAllWithEagerRelationships();
+    }
+
+    /**
+     * {@code GET  /students-user} : get the student by the logged user.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
+     */
+    @ApiOperation(value="Get tutor by logged User = return tutor information from logged user")
+    @GetMapping("/tutors-user")
+    public Tutor getTutorUser() {
+        log.debug("REST request to get all Turors");
+        return tutorService.getTutorByUser();
     }
 
     /**
@@ -97,10 +119,11 @@ public class TutorResource {
      * @param id the id of the tutor to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the tutor, or with status {@code 404 (Not Found)}.
      */
+    @ApiOperation(value="Get tutor by id = return tutor by id")
     @GetMapping("/tutors/{id}")
     public ResponseEntity<Tutor> getTutor(@PathVariable Long id) {
         log.debug("REST request to get Tutor : {}", id);
-        Optional<Tutor> tutor = tutorRepository.findById(id);
+        Optional<Tutor> tutor = tutorRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(tutor);
     }
 
@@ -110,10 +133,14 @@ public class TutorResource {
      * @param id the id of the tutor to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @ApiOperation(value="Delete tutor by id = remove the tutor from the system")
     @DeleteMapping("/tutors/{id}")
     public ResponseEntity<Void> deleteTutor(@PathVariable Long id) {
         log.debug("REST request to delete Tutor : {}", id);
         tutorRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

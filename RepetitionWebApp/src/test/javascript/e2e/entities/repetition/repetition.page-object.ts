@@ -30,8 +30,12 @@ export class RepetitionUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   topicInput = element(by.id('field_topic'));
+  additionalNoteInput = element(by.id('field_additionalNote'));
   dateRepetitionInput = element(by.id('field_dateRepetition'));
+  nPartecipantsInput = element(by.id('field_nPartecipants'));
   durationInput = element(by.id('field_duration'));
+  priceInput = element(by.id('field_price'));
+  meetingLinkInput = element(by.id('field_meetingLink'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
   dateDeletedInput = element(by.id('field_dateDeleted'));
@@ -51,6 +55,14 @@ export class RepetitionUpdatePage {
     return await this.topicInput.getAttribute('value');
   }
 
+  async setAdditionalNoteInput(additionalNote: string): Promise<void> {
+    await this.additionalNoteInput.sendKeys(additionalNote);
+  }
+
+  async getAdditionalNoteInput(): Promise<string> {
+    return await this.additionalNoteInput.getAttribute('value');
+  }
+
   async setDateRepetitionInput(dateRepetition: string): Promise<void> {
     await this.dateRepetitionInput.sendKeys(dateRepetition);
   }
@@ -59,12 +71,36 @@ export class RepetitionUpdatePage {
     return await this.dateRepetitionInput.getAttribute('value');
   }
 
+  async setNPartecipantsInput(nPartecipants: string): Promise<void> {
+    await this.nPartecipantsInput.sendKeys(nPartecipants);
+  }
+
+  async getNPartecipantsInput(): Promise<string> {
+    return await this.nPartecipantsInput.getAttribute('value');
+  }
+
   async setDurationInput(duration: string): Promise<void> {
     await this.durationInput.sendKeys(duration);
   }
 
   async getDurationInput(): Promise<string> {
     return await this.durationInput.getAttribute('value');
+  }
+
+  async setPriceInput(price: string): Promise<void> {
+    await this.priceInput.sendKeys(price);
+  }
+
+  async getPriceInput(): Promise<string> {
+    return await this.priceInput.getAttribute('value');
+  }
+
+  async setMeetingLinkInput(meetingLink: string): Promise<void> {
+    await this.meetingLinkInput.sendKeys(meetingLink);
+  }
+
+  async getMeetingLinkInput(): Promise<string> {
+    return await this.meetingLinkInput.getAttribute('value');
   }
 
   async setDateCreatedInput(dateCreated: string): Promise<void> {

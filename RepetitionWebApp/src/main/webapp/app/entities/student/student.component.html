@@ -38,10 +38,10 @@
                     <td><a [routerLink]="['/student', student.id, 'view']">{{ student.id }}</a></td>
                     <td>{{ student.name }}</td>
                     <td>{{ student.surname }}</td>
-                    <td>{{ student.birthDate | date:'medium' }}</td>
-                    <td>{{ student.dateCreated | date:'medium' }}</td>
-                    <td>{{ student.dateModified | date:'medium' }}</td>
-                    <td>{{ student.dateDeleted | date:'medium' }}</td>
+                    <td>{{ student.birthDate | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ student.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ student.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ student.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         {{ student.user?.id }}
                     </td>

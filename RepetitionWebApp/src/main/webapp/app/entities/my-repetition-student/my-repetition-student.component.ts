@@ -8,6 +8,7 @@ import { IMyRepetitionStudent } from 'app/shared/model/my-repetition-student.mod
 import { MyRepetitionStudentService } from './my-repetition-student.service';
 import { MyRepetitionStudentDeleteDialogComponent } from './my-repetition-student-delete-dialog.component';
 import { MyRepetitionStudentUpdateDialogComponent } from './my-repetition-student-update-dialog.component';
+import { MyRepetitionStudentJoinDialogComponent } from './my-repetition-student-join-dialog.component';
 
 @Component({
   selector: 'jhi-my-repetition-student',
@@ -57,5 +58,10 @@ export class MyRepetitionStudentComponent implements OnInit, OnDestroy {
   book(myRepetitionStudent: IMyRepetitionStudent): void {
     const modalRef1 = this.modalService.open(MyRepetitionStudentUpdateDialogComponent, { size: 'sm', backdrop: 'static' });
     modalRef1.componentInstance.myRepetitionStudent = myRepetitionStudent;
+  }
+
+  join(myRepetitionStudent: IMyRepetitionStudent): void {
+    const modalRef2 = this.modalService.open(MyRepetitionStudentJoinDialogComponent, { size: 'sm', backdrop: 'static' });
+    modalRef2.componentInstance.myRepetitionStudent = myRepetitionStudent;
   }
 }

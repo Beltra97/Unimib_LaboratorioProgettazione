@@ -23,10 +23,6 @@
       ]
     },
     {
-      "fieldName": "subject",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "degree",
       "fieldType": "String"
     },
@@ -57,6 +53,14 @@
       "otherEntityName": "repetition",
       "otherEntityRelationshipName": "tutor",
       "relationshipName": "repetition"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "tutor",
+      "relationshipName": "subject",
+      "otherEntityField": "id",
+      "ownerSide": true
     }
   ],
   "changelogDate": "20210325083943",

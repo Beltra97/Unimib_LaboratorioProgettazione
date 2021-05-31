@@ -1,9 +1,8 @@
 
 entity Tutor {
     name String required,
-    surname String required
-    birthDate Instant required
-    subject String,
+    surname String required,
+    birthDate Instant required,
     degree String,
     dateCreated Instant,
     dateModified Instant,
@@ -21,8 +20,12 @@ entity Student {
 
 entity Repetition {
     topic String,
+    additionalNote String,
     dateRepetition Instant required,
-    duration Integer,
+    nPartecipants Integer required,
+    duration Integer required,
+    price Float required,
+    meetingLink String,
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant
@@ -38,6 +41,14 @@ entity Subject {
     name String required,
     description String required,
     imageUrl String required maxlength(1024),
+    dateCreated Instant, 
+    dateModified Instant, 
+    dateDeleted Instant
+}
+
+entity Topic {
+    name String required,
+    description String required,
     dateCreated Instant, 
     dateModified Instant, 
     dateDeleted Instant
@@ -65,4 +76,12 @@ relationship ManyToOne {
 
 relationship OneToMany {
     Subject{repetition(id)} to Repetition,
+}
+
+relationship OneToMany {
+    Subject{topic(id)} to Topic,
+}
+
+relationship ManyToMany {
+	Tutor{subject(id)} to Subject{tutor(id)}
 }

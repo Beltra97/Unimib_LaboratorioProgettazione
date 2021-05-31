@@ -14,6 +14,8 @@ public class RepetitionStudentDTO {
 
     private String topic;
 
+    private String additionalNote;
+
     public RepetitionStudentDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -21,6 +23,7 @@ public class RepetitionStudentDTO {
     public RepetitionStudentDTO(Repetition repetition) {
         this.id = repetition.getId();
         this.topic = repetition.getTopic();
+        this.additionalNote = repetition.getAdditionalNote();
     }
 
     public Long getId() {
@@ -37,5 +40,13 @@ public class RepetitionStudentDTO {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public String getAdditionalNote() {
+        return additionalNote;
+    }
+
+    public void setAdditionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
     }
 }

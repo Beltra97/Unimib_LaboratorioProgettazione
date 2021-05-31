@@ -44,18 +44,17 @@ describe('Tutor e2e test', () => {
       tutorUpdatePage.setNameInput('name'),
       tutorUpdatePage.setSurnameInput('surname'),
       tutorUpdatePage.setBirthDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      tutorUpdatePage.setSubjectInput('subject'),
       tutorUpdatePage.setDegreeInput('degree'),
       tutorUpdatePage.setDateCreatedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       tutorUpdatePage.setDateModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       tutorUpdatePage.setDateDeletedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      tutorUpdatePage.userSelectFirstOption(),
+      tutorUpdatePage.userSelectLastOption(),
+      // tutorUpdatePage.subjectSelectLastOption(),
     ]);
 
     expect(await tutorUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await tutorUpdatePage.getSurnameInput()).to.eq('surname', 'Expected Surname value to be equals to surname');
     expect(await tutorUpdatePage.getBirthDateInput()).to.contain('2001-01-01T02:30', 'Expected birthDate value to be equals to 2000-12-31');
-    expect(await tutorUpdatePage.getSubjectInput()).to.eq('subject', 'Expected Subject value to be equals to subject');
     expect(await tutorUpdatePage.getDegreeInput()).to.eq('degree', 'Expected Degree value to be equals to degree');
     expect(await tutorUpdatePage.getDateCreatedInput()).to.contain(
       '2001-01-01T02:30',

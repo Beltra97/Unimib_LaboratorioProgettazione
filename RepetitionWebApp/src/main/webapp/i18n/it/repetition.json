@@ -1,0 +1,33 @@
+{
+  "repetitionWebApp": {
+    "repetition": {
+      "home": {
+        "title": "Ripetizioni",
+        "createLabel": "Crea una nuova Ripetizione",
+        "createOrEditLabel": "Crea o modifica la Ripetizione",
+        "notFound": "Nessuna Ripetizione trovata"
+      },
+      "created": "Una nuova Ripetizione con identificativo {{ param }} è stata creata",
+      "updated": "Una Ripetizione con identificativo {{ param }} è stata modificata",
+      "deleted": "Una Ripetizione con identificativo {{ param }} è stata eliminata ",
+      "madeRepetitionGroup": "Una Ripetizione con identificativo {{ param }} è diventata una Ripetizione di gruppo",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare la Ripetizione {{ id }}?"
+      },
+      "detail": {
+        "title": "Ripetizione"
+      },
+      "topic": "Argomento",
+      "additionalNote": "Note Addizionali",
+      "dateRepetition": "Data Ripetizione",
+      "nPartecipants": "N Partecipanti",
+      "duration": "Durata",
+      "price": "Prezzo",
+      "dateCreated": "Data Creazione",
+      "dateModified": "Data Modifica",
+      "dateDeleted": "Data Cancellazione",
+      "tutor": "Tutor",
+      "subject": "Materia"
+    }
+  }
+}

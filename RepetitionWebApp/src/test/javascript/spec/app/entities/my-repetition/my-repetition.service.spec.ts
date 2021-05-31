@@ -29,9 +29,14 @@ describe('Service Tests', () => {
         0,
         new Subject(0, 'TestSubject', 'This is an example', undefined, currentDate, currentDate, currentDate, undefined),
         'Topic example',
+        'Additional note example',
         100,
+        9.99,
+        'https://meet.google.com/example',
         currentDate,
-        undefined
+        currentDate,
+        undefined,
+        1
       );
     });
 
@@ -39,7 +44,6 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
             dateDeleted: currentDate.format(DATE_TIME_FORMAT),
@@ -68,7 +72,6 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            dateRepetition: currentDate,
             dateCreated: currentDate,
             dateModified: currentDate,
             dateDeleted: currentDate,
@@ -86,7 +89,9 @@ describe('Service Tests', () => {
       it('should update a MyRepetition', () => {
         const returnedFromService = Object.assign(
           {
-            subject: 'BBBBBB',
+            topic: 'BBBBBB',
+            duration: 1,
+            price: 1,
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
@@ -97,7 +102,6 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            dateRepetition: currentDate,
             dateCreated: currentDate,
             dateModified: currentDate,
             dateDeleted: currentDate,
@@ -115,7 +119,9 @@ describe('Service Tests', () => {
       it('should return a list of MyRepetition', () => {
         const returnedFromService = Object.assign(
           {
-            subject: 'BBBBBB',
+            topic: 'BBBBBB',
+            duration: 1,
+            price: 1,
             dateRepetition: currentDate.format(DATE_TIME_FORMAT),
             dateCreated: currentDate.format(DATE_TIME_FORMAT),
             dateModified: currentDate.format(DATE_TIME_FORMAT),
@@ -126,7 +132,6 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            dateRepetition: currentDate,
             dateCreated: currentDate,
             dateModified: currentDate,
             dateDeleted: currentDate,

@@ -3,16 +3,18 @@ package com.company.repetitionwebapp.service;
 import com.company.repetitionwebapp.config.Constants;
 import com.company.repetitionwebapp.domain.Authority;
 import com.company.repetitionwebapp.domain.Student;
+import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.domain.Tutor;
 import com.company.repetitionwebapp.domain.User;
 import com.company.repetitionwebapp.repository.AuthorityRepository;
 import com.company.repetitionwebapp.repository.StudentRepository;
+import com.company.repetitionwebapp.repository.SubjectRepository;
 import com.company.repetitionwebapp.repository.TutorRepository;
 import com.company.repetitionwebapp.repository.UserRepository;
 import com.company.repetitionwebapp.security.AuthoritiesConstants;
 import com.company.repetitionwebapp.security.SecurityUtils;
-import com.company.repetitionwebapp.service.dto.UserDTO;
 import com.company.repetitionwebapp.service.dto.ManagedUserVM;
+import com.company.repetitionwebapp.service.dto.UserDTO;
 import io.github.jhipster.security.RandomUtil;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -38,6 +40,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final SubjectRepository subjectRepository;
+
     private final TutorRepository tutorRepository;
 
     private final StudentRepository studentRepository;
@@ -54,16 +58,19 @@ public class UserService {
         TutorRepository tutorRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
+        SubjectRepository subjectRepository,
         CacheManager cacheManager
     ) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.tutorRepository = tutorRepository;
         this.passwordEncoder = passwordEncoder;
+        this.subjectRepository = subjectRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
     }
 
+    // method for activate the user registration 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository
@@ -80,6 +87,7 @@ public class UserService {
             );
     }
 
+    // method for complete the operation of password reset for user account
     public Optional<User> completePasswordReset(String newPassword, String key) {
         log.debug("Reset user password for reset key {}", key);
         return userRepository
@@ -96,6 +104,7 @@ public class UserService {
             );
     }
 
+    // method for initializate the operation of password reset for user account 
     public Optional<User> requestPasswordReset(String mail) {
         return userRepository
             .findOneByEmailIgnoreCase(mail)
@@ -110,6 +119,7 @@ public class UserService {
             );
     }
 
+    // method for register a new user
     public User registerUser(ManagedUserVM userDTO, String password) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
@@ -150,6 +160,7 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
 
+        // check if the new user is a student or a tutor
         if (userDTO.getIsStudent()) {
             Student newStudent = new Student();
             newStudent.setName(userDTO.getFirstName());
@@ -165,7 +176,7 @@ public class UserService {
             newTutor.setDegree(userDTO.getDegree());
             newTutor.setName(userDTO.getFirstName());
             newTutor.setSurname(userDTO.getLastName());
-            newTutor.setSubject(userDTO.getSubject());
+            newTutor.setSubjects(returnSubjects(userDTO.getSubject()));
             newTutor.setBirthDate(userDTO.getBirthdate().toInstant());
             newTutor.setUser(newUser);
             tutorRepository.save(newTutor);
@@ -178,19 +189,32 @@ public class UserService {
         return newUser;
     }
 
+    // method for remove the user that hasn't activate the account
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
             return false;
         }
-        tutorRepository.findAll().stream().filter(t ->
-            t.getUser() != null && t.getUser().getId() == existingUser.getId()).findFirst().ifPresent(t -> {
-            tutorRepository.delete(t);
-        });
+        tutorRepository
+            .findAll()
+            .stream()
+            .filter(t -> t.getUser() != null && t.getUser().getId() == existingUser.getId())
+            .findFirst()
+            .ifPresent(
+                t -> {
+                    tutorRepository.delete(t);
+                }
+            );
 
-        studentRepository.findAll().stream().filter(s ->
-            s.getUser() != null && s.getUser().getId() == existingUser.getId()).findFirst().ifPresent(s -> {
-            studentRepository.delete(s);
-            });
+        studentRepository
+            .findAll()
+            .stream()
+            .filter(s -> s.getUser() != null && s.getUser().getId() == existingUser.getId())
+            .findFirst()
+            .ifPresent(
+                s -> {
+                    studentRepository.delete(s);
+                }
+            );
 
         userRepository.delete(existingUser);
         userRepository.flush();
@@ -198,6 +222,7 @@ public class UserService {
         return true;
     }
 
+    // method for create a new user
     public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
@@ -273,6 +298,7 @@ public class UserService {
             .map(UserDTO::new);
     }
 
+    // method for delete a user
     public void deleteUser(String login) {
         userRepository
             .findOneByLogin(login)
@@ -286,7 +312,8 @@ public class UserService {
     }
 
     /**
-     * Update basic information (first name, last name, email, language) for the current user.
+     * Update basic information (first name, last name, email, language) for the
+     * current user.
      *
      * @param firstName first name of user.
      * @param lastName  last name of user.
@@ -313,6 +340,7 @@ public class UserService {
             );
     }
 
+    // method for change the password of user account
     @Transactional
     public void changePassword(String currentClearTextPassword, String newPassword) {
         SecurityUtils
@@ -367,6 +395,7 @@ public class UserService {
 
     /**
      * Gets a list of all the authorities.
+     *
      * @return a list of all the authorities.
      */
     @Transactional(readOnly = true)
@@ -379,5 +408,20 @@ public class UserService {
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
+    }
+
+    private Set<Subject> returnSubjects(ArrayList<Number> subjects) {
+        Set<Subject> newSubjects = new HashSet<Subject>();
+
+        System.out.println("*************************************************************");
+        System.out.println(subjects);
+        System.out.println("*************************************************************");
+
+        for (Number id : subjects) newSubjects.add(subjectRepository.findById(id.longValue()).get());
+
+        System.out.println("*************************************************************");
+        System.out.println("*************************************************************");
+
+        return newSubjects;
     }
 }

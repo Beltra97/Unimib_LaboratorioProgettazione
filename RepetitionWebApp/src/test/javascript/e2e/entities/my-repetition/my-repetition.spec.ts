@@ -45,10 +45,12 @@ describe('MyRepetition e2e test', () => {
     await promise.all([
       myRepetitionUpdatePage.subjectSelectLastOption(),
       myRepetitionUpdatePage.setDateRepetitionInput('31/12/2021' + protractor.Key.TAB + '02:30AM'),
-      myRepetitionUpdatePage.setDurationInput('5'),
+      myRepetitionUpdatePage.setDurationInput('60'),
+      myRepetitionUpdatePage.setPriceInput('9.99'),
     ]);
 
-    expect(await myRepetitionUpdatePage.getDurationInput()).to.eq('5', 'Expected duration value to be equals to 5');
+    expect(await myRepetitionUpdatePage.getDurationInput()).to.eq('60', 'Expected duration value to be equals to 60');
+    expect(await myRepetitionUpdatePage.getPriceInput()).to.eq('9.99', 'Expected price value to be equals to 9.99');
 
     await myRepetitionUpdatePage.save();
     expect(await myRepetitionUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

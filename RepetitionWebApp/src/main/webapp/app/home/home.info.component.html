@@ -1,18 +1,20 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{ repetition!.subject!.name }}</h4>
+    <h4 class="modal-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{ repetition!.subject!.name }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
     <p style="text-align: center;">
-        Subject: {{ repetition!.subject!.name }}<br />
-        Topic: {{ repetition!.topic }}<br />
-        Date: {{ repetition!.dateRepetition | date:'medium' }}<br />
-        Duration: {{ repetition!.duration }} minutes<br />
-        Tutor: {{ repetition!.tutor!.name }} {{ repetition!.tutor!.surname }}
+        <label jhiTranslate="global.menu.entities.subject"></label>: <label jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{ repetition!.subject!.name }}</label><br />
+        <span *ngIf="repetition!.topic"><label jhiTranslate="global.menu.entities.topic"></label>: {{ repetition!.topic }}<br /></span>
+        <span *ngIf="repetition!.additionalNote"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{ repetition!.additionalNote }}<br /></span>
+        <span *ngIf="repetition!.price"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{ repetition!.price }}€<br /></span>
+        <label jhiTranslate="repetitionWebApp.repetition.dateRepetition"></label>: {{ repetition!.dateRepetition | date:'dd-MM-yyyy, HH:mm' }}<br />
+        <label jhiTranslate="repetitionWebApp.repetition.duration"></label>: {{ repetition!.duration }} minutes<br />
+        <label jhiTranslate="global.menu.entities.tutor"></label>: {{ repetition!.tutor!.name }} {{ repetition!.tutor!.surname }}
     </p>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')" jhiTranslate="global.find.button.info">Close</button>
 </div>

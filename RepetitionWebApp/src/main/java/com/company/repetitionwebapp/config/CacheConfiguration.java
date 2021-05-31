@@ -54,6 +54,10 @@ public class CacheConfiguration {
             createCache(cm, com.company.repetitionwebapp.domain.RepetitionStudent.class.getName());
             createCache(cm, com.company.repetitionwebapp.domain.Subject.class.getName());
             createCache(cm, com.company.repetitionwebapp.domain.Subject.class.getName() + ".repetitions");
+            createCache(cm, com.company.repetitionwebapp.domain.Subject.class.getName() + ".topics");
+            createCache(cm, com.company.repetitionwebapp.domain.Topic.class.getName());
+            createCache(cm, com.company.repetitionwebapp.domain.Tutor.class.getName() + ".subjects");
+            createCache(cm, com.company.repetitionwebapp.domain.Subject.class.getName() + ".tutors");
             // jhipster-needle-ehcache-add-entry
         };
     }

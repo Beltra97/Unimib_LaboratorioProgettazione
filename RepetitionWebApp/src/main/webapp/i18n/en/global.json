@@ -11,9 +11,12 @@
         "student": "Student",
         "repetition": "Repetition",
         "repetitionStudent": "Repetition Student",
-        "myRepetition": "My Repetition",
+        "myRepetition": "My Repetitions",
+        "historyRepetition": "My History",
         "subject": "Subject",
-        "myRepetitionStudent": "My Repetition Student",
+        "myRepetitionStudent": "My Repetitions",
+        "historyRepetitionStudent": "My History",
+        "topic": "Topic",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -40,6 +43,17 @@
       },
       "language": "Language"
     },
+    "find": {
+      "title": "Find repetitions",
+      "placeholder": "Search by tutor or subject",
+      "group": "Allow group repetitions?",
+      "group.yes": "Yes (allow group repetitions)",
+      "group.no": "No (enable single repetitions only)",
+      "search": "Search",
+      "results": "Results",
+      "nores": "No results found",
+      "button.info": "Close"
+    },
     "form": {
       "name.label": "Name",
       "name.placeholder": "Your name",
@@ -56,6 +70,7 @@
       "email.label": "Email",
       "email.placeholder": "Your email",
       "birthdate.label": "Birthdate",
+      "birthdate.placeholder": "Your Birthdate",
       "role.label": "Role",
       "role.placeholder": "Your role",
       "role.label.student": "Student",
@@ -66,7 +81,8 @@
       "degree.label.university": "University",
       "degree.label.master": "Master",
       "subject.label": "Subject",
-      "subject.placeholder": "Your main subject"
+      "subject.placeholder": "Your main subject",
+      "subject2.placeholder": "Other subject"
     },
     "messages": {
       "info": {
@@ -118,7 +134,7 @@
         "birthdate": {
           "required": "Your birthdate is required.",
           "invalid": "Your birthdate is invalid, must be less than today.",
-          "pattern": "Your birthdate can only contain letters."
+          "pattern": "Your birthdate can only contain numbers."
         },
         "role": {
           "required": "Your role is required.",
@@ -129,7 +145,7 @@
           "invalid": "Your degree is invalid."
         },
         "subject": {
-          "required": "Your subject is required.",
+          "required": "Your main subject is required.",
           "invalid": "Your subject is invalid."
         },
         "dateRepetition": {

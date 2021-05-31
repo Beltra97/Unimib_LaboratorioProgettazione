@@ -1,0 +1,30 @@
+{
+  "repetitionWebApp": {
+    "myRepetitionStudent": {
+      "home": {
+        "title": "Mes Répétitions",
+        "notFound": "Aucune répétition trouvée"
+      },
+      "created": "Une répétition avec l'identifiant {{param}} est réservée",
+      "updated": "Une répétition avec l'identifiant {{param}} est modifiée",
+      "deleted": "Une réservervation pour la répétition avec l'identifiant {{param}} est supprimé",
+      "delete": {
+        "title": "Annuler la répétition",
+        "question": "Voulez-vous vraiment supprimer la réservation pour la répétition avec l'identifiant {{id}}?",
+        "btnConfirm": "Annuler"
+      },
+      "book": {
+        "title": "Réservez une répétition",
+        "question": "Êtes-vous sûr de vouloir réserver cette répétition ?",
+        "btnConfirm": "réserver"
+      },
+      "join": {
+        "title": "Rejoignez la répétition",
+        "question": "Êtes-vous sûr de vouloir participer à cette répétition ?",
+        "btnConfirm": "Rejoindre"
+      },
+      "topic": "Sujet",
+      "additionalNote": "Remarque additionnelle"
+    }
+  }
+}

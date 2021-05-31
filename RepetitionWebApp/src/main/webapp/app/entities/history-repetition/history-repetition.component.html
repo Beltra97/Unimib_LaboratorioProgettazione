@@ -1,0 +1,74 @@
+<div class="card jh-card">
+    <h2 id="page-heading">
+        <span jhiTranslate="repetitionWebApp.historyRepetition.home.title">History Repetitions</span>
+
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="historyRepetitions?.length === 0">
+        <span jhiTranslate="repetitionWebApp.historyRepetition.home.notFound">No Repetitions found</span>
+    </div>
+
+    <div id="entities" *ngIf="historyRepetitions && historyRepetitions.length > 0">
+
+        <mat-card class="alert alert-warning" *ngFor="let historyRepetition of historyRepetitions">
+
+            <!--<img mat-card-lg-image style="float:right" src="{{myRepetition.subject?.imageUrl}}">-->
+
+                <div class="row">
+                    <mat-card-header>
+                    <div class="column">
+                        <mat-card-title>
+                            <h5> {{ historyRepetition.dateRepetition | date: 'dd-MM-yyyy, HH:mm' }} </h5>
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <div>
+                                <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
+                                    [translateValues]="{ param: historyRepetition.duration }">Duration: {{ historyRepetition.duration }}
+                                    minutes </h6>
+
+                                <h6 jhiTranslate="repetitionWebApp.myRepetition.home.price"
+                                    [translateValues]="{ param: historyRepetition.price }">Price: {{ historyRepetition.price }} € </h6>
+                            </div>
+                            <div>
+                                <h4 jhiTranslate="repetitionWebApp.myRepetition.subject.{{ historyRepetition.subject?.name }}"> {{ historyRepetition.subject?.name }} </h4>
+
+                                <mat-chip-list *ngIf="historyRepetition.topic != ''" #chipList>
+                                    <mat-chip *ngFor="let topic of historyRepetition.topic!.split(';')">
+                                        {{ topic }}
+                                    </mat-chip>
+                                </mat-chip-list>
+
+                            </div>
+                        </mat-card-subtitle>
+                    </div>
+                    <div class="column">
+                        <mat-card-footer style="margin-left:20px;margin-bottom:10px">
+
+                            <h5 *ngIf="historyRepetition.nPartecipants == 1"
+                                jhiTranslate="repetitionWebApp.myRepetition.singleRepetition">Single Repetition</h5>
+
+                            <h5 *ngIf="historyRepetition.nPartecipants != 1"
+                                jhiTranslate="repetitionWebApp.myRepetition.groupRepetition">Group Repetition</h5>
+
+                            <p jhiTranslate="repetitionWebApp.myRepetition.nPartecipants"
+                                [translateValues]="{ param: historyRepetition.nPartecipants }">Max partecipants: {{
+                                historyRepetition.nPartecipants }} </p>
+
+                            <div *ngIf="historyRepetition.students && historyRepetition.students.length > 0">
+                                <h5 jhiTranslate="repetitionWebApp.myRepetition.home.Reservations">Booked by</h5>
+                                <li *ngFor="let student of historyRepetition.students">{{ student.name }} {{ student.surname }} </li>
+
+                            </div>
+                            <h5 *ngIf="historyRepetition.students?.length === 0"
+                                jhiTranslate="repetitionWebApp.myRepetition.home.noReservations">No reservations</h5>
+                        </mat-card-footer>
+                    </div>
+                    </mat-card-header>
+                </div>
+        </mat-card>
+    </div>
+</div>
