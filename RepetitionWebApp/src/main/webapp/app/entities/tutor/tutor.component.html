@@ -26,12 +26,12 @@
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.surname">Surname</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.birthDate">Birth Date</span></th>
-                    <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.degree">Degree</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.dateCreated">Date Created</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.dateModified">Date Modified</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.dateDeleted">Date Deleted</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.user">User</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.tutor.subject">Subject</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -40,14 +40,18 @@
                     <td><a [routerLink]="['/tutor', tutor.id, 'view']">{{ tutor.id }}</a></td>
                     <td>{{ tutor.name }}</td>
                     <td>{{ tutor.surname }}</td>
-                    <td>{{ tutor.birthDate | date:'medium' }}</td>
-                    <td>{{ tutor.subject }}</td>
+                    <td>{{ tutor.birthDate | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>{{ tutor.degree }}</td>
-                    <td>{{ tutor.dateCreated | date:'medium' }}</td>
-                    <td>{{ tutor.dateModified | date:'medium' }}</td>
-                    <td>{{ tutor.dateDeleted | date:'medium' }}</td>
+                    <td>{{ tutor.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ tutor.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ tutor.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         {{ tutor.user?.id }}
+                    </td>
+                    <td>
+                        <span *ngFor="let subject of tutor.subjects; let last = last">
+                            <a class="form-control-static" [routerLink]="['/subject', subject?.id, 'view']">{{ subject.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

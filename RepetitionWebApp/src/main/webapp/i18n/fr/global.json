@@ -1,0 +1,214 @@
+{
+    "global": {
+        "title": "WebApp Répétitions",
+        "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
+        "menu": {
+            "home": "Accueil",
+            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "entities": {
+                "main": "Entités",
+                "tutor": "Tuteur",
+                "student": "Étudiants",
+                "repetition": "Répétition",
+                "repetitionStudent": "Répétition Étudiants",
+                "myRepetition": "Mes Répétitions",
+                "historyRepetition": "Mon Histoire",
+                "subject": "Matière",
+                "myRepetitionStudent": "Mes Répétitions",
+                "historyRepetitionStudent": "Mon Histoire",
+                "topic": "Sujet",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            },
+            "account": {
+                "main": "Compte",
+                "settings": "Profil",
+                "password": "Mot de passe",
+                "sessions": "Sessions",
+                "login": "S'authentifier",
+                "logout": "Déconnexion",
+                "register": "Créer un compte"
+            },
+            "admin": {
+                "main": "Administration",
+                "userManagement": "Gestion des utilisateurs",
+                "tracker": "Suivi des utilisateurs",
+                "metrics": "Métriques",
+                "health": "Diagnostics",
+                "configuration": "Configuration",
+                "logs": "Logs",
+                "audits": "Audits",
+                "apidocs": "API",
+                "database": "Base de données",
+                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+            },
+            "language": "Langue"
+        },
+        "find": {
+            "title": "Trouver répétitions",
+            "placeholder": "Recherche par tuteur ou matière",
+            "group": "Autoriser les répétitions de groupe?",
+            "group.yes": "Oui (autoriser les répétitions de groupe)",
+            "group.no": "Non (activer les répétitions uniques uniquement)",
+            "search": "Rechercher",
+            "results": "Résultats",
+            "nores": "Aucun résultat trouvé",
+            "button.info": "Ferme"
+        },
+        "form": {
+            "name.label": "Prénom",
+            "name.placeholder": "Votre prénom",
+            "surname.label": "Nom",
+            "surname.placeholder": "Votre nom",
+            "username.label": "Nom d'utilisateur",
+            "username.placeholder": "Votre nom d'utilisateur",
+            "currentpassword.label": "Mot de passe actuel",
+            "currentpassword.placeholder": "Mot de passe actuel",
+            "newpassword.label": "Nouveau mot de passe",
+            "newpassword.placeholder": "Nouveau mot de passe",
+            "confirmpassword.label": "Confirmation du nouveau mot de passe",
+            "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
+            "email.label": "Email",
+            "email.placeholder": "Votre email",
+            "birthdate.label": "Date de naissance",
+            "birthdate.placeholder": "Votre date de naissance",
+            "role.label": "Rôle",
+            "role.placeholder": "Votre rôle",
+            "role.label.student": "Étudiants",
+            "role.label.tutor": "Tuteur",
+            "degree.label": "Degré",
+            "degree.placeholder": "Votre degré",
+            "degree.label.high_school": "collège",
+            "degree.label.university": "Université",
+            "degree.label.master": "Master",
+            "subject.label": "Matière",
+            "subject.placeholder": "Votre matière principal",
+            "subject2.placeholder": "Autre matière"
+        },
+        "messages": {
+            "info": {
+                "authenticated": {
+                    "prefix": "Si vous voulez vous ",
+                    "link": "connecter",
+                    "suffix": ", vous pouvez utiliser les comptes par défaut : <br/> - Administrateur (nom d'utilisateur=\"admin\" et mot de passe =\"admin\") <br/> - Utilisateur (nom d'utilisateur=\"user\" et mot de passe =\"user\")."
+                },
+                "register": {
+                    "noaccount": "Vous n'avez pas encore de compte ?",
+                    "link": "Créer un compte"
+                }
+            },
+            "error": {
+                "dontmatch": "Le nouveau mot de passe et sa confirmation ne sont pas égaux !"
+            },
+            "validate": {
+                "newpassword": {
+                    "required": "Votre mot de passe est obligatoire.",
+                    "minlength": "Votre mot de passe doit comporter au moins 4 caractères.",
+                    "maxlength": "Votre mot de passe ne doit pas comporter plus de 50 caractères.",
+                    "strength": "Robustesse du mot de passe :"
+                },
+                "confirmpassword": {
+                    "required": "Votre confirmation du mot de passe est obligatoire.",
+                    "minlength": "Votre confirmation du mot de passe doit comporter au moins 4 caractères.",
+                    "maxlength": "Votre confirmation du mot de passe ne doit pas comporter plus de 50 caractères."
+                },
+                "email": {
+                    "required": "Votre email est obligatoire.",
+                    "minlength": "Votre email doit comporter au moins 5 caractères.",
+                    "maxlength": "Votre email ne doit pas comporter plus de 50 caractères.",
+                    "invalid": "Votre email n'est pas valide."
+                },
+                "name": {
+                    "required": "Votre prénom est obligatoire.",
+                    "invalid": "Votre prénom n'est pas valide.",
+                    "pattern": "Votre prénom ne peut contenir que des lettres.",
+                    "minlength": "Votre prénom doit contenir au moins 1 caractères.",
+                    "maxlength": "Votre prénom ne peut pas comporter plus de 50 caractères."
+                  },
+                  "surname": {
+                    "required": "Votre nom est obligatoire.",
+                    "invalid": "Votre nom n'est pas valide.",
+                    "pattern": "Votre nom ne peut contenir que des lettres.",
+                    "minlength": "Votre nom doit contenir au moins 1 caractères.",
+                    "maxlength": "Votre nom ne peut pas comporter plus de 50 caractères."
+                  },
+                  "birthdate": {
+                    "required": "Votre date de naissance est obligatoire.",
+                    "invalid": "Votre date de naissance n'est pas valide, doit être moins qu'aujourd'hui.",
+                    "pattern": "Votre date de naissance ne peut contenir que des nombres."
+                  },
+                  "role": {
+                    "required": "Votre rôle est obligatoire.",
+                    "invalid": "Votre rôle n'est pas valide."
+                  },
+                  "degree": {
+                    "required": "Votre degré est obligatoire.",
+                    "invalid": "Votre degré n'est pas valide."
+                  },
+                  "subject": {
+                    "required": "Votre matière principal est obligatoire.",
+                    "invalid": "Votre matière n'est pas valide."
+                  },
+                  "dateRepetition": {
+                    "required": "La date de la répétition est obligatoire.",
+                    "invalid": "la date de la répétition n'est pas valide, doit être plus grand qu'aujourd'hui."
+                  }
+            }
+        },
+        "field": {
+            "id": "ID"
+        },
+        "ribbon": {
+            "dev": "Développement"
+        },
+        "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    },
+    "entity": {
+        "action": {
+            "addblob": "Ajouter blob",
+            "addimage": "Ajouter image",
+            "back": "Retour",
+            "cancel": "Annuler",
+            "edit": "Editer",
+            "delete": "Supprimer",
+            "open": "Ouvrir",
+            "save": "Sauvegarder",
+            "view": "Voir"
+        },
+        "detail": {
+            "field": "Champs",
+            "value": "Valeur"
+        },
+        "delete": {
+            "title": "Confirmation de suppression"
+        },
+        "validation": {
+            "required": "Ce champ est obligatoire.",
+            "minlength": "Ce champ doit faire au minimum {{min}} caractères.",
+            "maxlength": "Ce champ doit faire moins de {{max}} caractères.",
+            "min": "Ce champ doit être supérieur à {{min}}.",
+            "max": "Ce champ doit être inférieur à {{max}}.",
+            "minbytes": "Ce champ doit être supérieur à {{min}} bytes.",
+            "maxbytes": "Ce champ doit être inférieur à {{max}} bytes.",
+            "pattern": "Ce champ doit suivre l'expression régulière {{pattern}}.",
+            "number": "Ce champ doit être un nombre.",
+            "datetimelocal": "Ce champ doit être une date et une heure.",
+            "patternLogin": "Ce champ ne peut contenir que des lettres, des chiffres ou des adresses e-mail."
+        }
+    },
+    "error": {
+        "internalServerError": "Erreur interne du serveur",
+        "server.not.reachable": "Serveur inaccessible",
+        "url.not.found": "Non trouvé",
+        "NotNull": "Le champ {{fieldName}} ne peut pas être vide !",
+        "Size": "Le champ {{fieldName}} ne respecte pas les critères minimum et maximum !",
+        "userexists": "Login déjà utilisé !",
+        "emailexists": "Email déjà utilisé !",
+        "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'identifiant !",
+        "idnull": "Identifiant invalide",
+        "file": {
+            "could.not.extract": "Impossible d'extraire le fichier",
+            "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
+        }
+    },
+    "footer": "Développé par: <strong>Beltramelli</strong> Fabio - <strong>Bucci</strong> Davide - <strong>Capelli</strong> Alessandro - <strong>Finati</strong> Davide"
+}

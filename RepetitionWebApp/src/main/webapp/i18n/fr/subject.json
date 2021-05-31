@@ -1,0 +1,30 @@
+{
+  "repetitionWebApp": {
+    "subject": {
+      "home": {
+        "title": "Matière", 
+        "createLabel": "Créer un nouveau matière",
+        "createOrEditLabel": "Create or edit a matière",
+        "notFound": "Aucun matières trouvé"
+      },
+      "created": "Une nouvelle matière avec un identifiant {{ param }} est créé",
+      "updated": "Une matière avec l'identifiant {{ param }} est modifié",
+      "deleted": "Une matière avec son identifiant {{ param }} est supprimé",
+      "delete": {
+        "question": "Voulez-vous vraiment supprimer la matière {{id}}?"
+      },
+      "detail": {
+        "title": "Matière"
+      },
+      "name": "Nom",
+      "description": "Description",
+      "imageUrl": "URL de l'image",
+      "dateCreated": "Date Créée",
+      "dateModified": "Date Modifiée",
+      "dateDeleted": "Date de Suppression",
+      "repetition": "Répétition",
+      "topic": "Sujet",
+      "tutor": "Tuteur"
+    }
+  }
+}

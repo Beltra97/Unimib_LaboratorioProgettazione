@@ -15,6 +15,8 @@ type EntityArrayResponseType = HttpResponse<IMyRepetition[]>;
 @Injectable({ providedIn: 'root' })
 export class MyRepetitionService {
   public resourceUrl = SERVER_API_URL + 'api/my-repetitions';
+  public makeRepetitionGroupResourceUrl = SERVER_API_URL + 'api/make-repetition-group';
+  public historyResourceUrl = SERVER_API_URL + 'api/my-repetitions-history';
 
   constructor(protected http: HttpClient) {}
 
@@ -47,6 +49,17 @@ export class MyRepetitionService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  makeRepetitionGroup(id: number): Observable<HttpResponse<{}>> {
+    return this.http.get(`${this.makeRepetitionGroupResourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  history(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IRepetition[]>(this.historyResourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   protected convertDateFromClient(myRepetition: IMyRepetition): IMyRepetition {

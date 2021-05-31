@@ -1,0 +1,17 @@
+{
+  "home": {
+    "title": "¡Bienvenido a la aplicación web de Repeticiones!",
+    "logged": {
+      "admin": "Usted es el ADMINISTRADOR del sitio, preste atención a los cambios para asegurar el correcto funcionamiento del servicio.",
+      "message": "Estás conectado como \"{{username}}\"."
+    },
+    "functioning": "¿Como funciona?",
+    "description": "La aplicación consiste en la provisión de repeticiones. Los tutores pueden publicar sus ofertas y los estudiantes pueden registrarse. Si aún no has probado nuestro servicio, puedes registrarte para ver las repeticiones disponibles o crear las tuyas.",
+    "description_summary": "Fácil y eficaz.",
+    "repetitions": "siguientes repeticiónes",
+    "myRepetitions": "Ultima repetición",
+    "bookedBy": "Reservado por:",
+    "info": "Info",
+    "enroll": "Suscríbase"
+  }
+}

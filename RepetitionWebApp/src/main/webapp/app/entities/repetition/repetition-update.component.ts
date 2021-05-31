@@ -28,8 +28,12 @@ export class RepetitionUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     topic: [],
+    additionalNote: [],
     dateRepetition: [null, [Validators.required]],
-    duration: [],
+    nPartecipants: [null, [Validators.required]],
+    duration: [null, [Validators.required]],
+    price: [null, [Validators.required]],
+    meetingLink: [],
     dateCreated: [],
     dateModified: [],
     dateDeleted: [],
@@ -67,8 +71,12 @@ export class RepetitionUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: repetition.id,
       topic: repetition.topic,
+      additionalNote: repetition.additionalNote,
       dateRepetition: repetition.dateRepetition ? repetition.dateRepetition.format(DATE_TIME_FORMAT) : null,
+      nPartecipants: repetition.nPartecipants,
       duration: repetition.duration,
+      price: repetition.price,
+      meetingLink: repetition.meetingLink,
       dateCreated: repetition.dateCreated ? repetition.dateCreated.format(DATE_TIME_FORMAT) : null,
       dateModified: repetition.dateModified ? repetition.dateModified.format(DATE_TIME_FORMAT) : null,
       dateDeleted: repetition.dateDeleted ? repetition.dateDeleted.format(DATE_TIME_FORMAT) : null,
@@ -96,10 +104,14 @@ export class RepetitionUpdateComponent implements OnInit {
       ...new Repetition(),
       id: this.editForm.get(['id'])!.value,
       topic: this.editForm.get(['topic'])!.value,
+      additionalNote: this.editForm.get(['additionalNote'])!.value,
       dateRepetition: this.editForm.get(['dateRepetition'])!.value
         ? moment(this.editForm.get(['dateRepetition'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      nPartecipants: this.editForm.get(['nPartecipants'])!.value,
       duration: this.editForm.get(['duration'])!.value,
+      price: this.editForm.get(['price'])!.value,
+      meetingLink: this.editForm.get(['meetingLink'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value
         ? moment(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)
         : undefined,

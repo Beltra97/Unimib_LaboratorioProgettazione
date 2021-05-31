@@ -2,7 +2,7 @@
   "register": {
     "title": "Registration",
     "form": {
-      "button": "Register"
+      "button": "Create Account"
     },
     "messages": {
       "validate": {

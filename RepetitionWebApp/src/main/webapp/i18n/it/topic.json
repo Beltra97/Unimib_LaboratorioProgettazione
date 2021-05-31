@@ -1,0 +1,27 @@
+{
+  "repetitionWebApp": {
+    "topic": {
+      "home": {
+        "title": "Argomenti",
+        "createLabel": "Crea un nuovo Argomento",
+        "createOrEditLabel": "Crea o modifica un Argomento",
+        "notFound": "Nessun Argomento trovato"
+      },
+      "created": "Un nuovo Argomento con identificativo {{ param }} è stato creato",
+      "updated": "Un Argomento con identificativo {{ param }} è stato modificato",
+      "deleted": "Un Argomento con identificativo {{ param }} è stato eliminato",
+      "delete": {
+        "question": "Sei sicuro di voler eliminare l'Argomento {{ id }}?"
+      },
+      "detail": {
+        "title": "Argomenti"
+      },
+      "name": "Nome",
+      "description": "Descrizione",
+      "dateCreated": "Data Creazione",
+      "dateModified": "Data Modifica",
+      "dateDeleted": "Data Eliminazione",
+      "subject": "Materia"
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { myRepetitionRoute } from './my-repetition.route';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -18,14 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    RouterModule.forChild(myRepetitionRoute)
+    MatChipsModule,
+    RouterModule.forChild(myRepetitionRoute),
   ],
-  declarations: [
-    MyRepetitionComponent,
-    MyRepetitionDetailComponent,
-    MyRepetitionUpdateComponent,
-    MyRepetitionDeleteDialogComponent
-  ],
+  declarations: [MyRepetitionComponent, MyRepetitionDetailComponent, MyRepetitionUpdateComponent, MyRepetitionDeleteDialogComponent],
   entryComponents: [MyRepetitionDeleteDialogComponent],
 })
 export class RepetitionWebAppMyRepetitionModule {}

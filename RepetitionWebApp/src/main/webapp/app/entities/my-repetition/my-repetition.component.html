@@ -1,13 +1,15 @@
-<div>
+<div class="card jh-card">
     <h2 id="page-heading">
         <span jhiTranslate="repetitionWebApp.myRepetition.home.title">My Repetitions</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-repetition" [routerLink]="['/my-repetition/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-repetition"
+            [routerLink]="['/my-repetition/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="repetitionWebApp.myRepetition.home.createLabel">
-            Create a new My Repetition
+            <span jhiTranslate="repetitionWebApp.myRepetition.home.createLabel">
+                Create a new My Repetition
             </span>
         </button>
+
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
@@ -25,38 +27,68 @@
             <!--<img mat-card-lg-image style="float:right" src="{{myRepetition.subject?.imageUrl}}">-->
 
             <mat-card-header>
-                <mat-card-title ><h5> {{ myRepetition.dateRepetition | date:'medium' }} </h5></mat-card-title>
+                <mat-card-title>
+                    <h5> {{ myRepetition.dateRepetition | date:'dd-MM-yyyy, HH:mm' }} </h5>
+                </mat-card-title>
                 <mat-card-subtitle>
-                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
-                        [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }} minutes </h6>
+                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration" [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }} minutes </h6>
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <mat-chip *ngIf="myRepetition?.meetingLink">
+                        <a href="{{ myRepetition!.meetingLink }}" target="_blank"><span jhiTranslate="repetitionWebApp.myRepetition.meetingLink">Meeting Link</span></a>
+                    </mat-chip>
                 </mat-card-subtitle>
             </mat-card-header>
 
-            <hr/>
+            <hr />
 
             <mat-card-content>
 
-                <h4> {{ myRepetition.subject?.name }} </h4>
-                <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
-                    [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+                <h4 jhiTranslate="repetitionWebApp.myRepetition.subject.{{ myRepetition.subject?.name }}"> {{ myRepetition.subject?.name }} </h4>
+
+                <mat-chip-list *ngIf="myRepetition?.topic != ''" #chipList>
+                    <mat-chip *ngFor="let topic of myRepetition!.topic!.split(';')">
+                        {{ topic }}
+                    </mat-chip>
+                </mat-chip-list>
             </mat-card-content>
 
             <mat-card-actions style="float:right">
                 <div>
-                    <button *ngIf="myRepetition.students?.length === 0" style="margin-left:50px;margin-right:50px" mat-mini-fab [routerLink]="['/my-repetition', myRepetition.id, 'edit']">
+                    <button
+                        *ngIf="myRepetition.students && myRepetition.students.length == 1 && myRepetition.nPartecipants == 1"
+                        style="background-color:#faac3d;margin-left:100px;margin-right:50px" mat-mini-fab type="submit"
+                        (click)="makeRepetitionGroup(myRepetition?.id!)">
+                        <fa-icon icon="plus"></fa-icon>
+                    </button>
+
+                    <button *ngIf="myRepetition.students?.length === 0" style="margin-left:50px;margin-right:50px"
+                        mat-mini-fab [routerLink]="['/my-repetition', myRepetition.id, 'edit']">
                         <fa-icon icon="pencil-alt"></fa-icon>
                     </button>
 
-                    <button mat-mini-fab class="btn btn-danger btn-sm" style="background-color:red;" type="submit" (click)="delete(myRepetition)">
+                    <button mat-mini-fab class="btn btn-danger btn-sm" style="background-color:red;" type="submit"
+                        (click)="delete(myRepetition)">
                         <fa-icon icon="trash-alt"></fa-icon>
                     </button>
 
                 </div>
             </mat-card-actions>
 
-            <hr/>
+            <hr />
 
             <mat-card-footer style="margin-left:20px;margin-bottom:10px">
+
+                <h5 *ngIf="myRepetition.nPartecipants == 1"
+                    jhiTranslate="repetitionWebApp.myRepetition.singleRepetition">Single Repetition</h5>
+
+                <h5 *ngIf="myRepetition.nPartecipants != 1"
+                    jhiTranslate="repetitionWebApp.myRepetition.groupRepetition">Group Repetition</h5>
+
+                <p jhiTranslate="repetitionWebApp.myRepetition.nPartecipants"
+                    [translateValues]="{ param: myRepetition.nPartecipants }">Max partecipants: {{
+                    myRepetition.nPartecipants }} </p>
+
                 <div *ngIf="myRepetition.students && myRepetition.students.length > 0">
                     <h5 jhiTranslate="repetitionWebApp.myRepetition.home.Reservations">Booked by</h5>
                     <li *ngFor="let student of myRepetition.students">{{ student.name }} {{ student.surname }} </li>

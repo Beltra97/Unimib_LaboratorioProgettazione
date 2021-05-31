@@ -32,13 +32,13 @@ export class TutorUpdatePage {
   nameInput = element(by.id('field_name'));
   surnameInput = element(by.id('field_surname'));
   birthDateInput = element(by.id('field_birthDate'));
-  subjectInput = element(by.id('field_subject'));
   degreeInput = element(by.id('field_degree'));
   dateCreatedInput = element(by.id('field_dateCreated'));
   dateModifiedInput = element(by.id('field_dateModified'));
   dateDeletedInput = element(by.id('field_dateDeleted'));
 
   userSelect = element(by.id('field_user'));
+  subjectSelect = element(by.id('field_subject'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -66,14 +66,6 @@ export class TutorUpdatePage {
 
   async getBirthDateInput(): Promise<string> {
     return await this.birthDateInput.getAttribute('value');
-  }
-
-  async setSubjectInput(subject: string): Promise<void> {
-    await this.subjectInput.sendKeys(subject);
-  }
-
-  async getSubjectInput(): Promise<string> {
-    return await this.subjectInput.getAttribute('value');
   }
 
   async setDegreeInput(degree: string): Promise<void> {
@@ -108,8 +100,8 @@ export class TutorUpdatePage {
     return await this.dateDeletedInput.getAttribute('value');
   }
 
-  async userSelectFirstOption(): Promise<void> {
-    await this.userSelect.all(by.tagName('option')).first().click();
+  async userSelectLastOption(): Promise<void> {
+    await this.userSelect.all(by.tagName('option')).last().click();
   }
 
   async userSelectOption(option: string): Promise<void> {
@@ -122,6 +114,22 @@ export class TutorUpdatePage {
 
   async getUserSelectedOption(): Promise<string> {
     return await this.userSelect.element(by.css('option:checked')).getText();
+  }
+
+  async subjectSelectLastOption(): Promise<void> {
+    await this.subjectSelect.all(by.tagName('option')).last().click();
+  }
+
+  async subjectSelectOption(option: string): Promise<void> {
+    await this.subjectSelect.sendKeys(option);
+  }
+
+  getSubjectSelect(): ElementFinder {
+    return this.subjectSelect;
+  }
+
+  async getSubjectSelectedOption(): Promise<string> {
+    return await this.subjectSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

@@ -11,6 +11,10 @@ import { ITutor, Tutor } from 'app/shared/model/tutor.model';
 import { TutorService } from './tutor.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { ISubject } from 'app/shared/model/subject.model';
+import { SubjectService } from 'app/entities/subject/subject.service';
+
+type SelectableEntity = IUser | ISubject;
 
 @Component({
   selector: 'jhi-tutor-update',
@@ -19,23 +23,25 @@ import { UserService } from 'app/core/user/user.service';
 export class TutorUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
+  subjects: ISubject[] = [];
 
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
     surname: [null, [Validators.required]],
     birthDate: [null, [Validators.required]],
-    subject: [],
     degree: [],
     dateCreated: [],
     dateModified: [],
     dateDeleted: [],
     user: [],
+    subjects: [],
   });
 
   constructor(
     protected tutorService: TutorService,
     protected userService: UserService,
+    protected subjectService: SubjectService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -53,6 +59,8 @@ export class TutorUpdateComponent implements OnInit {
       this.updateForm(tutor);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.subjectService.query().subscribe((res: HttpResponse<ISubject[]>) => (this.subjects = res.body || []));
     });
   }
 
@@ -62,12 +70,12 @@ export class TutorUpdateComponent implements OnInit {
       name: tutor.name,
       surname: tutor.surname,
       birthDate: tutor.birthDate ? tutor.birthDate.format(DATE_TIME_FORMAT) : null,
-      subject: tutor.subject,
       degree: tutor.degree,
       dateCreated: tutor.dateCreated ? tutor.dateCreated.format(DATE_TIME_FORMAT) : null,
       dateModified: tutor.dateModified ? tutor.dateModified.format(DATE_TIME_FORMAT) : null,
       dateDeleted: tutor.dateDeleted ? tutor.dateDeleted.format(DATE_TIME_FORMAT) : null,
       user: tutor.user,
+      subjects: tutor.subjects,
     });
   }
 
@@ -92,7 +100,6 @@ export class TutorUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       surname: this.editForm.get(['surname'])!.value,
       birthDate: this.editForm.get(['birthDate'])!.value ? moment(this.editForm.get(['birthDate'])!.value, DATE_TIME_FORMAT) : undefined,
-      subject: this.editForm.get(['subject'])!.value,
       degree: this.editForm.get(['degree'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value
         ? moment(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)
@@ -104,6 +111,7 @@ export class TutorUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['dateDeleted'])!.value, DATE_TIME_FORMAT)
         : undefined,
       user: this.editForm.get(['user'])!.value,
+      subjects: this.editForm.get(['subjects'])!.value,
     };
   }
 
@@ -123,7 +131,18 @@ export class TutorUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IUser): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  getSelected(selectedVals: ISubject[], option: ISubject): ISubject {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

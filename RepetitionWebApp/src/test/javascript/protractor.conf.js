@@ -5,8 +5,14 @@ exports.config = {
     directConnect: true,
 
     specs: [
+        './e2e/admin/**/*.spec.ts',
         './e2e/account/**/*.spec.ts',
         './e2e/entities/my-repetition/*.spec.ts',
+        './e2e/entities/repetition/*.spec.ts',
+        './e2e/entities/repetition-student/*.spec.ts',
+        './e2e/entities/subject/*.spec.ts',
+        './e2e/entities/topic/*.spec.ts',
+        './e2e/entities/tutor/*.spec.ts',
         /* jhipster-needle-add-protractor-tests - JHipster will add protractors tests here */
     ],
 

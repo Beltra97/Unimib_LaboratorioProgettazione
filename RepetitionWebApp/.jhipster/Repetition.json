@@ -6,6 +6,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "additionalNote",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "dateRepetition",
       "fieldType": "Instant",
       "fieldValidateRules": [
@@ -13,8 +17,29 @@
       ]
     },
     {
+      "fieldName": "nPartecipants",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "duration",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Float",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "meetingLink",
+      "fieldType": "String"
     },
     {
       "fieldName": "dateCreated",

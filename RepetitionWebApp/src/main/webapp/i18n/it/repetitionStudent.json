@@ -1,0 +1,26 @@
+{
+  "repetitionWebApp": {
+    "repetitionStudent": {
+      "home": {
+        "title": "Ripetizioni Studenti",
+        "createLabel": "Crea una nuova Ripetizione Studente",
+        "createOrEditLabel": "Crea o modifica la Ripetizione Studente",
+        "notFound": "Nessuna Ripetizione Studente trovata"
+      },
+      "created": "Una nuova Ripetizione Studente con identificativo {{ param }} è stata creata",
+      "updated": "Una Ripetizione Studente con identificativo {{ param }} è stata modificata",
+      "deleted": "Una Ripetizione Studente con identificativo {{ param }} è stata eliminata ",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare la Ripetizione Studente {{ id }}?"
+      },
+      "detail": {
+        "title": "Ripetizione Studente"
+      },
+      "dateCreated": "Data Creazione",
+      "dateModified": "Data Modifica",
+      "dateDeleted": "Data Eliminazione",
+      "repetition": "Ripetizioni",
+      "student": "Studente"
+    }
+  }
+}

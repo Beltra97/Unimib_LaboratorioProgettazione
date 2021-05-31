@@ -53,12 +53,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="repetitionWebApp.tutor.subject" for="field_subject">Subject</label>
-                    <input type="text" class="form-control" name="subject" id="field_subject"
-                           formControlName="subject"/>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="repetitionWebApp.tutor.degree" for="field_degree">Degree</label>
                     <input type="text" class="form-control" name="degree" id="field_degree"
                            formControlName="degree"/>
@@ -90,6 +84,13 @@
                     <select class="form-control" id="field_user" name="user" formControlName="user">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="repetitionWebApp.tutor.subject" for="field_subjects">Subject</label>
+                    <select class="form-control" id="field_subjects" multiple name="subjects" formControlName="subjects">
+                        <option [ngValue]="getSelected(editForm.get('subjects')!.value, subjectOption)" *ngFor="let subjectOption of subjects; trackBy: trackById">{{ subjectOption.id }}</option>
                     </select>
                 </div>
             </div>

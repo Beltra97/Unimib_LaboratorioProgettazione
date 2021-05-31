@@ -1,14 +1,12 @@
 package com.company.repetitionwebapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.time.Instant;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Repetition.
@@ -17,22 +15,37 @@ import java.time.Instant;
 @Table(name = "repetition")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Repetition implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "topic")
-    private String topic;
+    private String topic = "";
+
+    @Column(name = "additional_note")
+    private String additionalNote;
 
     @NotNull
     @Column(name = "date_repetition", nullable = false)
     private Instant dateRepetition;
 
-    @Column(name = "duration")
+    @NotNull
+    @Column(name = "n_partecipants", nullable = false)
+    private Integer nPartecipants = 1;
+
+    @NotNull
+    @Column(name = "duration", nullable = false)
     private Integer duration;
+
+    @NotNull
+    @Column(name = "price", nullable = false)
+    private Float price;
+
+    @Column(name = "meeting_link")
+    private String meetingLink;
 
     @Column(name = "date_created")
     private Instant dateCreated;
@@ -73,6 +86,19 @@ public class Repetition implements Serializable {
         this.topic = topic;
     }
 
+    public String getAdditionalNote() {
+        return additionalNote;
+    }
+
+    public Repetition additionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
+        return this;
+    }
+
+    public void setAdditionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
+    }
+
     public Instant getDateRepetition() {
         return dateRepetition;
     }
@@ -86,6 +112,19 @@ public class Repetition implements Serializable {
         this.dateRepetition = dateRepetition;
     }
 
+    public Integer getnPartecipants() {
+        return nPartecipants;
+    }
+
+    public Repetition nPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
+        return this;
+    }
+
+    public void setnPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
+    }
+
     public Integer getDuration() {
         return duration;
     }
@@ -97,6 +136,32 @@ public class Repetition implements Serializable {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public Repetition price(Float price) {
+        this.price = price;
+        return this;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public Repetition meetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
+        return this;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 
     public Instant getDateCreated() {
@@ -163,6 +228,7 @@ public class Repetition implements Serializable {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -187,8 +253,12 @@ public class Repetition implements Serializable {
         return "Repetition{" +
             "id=" + getId() +
             ", topic='" + getTopic() + "'" +
+            ", additionalNote='" + getAdditionalNote() + "'" +
             ", dateRepetition='" + getDateRepetition() + "'" +
+            ", nPartecipants=" + getnPartecipants() +
             ", duration=" + getDuration() +
+            ", price=" + getPrice() +
+            ", meetingLink='" + getMeetingLink() + "'" +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateModified='" + getDateModified() + "'" +
             ", dateDeleted='" + getDateDeleted() + "'" +

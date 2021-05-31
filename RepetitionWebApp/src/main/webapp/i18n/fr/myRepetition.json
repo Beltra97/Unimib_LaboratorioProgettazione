@@ -1,0 +1,44 @@
+{
+  "repetitionWebApp": {
+    "myRepetition": {
+      "home": {
+        "title": "Mes Répétitions",
+        "createLabel": "Publier répétition",
+        "historyLabel": "Histoire de répétition",
+        "createOrEditLabel": "Publier ou modifier répétition",
+        "notFound": "Aucune Mes répétitions trouvée",
+        "Reservations": "Réservé par",
+        "noReservations": "Pas de réservations",
+        "duration": "Durée: {{ param }} minutes",
+        "price": "Prix: {{ param }} €"
+      },
+      "created": "Une répétition avec un identifiant {{ param }} est publiée",
+      "updated": "Une répétition avec l'identifiant {{ param }} est modifiée",
+      "deleted": "Une répétition avec l'identifiant {{ param }} est supprimée",
+      "madeRepetitionGroup": "Une répétition avec l'identifiant {{param}} est devenue une répétition de groupe",
+      "delete": {
+        "question": "Voulez-vous vraiment supprimer la répétition {{id}}?"
+      },
+      "detail": {
+        "title": "Mes Répétitions"
+      },
+      "subject": "Matière",
+      "subject.Math": "Mathématiques",
+      "subject.Physics": "Physique",
+      "subject.Information Technology": "Informatique",
+      "subject.Music": "Musique",
+      "subject.Art": "Art",
+      "topic": "Sujet: {{ param }}",
+      "additionalNote": "Remarque additionnelle: {{ param }}",
+      "nPartecipants": "Max participants: {{ param }}",
+      "singleRepetition": "Répétition unique",
+      "groupRepetition": "Répétition de groupe",
+      "duration": "Durée",
+      "dateRepetition": "Date Répétition",
+      "timeRepetition": "Heure Répétition",
+      "dateCreated": "Date Créée",
+      "dateModified": "Date Modifiée",
+      "dateDeleted": "Date de Suppression"
+    }
+  }
+}

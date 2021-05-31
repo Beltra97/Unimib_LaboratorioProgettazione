@@ -19,13 +19,13 @@
       "name": "Name",
       "surname": "Surname",
       "birthDate": "Birth Date",
-      "subject": "Subject",
       "degree": "Degree",
       "dateCreated": "Date Created",
       "dateModified": "Date Modified",
       "dateDeleted": "Date Deleted",
       "user": "User",
-      "repetition": "Repetition"
+      "repetition": "Repetition",
+      "subject": "Subject"
     }
   }
 }

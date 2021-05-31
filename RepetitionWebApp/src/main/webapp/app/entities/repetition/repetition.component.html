@@ -24,8 +24,12 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.topic">Topic</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.additionalNote">Additional Note</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateRepetition">Date Repetition</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.nPartecipants">N Partecipants</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.duration">Duration</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.price">Price</span></th>
+                    <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.meetingLink">Meeting Link</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateCreated">Date Created</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateModified">Date Modified</span></th>
                     <th scope="col" ><span jhiTranslate="repetitionWebApp.repetition.dateDeleted">Date Deleted</span></th>
@@ -38,11 +42,15 @@
                 <tr *ngFor="let repetition of repetitions ;trackBy: trackId">
                     <td><a [routerLink]="['/repetition', repetition.id, 'view']">{{ repetition.id }}</a></td>
                     <td>{{ repetition.topic }}</td>
-                    <td>{{ repetition.dateRepetition | date:'medium' }}</td>
+                    <td>{{ repetition.additionalNote }}</td>
+                    <td>{{ repetition.dateRepetition | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetition.nPartecipants }}</td>
                     <td>{{ repetition.duration }}</td>
-                    <td>{{ repetition.dateCreated | date:'medium' }}</td>
-                    <td>{{ repetition.dateModified | date:'medium' }}</td>
-                    <td>{{ repetition.dateDeleted | date:'medium' }}</td>
+                    <td>{{ repetition.price }}</td>
+                    <td>{{ repetition.meetingLink }}</td>
+                    <td>{{ repetition.dateCreated | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetition.dateModified | date:'dd-MM-yyyy, HH:mm' }}</td>
+                    <td>{{ repetition.dateDeleted | date:'dd-MM-yyyy, HH:mm' }}</td>
                     <td>
                         <div *ngIf="repetition.tutor">
                             <a [routerLink]="['/tutor', repetition.tutor?.id, 'view']" >{{ repetition.tutor?.id }}</a>

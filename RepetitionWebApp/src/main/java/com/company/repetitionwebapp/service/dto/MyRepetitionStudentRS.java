@@ -4,7 +4,6 @@ import com.company.repetitionwebapp.domain.Repetition;
 import com.company.repetitionwebapp.domain.Student;
 import com.company.repetitionwebapp.domain.Subject;
 import com.company.repetitionwebapp.domain.Tutor;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +20,21 @@ public class MyRepetitionStudentRS {
 
     private String topic;
 
+    private String additionalNote;
+
     private Integer duration;
+
+    private Float price;
 
     private Instant dateRepetition;
 
+    private Boolean isFree;
+
     private Boolean isAlreadyBooked;
+
+    private Integer nPartecipants;
+
+    private String meetingLink;
 
     public MyRepetitionStudentRS() {
         // Empty constructor needed for Jackson.
@@ -36,8 +45,12 @@ public class MyRepetitionStudentRS {
         this.tutor = repetition.getTutor();
         this.subject = repetition.getSubject();
         this.topic = repetition.getTopic();
+        this.additionalNote = repetition.getAdditionalNote();
         this.duration = repetition.getDuration();
+        this.price = repetition.getPrice();
         this.dateRepetition = repetition.getDateRepetition();
+        this.nPartecipants = repetition.getnPartecipants();
+        this.meetingLink = repetition.getMeetingLink();
     }
 
     public Long getId() {
@@ -72,12 +85,28 @@ public class MyRepetitionStudentRS {
         this.duration = duration;
     }
 
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
     public String getTopic() {
         return topic;
     }
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public String getAdditionalNote() {
+        return additionalNote;
+    }
+
+    public void setAdditionalNote(String additionalNote) {
+        this.additionalNote = additionalNote;
     }
 
     public Instant getDateRepetition() {
@@ -88,11 +117,35 @@ public class MyRepetitionStudentRS {
         this.dateRepetition = dateRepetition;
     }
 
+    public Boolean getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Boolean isFree) {
+        this.isFree = isFree;
+    }
+
     public Boolean getIsAlreadyBooked() {
         return isAlreadyBooked;
     }
 
     public void setIsAlreadyBooked(Boolean isAlreadyBooked) {
         this.isAlreadyBooked = isAlreadyBooked;
+    }
+
+    public Integer getnPartecipants() {
+        return nPartecipants;
+    }
+
+    public void setnPartecipants(Integer nPartecipants) {
+        this.nPartecipants = nPartecipants;
+    }
+
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 }

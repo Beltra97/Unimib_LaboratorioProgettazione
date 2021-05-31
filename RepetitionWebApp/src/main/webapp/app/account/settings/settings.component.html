@@ -1,10 +1,10 @@
 <div class="card jh-card">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 jhiTranslate="settings.title" [translateValues]="{ username: account.login }" *ngIf="account">User settings for [<b>{{ account.login }}</b>]</h2>
+            <h2 jhiTranslate="settings.title" [translateValues]="{ firstName: account.login, lastName: '' }" *ngIf="account"></h2>
 
-            <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
-                <strong>Settings saved!</strong>
+            <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success"> 
+                <strong>Profile saved!</strong>
             </div>
 
             <jhi-alert-error></jhi-alert-error>
@@ -94,6 +94,107 @@
                     </div>
                 </div>
 
+                <div *jhiHasAnyAuthority="['ROLE_STUDENT', 'ROLE_TUTOR']" class="form-group">
+                    <label class="form-control-label" for="birthDate" jhiTranslate="global.form.birthdate.label">Birthdate</label>
+                    <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="{{ 'global.form.birthdate.placeholder' | translate }}"
+                           formControlName="birthDate" [required]="birthValue">
+
+                    <div *ngIf="settingsForm.get('birthDate')!.invalid && (settingsForm.get('birthDate')!.dirty || settingsForm.get('birthDate')!.touched)">
+                        <small class="form-text text-danger"
+                            *ngIf="settingsForm.get('birthDate')?.errors?.required"
+                            jhiTranslate="global.messages.validate.birthdate.required">
+                        Your birthdate is required.
+                        </small>
+                    </div>
+                    <small class="form-text text-danger" *ngIf="settingsForm.get('birthDate')!.valid && settingsForm.get('birthDate')!.value >= maxDate"
+                        jhiTranslate="global.messages.validate.birthdate.invalid">
+                    Your birthdate is invalid, must be less than today.
+                    </small>
+                </div>
+                
+                <div *jhiHasAnyAuthority="'ROLE_TUTOR'" class="form-group">
+                    <label class="form-control-label" for="degree" jhiTranslate="global.form.degree.label">Degree</label>
+                    <select type="text" class="form-control" formControlName="degree" id="degree" name="degree" [required]="optionValue">
+                        <option value="High school" jhiTranslate="global.form.degree.label.high_school">High school</option>
+                        <option value="University" jhiTranslate="global.form.degree.label.university">University</option>
+                        <option value="Master" jhiTranslate="global.form.degree.label.master">Master</option>
+                    </select>     
+                </div>
+
+                <div *jhiHasAnyAuthority="'ROLE_TUTOR'" class="form-group">
+                    <label class="form-control-label" jhiTranslate="global.form.subject.label" for="subject1">Subject</label>
+
+                    <select class="form-control" id="subject1" name="subject1" formControlName="subject1" [required]="optionValue">
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>1" class="form-control" id="subject2" name="subject2" formControlName="subject2">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>2" class="form-control" id="subject3" name="subject3" formControlName="subject3">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>3" class="form-control" id="subject4" name="subject4" formControlName="subject4">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>4" class="form-control" id="subject5" name="subject5" formControlName="subject5">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>5" class="form-control" id="subject6" name="subject6" formControlName="subject6">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>6" class="form-control" id="subject7" name="subject7" formControlName="subject7">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>7" class="form-control" id="subject8" name="subject8" formControlName="subject8">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>8" class="form-control" id="subject9" name="subject9" formControlName="subject9">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <select *ngIf="DropdownVar>9" class="form-control" id="subject10" name="subject10" formControlName="subject10">
+                        <option value="" [hidden]="true" jhiTranslate="global.form.subject2.placeholder">Other subject</option>
+                        <option [ngValue]="subjectOption.name" *ngFor="let subjectOption of subjects2; trackBy: trackById"
+                        jhiTranslate="repetitionWebApp.myRepetition.subject.{{ subjectOption.name }}">{{ subjectOption.name }}</option>
+                    </select>
+
+                    <button type="button" class="btn btn-primary" (click)="DropdownVar < 10 ? DropdownVar = DropdownVar + 1 : DropdownVar" jhiTranslate="settings.buttonAdd">Add new subject</button>
+                    <button type="button" class="btn btn-primary" (click)="DropdownVar > 1 ? DropdownVar = DropdownVar - 1 : DropdownVar" jhiTranslate="settings.buttonRemove">Remove last subject</button>
+    
+                    <div *ngIf="settingsForm.get('subject1')!.invalid && (settingsForm.get('subject1')!.dirty || settingsForm.get('subject1')!.touched)">
+                        <small class="form-text text-danger"
+                                *ngIf="settingsForm.get('subject1')?.errors?.required"
+                                jhiTranslate="global.messages.validate.subject.required">
+                            Your main subject is required.
+                        </small>
+                    </div>
+                </div>
+
                 <div class="form-group" *ngIf="languages && languages.length > 0">
                     <label for="langKey" jhiTranslate="settings.form.language">Language</label>
                     <select class="form-control" id="langKey" name="langKey" formControlName="langKey">
@@ -101,7 +202,7 @@
                     </select>
                 </div>
 
-                <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
+                <button  type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
             </form>
         </div>
     </div>

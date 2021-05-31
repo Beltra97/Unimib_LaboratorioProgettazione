@@ -2,7 +2,7 @@
   "repetitionWebApp": {
     "myRepetitionStudent": {
       "home": {
-        "title": "My Repetition",
+        "title": "My Repetitions",
         "notFound": "No Repetition found"
       },
       "created": "A Repetition with identifier {{ param }} is booked",
@@ -18,7 +18,13 @@
         "question": "Are you sure you want to book this Repetition ?",
         "btnConfirm": "Book"
       },
-      "topic": "Topic"
+      "join": {
+        "title": "Join repetition",
+        "question": "Are you sure you want to join this Repetition ?",
+        "btnConfirm": "Join"
+      },
+      "topic": "Topic",
+      "additionalNote": "Additional Note"
     }
   }
 }

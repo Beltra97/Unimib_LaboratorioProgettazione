@@ -1,0 +1,17 @@
+{
+  "home": {
+    "title": "Benvenuto nella webapp di Ripetizioni!",
+    "logged": {
+      "admin": "Sei l'AMMINISTRATORE del sito, presta attenzione ai cambiamenti per assicurarti un corretto funzionamento del servizio.",
+      "message": "Autenticato come \"{{username}}\"."
+    },
+    "functioning": "Come funziona?",
+    "description": "L'applicazione consiste nell'erogazione di lezioni private. I Tutor possono pubblicare le loro offerte e gli Studenti possono iscriversi. Se non hai ancora provato il nostro servizio, iscriviti per vedere le ripetizioni disponibili o crearne di tue.",
+    "description_summary": "Semplice ed efficace.",
+    "repetitions": "Prossime ripetizioni",
+    "myRepetitions": "Ultima ripetizione",
+    "bookedBy": "Prenotata da:",
+    "info": "Info",
+    "enroll": "Iscriviti"
+  }
+}

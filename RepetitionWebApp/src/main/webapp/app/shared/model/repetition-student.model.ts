@@ -9,6 +9,7 @@ export interface IRepetitionStudent {
   dateDeleted?: Moment;
   repetition?: IRepetition;
   student?: IStudent;
+  meetingLink?: string;
 }
 
 export class RepetitionStudent implements IRepetitionStudent {
@@ -18,6 +19,7 @@ export class RepetitionStudent implements IRepetitionStudent {
     public dateModified?: Moment,
     public dateDeleted?: Moment,
     public repetition?: IRepetition,
-    public student?: IStudent
+    public student?: IStudent,
+    public meetingLink?: string
   ) {}
 }

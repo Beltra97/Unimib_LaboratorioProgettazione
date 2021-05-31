@@ -5,21 +5,26 @@
                 <fa-icon [icon]="faSchool"></fa-icon>
             </div>
         </div>
-        
+
         <div class="col-md-8">
             <h1 class="display-4" jhiTranslate="home.title">Welcome to the Repetition WebApp!</h1>
-            
+
             <div [ngSwitch]="isAuthenticated()">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <div class="alert alert-danger">
+                        <span id="home-logged-admin" jhiTranslate="home.logged.admin">You are the site ADMINISTRATOR, pay attention to the changes to ensure proper functioning of the service.</span>
+                    </div>
+                </div>
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
                 </div>
-                
+
                 <div class="alert alert-warning" *ngSwitchCase="false">
                     <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
                     <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -44,40 +49,44 @@
     <div *jhiHasAnyAuthority="'ROLE_TUTOR'">
         <div *ngIf="repetitionsTutor?.length !== 0">
             <div class="card jh-card" *ngSwitchCase="true">
-                <div class="row row-content"> 
-                    <div class="col-12">
-                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.myRepetitions">My Repetitions</h1>
+                <div class="row row-content justify-content-center"> 
+                    <div class="col-8">
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.myRepetitions">Last Repetition</h1>
                     </div>
                 </div>
                 
-                <div class="row row-content" *ngSwitchCase="true">
+                <div class="row row-content justify-content-center" *ngSwitchCase="true">
                     {{loadTutorData()}}
-                    <div class="col-12">
+                    <div class="col-8">
                         
-                        <div *ngFor="let repetition of repetitionsTutor">
                             <div id="cardRepetitions" class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column">
                                         <div class="p-2">
-                                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                            <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetitionsTutor![repetitionsTutor!.length-1].subject!.name }}">{{repetitionsTutor![repetitionsTutor!.length-1].subject!.name}}</h5>
+                                        </div>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].topic">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.topic"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].topic}}</p>
+                                        </div>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].additionalNote">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].additionalNote}}</p>
+                                        </div>
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].price">
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].price}}€</p>
                                         </div>
                                         <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.duration"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].duration}} minutes</p>
                                         </div>
                                         <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">Duration: {{repetition!.duration}} minutes</p>
+                                            <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.myRepetition.dateRepetition"></label>: {{repetitionsTutor![repetitionsTutor!.length-1].dateRepetition | date:'dd-MM-yyyy, HH:mm'}}</p>
                                         </div>
-                                        <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">Date: {{repetition!.dateRepetition | date:'medium'}}</p>
-                                        </div>
-                                        <div class="p-2" *ngIf="repetition.students && repetition.students.length > 0">
+                                        <div class="p-2" *ngIf="repetitionsTutor![repetitionsTutor!.length-1].students && repetitionsTutor![repetitionsTutor!.length-1].students!.length > 0">
                                             <p id="cardTextRepetitions" class="card-text" jhiTranslate="home.bookedBy">Booked By:</p>
-                                            <li class="li_center" *ngFor="let student of repetition.students">{{ student.name }} {{ student.surname }}</li>
+                                            <li class="li_center" *ngFor="let student of repetitionsTutor![repetitionsTutor!.length-1].students">{{ student.name }} {{ student.surname }}</li>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         
                     </div>
                 </div>
@@ -86,40 +95,122 @@
     </div>
 
     <div *jhiHasAnyAuthority="'ROLE_STUDENT'">
-        <div *ngIf="repetitionsStudent?.length !== 0">
+        <div class="card jh-card">
+            <div class="row row-content justify-content-center">
+                <div class="col-8">
+                    <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="global.find.title">Find repetitions</h1>
+                </div>
+                <div class="col-md-8">
+                    <form name="form" role="form" [formGroup]="findForm" (ngSubmit)="search()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="findGlobal" name="findGlobal" placeholder="{{ 'global.find.placeholder' | translate }}" formControlName="findGlobal">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" id="findDate" name="findDate" [min]="minDate" formControlName="findDate">
+                        </div>
+                        <div class="form-group">
+                            <select type="text" class="form-control" id="findGroup" name="findGroup" formControlName="findGroup">
+                                <option value="" [selected]="true" [hidden]="true" jhiTranslate="global.find.group">Allow group repetitions?</option>
+                                <option value="true" jhiTranslate="global.find.group.yes">Yes (allow group repetitions)</option>
+                                <option value="false" jhiTranslate="global.find.group.no">No (enable single repetitions only)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-primary btn-block" jhiTranslate="global.find.search" [disabled]="findForm.invalid">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="dataFound">
             <div class="card jh-card" *ngSwitchCase="true">
-                <div class="row row-content"> 
-                    <div class="col-12">
-                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.repetitions">Available repetitions</h1>
+                <div class="row row-content justify-content-center"> 
+                    <div class="col-8">
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="global.find.results">Results</h1>
+                    </div>
+                </div>
+
+                <div class="row row-content justify-content-center" *ngIf="repetitionsFound?.length === 0">
+                    <div class="col-8">
+                        <div class="alert alert-danger">
+                            <span id="home-logged-message" jhiTranslate="global.find.nores">No results found</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="repetitionsFound?.length !== 0">
+                    <div class="row row-content justify-content-center">
+                        <div class="col-8">
+                            <div *ngFor="let repetition of repetitionsFound">
+                                <div id="cardRepetitions" class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <div class="p-2">
+                                                <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{repetition!.subject!.name}}</h5>
+                                            </div>
+                                            <div class="p-2" *ngIf="repetition!.topic">
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.topic"></label>: {{repetition!.topic}}</p>
+                                            </div>
+                                            <div class="p-2" *ngIf="repetition!.additionalNote">
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.additionalNote"></label>: {{repetition!.additionalNote}}</p>
+                                            </div>
+                                            <div class="p-2" *ngIf="repetition!.price">
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.repetition.price"></label>: {{repetition!.price}}€</p>
+                                            </div>
+                                            <div class="p-2">
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="global.menu.entities.tutor"></label>: {{repetition!.tutor!.name}} {{repetition!.tutor!.surname}}</p>
+                                            </div>
+                                            <div class="p-2">
+                                                <p id="cardTextRepetitions" class="card-text"><label jhiTranslate="repetitionWebApp.myRepetition.dateRepetition"></label>: {{repetition!.dateRepetition | date:'dd-MM-yyyy, HH:mm' }}</p>
+                                            </div>
+                                            <div class="p-2">
+                                                <div class="container">
+                                                    <div class="row row-content justify-content-center">
+                                                        <div class="col-6">
+                                                            <a routerLink="my-repetition-student" class="btn btn-outline-primary btn-block" jhiTranslate="home.enroll">Enroll</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
                 
-                <div class="row row-content" *ngSwitchCase="true">
+            </div>
+        </div>
+
+        <div *ngIf="nextRepetitionsStudent?.length !== 0">
+            <div class="card jh-card" *ngSwitchCase="true">
+                <div class="row row-content justify-content-center"> 
+                    <div class="col-8">
+                        <h1 id="availableRepetitions_title" class="display-4" jhiTranslate="home.repetitions">Next repetitions</h1>
+                    </div>
+                </div>
+                
+                <div class="row row-content justify-content-center" *ngSwitchCase="true">
                     {{loadStudentData()}}
-                    <div class="col-12">
+                    <div class="col-8">
                         
-                        <div *ngFor="let repetition of repetitionsStudent">
-                            <div id="cardRepetitions" class="card" *ngIf="!repetition!.dateDeleted">
+                        <div *ngFor="let repetition of nextRepetitionsStudent">
+                            <div id="cardRepetitions" class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column">
                                         <div class="p-2">
-                                            <h5 id="cardTitleRepetitions" class="card-title">{{repetition!.subject!.name}}</h5>
+                                            <h5 id="cardTitleRepetitions" class="card-title" jhiTranslate="repetitionWebApp.myRepetition.subject.{{ repetition!.subject!.name }}">{{repetition!.subject!.name}}</h5>
                                         </div>
-                                        <div class="p-2">
-                                            <p id="cardTextRepetitions" class="card-text">{{repetition!.topic}}</p>
+                                        <div class="p-2" *ngIf="repetition!.topic">
+                                            <p id="cardTextRepetitions" class="card-text"> <label jhiTranslate="global.menu.entities.topic"></label>: {{repetition!.topic}}</p>
                                         </div>
                                         <div class="p-2">
                                             <div class="container">
-                                                <div class="row row-content" *ngIf="!repetition!.topic">
+                                                <div class="row row-content justify-content-center">
                                                     <div class="col-6">
-                                                        <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <a routerLink="my-repetition-student" class="btn btn-outline-primary btn-block" jhiTranslate="home.enroll">Enroll</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-content" *ngIf="repetition!.topic">
-                                                    <div class="col-12">
                                                         <button class="btn btn-outline-primary btn-block" (click)="openDialog(repetition)" jhiTranslate="home.info">Info</button>
                                                     </div>
                                                 </div>
@@ -136,35 +227,3 @@
         </div>
     </div>
 </div>
-    
-<!--
-    <div class="card jh-card">
-        <div class="row row-content">
-            <div class="col-12">
-                <ngb-carousel *ngIf="images" #carousel [interval]="1500" [showNavigationArrows]="false" [pauseOnHover]="true" [keyboard]="false">
-                    <ng-template ngbSlide *ngFor="let img of images">
-                        <div class="picsum-img-wrapper">
-                            <img class="d-block w-100" [src]="img">
-                        </div>
-                    </ng-template>
-                </ngb-carousel>
-            </div>
-        </div>
-    </div>
-    
-    <button mat-stroked-button color="warn">Warn</button>
-    
-    <mat-selection-list>
-        <mat-list-option *ngFor="let shoe of typesOfShoes">
-            {{shoe}}
-        </mat-list-option>
-    </mat-selection-list> 
-
-    <div class="container">
-        <div class="row row-content">
-            <div class="col-5">
-                <button mat-raised-button matBadge="10" matBadgeColor="warn" color="primary">TEST</button>
-            </div>
-        </div>
-    </div>
--->

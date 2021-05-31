@@ -1,0 +1,44 @@
+{
+  "repetitionWebApp": {
+    "myRepetition": {
+      "home": {
+        "title": "Mis Repeticiones",
+        "createLabel": "Publicar repetición",
+        "historyLabel": "Repetición histórica",
+        "createOrEditLabel": "Publicar o editar Repetición",
+        "notFound": "No se encontraron repeticiones",
+        "Reservations": "Reservado por",
+        "noReservations": "No reservaciones",
+        "duration": "Duración: {{param}} minutos",
+        "price": "Precio: {{ param }} €"
+      },
+      "created": "Se ha publicado una repetición con el identificador {{param}}",
+      "updated": "Se ha cambiado una repetición con el identificador {{param}}",
+      "deleted": "Se ha eliminado una repetición con el identificador {{param}}",
+      "madeRepetitionGroup": "Una repetición con el identificador {{param}} se ha convertido en una repetición de grupo",
+      "delete": {
+        "question": "¿Está seguro de eliminar la repetición {{id}}?"
+      },
+      "detail": {
+        "title": "Mis Repeticiones"
+      },
+      "subject": "Asignatura",
+      "subject.Math": "Matemáticas",
+      "subject.Physics": "Física",
+      "subject.Information Technology": "Tecnologia computacional",
+      "subject.Music": "Música",
+      "subject.Art": "Arte",
+      "topic": "Tema: {{ param }}",
+      "additionalNote": "Notas adicionales: {{ param }}",
+      "nPartecipants": "Participantes máximos: {{ param }}",
+      "singleRepetition": "Repetición única",
+      "groupRepetition": "Repetición de grupo",
+      "duration": "Duración",
+      "dateRepetition": "Fecha Repetición",
+      "timeRepetition": "Calendario Repetición",
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación"
+    }
+  }
+}

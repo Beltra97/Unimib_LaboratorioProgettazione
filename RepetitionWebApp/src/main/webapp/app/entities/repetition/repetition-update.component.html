@@ -18,6 +18,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.additionalNote" for="field_additionalNote">Additional Note</label>
+                    <input type="text" class="form-control" name="additionalNote" id="field_additionalNote"
+                           formControlName="additionalNote"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.dateRepetition" for="field_dateRepetition">Date Repetition</label>
                     <div class="d-flex">
                         <input id="field_dateRepetition" type="datetime-local" class="form-control" name="dateRepetition" formControlName="dateRepetition" placeholder="YYYY-MM-DD HH:mm"/>
@@ -35,9 +41,57 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.nPartecipants" for="field_nPartecipants">N Partecipants</label>
+                    <input type="number" class="form-control" name="nPartecipants" id="field_nPartecipants"
+                           formControlName="nPartecipants"/>
+                    <div *ngIf="editForm.get('nPartecipants')!.invalid && (editForm.get('nPartecipants')!.dirty || editForm.get('nPartecipants')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nPartecipants')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('nPartecipants')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.duration" for="field_duration">Duration</label>
                     <input type="number" class="form-control" name="duration" id="field_duration"
                            formControlName="duration"/>
+                    <div *ngIf="editForm.get('duration')!.invalid && (editForm.get('duration')!.dirty || editForm.get('duration')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('duration')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('duration')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.price" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                           formControlName="price"/>
+                    <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repetitionWebApp.repetition.meetingLink" for="field_meetingLink">Meeting Link</label>
+                    <input type="text" class="form-control" name="meetingLink" id="field_meetingLink"
+                           formControlName="meetingLink"/>
                 </div>
 
                 <div class="form-group">

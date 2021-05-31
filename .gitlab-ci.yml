@@ -1,0 +1,88 @@
+image: jhipster/jhipster:v6.10.5
+
+cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+        - .maven/
+stages:
+    - check
+    - build
+    - test
+    - analyze
+    - package
+    - release
+    - deploy
+before_script:
+    - export NG_CLI_ANALYTICS="false"
+    - export MAVEN_USER_HOME=`pwd`/.maven
+
+nohttp:
+    stage: check
+    script:
+        - cd RepetitionWebApp
+        - ./mvnw -ntp checkstyle:check -Dmaven.repo.local=$MAVEN_USER_HOME
+    only:
+        - master
+
+maven-compile:
+    stage: build
+    script:
+        - cd RepetitionWebApp
+        - ./mvnw -ntp compile -P-webpack -Dmaven.repo.local=$MAVEN_USER_HOME
+    artifacts:
+        paths:
+            - target/classes/
+            - target/generated-sources/
+        expire_in: 1 day
+    only:
+        - master
+
+maven-test:
+    # DinD service is required for Testcontainers
+    services:
+        - docker:dind
+
+    variables:
+        # Instruct Testcontainers to use the daemon of DinD.
+        DOCKER_HOST: 'tcp://docker:2375'
+        # Improve performance with overlayfs.
+        DOCKER_DRIVER: overlay2
+
+    stage: test
+    script:
+        - cd RepetitionWebApp
+        - ./mvnw -ntp verify -P-webpack -Dmaven.repo.local=$MAVEN_USER_HOME -Dspring.profiles.active=testcontainers
+    allow_failure: true
+    artifacts:
+        reports:
+            junit: target/test-results/**/TEST-*.xml
+        paths:
+            - target/test-results
+            - target/jacoco
+        expire_in: 1 day
+    only:
+        - master
+
+frontend-test:
+    stage: test
+    script:
+        - cd RepetitionWebApp
+        - npm install
+        - npm test
+    artifacts:
+        reports:
+            junit: target/test-results/TESTS-results-jest.xml
+        paths:
+            - target/test-results
+            - target/jacoco
+        expire_in: 1 day
+    only:
+        - master
+
+deploy:
+    stage: deploy
+    script:
+        - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/repetition-web-app-staging.git
+        - git push --force heroku `git subtree split --prefix RepetitionWebApp HEAD`:master
+    only:
+        - master

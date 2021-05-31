@@ -1,0 +1,31 @@
+{
+  "repetitionWebApp": {
+    "tutor": {
+      "home": {
+        "title": "Tutor",
+        "createLabel": "Crear un nuevo Tutor",
+        "createOrEditLabel": "Crear o editar un Tutor",
+        "notFound": "No se encontraron Tutores"
+      },
+      "created": "Se ha creado un nuevo Tutor con identificador {{param}}",
+      "updated": "Se ha cambiado un Tutor con identificador {{param}}",
+      "deleted": "Se ha eliminado un tutor con el identificador {{param}}",
+      "delete": {
+        "question": "¿Está seguro de eliminar el Tutor {{id}}?"
+      },
+      "detail": {
+        "title": "Tutor"
+      },
+      "name": "Nombre",
+      "surname": "Apellido",
+      "birthDate": "Fecha de Nacimiento",
+      "degree": "Grado de educación",
+      "dateCreated": "Fecha Creación",
+      "dateModified": "Fecha Modificada",
+      "dateDeleted": "Fecha Eliminación",
+      "user": "Usuario",
+      "repetition": "Repetición",
+      "subject": "Asignatura"
+    }
+  }
+}

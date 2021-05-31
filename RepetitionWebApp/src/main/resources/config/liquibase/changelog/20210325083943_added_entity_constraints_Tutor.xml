@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="tutor_id"
+                                 baseTableName="tutor_subject"
+                                 constraintName="fk_tutor_subject_tutor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tutor"/>
+
+        <addForeignKeyConstraint baseColumnNames="subject_id"
+                                 baseTableName="tutor_subject"
+                                 constraintName="fk_tutor_subject_subject_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="subject"/>
+        
     </changeSet>
 </databaseChangeLog>

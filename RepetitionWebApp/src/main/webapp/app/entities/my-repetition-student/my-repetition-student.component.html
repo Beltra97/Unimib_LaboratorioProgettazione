@@ -1,4 +1,4 @@
-<div>
+<div class="card jh-card">
     <h2 id="page-heading">
         <span jhiTranslate="repetitionWebApp.myRepetition.home.title">My Repetitions</span>
 
@@ -21,11 +21,19 @@
             <mat-card-header>
                 <mat-card-title >
                     <h5> {{ myRepetition.tutor?.surname }} {{ myRepetition.tutor?.name }}</h5>
-                    <h5> {{ myRepetition.dateRepetition | date:'medium' }} </h5>
+                    <h5> {{ myRepetition.dateRepetition | date: 'dd/MM/yyyy, HH:mm' }} </h5>
                 </mat-card-title>
                 <mat-card-subtitle>
                     <h6 jhiTranslate="repetitionWebApp.myRepetition.home.duration"
                         [translateValues]="{ param: myRepetition.duration }">Duration: {{ myRepetition.duration }} minutes </h6>
+
+                    <h6 jhiTranslate="repetitionWebApp.myRepetition.home.price"
+                        [translateValues]="{ param: myRepetition.price }">Price: {{ myRepetition.price }} € </h6>
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <mat-chip *ngIf="myRepetition?.isAlreadyBooked && myRepetition?.meetingLink">
+                        <a href="{{ myRepetition!.meetingLink }}" target="_blank"><span jhiTranslate="repetitionWebApp.myRepetition.meetingLink">Meeting Link</span></a>
+                    </mat-chip>
                 </mat-card-subtitle>
             </mat-card-header>
 
@@ -33,20 +41,33 @@
 
             <mat-card-content>
 
-                <h4> {{ myRepetition.subject?.name }} </h4>
-                <h6 *ngIf="myRepetition?.topic" jhiTranslate="repetitionWebApp.myRepetition.topic"
-                    [translateValues]="{ param: myRepetition.topic }">Topic: {{ myRepetition.topic }}</h6>
+                <h4 jhiTranslate="repetitionWebApp.myRepetition.subject.{{ myRepetition.subject?.name }}"> {{ myRepetition.subject?.name }} </h4>
+
+                <mat-chip-list *ngIf="myRepetition.topic != ''" #chipList>
+                    <mat-chip *ngFor="let topic of myRepetition.topic!.split(';')">
+                        {{ topic }}
+                    </mat-chip>
+                </mat-chip-list>
+
+                <h6 *ngIf="myRepetition?.additionalNote" jhiTranslate="repetitionWebApp.myRepetition.additionalNote"
+                    [translateValues]="{ param: myRepetition.additionalNote }">Additional Note: {{ myRepetition.additionalNote }}</h6>
             </mat-card-content>
 
             <mat-card-actions>
-                <button *ngIf="!myRepetition?.isAlreadyBooked" class="btn btn-primary float-right jh-create-entity create-my-repetition"
-                        type="submit" (click)="book(myRepetition)">
+                <button *ngIf="!myRepetition?.isAlreadyBooked && myRepetition?.isFree" class="btn btn-primary float-right jh-create-entity create-my-repetition"
+                        type="submit" (click)="book(myRepetition)" jhiTranslate="repetitionWebApp.myRepetitionStudent.book.btnConfirm">
                     <fa-icon icon="book"></fa-icon>
                     Book
                 </button>
 
+                <button *ngIf="!myRepetition?.isAlreadyBooked && !myRepetition?.isFree" class="btn btn-warning float-right jh-create-entity create-my-repetition"
+                        type="submit" (click)="join(myRepetition)" jhiTranslate="repetitionWebApp.myRepetitionStudent.join.btnConfirm">
+                    <fa-icon icon="book"></fa-icon>
+                    Join
+                </button>
+
                 <button *ngIf="myRepetition?.isAlreadyBooked" class="btn btn-danger float-right jh-create-entity create-my-repetition"
-                            type="submit" (click)="delete(myRepetition)">
+                            type="submit" (click)="delete(myRepetition)" jhiTranslate="repetitionWebApp.myRepetitionStudent.delete.btnConfirm">
                     <fa-icon icon="times"></fa-icon>
                     UnBook
                 </button>

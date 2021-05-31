@@ -1,0 +1,30 @@
+{
+  "repetitionWebApp": {
+    "myRepetitionStudent": {
+      "home": {
+        "title": "Mie Ripetizioni",
+        "notFound": "Nessuna Ripetizione trovata"
+      },
+      "created": "Una Ripetizione con identificativo {{ param }} è stata prenotata",
+      "updated": "Una Ripetizione con identificativo {{ param }} è stata modificata",
+      "deleted": "Una Ripetizione prenotata con identificativo {{ param }} è stata rimossa",
+      "delete": {
+        "title": "Disdici ripetizione",
+        "question": "Sei sicuro di volere disdire la prenotazione per la ripetizione con identificativo {{ id }}?",
+        "btnConfirm": "Disdici"
+      },
+      "book": {
+        "title": "Prenota ripetizione",
+        "question": "Sei sicuro di volere prenotare questa Ripetizione ?",
+        "btnConfirm": "Prenota"
+      },
+      "join": {
+        "title": "Unisciti a ripetizione",
+        "question": "Sei sicuro di volerti unire a questa Ripetizione ?",
+        "btnConfirm": "Unisciti"
+      },
+      "topic": "Argomento",
+      "additionalNote": "Note Addizionali"
+    }
+  }
+}
